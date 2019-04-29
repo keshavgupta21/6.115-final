@@ -1,0 +1,1 @@
+#define RAM_INIT_DATA {};

@@ -21,6 +21,7 @@
 #include "cydisabledsheets.h"
 #include "LED_aliases.h"
 #include "LED.h"
+#include "PRS_1.h"
 #include "cy_em_eeprom.h"
 #include "core_cm3_psoc5.h"
 #include "CyDmac.h"

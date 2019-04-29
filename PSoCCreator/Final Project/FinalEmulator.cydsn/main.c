@@ -5,6 +5,9 @@
  * ============================================================================
 */
 
+#include "project.h"
+#include "ram_init_data.h"
+
 /* Instruction Opcodes */
 #define OP3_SYSTEM 0x0
 #define OP3_JUMP_ABSOLUTE 0x1
@@ -50,10 +53,6 @@
 #define OP0_ARITH_SUBN 0x7
 #define OP0_ARITH_SHL 0xe
 
-#define RANDOM_BYTE 0x69 // TODO
-
-#include "project.h"
-
 /* CHIP8 VRAM 
     Each row is one 64bit number
 */
@@ -74,13 +73,14 @@ uint8_t snd = 0, tmr = 0;
 uint8_t keys[16] = {0};
 uint8_t lastkey = 0, keyflag = 0;
 
+uint8_t RANDOM_BYTE = 0x0;
+
 int main(void){
     /* Enable global interrupts. */
     CyGlobalIntEnable;
     
     /* CHIP8 RAM*/
-    uint8_t ram[4096];
-    // TODO fonts
+    uint8_t ram[4096] = RAM_INIT_DATA;
     
     /* CHIP8 Register File*/
     uint8_t v[16];
@@ -93,6 +93,11 @@ int main(void){
     for (uint8_t j = 0; j < 32; j++){
         vram[j] = 0;
     }
+    
+    /* Initialize Random Generator */
+    PRS_1_Enable();
+    PRS_1_Init();
+    PRS_1_Start();
     
     /* Emulate away.. */
     while(1){
@@ -118,6 +123,9 @@ int main(void){
         /* This flag is set if a new PC was set and must not be incremented */
         uint8_t freeze_pc = 0;
         
+        /* Randomize */
+        RANDOM_BYTE = PRS_1_Read();
+        
         /* Branch on opcodes and execute */
         switch(op3){
         case OP3_SYSTEM:
@@ -134,8 +142,8 @@ int main(void){
                     break;
                 case OP10_SYSTEM_RETURN:
                     /* Return from instruction */
-                    pc = stack[sp];
                     sp = (sp == 0x0) ? 0x0 : sp - 1;
+                    pc = stack[sp];
                     freeze_pc = 1;
                     break;
                 default:
@@ -163,22 +171,14 @@ int main(void){
             break;
         case OP3_SKIP_NEXT_EQ_IM:
             /* Skip next instruction if Vx == kk */
-            if (op0 == OP0_SKIP_NEXT){
-                if (v[x] == kk) {
-                    pc += 2;
-                }
-            } else {
-                invalid_op = 1;
+            if (v[x] == kk) {
+                pc += 2;
             }
             break;
         case OP3_SKIP_NEXT_NEQ_IM:
             /* Skip next instruction if Vx != kk */
-            if (op0 == OP0_SKIP_NEXT){
-                if (v[x] != kk) {
-                    pc += 2;
-                }
-            } else {
-                invalid_op = 1;
+            if (v[x] != kk) {
+                pc += 2;
             }
             break;
         case OP3_SKIP_NEXT_EQ:
@@ -238,12 +238,13 @@ int main(void){
                 uint16_t vy = v[y];
                 uint16_t diff = vx - vy;                                
                 v[x] = diff;
-                v[0xf] = (diff & 0x100) ? 1 : 0;
+                v[0xf] = (diff & 0x100) ? 0 : 1;
                 break;
             }
             case OP0_ARITH_SHR:
                 /* Vx = Vx >> Vy */
-                v[x] >>= v[y];
+                v[0xf] = (v[x] & 0x01) ? 1 : 0;
+                v[x] >>= 1;
                 break;
             case OP0_ARITH_SUBN:{
                 /* Vx = Vy - Vx, Vf = not borrow */
@@ -251,12 +252,13 @@ int main(void){
                 uint16_t vy = v[y];
                 uint16_t diff = vy - vx;                                
                 v[x] = diff;
-                v[0xf] = (diff & 0x100) ? 1 : 0;
+                v[0xf] = (diff & 0x100) ? 0 : 1;
                 break;
             }
             case OP0_ARITH_SHL:
-                /* Vx = Vx << Vy */
-                v[x] <<= v[y];
+                /* Vx = Vx << 1, Vf = carry */
+                v[0xf] = (v[x] & 0x80) ? 1 : 0;
+                v[x] <<= 1;
                 break;
             default:
                 invalid_op = 1;
@@ -344,14 +346,14 @@ int main(void){
                 ram[i+2] = (uint8_t)(v[x]) % 10;
                 break;
             case OP10_SPECIAL_LOAD_AT_I:
-                /* Store V0 to Vx in I to I+x-1 */
-                for (uint8_t j = 0; j < x; j++){
+                /* Store V0 to Vx in I to I+x */
+                for (uint8_t j = 0; j <= x; j++){
                     ram[i + j] = v[j];
                 }
                 break;
             case OP10_SPECIAL_SET_AT_I:
-                /* Restore V0 to Vx from I to I+x-1 */
-                for (uint8_t j = 0; j < x; j++){
+                /* Restore V0 to Vx from I to I+x */
+                for (uint8_t j = 0; j <= x; j++){
                     v[j] = ram[i + j];
                 }
                 break;
@@ -366,11 +368,15 @@ int main(void){
         }
         if (invalid_op) {
             /* Halt and dump core if invalid instruction received */
-            // TODO
+            while(1){
+                LED_Write(1);
+                CyDelay(100);
+                LED_Write(0);
+                CyDelay(100);
+            }
         }
         if (!freeze_pc){
             /* Increment PC */
-            // TODO replace with continue
             pc += 2;
         }
     }
