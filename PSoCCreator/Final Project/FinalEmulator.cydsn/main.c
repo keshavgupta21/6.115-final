@@ -1,7 +1,8 @@
-/* ========================================
+/* ============================================================================
  * CHIP8 Emulator
  * Written By Keshav Gupta, April 2019
- * ========================================
+ * Technical Reference: http://devernay.free.fr/hacks/chip8/C8TECH10.HTM
+ * ============================================================================
 */
 
 /* Instruction Opcodes */
@@ -49,7 +50,7 @@
 #define OP0_ARITH_SUBN 0x7
 #define OP0_ARITH_SHL 0xe
 
-#define RANDOM_BYTE 0x69 // for now
+#define RANDOM_BYTE 0x69 // TODO
 
 #include "project.h"
 
@@ -58,29 +59,38 @@
 */
 uint64_t vram[32];
 
-int main(void)
-{
+/* CHIP8 Timers 
+    Decrement each at 60Hz if not zero
+*/
+uint8_t snd = 0, tmr = 0;
+
+/* CHIP8 Keyboard 
+    keys stores the current state of each key
+        (1 = down, 0 = up)
+    lastkey stores the last key that was pressed
+    leyflag = 1 if new data available in lastkey
+        must be reset to 0 when data used
+*/
+uint8_t keys[16] = {0};
+uint8_t lastkey = 0, keyflag = 0;
+
+int main(void){
     /* Enable global interrupts. */
     CyGlobalIntEnable;
     
-    /* CHIP8 Memory Space */
     /* CHIP8 RAM*/
     uint8_t ram[4096];
-
-    /* CHIP8 File*/
-    uint8_t v[16];
-    uint16_t i;
-    uint8_t snd, tmr;
-    uint16_t pc;
-    uint8_t sp;
-    uint16_t stack[16];
+    // TODO fonts
     
-    /* Initialize PC and SP */
-    pc = 0x0200;
-    sp = 0x00;
+    /* CHIP8 Register File*/
+    uint8_t v[16];
+    uint16_t i = 0;
+    uint16_t pc = 0x0200;
+    uint8_t sp = 0x00;
+    uint16_t stack[16] = {0};
     
     /* Clear screen */
-    for (int j = 0; j < 32; j++){
+    for (uint8_t j = 0; j < 32; j++){
         vram[j] = 0;
     }
     
@@ -105,7 +115,7 @@ int main(void)
         /* This flag is set if an invalid OP is encountered */
         uint8_t invalid_op = 0;
         
-        /* This flag is set if a new PC was set */
+        /* This flag is set if a new PC was set and must not be incremented */
         uint8_t freeze_pc = 0;
         
         /* Branch on opcodes and execute */
@@ -147,6 +157,7 @@ int main(void)
         case OP3_CALL_SUBROUTINE:
             /* Call subroutine at nnn */
             stack[sp] = pc;
+            sp = (sp == 0xf) ? 0xf : sp + 1;
             pc = nnn;
             freeze_pc = 1;
             break;
@@ -222,7 +233,6 @@ int main(void)
                 v[x] += v[y];
                 break;
             case OP0_ARITH_SUB:{
-                // removing the semicolon breaks the file
                 /* Vx = Vx - Vy, Vf = not borrow */
                 uint16_t vx = v[x];
                 uint16_t vy = v[y];
@@ -265,7 +275,13 @@ int main(void)
             uint64_t collision = 0;
             /* Draw sprite from I at (Vx, Vy), vf = collision, see reference */
             for (int j = 0; j < n; j++){
-                uint64_t row = ram[i + j]; // TODO shift and warp around
+                uint64_t row = 0;
+                if (v[x] <= 56){
+                    row = ((uint64_t)ram[i + j]) << (56 - v[x]);
+                } else {
+                    row = ((uint64_t)ram[i + j]) >> (v[x] - 56)
+                        | ((uint64_t)ram[i + j]) << (120 - v[x]);
+                }
                 collision |= vram[(v[y] + j) % 32] & row;
                 vram[(v[y] + j) % 32] ^= row;
             }
@@ -277,9 +293,15 @@ int main(void)
             switch(op10){
             case OP10_KEYBOARD_EQ:
                 /* Skip next instruction if Vx pressed */
+                if (keys[v[x] & 0xf] == 1){
+                    pc += 2;
+                }
                 break;
-            case OP10_KEYBOARD_NEQ:
+            case OP10_KEYBOARD_NEQ: 
                 /* Skip next instruction if Vx not pressed */
+                if (keys[v[x] & 0xf] == 0){
+                    pc += 2;
+                }
                 break;
             default:
                 invalid_op = 1;
@@ -291,30 +313,47 @@ int main(void)
             switch(op10){
             case OP10_SPECIAL_LOAD_DELAY:
                 /* Vx = delay timer */
+                v[x] = tmr;
                 break;
             case OP10_SPECIAL_LOAD_KEYBOARD:
                 /* Vx = keypress, blocks till something pressed */
+                while (!keyflag);
+                v[x] = lastkey;
+                keyflag = 0;
                 break;
             case OP10_SPECIAL_SET_DELAY:
                 /* delay timer = Vx */
+                tmr = v[x];
                 break;
             case OP10_SPECIAL_SET_SOUND:
                 /* sound timer = Vx */
+                snd = v[x];
                 break;
             case OP10_SPECIAL_ADD_TO_I:
                 /* I += Vx */
+                i += v[x];
                 break;
             case OP10_SPECIAL_LOAD_FONT:
                 /* I = location of sprite for hex digit Vx */
+                i = (v[x] & 0xf) * 5;
                 break;
             case OP10_SPECIAL_LOAD_BCD:
                 /* BCD hundreds to units of Vx in I to I+2 */
+                ram[i] = (uint8_t)(v[x] / 100) % 10;
+                ram[i+1] = (uint8_t)(v[x] / 10) % 10;
+                ram[i+2] = (uint8_t)(v[x]) % 10;
                 break;
             case OP10_SPECIAL_LOAD_AT_I:
                 /* Store V0 to Vx in I to I+x-1 */
+                for (uint8_t j = 0; j < x; j++){
+                    ram[i + j] = v[j];
+                }
                 break;
             case OP10_SPECIAL_SET_AT_I:
                 /* Restore V0 to Vx from I to I+x-1 */
+                for (uint8_t j = 0; j < x; j++){
+                    v[j] = ram[i + j];
+                }
                 break;
             default:
                 invalid_op = 1;
@@ -331,6 +370,7 @@ int main(void)
         }
         if (!freeze_pc){
             /* Increment PC */
+            // TODO replace with continue
             pc += 2;
         }
     }
