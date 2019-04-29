@@ -80,7 +80,7 @@ int main(void){
     CyGlobalIntEnable;
     
     /* CHIP8 RAM*/
-    uint8_t ram[4096] = RAM_INIT_DATA;
+    uint8_t ram[4096] = RAM_INITIAL_DATA;
     
     /* CHIP8 Register File*/
     uint8_t v[16];
