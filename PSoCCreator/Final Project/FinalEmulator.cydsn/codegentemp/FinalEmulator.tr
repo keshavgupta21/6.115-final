@@ -18,12 +18,14 @@
 ##################################################################### 
                     1::Clock Frequency Summary
 ===================================================================== 
-Number of clocks: 5
-Clock: CyBUS_CLK     | Frequency: 82.50 MHz  | Target: 24.00 MHz  | 
-Clock: CyILO         | N/A                   | Target: 0.00 MHz   | 
-Clock: CyIMO         | N/A                   | Target: 3.00 MHz   | 
-Clock: CyMASTER_CLK  | N/A                   | Target: 24.00 MHz  | 
-Clock: CyPLL_OUT     | N/A                   | Target: 24.00 MHz  | 
+Number of clocks: 7
+Clock: CyBUS_CLK          | Frequency: 82.50 MHz  | Target: 24.00 MHz  | 
+Clock: CyILO              | N/A                   | Target: 0.00 MHz   | 
+Clock: CyIMO              | N/A                   | Target: 3.00 MHz   | 
+Clock: CyMASTER_CLK       | N/A                   | Target: 24.00 MHz  | 
+Clock: CyPLL_OUT          | N/A                   | Target: 24.00 MHz  | 
+Clock: clk_timer          | N/A                   | Target: 0.00 MHz   | 
+Clock: clk_timer(routed)  | N/A                   | Target: 0.00 MHz   | 
 
  =====================================================================
                     End of Clock Frequency Summary
@@ -82,9 +84,9 @@ Frequency: 82.50 MHz | Target: 24.00 MHz
 
 ++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \PRS_1:ClkSp:CtrlReg\/control_0
-Path End       : \PRS_1:sC8:PRSdp:u0\/cs_addr_0
-Capture Clock  : \PRS_1:sC8:PRSdp:u0\/clock
+Path Begin     : \random:ClkSp:CtrlReg\/control_0
+Path End       : \random:sC8:PRSdp:u0\/cs_addr_0
+Capture Clock  : \random:sC8:PRSdp:u0\/clock
 Path slack     : 29545p
 
 Capture Clock Arrival Time                             0
@@ -104,19 +106,19 @@ Launch Clock Path
 pin name                                                    model name      delay     AT  edge  Fanout
 ----------------------------------------------------------  --------------  -----  -----  ----  ------
 ClockBlock/clk_bus_glb                                      clockblockcell      0      0  RISE       1
-\PRS_1:ClkSp:CtrlReg\/clock                                 controlcell1        0      0  RISE       1
+\random:ClkSp:CtrlReg\/clock                                controlcell1        0      0  RISE       1
 
 Data path
-pin name                         model name     delay     AT  slack  edge  Fanout
--------------------------------  -------------  -----  -----  -----  ----  ------
-\PRS_1:ClkSp:CtrlReg\/control_0  controlcell1    1210   1210  29545  RISE       1
-\PRS_1:sC8:PRSdp:u0\/cs_addr_0   datapathcell1   2782   3992  29545  RISE       1
+pin name                          model name     delay     AT  slack  edge  Fanout
+--------------------------------  -------------  -----  -----  -----  ----  ------
+\random:ClkSp:CtrlReg\/control_0  controlcell1    1210   1210  29545  RISE       1
+\random:sC8:PRSdp:u0\/cs_addr_0   datapathcell1   2782   3992  29545  RISE       1
 
 Capture Clock Path
 pin name                                                    model name      delay     AT  edge  Fanout
 ----------------------------------------------------------  --------------  -----  -----  ----  ------
 ClockBlock/clk_bus_glb                                      clockblockcell      0      0  RISE       1
-\PRS_1:sC8:PRSdp:u0\/clock                                  datapathcell1       0      0  RISE       1
+\random:sC8:PRSdp:u0\/clock                                 datapathcell1       0      0  RISE       1
 
 
 
@@ -134,9 +136,9 @@ ClockBlock/clk_bus_glb                                      clockblockcell      
 
 ++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \PRS_1:ClkSp:CtrlReg\/control_0
-Path End       : \PRS_1:sC8:PRSdp:u0\/cs_addr_0
-Capture Clock  : \PRS_1:sC8:PRSdp:u0\/clock
+Path Begin     : \random:ClkSp:CtrlReg\/control_0
+Path End       : \random:sC8:PRSdp:u0\/cs_addr_0
+Capture Clock  : \random:sC8:PRSdp:u0\/clock
 Path slack     : 29545p
 
 Capture Clock Arrival Time                             0
@@ -156,19 +158,19 @@ Launch Clock Path
 pin name                                                    model name      delay     AT  edge  Fanout
 ----------------------------------------------------------  --------------  -----  -----  ----  ------
 ClockBlock/clk_bus_glb                                      clockblockcell      0      0  RISE       1
-\PRS_1:ClkSp:CtrlReg\/clock                                 controlcell1        0      0  RISE       1
+\random:ClkSp:CtrlReg\/clock                                controlcell1        0      0  RISE       1
 
 Data path
-pin name                         model name     delay     AT  slack  edge  Fanout
--------------------------------  -------------  -----  -----  -----  ----  ------
-\PRS_1:ClkSp:CtrlReg\/control_0  controlcell1    1210   1210  29545  RISE       1
-\PRS_1:sC8:PRSdp:u0\/cs_addr_0   datapathcell1   2782   3992  29545  RISE       1
+pin name                          model name     delay     AT  slack  edge  Fanout
+--------------------------------  -------------  -----  -----  -----  ----  ------
+\random:ClkSp:CtrlReg\/control_0  controlcell1    1210   1210  29545  RISE       1
+\random:sC8:PRSdp:u0\/cs_addr_0   datapathcell1   2782   3992  29545  RISE       1
 
 Capture Clock Path
 pin name                                                    model name      delay     AT  edge  Fanout
 ----------------------------------------------------------  --------------  -----  -----  ----  ------
 ClockBlock/clk_bus_glb                                      clockblockcell      0      0  RISE       1
-\PRS_1:sC8:PRSdp:u0\/clock                                  datapathcell1       0      0  RISE       1
+\random:sC8:PRSdp:u0\/clock                                 datapathcell1       0      0  RISE       1
 
 
 
@@ -182,9 +184,9 @@ ClockBlock/clk_bus_glb                                      clockblockcell      
 
 ++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \PRS_1:ClkSp:CtrlReg\/control_0
-Path End       : \PRS_1:sC8:PRSdp:u0\/cs_addr_0
-Capture Clock  : \PRS_1:sC8:PRSdp:u0\/clock
+Path Begin     : \random:ClkSp:CtrlReg\/control_0
+Path End       : \random:sC8:PRSdp:u0\/cs_addr_0
+Capture Clock  : \random:sC8:PRSdp:u0\/clock
 Path slack     : 29545p
 
 Capture Clock Arrival Time                             0
@@ -204,27 +206,27 @@ Launch Clock Path
 pin name                                                    model name      delay     AT  edge  Fanout
 ----------------------------------------------------------  --------------  -----  -----  ----  ------
 ClockBlock/clk_bus_glb                                      clockblockcell      0      0  RISE       1
-\PRS_1:ClkSp:CtrlReg\/clock                                 controlcell1        0      0  RISE       1
+\random:ClkSp:CtrlReg\/clock                                controlcell1        0      0  RISE       1
 
 Data path
-pin name                         model name     delay     AT  slack  edge  Fanout
--------------------------------  -------------  -----  -----  -----  ----  ------
-\PRS_1:ClkSp:CtrlReg\/control_0  controlcell1    1210   1210  29545  RISE       1
-\PRS_1:sC8:PRSdp:u0\/cs_addr_0   datapathcell1   2782   3992  29545  RISE       1
+pin name                          model name     delay     AT  slack  edge  Fanout
+--------------------------------  -------------  -----  -----  -----  ----  ------
+\random:ClkSp:CtrlReg\/control_0  controlcell1    1210   1210  29545  RISE       1
+\random:sC8:PRSdp:u0\/cs_addr_0   datapathcell1   2782   3992  29545  RISE       1
 
 Capture Clock Path
 pin name                                                    model name      delay     AT  edge  Fanout
 ----------------------------------------------------------  --------------  -----  -----  ----  ------
 ClockBlock/clk_bus_glb                                      clockblockcell      0      0  RISE       1
-\PRS_1:sC8:PRSdp:u0\/clock                                  datapathcell1       0      0  RISE       1
+\random:sC8:PRSdp:u0\/clock                                 datapathcell1       0      0  RISE       1
 
 
 
 ++++ Path 2 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \PRS_1:ClkSp:CtrlReg\/control_0
-Path End       : \PRS_1:sC8:PRSdp:u0\/clk_en
-Capture Clock  : \PRS_1:sC8:PRSdp:u0\/clock
+Path Begin     : \random:ClkSp:CtrlReg\/control_0
+Path End       : \random:sC8:PRSdp:u0\/clk_en
+Capture Clock  : \random:sC8:PRSdp:u0\/clock
 Path slack     : 35586p
 
 Capture Clock Arrival Time                             0
@@ -244,19 +246,19 @@ Launch Clock Path
 pin name                                                    model name      delay     AT  edge  Fanout
 ----------------------------------------------------------  --------------  -----  -----  ----  ------
 ClockBlock/clk_bus_glb                                      clockblockcell      0      0  RISE       1
-\PRS_1:ClkSp:CtrlReg\/clock                                 controlcell1        0      0  RISE       1
+\random:ClkSp:CtrlReg\/clock                                controlcell1        0      0  RISE       1
 
 Data path
-pin name                         model name     delay     AT  slack  edge  Fanout
--------------------------------  -------------  -----  -----  -----  ----  ------
-\PRS_1:ClkSp:CtrlReg\/control_0  controlcell1    1210   1210  29545  RISE       1
-\PRS_1:sC8:PRSdp:u0\/clk_en      datapathcell1   2771   3981  35586  RISE       1
+pin name                          model name     delay     AT  slack  edge  Fanout
+--------------------------------  -------------  -----  -----  -----  ----  ------
+\random:ClkSp:CtrlReg\/control_0  controlcell1    1210   1210  29545  RISE       1
+\random:sC8:PRSdp:u0\/clk_en      datapathcell1   2771   3981  35586  RISE       1
 
 Capture Clock Path
 pin name                                                    model name      delay     AT  edge  Fanout
 ----------------------------------------------------------  --------------  -----  -----  ----  ------
 ClockBlock/clk_bus_glb                                      clockblockcell      0      0  RISE       1
-\PRS_1:sC8:PRSdp:u0\/clock                                  datapathcell1       0      0  RISE       1
+\random:sC8:PRSdp:u0\/clock                                 datapathcell1       0      0  RISE       1
 
 
 ===================================================================== 

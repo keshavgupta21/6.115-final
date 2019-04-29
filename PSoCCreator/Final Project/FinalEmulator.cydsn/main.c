@@ -5,6 +5,15 @@
  * ============================================================================
 */
 
+/*
+TODO
+
+Implement Keyboard
+Implement VGA
+
+Replace SRAM with EEPROM (or other funcitonality to change roms nicely
+*/
+
 #include "project.h"
 #include "ram_init_data.h"
 
@@ -73,9 +82,22 @@ uint8_t snd = 0, tmr = 0;
 uint8_t keys[16] = {0};
 uint8_t lastkey = 0, keyflag = 0;
 
-uint8_t RANDOM_BYTE = 0x0;
+uint8_t led = 0;
+
+CY_ISR(isr_tmr_handler){
+    snd = (snd == 0) ? 0 : snd - 1;
+    tmr = (tmr == 0) ? 0 : tmr - 1;
+    if (snd) {
+        pin_snd_Write(1);
+    } else {
+        pin_snd_Write(0);
+    }
+}
 
 int main(void){
+    /* Start the interrupts */
+    isr_timer_StartEx(isr_tmr_handler);
+    
     /* Enable global interrupts. */
     CyGlobalIntEnable;
     
@@ -95,9 +117,9 @@ int main(void){
     }
     
     /* Initialize Random Generator */
-    PRS_1_Enable();
-    PRS_1_Init();
-    PRS_1_Start();
+    random_Enable();
+    random_Init();
+    random_Start();
     
     /* Emulate away.. */
     while(1){
@@ -122,9 +144,6 @@ int main(void){
         
         /* This flag is set if a new PC was set and must not be incremented */
         uint8_t freeze_pc = 0;
-        
-        /* Randomize */
-        RANDOM_BYTE = PRS_1_Read();
         
         /* Branch on opcodes and execute */
         switch(op3){
@@ -270,8 +289,8 @@ int main(void){
             i = nnn;
             break;
         case OP3_RANDOM:
-            /* Vx = (random byte) & kk */
-            v[x] = RANDOM_BYTE & kk;
+            /* Vx = (random byte) & kk */            
+            v[x] = random_Read() & kk;
             break;
         case OP3_DRAW:{
             uint64_t collision = 0;
@@ -369,9 +388,9 @@ int main(void){
         if (invalid_op) {
             /* Halt and dump core if invalid instruction received */
             while(1){
-                LED_Write(1);
+                pin_led_Write(1);
                 CyDelay(100);
-                LED_Write(0);
+                pin_led_Write(0);
                 CyDelay(100);
             }
         }

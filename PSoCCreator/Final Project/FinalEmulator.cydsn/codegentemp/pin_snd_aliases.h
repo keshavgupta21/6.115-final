@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: LED.h  
+* File Name: pin_snd.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_LED_ALIASES_H) /* Pins LED_ALIASES_H */
-#define CY_PINS_LED_ALIASES_H
+#if !defined(CY_PINS_pin_snd_ALIASES_H) /* Pins pin_snd_ALIASES_H */
+#define CY_PINS_pin_snd_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -25,12 +25,12 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define LED_0			(LED__0__PC)
-#define LED_0_INTR	((uint16)((uint16)0x0001u << LED__0__SHIFT))
+#define pin_snd_0			(pin_snd__0__PC)
+#define pin_snd_0_INTR	((uint16)((uint16)0x0001u << pin_snd__0__SHIFT))
 
-#define LED_INTR_ALL	 ((uint16)(LED_0_INTR))
+#define pin_snd_INTR_ALL	 ((uint16)(pin_snd_0_INTR))
 
-#endif /* End Pins LED_ALIASES_H */
+#endif /* End Pins pin_snd_ALIASES_H */
 
 
 /* [] END OF FILE */

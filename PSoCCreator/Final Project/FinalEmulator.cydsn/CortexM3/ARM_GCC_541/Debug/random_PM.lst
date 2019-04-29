@@ -1,0 +1,1033 @@
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"random_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.random_SaveConfig,"ax",%progbits
+  20              		.align	2
+  21              		.global	random_SaveConfig
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	random_SaveConfig, %function
+  25              	random_SaveConfig:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC5\\random_PM.c"
+   1:Generated_Source\PSoC5/random_PM.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/random_PM.c **** * File Name: random_PM.c
+   3:Generated_Source\PSoC5/random_PM.c **** * Version 2.40
+   4:Generated_Source\PSoC5/random_PM.c **** *
+   5:Generated_Source\PSoC5/random_PM.c **** * Description:
+   6:Generated_Source\PSoC5/random_PM.c **** *  This file provides Sleep APIs for PRS component.
+   7:Generated_Source\PSoC5/random_PM.c **** *
+   8:Generated_Source\PSoC5/random_PM.c **** * Note:
+   9:Generated_Source\PSoC5/random_PM.c **** *  None
+  10:Generated_Source\PSoC5/random_PM.c **** *
+  11:Generated_Source\PSoC5/random_PM.c **** ********************************************************************************
+  12:Generated_Source\PSoC5/random_PM.c **** * Copyright 2008-2013, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/random_PM.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  14:Generated_Source\PSoC5/random_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  15:Generated_Source\PSoC5/random_PM.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/random_PM.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/random_PM.c **** 
+  18:Generated_Source\PSoC5/random_PM.c **** #include "random.h"
+  19:Generated_Source\PSoC5/random_PM.c **** 
+  20:Generated_Source\PSoC5/random_PM.c **** #if ((random_TIME_MULTIPLEXING_ENABLE) && (random_WAKEUP_BEHAVIOUR == random__RESUMEWORK))
+  21:Generated_Source\PSoC5/random_PM.c ****     uint8 random_sleepState = random_NORMAL_SEQUENCE;    
+  22:Generated_Source\PSoC5/random_PM.c **** #endif  /* End ((random_TIME_MULTIPLEXING_ENABLE) && 
+  23:Generated_Source\PSoC5/random_PM.c ****           (random_WAKEUP_BEHAVIOUR == random__RESUMEWORK)) */
+  24:Generated_Source\PSoC5/random_PM.c **** 
+  25:Generated_Source\PSoC5/random_PM.c **** 
+  26:Generated_Source\PSoC5/random_PM.c **** /*******************************************************************************
+  27:Generated_Source\PSoC5/random_PM.c **** * Function Name: random_SaveConfig
+  28:Generated_Source\PSoC5/random_PM.c **** ********************************************************************************
+  29:Generated_Source\PSoC5/random_PM.c **** *
+  30:Generated_Source\PSoC5/random_PM.c **** * Summary:
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 2
+
+
+  31:Generated_Source\PSoC5/random_PM.c **** *  Saves seed and polynomial registers.
+  32:Generated_Source\PSoC5/random_PM.c **** *
+  33:Generated_Source\PSoC5/random_PM.c **** * Parameters:
+  34:Generated_Source\PSoC5/random_PM.c **** *  void
+  35:Generated_Source\PSoC5/random_PM.c **** *
+  36:Generated_Source\PSoC5/random_PM.c **** * Return:
+  37:Generated_Source\PSoC5/random_PM.c **** *  void
+  38:Generated_Source\PSoC5/random_PM.c **** *
+  39:Generated_Source\PSoC5/random_PM.c **** * Global Variables:
+  40:Generated_Source\PSoC5/random_PM.c **** *  random_backup - modified when non-retention registers are saved.
+  41:Generated_Source\PSoC5/random_PM.c **** *
+  42:Generated_Source\PSoC5/random_PM.c **** *******************************************************************************/
+  43:Generated_Source\PSoC5/random_PM.c **** void random_SaveConfig(void) 
+  44:Generated_Source\PSoC5/random_PM.c **** {    
+  28              		.loc 1 44 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  45:Generated_Source\PSoC5/random_PM.c ****     #if (random_WAKEUP_BEHAVIOUR == random__RESUMEWORK)
+  46:Generated_Source\PSoC5/random_PM.c ****         /* Save dff register for time mult */
+  47:Generated_Source\PSoC5/random_PM.c ****         #if (random_TIME_MULTIPLEXING_ENABLE)
+  48:Generated_Source\PSoC5/random_PM.c ****             random_backup.dffStatus = random_STATUS;
+  49:Generated_Source\PSoC5/random_PM.c ****             /* Clear normal dff sequence set */
+  50:Generated_Source\PSoC5/random_PM.c ****             random_sleepState &= ((uint8)~random_NORMAL_SEQUENCE);
+  51:Generated_Source\PSoC5/random_PM.c ****         #endif  /* End random_TIME_MULTIPLEXING_ENABLE */
+  52:Generated_Source\PSoC5/random_PM.c ****         
+  53:Generated_Source\PSoC5/random_PM.c ****         /* Save A0 and A1 registers */
+  54:Generated_Source\PSoC5/random_PM.c ****         #if (random_PRS_SIZE <= 32u)
+  55:Generated_Source\PSoC5/random_PM.c ****             random_backup.seed = random_Read();
+  36              		.loc 1 55 0
+  37 0002 FFF7FEFF 		bl	random_Read
+  38              	.LVL0:
+  39 0006 014B     		ldr	r3, .L3
+  40 0008 5870     		strb	r0, [r3, #1]
+  41 000a 08BD     		pop	{r3, pc}
+  42              	.L4:
+  43              		.align	2
+  44              	.L3:
+  45 000c 00000000 		.word	random_backup
+  46              		.cfi_endproc
+  47              	.LFE0:
+  48              		.size	random_SaveConfig, .-random_SaveConfig
+  49              		.section	.text.random_Sleep,"ax",%progbits
+  50              		.align	2
+  51              		.global	random_Sleep
+  52              		.thumb
+  53              		.thumb_func
+  54              		.type	random_Sleep, %function
+  55              	random_Sleep:
+  56              	.LFB1:
+  56:Generated_Source\PSoC5/random_PM.c ****             
+  57:Generated_Source\PSoC5/random_PM.c ****         #else
+  58:Generated_Source\PSoC5/random_PM.c ****             random_backup.seedUpper = random_ReadUpper();
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 3
+
+
+  59:Generated_Source\PSoC5/random_PM.c ****             random_backup.seedLower = random_ReadLower();
+  60:Generated_Source\PSoC5/random_PM.c ****             
+  61:Generated_Source\PSoC5/random_PM.c ****         #endif     /* End (random_PRS_SIZE <= 32u) */
+  62:Generated_Source\PSoC5/random_PM.c ****         
+  63:Generated_Source\PSoC5/random_PM.c ****     #endif  /* End (random_WAKEUP_BEHAVIOUR == random__RESUMEWORK) */
+  64:Generated_Source\PSoC5/random_PM.c **** }
+  65:Generated_Source\PSoC5/random_PM.c **** 
+  66:Generated_Source\PSoC5/random_PM.c **** 
+  67:Generated_Source\PSoC5/random_PM.c **** /*******************************************************************************
+  68:Generated_Source\PSoC5/random_PM.c **** * Function Name: random_Sleep
+  69:Generated_Source\PSoC5/random_PM.c **** ********************************************************************************
+  70:Generated_Source\PSoC5/random_PM.c **** *
+  71:Generated_Source\PSoC5/random_PM.c **** * Summary:
+  72:Generated_Source\PSoC5/random_PM.c **** *  Stops PRS computation and saves PRS configuration.
+  73:Generated_Source\PSoC5/random_PM.c **** *
+  74:Generated_Source\PSoC5/random_PM.c **** * Parameters:
+  75:Generated_Source\PSoC5/random_PM.c **** *  void
+  76:Generated_Source\PSoC5/random_PM.c **** *
+  77:Generated_Source\PSoC5/random_PM.c **** * Return:
+  78:Generated_Source\PSoC5/random_PM.c **** *  void
+  79:Generated_Source\PSoC5/random_PM.c **** *
+  80:Generated_Source\PSoC5/random_PM.c **** * Global Variables:
+  81:Generated_Source\PSoC5/random_PM.c **** *  random_backup - modified when non-retention registers are saved.
+  82:Generated_Source\PSoC5/random_PM.c **** *
+  83:Generated_Source\PSoC5/random_PM.c **** *******************************************************************************/
+  84:Generated_Source\PSoC5/random_PM.c **** void random_Sleep(void) 
+  85:Generated_Source\PSoC5/random_PM.c **** {
+  57              		.loc 1 85 0
+  58              		.cfi_startproc
+  59              		@ args = 0, pretend = 0, frame = 0
+  60              		@ frame_needed = 0, uses_anonymous_args = 0
+  61 0000 08B5     		push	{r3, lr}
+  62              		.cfi_def_cfa_offset 8
+  63              		.cfi_offset 3, -8
+  64              		.cfi_offset 14, -4
+  86:Generated_Source\PSoC5/random_PM.c ****     /* Store PRS enable state */
+  87:Generated_Source\PSoC5/random_PM.c ****     if(random_IS_PRS_ENABLE(random_CONTROL_REG))
+  65              		.loc 1 87 0
+  66 0002 084B     		ldr	r3, .L9
+  67 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  68 0006 13F0010F 		tst	r3, #1
+  69 000a 05D0     		beq	.L6
+  88:Generated_Source\PSoC5/random_PM.c ****     {
+  89:Generated_Source\PSoC5/random_PM.c ****         random_backup.enableState = 1u;
+  70              		.loc 1 89 0
+  71 000c 0122     		movs	r2, #1
+  72 000e 064B     		ldr	r3, .L9+4
+  73 0010 1A70     		strb	r2, [r3]
+  90:Generated_Source\PSoC5/random_PM.c ****         random_Stop();
+  74              		.loc 1 90 0
+  75 0012 FFF7FEFF 		bl	random_Stop
+  76              	.LVL1:
+  77 0016 02E0     		b	.L7
+  78              	.L6:
+  91:Generated_Source\PSoC5/random_PM.c ****     }
+  92:Generated_Source\PSoC5/random_PM.c ****     else
+  93:Generated_Source\PSoC5/random_PM.c ****     {
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 4
+
+
+  94:Generated_Source\PSoC5/random_PM.c ****         random_backup.enableState = 0u;
+  79              		.loc 1 94 0
+  80 0018 0022     		movs	r2, #0
+  81 001a 034B     		ldr	r3, .L9+4
+  82 001c 1A70     		strb	r2, [r3]
+  83              	.L7:
+  95:Generated_Source\PSoC5/random_PM.c ****     }
+  96:Generated_Source\PSoC5/random_PM.c ****     
+  97:Generated_Source\PSoC5/random_PM.c ****     random_SaveConfig();
+  84              		.loc 1 97 0
+  85 001e FFF7FEFF 		bl	random_SaveConfig
+  86              	.LVL2:
+  87 0022 08BD     		pop	{r3, pc}
+  88              	.L10:
+  89              		.align	2
+  90              	.L9:
+  91 0024 7B640040 		.word	1073767547
+  92 0028 00000000 		.word	random_backup
+  93              		.cfi_endproc
+  94              	.LFE1:
+  95              		.size	random_Sleep, .-random_Sleep
+  96              		.section	.text.random_RestoreConfig,"ax",%progbits
+  97              		.align	2
+  98              		.global	random_RestoreConfig
+  99              		.thumb
+ 100              		.thumb_func
+ 101              		.type	random_RestoreConfig, %function
+ 102              	random_RestoreConfig:
+ 103              	.LFB2:
+  98:Generated_Source\PSoC5/random_PM.c **** }
+  99:Generated_Source\PSoC5/random_PM.c **** 
+ 100:Generated_Source\PSoC5/random_PM.c **** 
+ 101:Generated_Source\PSoC5/random_PM.c **** /*******************************************************************************
+ 102:Generated_Source\PSoC5/random_PM.c **** * Function Name: random_RestoreConfig
+ 103:Generated_Source\PSoC5/random_PM.c **** ********************************************************************************
+ 104:Generated_Source\PSoC5/random_PM.c **** *
+ 105:Generated_Source\PSoC5/random_PM.c **** * Summary:
+ 106:Generated_Source\PSoC5/random_PM.c **** *  Restores seed and polynomial registers.
+ 107:Generated_Source\PSoC5/random_PM.c **** *
+ 108:Generated_Source\PSoC5/random_PM.c **** * Parameters:
+ 109:Generated_Source\PSoC5/random_PM.c **** *  void
+ 110:Generated_Source\PSoC5/random_PM.c **** *
+ 111:Generated_Source\PSoC5/random_PM.c **** * Return:
+ 112:Generated_Source\PSoC5/random_PM.c **** *  void
+ 113:Generated_Source\PSoC5/random_PM.c **** *
+ 114:Generated_Source\PSoC5/random_PM.c **** *******************************************************************************/
+ 115:Generated_Source\PSoC5/random_PM.c **** #if (random_WAKEUP_BEHAVIOUR == random__RESUMEWORK)
+ 116:Generated_Source\PSoC5/random_PM.c ****     #if (random_TIME_MULTIPLEXING_ENABLE)
+ 117:Generated_Source\PSoC5/random_PM.c ****         void random_RestoreConfig(void) 
+ 118:Generated_Source\PSoC5/random_PM.c ****         {   
+ 119:Generated_Source\PSoC5/random_PM.c ****             /* Restore A0 and A1 registers */
+ 120:Generated_Source\PSoC5/random_PM.c ****             #if (random_PRS_SIZE <= 32u)
+ 121:Generated_Source\PSoC5/random_PM.c ****                 random_WriteSeed(random_backup.seed);
+ 122:Generated_Source\PSoC5/random_PM.c ****             #else
+ 123:Generated_Source\PSoC5/random_PM.c ****                 random_WriteSeedUpper(random_backup.seedUpper);
+ 124:Generated_Source\PSoC5/random_PM.c ****                 random_WriteSeedLower(random_backup.seedLower);
+ 125:Generated_Source\PSoC5/random_PM.c ****             #endif  /* End (random_PRS_SIZE <= 32u) */
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 5
+
+
+ 126:Generated_Source\PSoC5/random_PM.c ****             
+ 127:Generated_Source\PSoC5/random_PM.c ****             #if (random_RUN_MODE == random__CLOCKED)
+ 128:Generated_Source\PSoC5/random_PM.c ****                 #if (random_PRS_SIZE <= 32u)
+ 129:Generated_Source\PSoC5/random_PM.c ****                     random_ResetSeedInit(random_DEFAULT_SEED);                        
+ 130:Generated_Source\PSoC5/random_PM.c ****                 #else
+ 131:Generated_Source\PSoC5/random_PM.c ****                     random_ResetSeedInitUpper(random_DEFAULT_SEED_UPPER);
+ 132:Generated_Source\PSoC5/random_PM.c ****                     random_ResetSeedInitLower(random_DEFAULT_SEED_LOWER); 
+ 133:Generated_Source\PSoC5/random_PM.c ****                 #endif  /* End (random_PRS_SIZE <= 32u) */ 
+ 134:Generated_Source\PSoC5/random_PM.c ****             #endif  /* End (random_RUN_MODE == random__CLOCKED) */
+ 135:Generated_Source\PSoC5/random_PM.c ****             
+ 136:Generated_Source\PSoC5/random_PM.c ****             /* Restore dff state for time mult: use async set/reest */
+ 137:Generated_Source\PSoC5/random_PM.c ****             /* Set CI, SI, SO, STATE0, STATE1 */
+ 138:Generated_Source\PSoC5/random_PM.c ****             random_CONTROL_REG = random_backup.dffStatus;
+ 139:Generated_Source\PSoC5/random_PM.c ****             
+ 140:Generated_Source\PSoC5/random_PM.c ****             /* Make pulse, to set trigger to defined state */
+ 141:Generated_Source\PSoC5/random_PM.c ****             random_EXECUTE_DFF_SET;
+ 142:Generated_Source\PSoC5/random_PM.c ****             
+ 143:Generated_Source\PSoC5/random_PM.c ****             /* Set normal dff sequence set */
+ 144:Generated_Source\PSoC5/random_PM.c ****             random_sleepState |= random_NORMAL_SEQUENCE;
+ 145:Generated_Source\PSoC5/random_PM.c ****         }
+ 146:Generated_Source\PSoC5/random_PM.c ****         
+ 147:Generated_Source\PSoC5/random_PM.c ****     #else
+ 148:Generated_Source\PSoC5/random_PM.c ****         void random_RestoreConfig(void) 
+ 149:Generated_Source\PSoC5/random_PM.c ****         {   
+ 104              		.loc 1 149 0
+ 105              		.cfi_startproc
+ 106              		@ args = 0, pretend = 0, frame = 0
+ 107              		@ frame_needed = 0, uses_anonymous_args = 0
+ 108 0000 08B5     		push	{r3, lr}
+ 109              		.cfi_def_cfa_offset 8
+ 110              		.cfi_offset 3, -8
+ 111              		.cfi_offset 14, -4
+ 150:Generated_Source\PSoC5/random_PM.c ****             /* Restore A0 and A1 registers */
+ 151:Generated_Source\PSoC5/random_PM.c ****             #if (random_PRS_SIZE <= 32u)
+ 152:Generated_Source\PSoC5/random_PM.c ****                 random_WriteSeed(random_backup.seed);
+ 112              		.loc 1 152 0
+ 113 0002 044B     		ldr	r3, .L13
+ 114 0004 5878     		ldrb	r0, [r3, #1]	@ zero_extendqisi2
+ 115 0006 FFF7FEFF 		bl	random_WriteSeed
+ 116              	.LVL3:
+ 153:Generated_Source\PSoC5/random_PM.c ****             #else
+ 154:Generated_Source\PSoC5/random_PM.c ****                 random_WriteSeedUpper(random_backup.seedUpper);
+ 155:Generated_Source\PSoC5/random_PM.c ****                 random_WriteSeedLower(random_backup.seedLower);
+ 156:Generated_Source\PSoC5/random_PM.c ****             #endif  /* End (random_PRS_SIZE <= 32u) */
+ 157:Generated_Source\PSoC5/random_PM.c ****             
+ 158:Generated_Source\PSoC5/random_PM.c ****             #if (random_RUN_MODE == random__CLOCKED)
+ 159:Generated_Source\PSoC5/random_PM.c ****                 #if (random_PRS_SIZE <= 32u)
+ 160:Generated_Source\PSoC5/random_PM.c ****                     random_ResetSeedInit(random_DEFAULT_SEED);                        
+ 117              		.loc 1 160 0
+ 118 000a FF20     		movs	r0, #255
+ 119 000c FFF7FEFF 		bl	random_ResetSeedInit
+ 120              	.LVL4:
+ 121 0010 08BD     		pop	{r3, pc}
+ 122              	.L14:
+ 123 0012 00BF     		.align	2
+ 124              	.L13:
+ 125 0014 00000000 		.word	random_backup
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 6
+
+
+ 126              		.cfi_endproc
+ 127              	.LFE2:
+ 128              		.size	random_RestoreConfig, .-random_RestoreConfig
+ 129              		.section	.text.random_Wakeup,"ax",%progbits
+ 130              		.align	2
+ 131              		.global	random_Wakeup
+ 132              		.thumb
+ 133              		.thumb_func
+ 134              		.type	random_Wakeup, %function
+ 135              	random_Wakeup:
+ 136              	.LFB3:
+ 161:Generated_Source\PSoC5/random_PM.c ****                 #else
+ 162:Generated_Source\PSoC5/random_PM.c ****                     random_ResetSeedInitUpper(random_DEFAULT_SEED_UPPER);
+ 163:Generated_Source\PSoC5/random_PM.c ****                     random_ResetSeedInitLower(random_DEFAULT_SEED_LOWER); 
+ 164:Generated_Source\PSoC5/random_PM.c ****                 #endif  /* End (random_PRS_SIZE <= 32u) */ 
+ 165:Generated_Source\PSoC5/random_PM.c ****             #endif  /* End (random_RUN_MODE == random__CLOCKED) */
+ 166:Generated_Source\PSoC5/random_PM.c ****         }
+ 167:Generated_Source\PSoC5/random_PM.c ****         
+ 168:Generated_Source\PSoC5/random_PM.c ****     #endif  /* End (random_TIME_MULTIPLEXING_ENABLE) */
+ 169:Generated_Source\PSoC5/random_PM.c ****     
+ 170:Generated_Source\PSoC5/random_PM.c **** #else
+ 171:Generated_Source\PSoC5/random_PM.c ****     void random_RestoreConfig(void) 
+ 172:Generated_Source\PSoC5/random_PM.c ****     {
+ 173:Generated_Source\PSoC5/random_PM.c ****         random_Init();
+ 174:Generated_Source\PSoC5/random_PM.c ****     }
+ 175:Generated_Source\PSoC5/random_PM.c ****     
+ 176:Generated_Source\PSoC5/random_PM.c **** #endif  /* End (random_WAKEUP_BEHAVIOUR == random__RESUMEWORK) */
+ 177:Generated_Source\PSoC5/random_PM.c **** 
+ 178:Generated_Source\PSoC5/random_PM.c **** 
+ 179:Generated_Source\PSoC5/random_PM.c **** /*******************************************************************************
+ 180:Generated_Source\PSoC5/random_PM.c **** * Function Name: random_Wakeup
+ 181:Generated_Source\PSoC5/random_PM.c **** ********************************************************************************
+ 182:Generated_Source\PSoC5/random_PM.c **** *
+ 183:Generated_Source\PSoC5/random_PM.c **** * Summary:
+ 184:Generated_Source\PSoC5/random_PM.c **** *  Restores PRS configuration and starts PRS computation. 
+ 185:Generated_Source\PSoC5/random_PM.c **** *
+ 186:Generated_Source\PSoC5/random_PM.c **** * Parameters:
+ 187:Generated_Source\PSoC5/random_PM.c **** *  void
+ 188:Generated_Source\PSoC5/random_PM.c **** *
+ 189:Generated_Source\PSoC5/random_PM.c **** * Return:
+ 190:Generated_Source\PSoC5/random_PM.c **** *  void
+ 191:Generated_Source\PSoC5/random_PM.c **** *
+ 192:Generated_Source\PSoC5/random_PM.c **** *******************************************************************************/
+ 193:Generated_Source\PSoC5/random_PM.c **** #if ((random_WAKEUP_BEHAVIOUR == random__RESUMEWORK) && (random_TIME_MULTIPLEXING_ENABLE))
+ 194:Generated_Source\PSoC5/random_PM.c ****     void random_Wakeup(void) 
+ 195:Generated_Source\PSoC5/random_PM.c **** #else
+ 196:Generated_Source\PSoC5/random_PM.c ****     void random_Wakeup(void) 
+ 197:Generated_Source\PSoC5/random_PM.c **** #endif  /* End ((random_WAKEUP_BEHAVIOUR == random__RESUMEWORK) && 
+ 198:Generated_Source\PSoC5/random_PM.c ****                 (random_TIME_MULTIPLEXING_ENABLE)) */
+ 199:Generated_Source\PSoC5/random_PM.c **** {
+ 137              		.loc 1 199 0
+ 138              		.cfi_startproc
+ 139              		@ args = 0, pretend = 0, frame = 0
+ 140              		@ frame_needed = 0, uses_anonymous_args = 0
+ 141 0000 08B5     		push	{r3, lr}
+ 142              		.cfi_def_cfa_offset 8
+ 143              		.cfi_offset 3, -8
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 7
+
+
+ 144              		.cfi_offset 14, -4
+ 200:Generated_Source\PSoC5/random_PM.c ****     random_RestoreConfig();
+ 145              		.loc 1 200 0
+ 146 0002 FFF7FEFF 		bl	random_RestoreConfig
+ 147              	.LVL5:
+ 201:Generated_Source\PSoC5/random_PM.c ****     
+ 202:Generated_Source\PSoC5/random_PM.c ****     /* Restore PRS enable state */
+ 203:Generated_Source\PSoC5/random_PM.c ****     if (random_backup.enableState != 0u)
+ 148              		.loc 1 203 0
+ 149 0006 034B     		ldr	r3, .L18
+ 150 0008 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 151 000a 0BB1     		cbz	r3, .L15
+ 204:Generated_Source\PSoC5/random_PM.c ****     {
+ 205:Generated_Source\PSoC5/random_PM.c ****         random_Enable();
+ 152              		.loc 1 205 0
+ 153 000c FFF7FEFF 		bl	random_Enable
+ 154              	.LVL6:
+ 155              	.L15:
+ 156 0010 08BD     		pop	{r3, pc}
+ 157              	.L19:
+ 158 0012 00BF     		.align	2
+ 159              	.L18:
+ 160 0014 00000000 		.word	random_backup
+ 161              		.cfi_endproc
+ 162              	.LFE3:
+ 163              		.size	random_Wakeup, .-random_Wakeup
+ 164              		.text
+ 165              	.Letext0:
+ 166              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 167              		.file 3 "Generated_Source\\PSoC5\\random.h"
+ 168              		.section	.debug_info,"",%progbits
+ 169              	.Ldebug_info0:
+ 170 0000 B4010000 		.4byte	0x1b4
+ 171 0004 0400     		.2byte	0x4
+ 172 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 173 000a 04       		.byte	0x4
+ 174 000b 01       		.uleb128 0x1
+ 175 000c BE000000 		.4byte	.LASF28
+ 176 0010 0C       		.byte	0xc
+ 177 0011 87010000 		.4byte	.LASF29
+ 178 0015 46000000 		.4byte	.LASF30
+ 179 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 180 001d 00000000 		.4byte	0
+ 181 0021 00000000 		.4byte	.Ldebug_line0
+ 182 0025 02       		.uleb128 0x2
+ 183 0026 01       		.byte	0x1
+ 184 0027 06       		.byte	0x6
+ 185 0028 87020000 		.4byte	.LASF0
+ 186 002c 02       		.uleb128 0x2
+ 187 002d 01       		.byte	0x1
+ 188 002e 08       		.byte	0x8
+ 189 002f B0000000 		.4byte	.LASF1
+ 190 0033 02       		.uleb128 0x2
+ 191 0034 02       		.byte	0x2
+ 192 0035 05       		.byte	0x5
+ 193 0036 57020000 		.4byte	.LASF2
+ 194 003a 02       		.uleb128 0x2
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 8
+
+
+ 195 003b 02       		.byte	0x2
+ 196 003c 07       		.byte	0x7
+ 197 003d 0C000000 		.4byte	.LASF3
+ 198 0041 02       		.uleb128 0x2
+ 199 0042 04       		.byte	0x4
+ 200 0043 05       		.byte	0x5
+ 201 0044 66020000 		.4byte	.LASF4
+ 202 0048 02       		.uleb128 0x2
+ 203 0049 04       		.byte	0x4
+ 204 004a 07       		.byte	0x7
+ 205 004b BF010000 		.4byte	.LASF5
+ 206 004f 02       		.uleb128 0x2
+ 207 0050 08       		.byte	0x8
+ 208 0051 05       		.byte	0x5
+ 209 0052 33020000 		.4byte	.LASF6
+ 210 0056 02       		.uleb128 0x2
+ 211 0057 08       		.byte	0x8
+ 212 0058 07       		.byte	0x7
+ 213 0059 F3010000 		.4byte	.LASF7
+ 214 005d 03       		.uleb128 0x3
+ 215 005e 04       		.byte	0x4
+ 216 005f 05       		.byte	0x5
+ 217 0060 696E7400 		.ascii	"int\000"
+ 218 0064 02       		.uleb128 0x2
+ 219 0065 04       		.byte	0x4
+ 220 0066 07       		.byte	0x7
+ 221 0067 D1010000 		.4byte	.LASF8
+ 222 006b 04       		.uleb128 0x4
+ 223 006c 5E010000 		.4byte	.LASF12
+ 224 0070 02       		.byte	0x2
+ 225 0071 E401     		.2byte	0x1e4
+ 226 0073 2C000000 		.4byte	0x2c
+ 227 0077 02       		.uleb128 0x2
+ 228 0078 04       		.byte	0x4
+ 229 0079 04       		.byte	0x4
+ 230 007a 40000000 		.4byte	.LASF9
+ 231 007e 02       		.uleb128 0x2
+ 232 007f 08       		.byte	0x8
+ 233 0080 04       		.byte	0x4
+ 234 0081 2B000000 		.4byte	.LASF10
+ 235 0085 02       		.uleb128 0x2
+ 236 0086 01       		.byte	0x1
+ 237 0087 08       		.byte	0x8
+ 238 0088 52020000 		.4byte	.LASF11
+ 239 008c 04       		.uleb128 0x4
+ 240 008d 4C010000 		.4byte	.LASF13
+ 241 0091 02       		.byte	0x2
+ 242 0092 8E02     		.2byte	0x28e
+ 243 0094 98000000 		.4byte	0x98
+ 244 0098 05       		.uleb128 0x5
+ 245 0099 6B000000 		.4byte	0x6b
+ 246 009d 02       		.uleb128 0x2
+ 247 009e 08       		.byte	0x8
+ 248 009f 04       		.byte	0x4
+ 249 00a0 7B020000 		.4byte	.LASF14
+ 250 00a4 02       		.uleb128 0x2
+ 251 00a5 04       		.byte	0x4
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 9
+
+
+ 252 00a6 07       		.byte	0x7
+ 253 00a7 2A020000 		.4byte	.LASF15
+ 254 00ab 06       		.uleb128 0x6
+ 255 00ac 02       		.byte	0x2
+ 256 00ad 03       		.byte	0x3
+ 257 00ae 31       		.byte	0x31
+ 258 00af CC000000 		.4byte	0xcc
+ 259 00b3 07       		.uleb128 0x7
+ 260 00b4 6F020000 		.4byte	.LASF16
+ 261 00b8 03       		.byte	0x3
+ 262 00b9 33       		.byte	0x33
+ 263 00ba 6B000000 		.4byte	0x6b
+ 264 00be 00       		.byte	0
+ 265 00bf 07       		.uleb128 0x7
+ 266 00c0 61020000 		.4byte	.LASF17
+ 267 00c4 03       		.byte	0x3
+ 268 00c5 3D       		.byte	0x3d
+ 269 00c6 6B000000 		.4byte	0x6b
+ 270 00ca 01       		.byte	0x1
+ 271 00cb 00       		.byte	0
+ 272 00cc 08       		.uleb128 0x8
+ 273 00cd 64010000 		.4byte	.LASF18
+ 274 00d1 03       		.byte	0x3
+ 275 00d2 47       		.byte	0x47
+ 276 00d3 AB000000 		.4byte	0xab
+ 277 00d7 09       		.uleb128 0x9
+ 278 00d8 18020000 		.4byte	.LASF19
+ 279 00dc 01       		.byte	0x1
+ 280 00dd 2B       		.byte	0x2b
+ 281 00de 00000000 		.4byte	.LFB0
+ 282 00e2 10000000 		.4byte	.LFE0-.LFB0
+ 283 00e6 01       		.uleb128 0x1
+ 284 00e7 9C       		.byte	0x9c
+ 285 00e8 F6000000 		.4byte	0xf6
+ 286 00ec 0A       		.uleb128 0xa
+ 287 00ed 06000000 		.4byte	.LVL0
+ 288 00f1 80010000 		.4byte	0x180
+ 289 00f5 00       		.byte	0
+ 290 00f6 09       		.uleb128 0x9
+ 291 00f7 51010000 		.4byte	.LASF20
+ 292 00fb 01       		.byte	0x1
+ 293 00fc 54       		.byte	0x54
+ 294 00fd 00000000 		.4byte	.LFB1
+ 295 0101 2C000000 		.4byte	.LFE1-.LFB1
+ 296 0105 01       		.uleb128 0x1
+ 297 0106 9C       		.byte	0x9c
+ 298 0107 1E010000 		.4byte	0x11e
+ 299 010b 0A       		.uleb128 0xa
+ 300 010c 16000000 		.4byte	.LVL1
+ 301 0110 8B010000 		.4byte	0x18b
+ 302 0114 0A       		.uleb128 0xa
+ 303 0115 22000000 		.4byte	.LVL2
+ 304 0119 D7000000 		.4byte	0xd7
+ 305 011d 00       		.byte	0
+ 306 011e 09       		.uleb128 0x9
+ 307 011f DE010000 		.4byte	.LASF21
+ 308 0123 01       		.byte	0x1
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 10
+
+
+ 309 0124 94       		.byte	0x94
+ 310 0125 00000000 		.4byte	.LFB2
+ 311 0129 18000000 		.4byte	.LFE2-.LFB2
+ 312 012d 01       		.uleb128 0x1
+ 313 012e 9C       		.byte	0x9c
+ 314 012f 4D010000 		.4byte	0x14d
+ 315 0133 0A       		.uleb128 0xa
+ 316 0134 0A000000 		.4byte	.LVL3
+ 317 0138 96010000 		.4byte	0x196
+ 318 013c 0B       		.uleb128 0xb
+ 319 013d 10000000 		.4byte	.LVL4
+ 320 0141 A1010000 		.4byte	0x1a1
+ 321 0145 0C       		.uleb128 0xc
+ 322 0146 01       		.uleb128 0x1
+ 323 0147 50       		.byte	0x50
+ 324 0148 02       		.uleb128 0x2
+ 325 0149 09       		.byte	0x9
+ 326 014a FF       		.byte	0xff
+ 327 014b 00       		.byte	0
+ 328 014c 00       		.byte	0
+ 329 014d 09       		.uleb128 0x9
+ 330 014e 79010000 		.4byte	.LASF22
+ 331 0152 01       		.byte	0x1
+ 332 0153 C4       		.byte	0xc4
+ 333 0154 00000000 		.4byte	.LFB3
+ 334 0158 18000000 		.4byte	.LFE3-.LFB3
+ 335 015c 01       		.uleb128 0x1
+ 336 015d 9C       		.byte	0x9c
+ 337 015e 75010000 		.4byte	0x175
+ 338 0162 0A       		.uleb128 0xa
+ 339 0163 06000000 		.4byte	.LVL5
+ 340 0167 1E010000 		.4byte	0x11e
+ 341 016b 0A       		.uleb128 0xa
+ 342 016c 10000000 		.4byte	.LVL6
+ 343 0170 AC010000 		.4byte	0x1ac
+ 344 0174 00       		.byte	0
+ 345 0175 0D       		.uleb128 0xd
+ 346 0176 32000000 		.4byte	.LASF31
+ 347 017a 03       		.byte	0x3
+ 348 017b 4B       		.byte	0x4b
+ 349 017c CC000000 		.4byte	0xcc
+ 350 0180 0E       		.uleb128 0xe
+ 351 0181 1F000000 		.4byte	.LASF23
+ 352 0185 1F000000 		.4byte	.LASF23
+ 353 0189 03       		.byte	0x3
+ 354 018a 6D       		.byte	0x6d
+ 355 018b 0E       		.uleb128 0xe
+ 356 018c 00000000 		.4byte	.LASF24
+ 357 0190 00000000 		.4byte	.LASF24
+ 358 0194 03       		.byte	0x3
+ 359 0195 5A       		.byte	0x5a
+ 360 0196 0E       		.uleb128 0xe
+ 361 0197 41020000 		.4byte	.LASF25
+ 362 019b 41020000 		.4byte	.LASF25
+ 363 019f 03       		.byte	0x3
+ 364 01a0 6E       		.byte	0x6e
+ 365 01a1 0E       		.uleb128 0xe
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 11
+
+
+ 366 01a2 AA010000 		.4byte	.LASF26
+ 367 01a6 AA010000 		.4byte	.LASF26
+ 368 01aa 03       		.byte	0x3
+ 369 01ab 84       		.byte	0x84
+ 370 01ac 0E       		.uleb128 0xe
+ 371 01ad 0A020000 		.4byte	.LASF27
+ 372 01b1 0A020000 		.4byte	.LASF27
+ 373 01b5 03       		.byte	0x3
+ 374 01b6 58       		.byte	0x58
+ 375 01b7 00       		.byte	0
+ 376              		.section	.debug_abbrev,"",%progbits
+ 377              	.Ldebug_abbrev0:
+ 378 0000 01       		.uleb128 0x1
+ 379 0001 11       		.uleb128 0x11
+ 380 0002 01       		.byte	0x1
+ 381 0003 25       		.uleb128 0x25
+ 382 0004 0E       		.uleb128 0xe
+ 383 0005 13       		.uleb128 0x13
+ 384 0006 0B       		.uleb128 0xb
+ 385 0007 03       		.uleb128 0x3
+ 386 0008 0E       		.uleb128 0xe
+ 387 0009 1B       		.uleb128 0x1b
+ 388 000a 0E       		.uleb128 0xe
+ 389 000b 55       		.uleb128 0x55
+ 390 000c 17       		.uleb128 0x17
+ 391 000d 11       		.uleb128 0x11
+ 392 000e 01       		.uleb128 0x1
+ 393 000f 10       		.uleb128 0x10
+ 394 0010 17       		.uleb128 0x17
+ 395 0011 00       		.byte	0
+ 396 0012 00       		.byte	0
+ 397 0013 02       		.uleb128 0x2
+ 398 0014 24       		.uleb128 0x24
+ 399 0015 00       		.byte	0
+ 400 0016 0B       		.uleb128 0xb
+ 401 0017 0B       		.uleb128 0xb
+ 402 0018 3E       		.uleb128 0x3e
+ 403 0019 0B       		.uleb128 0xb
+ 404 001a 03       		.uleb128 0x3
+ 405 001b 0E       		.uleb128 0xe
+ 406 001c 00       		.byte	0
+ 407 001d 00       		.byte	0
+ 408 001e 03       		.uleb128 0x3
+ 409 001f 24       		.uleb128 0x24
+ 410 0020 00       		.byte	0
+ 411 0021 0B       		.uleb128 0xb
+ 412 0022 0B       		.uleb128 0xb
+ 413 0023 3E       		.uleb128 0x3e
+ 414 0024 0B       		.uleb128 0xb
+ 415 0025 03       		.uleb128 0x3
+ 416 0026 08       		.uleb128 0x8
+ 417 0027 00       		.byte	0
+ 418 0028 00       		.byte	0
+ 419 0029 04       		.uleb128 0x4
+ 420 002a 16       		.uleb128 0x16
+ 421 002b 00       		.byte	0
+ 422 002c 03       		.uleb128 0x3
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 12
+
+
+ 423 002d 0E       		.uleb128 0xe
+ 424 002e 3A       		.uleb128 0x3a
+ 425 002f 0B       		.uleb128 0xb
+ 426 0030 3B       		.uleb128 0x3b
+ 427 0031 05       		.uleb128 0x5
+ 428 0032 49       		.uleb128 0x49
+ 429 0033 13       		.uleb128 0x13
+ 430 0034 00       		.byte	0
+ 431 0035 00       		.byte	0
+ 432 0036 05       		.uleb128 0x5
+ 433 0037 35       		.uleb128 0x35
+ 434 0038 00       		.byte	0
+ 435 0039 49       		.uleb128 0x49
+ 436 003a 13       		.uleb128 0x13
+ 437 003b 00       		.byte	0
+ 438 003c 00       		.byte	0
+ 439 003d 06       		.uleb128 0x6
+ 440 003e 13       		.uleb128 0x13
+ 441 003f 01       		.byte	0x1
+ 442 0040 0B       		.uleb128 0xb
+ 443 0041 0B       		.uleb128 0xb
+ 444 0042 3A       		.uleb128 0x3a
+ 445 0043 0B       		.uleb128 0xb
+ 446 0044 3B       		.uleb128 0x3b
+ 447 0045 0B       		.uleb128 0xb
+ 448 0046 01       		.uleb128 0x1
+ 449 0047 13       		.uleb128 0x13
+ 450 0048 00       		.byte	0
+ 451 0049 00       		.byte	0
+ 452 004a 07       		.uleb128 0x7
+ 453 004b 0D       		.uleb128 0xd
+ 454 004c 00       		.byte	0
+ 455 004d 03       		.uleb128 0x3
+ 456 004e 0E       		.uleb128 0xe
+ 457 004f 3A       		.uleb128 0x3a
+ 458 0050 0B       		.uleb128 0xb
+ 459 0051 3B       		.uleb128 0x3b
+ 460 0052 0B       		.uleb128 0xb
+ 461 0053 49       		.uleb128 0x49
+ 462 0054 13       		.uleb128 0x13
+ 463 0055 38       		.uleb128 0x38
+ 464 0056 0B       		.uleb128 0xb
+ 465 0057 00       		.byte	0
+ 466 0058 00       		.byte	0
+ 467 0059 08       		.uleb128 0x8
+ 468 005a 16       		.uleb128 0x16
+ 469 005b 00       		.byte	0
+ 470 005c 03       		.uleb128 0x3
+ 471 005d 0E       		.uleb128 0xe
+ 472 005e 3A       		.uleb128 0x3a
+ 473 005f 0B       		.uleb128 0xb
+ 474 0060 3B       		.uleb128 0x3b
+ 475 0061 0B       		.uleb128 0xb
+ 476 0062 49       		.uleb128 0x49
+ 477 0063 13       		.uleb128 0x13
+ 478 0064 00       		.byte	0
+ 479 0065 00       		.byte	0
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 13
+
+
+ 480 0066 09       		.uleb128 0x9
+ 481 0067 2E       		.uleb128 0x2e
+ 482 0068 01       		.byte	0x1
+ 483 0069 3F       		.uleb128 0x3f
+ 484 006a 19       		.uleb128 0x19
+ 485 006b 03       		.uleb128 0x3
+ 486 006c 0E       		.uleb128 0xe
+ 487 006d 3A       		.uleb128 0x3a
+ 488 006e 0B       		.uleb128 0xb
+ 489 006f 3B       		.uleb128 0x3b
+ 490 0070 0B       		.uleb128 0xb
+ 491 0071 27       		.uleb128 0x27
+ 492 0072 19       		.uleb128 0x19
+ 493 0073 11       		.uleb128 0x11
+ 494 0074 01       		.uleb128 0x1
+ 495 0075 12       		.uleb128 0x12
+ 496 0076 06       		.uleb128 0x6
+ 497 0077 40       		.uleb128 0x40
+ 498 0078 18       		.uleb128 0x18
+ 499 0079 9742     		.uleb128 0x2117
+ 500 007b 19       		.uleb128 0x19
+ 501 007c 01       		.uleb128 0x1
+ 502 007d 13       		.uleb128 0x13
+ 503 007e 00       		.byte	0
+ 504 007f 00       		.byte	0
+ 505 0080 0A       		.uleb128 0xa
+ 506 0081 898201   		.uleb128 0x4109
+ 507 0084 00       		.byte	0
+ 508 0085 11       		.uleb128 0x11
+ 509 0086 01       		.uleb128 0x1
+ 510 0087 31       		.uleb128 0x31
+ 511 0088 13       		.uleb128 0x13
+ 512 0089 00       		.byte	0
+ 513 008a 00       		.byte	0
+ 514 008b 0B       		.uleb128 0xb
+ 515 008c 898201   		.uleb128 0x4109
+ 516 008f 01       		.byte	0x1
+ 517 0090 11       		.uleb128 0x11
+ 518 0091 01       		.uleb128 0x1
+ 519 0092 31       		.uleb128 0x31
+ 520 0093 13       		.uleb128 0x13
+ 521 0094 00       		.byte	0
+ 522 0095 00       		.byte	0
+ 523 0096 0C       		.uleb128 0xc
+ 524 0097 8A8201   		.uleb128 0x410a
+ 525 009a 00       		.byte	0
+ 526 009b 02       		.uleb128 0x2
+ 527 009c 18       		.uleb128 0x18
+ 528 009d 9142     		.uleb128 0x2111
+ 529 009f 18       		.uleb128 0x18
+ 530 00a0 00       		.byte	0
+ 531 00a1 00       		.byte	0
+ 532 00a2 0D       		.uleb128 0xd
+ 533 00a3 34       		.uleb128 0x34
+ 534 00a4 00       		.byte	0
+ 535 00a5 03       		.uleb128 0x3
+ 536 00a6 0E       		.uleb128 0xe
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 14
+
+
+ 537 00a7 3A       		.uleb128 0x3a
+ 538 00a8 0B       		.uleb128 0xb
+ 539 00a9 3B       		.uleb128 0x3b
+ 540 00aa 0B       		.uleb128 0xb
+ 541 00ab 49       		.uleb128 0x49
+ 542 00ac 13       		.uleb128 0x13
+ 543 00ad 3F       		.uleb128 0x3f
+ 544 00ae 19       		.uleb128 0x19
+ 545 00af 3C       		.uleb128 0x3c
+ 546 00b0 19       		.uleb128 0x19
+ 547 00b1 00       		.byte	0
+ 548 00b2 00       		.byte	0
+ 549 00b3 0E       		.uleb128 0xe
+ 550 00b4 2E       		.uleb128 0x2e
+ 551 00b5 00       		.byte	0
+ 552 00b6 3F       		.uleb128 0x3f
+ 553 00b7 19       		.uleb128 0x19
+ 554 00b8 3C       		.uleb128 0x3c
+ 555 00b9 19       		.uleb128 0x19
+ 556 00ba 6E       		.uleb128 0x6e
+ 557 00bb 0E       		.uleb128 0xe
+ 558 00bc 03       		.uleb128 0x3
+ 559 00bd 0E       		.uleb128 0xe
+ 560 00be 3A       		.uleb128 0x3a
+ 561 00bf 0B       		.uleb128 0xb
+ 562 00c0 3B       		.uleb128 0x3b
+ 563 00c1 0B       		.uleb128 0xb
+ 564 00c2 00       		.byte	0
+ 565 00c3 00       		.byte	0
+ 566 00c4 00       		.byte	0
+ 567              		.section	.debug_aranges,"",%progbits
+ 568 0000 34000000 		.4byte	0x34
+ 569 0004 0200     		.2byte	0x2
+ 570 0006 00000000 		.4byte	.Ldebug_info0
+ 571 000a 04       		.byte	0x4
+ 572 000b 00       		.byte	0
+ 573 000c 0000     		.2byte	0
+ 574 000e 0000     		.2byte	0
+ 575 0010 00000000 		.4byte	.LFB0
+ 576 0014 10000000 		.4byte	.LFE0-.LFB0
+ 577 0018 00000000 		.4byte	.LFB1
+ 578 001c 2C000000 		.4byte	.LFE1-.LFB1
+ 579 0020 00000000 		.4byte	.LFB2
+ 580 0024 18000000 		.4byte	.LFE2-.LFB2
+ 581 0028 00000000 		.4byte	.LFB3
+ 582 002c 18000000 		.4byte	.LFE3-.LFB3
+ 583 0030 00000000 		.4byte	0
+ 584 0034 00000000 		.4byte	0
+ 585              		.section	.debug_ranges,"",%progbits
+ 586              	.Ldebug_ranges0:
+ 587 0000 00000000 		.4byte	.LFB0
+ 588 0004 10000000 		.4byte	.LFE0
+ 589 0008 00000000 		.4byte	.LFB1
+ 590 000c 2C000000 		.4byte	.LFE1
+ 591 0010 00000000 		.4byte	.LFB2
+ 592 0014 18000000 		.4byte	.LFE2
+ 593 0018 00000000 		.4byte	.LFB3
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 15
+
+
+ 594 001c 18000000 		.4byte	.LFE3
+ 595 0020 00000000 		.4byte	0
+ 596 0024 00000000 		.4byte	0
+ 597              		.section	.debug_line,"",%progbits
+ 598              	.Ldebug_line0:
+ 599 0000 A4000000 		.section	.debug_str,"MS",%progbits,1
+ 599      02005200 
+ 599      00000201 
+ 599      FB0E0D00 
+ 599      01010101 
+ 600              	.LASF24:
+ 601 0000 72616E64 		.ascii	"random_Stop\000"
+ 601      6F6D5F53 
+ 601      746F7000 
+ 602              	.LASF3:
+ 603 000c 73686F72 		.ascii	"short unsigned int\000"
+ 603      7420756E 
+ 603      7369676E 
+ 603      65642069 
+ 603      6E7400
+ 604              	.LASF23:
+ 605 001f 72616E64 		.ascii	"random_Read\000"
+ 605      6F6D5F52 
+ 605      65616400 
+ 606              	.LASF10:
+ 607 002b 646F7562 		.ascii	"double\000"
+ 607      6C6500
+ 608              	.LASF31:
+ 609 0032 72616E64 		.ascii	"random_backup\000"
+ 609      6F6D5F62 
+ 609      61636B75 
+ 609      7000
+ 610              	.LASF9:
+ 611 0040 666C6F61 		.ascii	"float\000"
+ 611      7400
+ 612              	.LASF30:
+ 613 0046 433A5C55 		.ascii	"C:\\Users\\info\\Desktop\\Spring 2019 Classes\\6.11"
+ 613      73657273 
+ 613      5C696E66 
+ 613      6F5C4465 
+ 613      736B746F 
+ 614 0074 355C362E 		.ascii	"5\\6.115-final\\PSoCCreator\\Final Project\\FinalEm"
+ 614      3131352D 
+ 614      66696E61 
+ 614      6C5C5053 
+ 614      6F434372 
+ 615 00a3 756C6174 		.ascii	"ulator.cydsn\000"
+ 615      6F722E63 
+ 615      7964736E 
+ 615      00
+ 616              	.LASF1:
+ 617 00b0 756E7369 		.ascii	"unsigned char\000"
+ 617      676E6564 
+ 617      20636861 
+ 617      7200
+ 618              	.LASF28:
+ 619 00be 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 16
+
+
+ 619      43313120 
+ 619      352E342E 
+ 619      31203230 
+ 619      31363036 
+ 620 00f1 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 620      20726576 
+ 620      6973696F 
+ 620      6E203233 
+ 620      37373135 
+ 621 0124 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 621      66756E63 
+ 621      74696F6E 
+ 621      2D736563 
+ 621      74696F6E 
+ 622              	.LASF13:
+ 623 014c 72656738 		.ascii	"reg8\000"
+ 623      00
+ 624              	.LASF20:
+ 625 0151 72616E64 		.ascii	"random_Sleep\000"
+ 625      6F6D5F53 
+ 625      6C656570 
+ 625      00
+ 626              	.LASF12:
+ 627 015e 75696E74 		.ascii	"uint8\000"
+ 627      3800
+ 628              	.LASF18:
+ 629 0164 72616E64 		.ascii	"random_BACKUP_STRUCT\000"
+ 629      6F6D5F42 
+ 629      41434B55 
+ 629      505F5354 
+ 629      52554354 
+ 630              	.LASF22:
+ 631 0179 72616E64 		.ascii	"random_Wakeup\000"
+ 631      6F6D5F57 
+ 631      616B6575 
+ 631      7000
+ 632              	.LASF29:
+ 633 0187 47656E65 		.ascii	"Generated_Source\\PSoC5\\random_PM.c\000"
+ 633      72617465 
+ 633      645F536F 
+ 633      75726365 
+ 633      5C50536F 
+ 634              	.LASF26:
+ 635 01aa 72616E64 		.ascii	"random_ResetSeedInit\000"
+ 635      6F6D5F52 
+ 635      65736574 
+ 635      53656564 
+ 635      496E6974 
+ 636              	.LASF5:
+ 637 01bf 6C6F6E67 		.ascii	"long unsigned int\000"
+ 637      20756E73 
+ 637      69676E65 
+ 637      6420696E 
+ 637      7400
+ 638              	.LASF8:
+ 639 01d1 756E7369 		.ascii	"unsigned int\000"
+ 639      676E6564 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 17
+
+
+ 639      20696E74 
+ 639      00
+ 640              	.LASF21:
+ 641 01de 72616E64 		.ascii	"random_RestoreConfig\000"
+ 641      6F6D5F52 
+ 641      6573746F 
+ 641      7265436F 
+ 641      6E666967 
+ 642              	.LASF7:
+ 643 01f3 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 643      206C6F6E 
+ 643      6720756E 
+ 643      7369676E 
+ 643      65642069 
+ 644              	.LASF27:
+ 645 020a 72616E64 		.ascii	"random_Enable\000"
+ 645      6F6D5F45 
+ 645      6E61626C 
+ 645      6500
+ 646              	.LASF19:
+ 647 0218 72616E64 		.ascii	"random_SaveConfig\000"
+ 647      6F6D5F53 
+ 647      61766543 
+ 647      6F6E6669 
+ 647      6700
+ 648              	.LASF15:
+ 649 022a 73697A65 		.ascii	"sizetype\000"
+ 649      74797065 
+ 649      00
+ 650              	.LASF6:
+ 651 0233 6C6F6E67 		.ascii	"long long int\000"
+ 651      206C6F6E 
+ 651      6720696E 
+ 651      7400
+ 652              	.LASF25:
+ 653 0241 72616E64 		.ascii	"random_WriteSeed\000"
+ 653      6F6D5F57 
+ 653      72697465 
+ 653      53656564 
+ 653      00
+ 654              	.LASF11:
+ 655 0252 63686172 		.ascii	"char\000"
+ 655      00
+ 656              	.LASF2:
+ 657 0257 73686F72 		.ascii	"short int\000"
+ 657      7420696E 
+ 657      7400
+ 658              	.LASF17:
+ 659 0261 73656564 		.ascii	"seed\000"
+ 659      00
+ 660              	.LASF4:
+ 661 0266 6C6F6E67 		.ascii	"long int\000"
+ 661      20696E74 
+ 661      00
+ 662              	.LASF16:
+ 663 026f 656E6162 		.ascii	"enableState\000"
+ 663      6C655374 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc3uqqlO.s 			page 18
+
+
+ 663      61746500 
+ 664              	.LASF14:
+ 665 027b 6C6F6E67 		.ascii	"long double\000"
+ 665      20646F75 
+ 665      626C6500 
+ 666              	.LASF0:
+ 667 0287 7369676E 		.ascii	"signed char\000"
+ 667      65642063 
+ 667      68617200 
+ 668              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
