@@ -7,7 +7,7 @@
       <Tool Name="prebuild" Command="" Options="" />
       <Tool Name="assembler" Command="arm-none-eabi-as.exe" Options="-mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -alh=${OutputDir}/${CompileFile}.lst -g -W" />
       <Tool Name="compiler" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
-      <Tool Name="linker" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -Og -ffat-lto-objects" />
+      <Tool Name="linker" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T .\custom.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -Og -ffat-lto-objects" />
       <Tool Name="postbuild" Command="" Options="" />
     </Toolchain>
     <Toolchain Name="ARM MDK Generic" Selected="False">
@@ -29,7 +29,7 @@
     <CMSIS_SVD_File>FinalEmulator.svd</CMSIS_SVD_File>
     <Datasheet />
     <LinkerFiles>
-      <LinkerFile Toolchain="ARM GCC Generic">.\Generated_Source\PSoC5\cm3gcc.ld</LinkerFile>
+      <LinkerFile Toolchain="ARM GCC Generic">.\custom.ld</LinkerFile>
       <LinkerFile Toolchain="ARM MDK Generic">.\Generated_Source\PSoC5\Cm3RealView.scat</LinkerFile>
       <LinkerFile Toolchain="ARM IAR Generic">.\Generated_Source\PSoC5\Cm3Iar.icf</LinkerFile>
     </LinkerFiles>
@@ -39,6 +39,7 @@
           <File BuildType="BUILD" Toolchain="">main.c</File>
           <File BuildType="BUILD" Toolchain="">cyapicallbacks.h</File>
           <File BuildType="BUILD" Toolchain="">ram_init_data.h</File>
+          <File BuildType="BUILD" Toolchain="ARM GCC Generic">custom.ld</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\info\Desktop\Spring 2019 Classes\6.115\6.115-final\PSoCCreator\Final Project\FinalEmulator.cydsn\Generated_Source\PSoC5">
@@ -105,6 +106,36 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\pin_snd_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\pin_snd.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\pin_snd.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\HORIZ.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\HORIZ.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\HORIZ_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VGA_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VGA.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VGA.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VERT.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VERT.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VERT_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VSYNC.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VSYNC.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VSYNC_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\HSYNC.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\HSYNC.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\HSYNC_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DMA_dma.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\DMA_dma.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PIXEL.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PIXEL.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PIXEL_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\NEWLINE.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\NEWLINE.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\HSYNC_OUT_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\HSYNC_OUT.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\HSYNC_OUT.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VSYNC_OUT_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VSYNC_OUT.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VSYNC_OUT.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VGA_CLK.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VGA_CLK.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\info\Desktop\Spring 2019 Classes\6.115\6.115-final\PSoCCreator\Final Project\FinalEmulator.cydsn\Export\ARM_GCC_Generic">

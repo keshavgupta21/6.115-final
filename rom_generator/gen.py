@@ -1,6 +1,6 @@
 from pathlib import Path
 import sys
-rom = Path(sys.argv[1]).read_bytes()  # Python 3.5+
+rom = Path(sys.argv[1]).read_bytes()
 
 font = [0xF0, 0x90, 0x90, 0x90, 0xF0,\
         0x20, 0x60, 0x20, 0x20, 0x70,\
@@ -26,6 +26,7 @@ while len(data) < 0x200:
 data += rom
 
 with open("ram_init_data.h", "w") as f:
+    f.write("/* ROM from file: {0} */\n".format(sys.argv[1]))
     f.write("#define RAM_INITIAL_DATA {\\\n")
     for i in range(0, len(data), 8):
         strs = []
