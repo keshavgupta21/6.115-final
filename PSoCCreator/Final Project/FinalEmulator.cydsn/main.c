@@ -108,14 +108,15 @@ CY_ISR(newline) {
             /* Refresh buffer during vsync */
             CyDmaChDisable(dma_chan);
             if (vga_update_flag) {
-            uint8_t pixel;
+                uint8_t pixel;
+                uint64_t temprow;
                 for (uint8_t x = 0; x < 64; x++){
                     for (uint8_t y = 0; y < 48; y++){
                         if (y < 8 || y >= 40) {
                             pixel = 0;
                         } else {
-                            pixel = vram[y - 8] & (((uint64_t)1) << (63-x));
-                            pixel = (pixel) ? 1 : 0;
+                            temprow = vram[y - 8] & (((uint64_t)1) << (63-x));
+                            pixel = (temprow) ? 1 : 0;
                         }
                         vbuf[2*y][2*x] = pixel;
                         vbuf[2*y+1][2*x] = pixel;
@@ -128,11 +129,6 @@ CY_ISR(newline) {
             CyDmaChEnable(dma_chan, 1);
         }
     }
-}
-
-void update_vga() {
-    vga_update_flag = 1;
-    while (vga_update_flag);
 }
 
 /* 
@@ -194,6 +190,9 @@ int main(void){
     random_Enable();
     random_Init();
     random_Start();
+    
+    /* Turn on LED to indicate execution */
+    pin_led_Write(1);
     
     /* Emulate away.. */
     while(1){
@@ -381,6 +380,7 @@ int main(void){
                 vram[(v[y] + j) % 32] ^= row;
             }
             v[0xf] = collision ? 1 : 0;
+            vga_update_flag = 1;
             break;
         }
         case OP3_KEYBOARD:
@@ -460,12 +460,9 @@ int main(void){
             break;
         }
         if (invalid_op) {
-            /* Halt and dump core if invalid instruction received */
+            /* Turn off LED if invalid instruction received */
             while(1){
-                pin_led_Write(1);
-                CyDelay(100);
                 pin_led_Write(0);
-                CyDelay(100);
             }
         }
         if (!freeze_pc){
