@@ -6,9 +6,13 @@
 */
 
 /*
-TODO
+TODO Check last column on vga is always black
 
-Translate physical key to real key
+TODO Space Invaders debug
+
+TODO sound
+
+TODO Correct one leg of PCB
 
 Replace SRAM with EEPROM (or other funcitonality to change roms nicely)
 
@@ -93,7 +97,7 @@ int main(void){
         
     /* Turn on LED to indicate execution */
     pin_led_Write(1);
-    
+
     /* Start execution */
     execute(ram, vram, &snd, &tmr, &vga_update_flag);
     

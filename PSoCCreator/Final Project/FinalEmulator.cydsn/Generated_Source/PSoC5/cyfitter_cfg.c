@@ -220,34 +220,19 @@ static void cfg_write_bytes32(const uint32 addr_table[], const cy_cfg_addrvalue_
 static void ClockSetup(void);
 static void ClockSetup(void)
 {
-	uint8 x32TrHold;
 	uint32 timeout;
 	uint8 pllLock;
 
-	x32TrHold = CY_GET_XTND_REG8((void CYFAR *)CYREG_X32_TR);
 
 	/* Configure Digital Clocks based on settings from Clock DWR */
 	CY_SET_XTND_REG16((void CYFAR *)(CYREG_CLKDIST_DCFG0_CFG0), 0x0007u);
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CLKDIST_DCFG0_CFG0 + 0x2u), 0x18u);
-	CY_SET_XTND_REG16((void CYFAR *)(CYREG_CLKDIST_DCFG1_CFG0), 0x0221u);
-	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CLKDIST_DCFG1_CFG0 + 0x2u), 0x1Du);
+	CY_SET_XTND_REG16((void CYFAR *)(CYREG_CLKDIST_DCFG1_CFG0), 0x2A68u);
+	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CLKDIST_DCFG1_CFG0 + 0x2u), 0x18u);
 
 	/* Configure ILO based on settings from Clock DWR */
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_SLOWCLK_ILO_CR0), 0x02u);
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CLKDIST_CR), 0x08u);
-
-	/* Configure XTAL 32kHz based on settings from Clock DWR */
-	CY_SET_XTND_REG8((void CYFAR *)(CYREG_SLOWCLK_X32_TST), 0xF3u);
-	CY_SET_XTND_REG8((void CYFAR *)(CYREG_X32_TR), 0x03u);
-	CY_SET_XTND_REG8((void CYFAR *)(CYREG_SLOWCLK_X32_CFG), 0x84u);
-	CY_SET_XTND_REG8((void CYFAR *)(CYREG_SLOWCLK_X32_CR), 0x05u);
-	/* Wait up to 1000000us for the XTAL 32kHz to lock */
-	for (timeout = 1000000u / 10u; (timeout > 0u) && ((CY_GET_XTND_REG8((void CYFAR *)CYREG_SLOWCLK_X32_CR) & 0x20u) == 0u); timeout--)
-	{ 
-		
-		CyDelayCycles(10u * 48u); /* Delay 10us based on 48MHz clock */
-	}
-	CY_SET_XTND_REG8((void CYFAR *)(CYREG_X32_TR), (x32TrHold));
 
 	/* Configure IMO based on settings from Clock DWR */
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_FASTCLK_IMO_CR), 0x02u);
@@ -367,6 +352,13 @@ void cyfitter_cfg(void)
 	CYGlobalIntDisable
 #endif
 
+
+	/* Set Flash Cycles based on max possible frequency in case a glitch occurs during ClockSetup(). */
+	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CACHE_CC_CTL), (((CYDEV_INSTRUCT_CACHE_ENABLED) != 0) ? 0x61u : 0x60u));
+	/* Setup clocks based on selections from Clock DWR */
+	ClockSetup();
+	/* Set Flash Cycles based on newly configured 65.14MHz Bus Clock. */
+	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CACHE_CC_CTL), (((CYDEV_INSTRUCT_CACHE_ENABLED) != 0) ? 0x01u : 0x00u));
 	/* Enable/Disable Debug functionality based on settings from System DWR */
 	CY_SET_XTND_REG8((void CYFAR *)CYREG_MLOGIC_DEBUG, (CY_GET_XTND_REG8((void CYFAR *)CYREG_MLOGIC_DEBUG) | 0x04u));
 
@@ -420,13 +412,6 @@ void cyfitter_cfg(void)
 	CYCONFIGCPY((void CYFAR *)(CYREG_PRT3_DM0), (const void CYFAR *)(BS_IOPINS0_3_VAL), 8u);
 	/* Switch Boost to the precision bandgap reference from its internal reference */
 	CY_SET_REG8((void CYXDATA *)CYREG_BOOST_CR2, (CY_GET_REG8((void CYXDATA *)CYREG_BOOST_CR2) | 0x08u));
-
-	/* Set Flash Cycles based on max possible frequency in case a glitch occurs during ClockSetup(). */
-	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CACHE_CC_CTL), (((CYDEV_INSTRUCT_CACHE_ENABLED) != 0) ? 0x61u : 0x60u));
-	/* Setup clocks based on selections from Clock DWR */
-	ClockSetup();
-	/* Set Flash Cycles based on newly configured 65.14MHz Bus Clock. */
-	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CACHE_CC_CTL), (((CYDEV_INSTRUCT_CACHE_ENABLED) != 0) ? 0x01u : 0x00u));
 
 	/* Perform basic analog initialization to defaults */
 	AnalogSetDefault();

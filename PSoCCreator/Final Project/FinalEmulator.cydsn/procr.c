@@ -18,6 +18,7 @@ void execute(uint8_t ram[], uint64_t vram[32], uint8_t* snd,
     
     /* Emulate away.. */
     while(1){
+        pc &= 0x0fff;
         /* Get the instruction at the current address */
         uint16_t instr = (ram[pc] << 8) | ram[pc+1];
         

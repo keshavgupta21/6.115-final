@@ -1,6 +1,6 @@
 // ======================================================================
 // FinalEmulator.v generated from TopDesign.cysch
-// 05/01/2019 at 00:41
+// 05/01/2019 at 10:37
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -641,7 +641,7 @@ endmodule
 // top
 module top ;
 
-          wire  Net_13381;
+          wire  Net_15966;
           wire  Net_725;
           wire  Net_75;
           wire  Net_74;
@@ -654,51 +654,51 @@ module top ;
           wire  Net_67;
           wire  Net_66;
           wire  Net_727;
-          wire  Net_13380;
-          wire  Net_13379;
-          wire  Net_13378;
-          wire  Net_13377;
-          wire  Net_13376;
-          wire  Net_13375;
-          wire  Net_13374;
-          wire  Net_13373;
-          wire  Net_13372;
-          wire  Net_13371;
-          wire  Net_13370;
-          wire  Net_13369;
-          wire  Net_13368;
-          wire  Net_13367;
-          wire  Net_13366;
-          wire  Net_13365;
-          wire  Net_13364;
-          wire  Net_13363;
-          wire  Net_13362;
-          wire  Net_13361;
-          wire  Net_13360;
-          wire  Net_13359;
-          wire  Net_13358;
-          wire  Net_13357;
-          wire  Net_13356;
-          wire  Net_13355;
-          wire  Net_13354;
-          wire  Net_13353;
-          wire  Net_13352;
-          wire  Net_13351;
-          wire  Net_13350;
-          wire  Net_13349;
-          wire  Net_13348;
-          wire  Net_13347;
-          wire  Net_13346;
-          wire  Net_13345;
-          wire  Net_13344;
-          wire  Net_13343;
-          wire  Net_13342;
-          wire  Net_13341;
-          wire  Net_13340;
-          wire  Net_13339;
-          wire  Net_13338;
-          wire  Net_13337;
-          wire  Net_13336;
+          wire  Net_15965;
+          wire  Net_15964;
+          wire  Net_15963;
+          wire  Net_15962;
+          wire  Net_15961;
+          wire  Net_15960;
+          wire  Net_15959;
+          wire  Net_15958;
+          wire  Net_15957;
+          wire  Net_15956;
+          wire  Net_15955;
+          wire  Net_15954;
+          wire  Net_15953;
+          wire  Net_15952;
+          wire  Net_15951;
+          wire  Net_15950;
+          wire  Net_15949;
+          wire  Net_15948;
+          wire  Net_15947;
+          wire  Net_15946;
+          wire  Net_15945;
+          wire  Net_15944;
+          wire  Net_15943;
+          wire  Net_15942;
+          wire  Net_15941;
+          wire  Net_15940;
+          wire  Net_15939;
+          wire  Net_15938;
+          wire  Net_15937;
+          wire  Net_15936;
+          wire  Net_15935;
+          wire  Net_15934;
+          wire  Net_15933;
+          wire  Net_15932;
+          wire  Net_15931;
+          wire  Net_15930;
+          wire  Net_15929;
+          wire  Net_15928;
+          wire  Net_15927;
+          wire  Net_15926;
+          wire  Net_15925;
+          wire  Net_15924;
+          wire  Net_15923;
+          wire  Net_15922;
+          wire  Net_15921;
           wire  Net_12;
           wire  Net_10;
           wire  Net_8;
@@ -828,9 +828,9 @@ module top ;
 
 	cy_clock_v1_0
 		#(.id("95edaf4c-cef2-4a87-b064-3fa6c52576c8"),
-		  .source_clock_id("EC9D9168-D68F-4573-AC21-F93D3BF005CD"),
+		  .source_clock_id(""),
 		  .divisor(0),
-		  .period("16666666666666.7"),
+		  .period("166666666666.667"),
 		  .is_direct(0),
 		  .is_digital(1))
 		clk_timer
@@ -915,18 +915,18 @@ module top ;
     PWM_v3_30_0 HORIZ (
         .reset(1'b0),
         .clock(Net_1241),
-        .tc(Net_13337),
+        .tc(Net_15922),
         .pwm1(Net_1700),
         .pwm2(Net_584),
-        .interrupt(Net_13338),
+        .interrupt(Net_15923),
         .capture(1'b0),
         .kill(1'b1),
         .enable(1'b1),
         .trigger(1'b0),
         .cmp_sel(1'b0),
-        .pwm(Net_13344),
-        .ph1(Net_13345),
-        .ph2(Net_13346));
+        .pwm(Net_15929),
+        .ph1(Net_15930),
+        .ph2(Net_15931));
     defparam HORIZ.Resolution = 8;
 
 	wire [0:0] tmpOE__VGA_net;
@@ -1007,52 +1007,52 @@ module top ;
     PWM_v3_30_1 VERT (
         .reset(1'b0),
         .clock(Net_1700),
-        .tc(Net_13348),
-        .pwm1(Net_13349),
-        .pwm2(Net_13350),
-        .interrupt(Net_13351),
+        .tc(Net_15933),
+        .pwm1(Net_15934),
+        .pwm2(Net_15935),
+        .interrupt(Net_15936),
         .capture(1'b0),
         .kill(1'b1),
         .enable(1'b1),
         .trigger(1'b0),
         .cmp_sel(1'b0),
         .pwm(Net_923),
-        .ph1(Net_13357),
-        .ph2(Net_13358));
+        .ph1(Net_15942),
+        .ph2(Net_15943));
     defparam VERT.Resolution = 16;
 
     PWM_v3_30_2 VSYNC (
         .reset(1'b0),
         .clock(Net_1700),
-        .tc(Net_13360),
-        .pwm1(Net_13361),
-        .pwm2(Net_13362),
-        .interrupt(Net_13363),
+        .tc(Net_15945),
+        .pwm1(Net_15946),
+        .pwm2(Net_15947),
+        .interrupt(Net_15948),
         .capture(1'b0),
         .kill(1'b1),
         .enable(1'b1),
         .trigger(Net_923),
         .cmp_sel(1'b0),
         .pwm(Net_1730),
-        .ph1(Net_13368),
-        .ph2(Net_13369));
+        .ph1(Net_15953),
+        .ph2(Net_15954));
     defparam VSYNC.Resolution = 8;
 
     PWM_v3_30_3 HSYNC (
         .reset(1'b0),
         .clock(Net_1241),
-        .tc(Net_13371),
-        .pwm1(Net_13372),
-        .pwm2(Net_13373),
-        .interrupt(Net_13374),
+        .tc(Net_15956),
+        .pwm1(Net_15957),
+        .pwm2(Net_15958),
+        .interrupt(Net_15959),
         .capture(1'b0),
         .kill(1'b1),
         .enable(1'b1),
         .trigger(Net_584),
         .cmp_sel(1'b0),
         .pwm(Net_1731),
-        .ph1(Net_13379),
-        .ph2(Net_13380));
+        .ph1(Net_15964),
+        .ph2(Net_15965));
     defparam HSYNC.Resolution = 8;
 
 
