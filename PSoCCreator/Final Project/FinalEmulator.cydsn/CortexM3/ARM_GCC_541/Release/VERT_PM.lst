@@ -1,0 +1,1221 @@
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"VERT_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.VERT_SaveConfig,"ax",%progbits
+  20              		.align	2
+  21              		.global	VERT_SaveConfig
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	VERT_SaveConfig, %function
+  25              	VERT_SaveConfig:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC5\\VERT_PM.c"
+   1:Generated_Source\PSoC5/VERT_PM.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/VERT_PM.c **** * File Name: VERT_PM.c
+   3:Generated_Source\PSoC5/VERT_PM.c **** * Version 3.30
+   4:Generated_Source\PSoC5/VERT_PM.c **** *
+   5:Generated_Source\PSoC5/VERT_PM.c **** * Description:
+   6:Generated_Source\PSoC5/VERT_PM.c **** *  This file provides the power management source code to API for the
+   7:Generated_Source\PSoC5/VERT_PM.c **** *  PWM.
+   8:Generated_Source\PSoC5/VERT_PM.c **** *
+   9:Generated_Source\PSoC5/VERT_PM.c **** * Note:
+  10:Generated_Source\PSoC5/VERT_PM.c **** *
+  11:Generated_Source\PSoC5/VERT_PM.c **** ********************************************************************************
+  12:Generated_Source\PSoC5/VERT_PM.c **** * Copyright 2008-2014, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/VERT_PM.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:Generated_Source\PSoC5/VERT_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:Generated_Source\PSoC5/VERT_PM.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/VERT_PM.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/VERT_PM.c **** 
+  18:Generated_Source\PSoC5/VERT_PM.c **** #include "VERT.h"
+  19:Generated_Source\PSoC5/VERT_PM.c **** 
+  20:Generated_Source\PSoC5/VERT_PM.c **** static VERT_backupStruct VERT_backup;
+  21:Generated_Source\PSoC5/VERT_PM.c **** 
+  22:Generated_Source\PSoC5/VERT_PM.c **** 
+  23:Generated_Source\PSoC5/VERT_PM.c **** /*******************************************************************************
+  24:Generated_Source\PSoC5/VERT_PM.c **** * Function Name: VERT_SaveConfig
+  25:Generated_Source\PSoC5/VERT_PM.c **** ********************************************************************************
+  26:Generated_Source\PSoC5/VERT_PM.c **** *
+  27:Generated_Source\PSoC5/VERT_PM.c **** * Summary:
+  28:Generated_Source\PSoC5/VERT_PM.c **** *  Saves the current user configuration of the component.
+  29:Generated_Source\PSoC5/VERT_PM.c **** *
+  30:Generated_Source\PSoC5/VERT_PM.c **** * Parameters:
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 2
+
+
+  31:Generated_Source\PSoC5/VERT_PM.c **** *  None
+  32:Generated_Source\PSoC5/VERT_PM.c **** *
+  33:Generated_Source\PSoC5/VERT_PM.c **** * Return:
+  34:Generated_Source\PSoC5/VERT_PM.c **** *  None
+  35:Generated_Source\PSoC5/VERT_PM.c **** *
+  36:Generated_Source\PSoC5/VERT_PM.c **** * Global variables:
+  37:Generated_Source\PSoC5/VERT_PM.c **** *  VERT_backup:  Variables of this global structure are modified to
+  38:Generated_Source\PSoC5/VERT_PM.c **** *  store the values of non retention configuration registers when Sleep() API is
+  39:Generated_Source\PSoC5/VERT_PM.c **** *  called.
+  40:Generated_Source\PSoC5/VERT_PM.c **** *
+  41:Generated_Source\PSoC5/VERT_PM.c **** *******************************************************************************/
+  42:Generated_Source\PSoC5/VERT_PM.c **** void VERT_SaveConfig(void) 
+  43:Generated_Source\PSoC5/VERT_PM.c **** {
+  28              		.loc 1 43 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 4, -8
+  35              		.cfi_offset 14, -4
+  44:Generated_Source\PSoC5/VERT_PM.c **** 
+  45:Generated_Source\PSoC5/VERT_PM.c ****     #if(!VERT_UsingFixedFunction)
+  46:Generated_Source\PSoC5/VERT_PM.c ****         #if(!VERT_PWMModeIsCenterAligned)
+  47:Generated_Source\PSoC5/VERT_PM.c ****             VERT_backup.PWMPeriod = VERT_ReadPeriod();
+  36              		.loc 1 47 0
+  37 0002 FFF7FEFF 		bl	VERT_ReadPeriod
+  38              	.LVL0:
+  39 0006 044C     		ldr	r4, .L3
+  40 0008 A080     		strh	r0, [r4, #4]	@ movhi
+  48:Generated_Source\PSoC5/VERT_PM.c ****         #endif /* (!VERT_PWMModeIsCenterAligned) */
+  49:Generated_Source\PSoC5/VERT_PM.c ****         VERT_backup.PWMUdb = VERT_ReadCounter();
+  41              		.loc 1 49 0
+  42 000a FFF7FEFF 		bl	VERT_ReadCounter
+  43              	.LVL1:
+  44 000e 6080     		strh	r0, [r4, #2]	@ movhi
+  50:Generated_Source\PSoC5/VERT_PM.c ****         #if (VERT_UseStatus)
+  51:Generated_Source\PSoC5/VERT_PM.c ****             VERT_backup.InterruptMaskValue = VERT_STATUS_MASK;
+  52:Generated_Source\PSoC5/VERT_PM.c ****         #endif /* (VERT_UseStatus) */
+  53:Generated_Source\PSoC5/VERT_PM.c **** 
+  54:Generated_Source\PSoC5/VERT_PM.c ****         #if(VERT_DeadBandMode == VERT__B_PWM__DBM_256_CLOCKS || \
+  55:Generated_Source\PSoC5/VERT_PM.c ****             VERT_DeadBandMode == VERT__B_PWM__DBM_2_4_CLOCKS)
+  56:Generated_Source\PSoC5/VERT_PM.c ****             VERT_backup.PWMdeadBandValue = VERT_ReadDeadTime();
+  57:Generated_Source\PSoC5/VERT_PM.c ****         #endif /*  deadband count is either 2-4 clocks or 256 clocks */
+  58:Generated_Source\PSoC5/VERT_PM.c **** 
+  59:Generated_Source\PSoC5/VERT_PM.c ****         #if(VERT_KillModeMinTime)
+  60:Generated_Source\PSoC5/VERT_PM.c ****              VERT_backup.PWMKillCounterPeriod = VERT_ReadKillTime();
+  61:Generated_Source\PSoC5/VERT_PM.c ****         #endif /* (VERT_KillModeMinTime) */
+  62:Generated_Source\PSoC5/VERT_PM.c **** 
+  63:Generated_Source\PSoC5/VERT_PM.c ****         #if(VERT_UseControl)
+  64:Generated_Source\PSoC5/VERT_PM.c ****             VERT_backup.PWMControlRegister = VERT_ReadControlRegister();
+  45              		.loc 1 64 0
+  46 0010 FFF7FEFF 		bl	VERT_ReadControlRegister
+  47              	.LVL2:
+  48 0014 A071     		strb	r0, [r4, #6]
+  49 0016 10BD     		pop	{r4, pc}
+  50              	.L4:
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 3
+
+
+  51              		.align	2
+  52              	.L3:
+  53 0018 00000000 		.word	.LANCHOR0
+  54              		.cfi_endproc
+  55              	.LFE0:
+  56              		.size	VERT_SaveConfig, .-VERT_SaveConfig
+  57              		.section	.text.VERT_RestoreConfig,"ax",%progbits
+  58              		.align	2
+  59              		.global	VERT_RestoreConfig
+  60              		.thumb
+  61              		.thumb_func
+  62              		.type	VERT_RestoreConfig, %function
+  63              	VERT_RestoreConfig:
+  64              	.LFB1:
+  65:Generated_Source\PSoC5/VERT_PM.c ****         #endif /* (VERT_UseControl) */
+  66:Generated_Source\PSoC5/VERT_PM.c ****     #endif  /* (!VERT_UsingFixedFunction) */
+  67:Generated_Source\PSoC5/VERT_PM.c **** }
+  68:Generated_Source\PSoC5/VERT_PM.c **** 
+  69:Generated_Source\PSoC5/VERT_PM.c **** 
+  70:Generated_Source\PSoC5/VERT_PM.c **** /*******************************************************************************
+  71:Generated_Source\PSoC5/VERT_PM.c **** * Function Name: VERT_RestoreConfig
+  72:Generated_Source\PSoC5/VERT_PM.c **** ********************************************************************************
+  73:Generated_Source\PSoC5/VERT_PM.c **** *
+  74:Generated_Source\PSoC5/VERT_PM.c **** * Summary:
+  75:Generated_Source\PSoC5/VERT_PM.c **** *  Restores the current user configuration of the component.
+  76:Generated_Source\PSoC5/VERT_PM.c **** *
+  77:Generated_Source\PSoC5/VERT_PM.c **** * Parameters:
+  78:Generated_Source\PSoC5/VERT_PM.c **** *  None
+  79:Generated_Source\PSoC5/VERT_PM.c **** *
+  80:Generated_Source\PSoC5/VERT_PM.c **** * Return:
+  81:Generated_Source\PSoC5/VERT_PM.c **** *  None
+  82:Generated_Source\PSoC5/VERT_PM.c **** *
+  83:Generated_Source\PSoC5/VERT_PM.c **** * Global variables:
+  84:Generated_Source\PSoC5/VERT_PM.c **** *  VERT_backup:  Variables of this global structure are used to
+  85:Generated_Source\PSoC5/VERT_PM.c **** *  restore the values of non retention registers on wakeup from sleep mode.
+  86:Generated_Source\PSoC5/VERT_PM.c **** *
+  87:Generated_Source\PSoC5/VERT_PM.c **** *******************************************************************************/
+  88:Generated_Source\PSoC5/VERT_PM.c **** void VERT_RestoreConfig(void) 
+  89:Generated_Source\PSoC5/VERT_PM.c **** {
+  65              		.loc 1 89 0
+  66              		.cfi_startproc
+  67              		@ args = 0, pretend = 0, frame = 0
+  68              		@ frame_needed = 0, uses_anonymous_args = 0
+  69 0000 10B5     		push	{r4, lr}
+  70              		.cfi_def_cfa_offset 8
+  71              		.cfi_offset 4, -8
+  72              		.cfi_offset 14, -4
+  90:Generated_Source\PSoC5/VERT_PM.c ****         #if(!VERT_UsingFixedFunction)
+  91:Generated_Source\PSoC5/VERT_PM.c ****             #if(!VERT_PWMModeIsCenterAligned)
+  92:Generated_Source\PSoC5/VERT_PM.c ****                 VERT_WritePeriod(VERT_backup.PWMPeriod);
+  73              		.loc 1 92 0
+  74 0002 064C     		ldr	r4, .L7
+  75 0004 A088     		ldrh	r0, [r4, #4]
+  76 0006 FFF7FEFF 		bl	VERT_WritePeriod
+  77              	.LVL3:
+  93:Generated_Source\PSoC5/VERT_PM.c ****             #endif /* (!VERT_PWMModeIsCenterAligned) */
+  94:Generated_Source\PSoC5/VERT_PM.c **** 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 4
+
+
+  95:Generated_Source\PSoC5/VERT_PM.c ****             VERT_WriteCounter(VERT_backup.PWMUdb);
+  78              		.loc 1 95 0
+  79 000a 6088     		ldrh	r0, [r4, #2]
+  80 000c FFF7FEFF 		bl	VERT_WriteCounter
+  81              	.LVL4:
+  96:Generated_Source\PSoC5/VERT_PM.c **** 
+  97:Generated_Source\PSoC5/VERT_PM.c ****             #if (VERT_UseStatus)
+  98:Generated_Source\PSoC5/VERT_PM.c ****                 VERT_STATUS_MASK = VERT_backup.InterruptMaskValue;
+  99:Generated_Source\PSoC5/VERT_PM.c ****             #endif /* (VERT_UseStatus) */
+ 100:Generated_Source\PSoC5/VERT_PM.c **** 
+ 101:Generated_Source\PSoC5/VERT_PM.c ****             #if(VERT_DeadBandMode == VERT__B_PWM__DBM_256_CLOCKS || \
+ 102:Generated_Source\PSoC5/VERT_PM.c ****                 VERT_DeadBandMode == VERT__B_PWM__DBM_2_4_CLOCKS)
+ 103:Generated_Source\PSoC5/VERT_PM.c ****                 VERT_WriteDeadTime(VERT_backup.PWMdeadBandValue);
+ 104:Generated_Source\PSoC5/VERT_PM.c ****             #endif /* deadband count is either 2-4 clocks or 256 clocks */
+ 105:Generated_Source\PSoC5/VERT_PM.c **** 
+ 106:Generated_Source\PSoC5/VERT_PM.c ****             #if(VERT_KillModeMinTime)
+ 107:Generated_Source\PSoC5/VERT_PM.c ****                 VERT_WriteKillTime(VERT_backup.PWMKillCounterPeriod);
+ 108:Generated_Source\PSoC5/VERT_PM.c ****             #endif /* (VERT_KillModeMinTime) */
+ 109:Generated_Source\PSoC5/VERT_PM.c **** 
+ 110:Generated_Source\PSoC5/VERT_PM.c ****             #if(VERT_UseControl)
+ 111:Generated_Source\PSoC5/VERT_PM.c ****                 VERT_WriteControlRegister(VERT_backup.PWMControlRegister);
+  82              		.loc 1 111 0
+  83 0010 A079     		ldrb	r0, [r4, #6]	@ zero_extendqisi2
+ 112:Generated_Source\PSoC5/VERT_PM.c ****             #endif /* (VERT_UseControl) */
+ 113:Generated_Source\PSoC5/VERT_PM.c ****         #endif  /* (!VERT_UsingFixedFunction) */
+ 114:Generated_Source\PSoC5/VERT_PM.c ****     }
+  84              		.loc 1 114 0
+  85 0012 BDE81040 		pop	{r4, lr}
+  86              		.cfi_restore 14
+  87              		.cfi_restore 4
+  88              		.cfi_def_cfa_offset 0
+ 111:Generated_Source\PSoC5/VERT_PM.c ****             #endif /* (VERT_UseControl) */
+  89              		.loc 1 111 0
+  90 0016 FFF7FEBF 		b	VERT_WriteControlRegister
+  91              	.LVL5:
+  92              	.L8:
+  93 001a 00BF     		.align	2
+  94              	.L7:
+  95 001c 00000000 		.word	.LANCHOR0
+  96              		.cfi_endproc
+  97              	.LFE1:
+  98              		.size	VERT_RestoreConfig, .-VERT_RestoreConfig
+  99              		.section	.text.VERT_Sleep,"ax",%progbits
+ 100              		.align	2
+ 101              		.global	VERT_Sleep
+ 102              		.thumb
+ 103              		.thumb_func
+ 104              		.type	VERT_Sleep, %function
+ 105              	VERT_Sleep:
+ 106              	.LFB2:
+ 115:Generated_Source\PSoC5/VERT_PM.c **** 
+ 116:Generated_Source\PSoC5/VERT_PM.c **** 
+ 117:Generated_Source\PSoC5/VERT_PM.c **** /*******************************************************************************
+ 118:Generated_Source\PSoC5/VERT_PM.c **** * Function Name: VERT_Sleep
+ 119:Generated_Source\PSoC5/VERT_PM.c **** ********************************************************************************
+ 120:Generated_Source\PSoC5/VERT_PM.c **** *
+ 121:Generated_Source\PSoC5/VERT_PM.c **** * Summary:
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 5
+
+
+ 122:Generated_Source\PSoC5/VERT_PM.c **** *  Disables block's operation and saves the user configuration. Should be called
+ 123:Generated_Source\PSoC5/VERT_PM.c **** *  just prior to entering sleep.
+ 124:Generated_Source\PSoC5/VERT_PM.c **** *
+ 125:Generated_Source\PSoC5/VERT_PM.c **** * Parameters:
+ 126:Generated_Source\PSoC5/VERT_PM.c **** *  None
+ 127:Generated_Source\PSoC5/VERT_PM.c **** *
+ 128:Generated_Source\PSoC5/VERT_PM.c **** * Return:
+ 129:Generated_Source\PSoC5/VERT_PM.c **** *  None
+ 130:Generated_Source\PSoC5/VERT_PM.c **** *
+ 131:Generated_Source\PSoC5/VERT_PM.c **** * Global variables:
+ 132:Generated_Source\PSoC5/VERT_PM.c **** *  VERT_backup.PWMEnableState:  Is modified depending on the enable
+ 133:Generated_Source\PSoC5/VERT_PM.c **** *  state of the block before entering sleep mode.
+ 134:Generated_Source\PSoC5/VERT_PM.c **** *
+ 135:Generated_Source\PSoC5/VERT_PM.c **** *******************************************************************************/
+ 136:Generated_Source\PSoC5/VERT_PM.c **** void VERT_Sleep(void) 
+ 137:Generated_Source\PSoC5/VERT_PM.c **** {
+ 107              		.loc 1 137 0
+ 108              		.cfi_startproc
+ 109              		@ args = 0, pretend = 0, frame = 0
+ 110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 111 0000 10B5     		push	{r4, lr}
+ 112              		.cfi_def_cfa_offset 8
+ 113              		.cfi_offset 4, -8
+ 114              		.cfi_offset 14, -4
+ 138:Generated_Source\PSoC5/VERT_PM.c ****     #if(VERT_UseControl)
+ 139:Generated_Source\PSoC5/VERT_PM.c ****         if(VERT_CTRL_ENABLE == (VERT_CONTROL & VERT_CTRL_ENABLE))
+ 115              		.loc 1 139 0
+ 116 0002 084B     		ldr	r3, .L11
+ 117 0004 084C     		ldr	r4, .L11+4
+ 118 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 119 0008 DB09     		lsrs	r3, r3, #7
+ 120 000a 2370     		strb	r3, [r4]
+ 140:Generated_Source\PSoC5/VERT_PM.c ****         {
+ 141:Generated_Source\PSoC5/VERT_PM.c ****             /*Component is enabled */
+ 142:Generated_Source\PSoC5/VERT_PM.c ****             VERT_backup.PWMEnableState = 1u;
+ 143:Generated_Source\PSoC5/VERT_PM.c ****         }
+ 144:Generated_Source\PSoC5/VERT_PM.c ****         else
+ 145:Generated_Source\PSoC5/VERT_PM.c ****         {
+ 146:Generated_Source\PSoC5/VERT_PM.c ****             /* Component is disabled */
+ 147:Generated_Source\PSoC5/VERT_PM.c ****             VERT_backup.PWMEnableState = 0u;
+ 148:Generated_Source\PSoC5/VERT_PM.c ****         }
+ 149:Generated_Source\PSoC5/VERT_PM.c ****     #endif /* (VERT_UseControl) */
+ 150:Generated_Source\PSoC5/VERT_PM.c **** 
+ 151:Generated_Source\PSoC5/VERT_PM.c ****     /* Stop component */
+ 152:Generated_Source\PSoC5/VERT_PM.c ****     VERT_Stop();
+ 121              		.loc 1 152 0
+ 122 000c FFF7FEFF 		bl	VERT_Stop
+ 123              	.LVL6:
+ 124              	.LBB4:
+ 125              	.LBB5:
+  47:Generated_Source\PSoC5/VERT_PM.c ****         #endif /* (!VERT_PWMModeIsCenterAligned) */
+ 126              		.loc 1 47 0
+ 127 0010 FFF7FEFF 		bl	VERT_ReadPeriod
+ 128              	.LVL7:
+ 129 0014 A080     		strh	r0, [r4, #4]	@ movhi
+  49:Generated_Source\PSoC5/VERT_PM.c ****         #if (VERT_UseStatus)
+ 130              		.loc 1 49 0
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 6
+
+
+ 131 0016 FFF7FEFF 		bl	VERT_ReadCounter
+ 132              	.LVL8:
+ 133 001a 6080     		strh	r0, [r4, #2]	@ movhi
+  64:Generated_Source\PSoC5/VERT_PM.c ****         #endif /* (VERT_UseControl) */
+ 134              		.loc 1 64 0
+ 135 001c FFF7FEFF 		bl	VERT_ReadControlRegister
+ 136              	.LVL9:
+ 137 0020 A071     		strb	r0, [r4, #6]
+ 138 0022 10BD     		pop	{r4, pc}
+ 139              	.L12:
+ 140              		.align	2
+ 141              	.L11:
+ 142 0024 7D640040 		.word	1073767549
+ 143 0028 00000000 		.word	.LANCHOR0
+ 144              	.LBE5:
+ 145              	.LBE4:
+ 146              		.cfi_endproc
+ 147              	.LFE2:
+ 148              		.size	VERT_Sleep, .-VERT_Sleep
+ 149              		.section	.text.VERT_Wakeup,"ax",%progbits
+ 150              		.align	2
+ 151              		.global	VERT_Wakeup
+ 152              		.thumb
+ 153              		.thumb_func
+ 154              		.type	VERT_Wakeup, %function
+ 155              	VERT_Wakeup:
+ 156              	.LFB3:
+ 153:Generated_Source\PSoC5/VERT_PM.c **** 
+ 154:Generated_Source\PSoC5/VERT_PM.c ****     /* Save registers configuration */
+ 155:Generated_Source\PSoC5/VERT_PM.c ****     VERT_SaveConfig();
+ 156:Generated_Source\PSoC5/VERT_PM.c **** }
+ 157:Generated_Source\PSoC5/VERT_PM.c **** 
+ 158:Generated_Source\PSoC5/VERT_PM.c **** 
+ 159:Generated_Source\PSoC5/VERT_PM.c **** /*******************************************************************************
+ 160:Generated_Source\PSoC5/VERT_PM.c **** * Function Name: VERT_Wakeup
+ 161:Generated_Source\PSoC5/VERT_PM.c **** ********************************************************************************
+ 162:Generated_Source\PSoC5/VERT_PM.c **** *
+ 163:Generated_Source\PSoC5/VERT_PM.c **** * Summary:
+ 164:Generated_Source\PSoC5/VERT_PM.c **** *  Restores and enables the user configuration. Should be called just after
+ 165:Generated_Source\PSoC5/VERT_PM.c **** *  awaking from sleep.
+ 166:Generated_Source\PSoC5/VERT_PM.c **** *
+ 167:Generated_Source\PSoC5/VERT_PM.c **** * Parameters:
+ 168:Generated_Source\PSoC5/VERT_PM.c **** *  None
+ 169:Generated_Source\PSoC5/VERT_PM.c **** *
+ 170:Generated_Source\PSoC5/VERT_PM.c **** * Return:
+ 171:Generated_Source\PSoC5/VERT_PM.c **** *  None
+ 172:Generated_Source\PSoC5/VERT_PM.c **** *
+ 173:Generated_Source\PSoC5/VERT_PM.c **** * Global variables:
+ 174:Generated_Source\PSoC5/VERT_PM.c **** *  VERT_backup.pwmEnable:  Is used to restore the enable state of
+ 175:Generated_Source\PSoC5/VERT_PM.c **** *  block on wakeup from sleep mode.
+ 176:Generated_Source\PSoC5/VERT_PM.c **** *
+ 177:Generated_Source\PSoC5/VERT_PM.c **** *******************************************************************************/
+ 178:Generated_Source\PSoC5/VERT_PM.c **** void VERT_Wakeup(void) 
+ 179:Generated_Source\PSoC5/VERT_PM.c **** {
+ 157              		.loc 1 179 0
+ 158              		.cfi_startproc
+ 159              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 7
+
+
+ 160              		@ frame_needed = 0, uses_anonymous_args = 0
+ 161 0000 10B5     		push	{r4, lr}
+ 162              		.cfi_def_cfa_offset 8
+ 163              		.cfi_offset 4, -8
+ 164              		.cfi_offset 14, -4
+ 165              	.LBB8:
+ 166              	.LBB9:
+  92:Generated_Source\PSoC5/VERT_PM.c ****             #endif /* (!VERT_PWMModeIsCenterAligned) */
+ 167              		.loc 1 92 0
+ 168 0002 084C     		ldr	r4, .L18
+ 169 0004 A088     		ldrh	r0, [r4, #4]
+ 170 0006 FFF7FEFF 		bl	VERT_WritePeriod
+ 171              	.LVL10:
+  95:Generated_Source\PSoC5/VERT_PM.c **** 
+ 172              		.loc 1 95 0
+ 173 000a 6088     		ldrh	r0, [r4, #2]
+ 174 000c FFF7FEFF 		bl	VERT_WriteCounter
+ 175              	.LVL11:
+ 111:Generated_Source\PSoC5/VERT_PM.c ****             #endif /* (VERT_UseControl) */
+ 176              		.loc 1 111 0
+ 177 0010 A079     		ldrb	r0, [r4, #6]	@ zero_extendqisi2
+ 178 0012 FFF7FEFF 		bl	VERT_WriteControlRegister
+ 179              	.LVL12:
+ 180              	.LBE9:
+ 181              	.LBE8:
+ 180:Generated_Source\PSoC5/VERT_PM.c ****      /* Restore registers values */
+ 181:Generated_Source\PSoC5/VERT_PM.c ****     VERT_RestoreConfig();
+ 182:Generated_Source\PSoC5/VERT_PM.c **** 
+ 183:Generated_Source\PSoC5/VERT_PM.c ****     if(VERT_backup.PWMEnableState != 0u)
+ 182              		.loc 1 183 0
+ 183 0016 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 184 0018 03B9     		cbnz	r3, .L17
+ 185 001a 10BD     		pop	{r4, pc}
+ 186              	.L17:
+ 184:Generated_Source\PSoC5/VERT_PM.c ****     {
+ 185:Generated_Source\PSoC5/VERT_PM.c ****         /* Enable component's operation */
+ 186:Generated_Source\PSoC5/VERT_PM.c ****         VERT_Enable();
+ 187:Generated_Source\PSoC5/VERT_PM.c ****     } /* Do nothing if component's block was disabled before */
+ 188:Generated_Source\PSoC5/VERT_PM.c **** 
+ 189:Generated_Source\PSoC5/VERT_PM.c **** }
+ 187              		.loc 1 189 0
+ 188 001c BDE81040 		pop	{r4, lr}
+ 189              		.cfi_restore 14
+ 190              		.cfi_restore 4
+ 191              		.cfi_def_cfa_offset 0
+ 186:Generated_Source\PSoC5/VERT_PM.c ****     } /* Do nothing if component's block was disabled before */
+ 192              		.loc 1 186 0
+ 193 0020 FFF7FEBF 		b	VERT_Enable
+ 194              	.LVL13:
+ 195              	.L19:
+ 196              		.align	2
+ 197              	.L18:
+ 198 0024 00000000 		.word	.LANCHOR0
+ 199              		.cfi_endproc
+ 200              	.LFE3:
+ 201              		.size	VERT_Wakeup, .-VERT_Wakeup
+ 202              		.bss
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 8
+
+
+ 203              		.align	2
+ 204              		.set	.LANCHOR0,. + 0
+ 205              		.type	VERT_backup, %object
+ 206              		.size	VERT_backup, 8
+ 207              	VERT_backup:
+ 208 0000 00000000 		.space	8
+ 208      00000000 
+ 209              		.text
+ 210              	.Letext0:
+ 211              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 212              		.file 3 "Generated_Source\\PSoC5\\VERT.h"
+ 213              		.section	.debug_info,"",%progbits
+ 214              	.Ldebug_info0:
+ 215 0000 6B020000 		.4byte	0x26b
+ 216 0004 0400     		.2byte	0x4
+ 217 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 218 000a 04       		.byte	0x4
+ 219 000b 01       		.uleb128 0x1
+ 220 000c 22000000 		.4byte	.LASF34
+ 221 0010 0C       		.byte	0xc
+ 222 0011 9E010000 		.4byte	.LASF35
+ 223 0015 EF010000 		.4byte	.LASF36
+ 224 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 225 001d 00000000 		.4byte	0
+ 226 0021 00000000 		.4byte	.Ldebug_line0
+ 227 0025 02       		.uleb128 0x2
+ 228 0026 01       		.byte	0x1
+ 229 0027 06       		.byte	0x6
+ 230 0028 D6020000 		.4byte	.LASF0
+ 231 002c 02       		.uleb128 0x2
+ 232 002d 01       		.byte	0x1
+ 233 002e 08       		.byte	0x8
+ 234 002f 1C010000 		.4byte	.LASF1
+ 235 0033 02       		.uleb128 0x2
+ 236 0034 02       		.byte	0x2
+ 237 0035 05       		.byte	0x5
+ 238 0036 9D020000 		.4byte	.LASF2
+ 239 003a 02       		.uleb128 0x2
+ 240 003b 02       		.byte	0x2
+ 241 003c 07       		.byte	0x7
+ 242 003d D5000000 		.4byte	.LASF3
+ 243 0041 02       		.uleb128 0x2
+ 244 0042 04       		.byte	0x4
+ 245 0043 05       		.byte	0x5
+ 246 0044 C1020000 		.4byte	.LASF4
+ 247 0048 02       		.uleb128 0x2
+ 248 0049 04       		.byte	0x4
+ 249 004a 07       		.byte	0x7
+ 250 004b 43010000 		.4byte	.LASF5
+ 251 004f 02       		.uleb128 0x2
+ 252 0050 08       		.byte	0x8
+ 253 0051 05       		.byte	0x5
+ 254 0052 7E020000 		.4byte	.LASF6
+ 255 0056 02       		.uleb128 0x2
+ 256 0057 08       		.byte	0x8
+ 257 0058 07       		.byte	0x7
+ 258 0059 59020000 		.4byte	.LASF7
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 9
+
+
+ 259 005d 03       		.uleb128 0x3
+ 260 005e 04       		.byte	0x4
+ 261 005f 05       		.byte	0x5
+ 262 0060 696E7400 		.ascii	"int\000"
+ 263 0064 02       		.uleb128 0x2
+ 264 0065 04       		.byte	0x4
+ 265 0066 07       		.byte	0x7
+ 266 0067 F9000000 		.4byte	.LASF8
+ 267 006b 04       		.uleb128 0x4
+ 268 006c 55010000 		.4byte	.LASF9
+ 269 0070 02       		.byte	0x2
+ 270 0071 E401     		.2byte	0x1e4
+ 271 0073 2C000000 		.4byte	0x2c
+ 272 0077 04       		.uleb128 0x4
+ 273 0078 BF010000 		.4byte	.LASF10
+ 274 007c 02       		.byte	0x2
+ 275 007d E501     		.2byte	0x1e5
+ 276 007f 3A000000 		.4byte	0x3a
+ 277 0083 02       		.uleb128 0x2
+ 278 0084 04       		.byte	0x4
+ 279 0085 04       		.byte	0x4
+ 280 0086 16010000 		.4byte	.LASF11
+ 281 008a 02       		.uleb128 0x2
+ 282 008b 08       		.byte	0x8
+ 283 008c 04       		.byte	0x4
+ 284 008d 6E010000 		.4byte	.LASF12
+ 285 0091 02       		.uleb128 0x2
+ 286 0092 01       		.byte	0x1
+ 287 0093 08       		.byte	0x8
+ 288 0094 8C020000 		.4byte	.LASF13
+ 289 0098 04       		.uleb128 0x4
+ 290 0099 70020000 		.4byte	.LASF14
+ 291 009d 02       		.byte	0x2
+ 292 009e 8E02     		.2byte	0x28e
+ 293 00a0 A4000000 		.4byte	0xa4
+ 294 00a4 05       		.uleb128 0x5
+ 295 00a5 6B000000 		.4byte	0x6b
+ 296 00a9 02       		.uleb128 0x2
+ 297 00aa 08       		.byte	0x8
+ 298 00ab 04       		.byte	0x4
+ 299 00ac CA020000 		.4byte	.LASF15
+ 300 00b0 02       		.uleb128 0x2
+ 301 00b1 04       		.byte	0x4
+ 302 00b2 07       		.byte	0x7
+ 303 00b3 75020000 		.4byte	.LASF16
+ 304 00b7 06       		.uleb128 0x6
+ 305 00b8 08       		.byte	0x8
+ 306 00b9 03       		.byte	0x3
+ 307 00ba 6B       		.byte	0x6b
+ 308 00bb F0000000 		.4byte	0xf0
+ 309 00bf 07       		.uleb128 0x7
+ 310 00c0 2A010000 		.4byte	.LASF17
+ 311 00c4 03       		.byte	0x3
+ 312 00c5 6E       		.byte	0x6e
+ 313 00c6 6B000000 		.4byte	0x6b
+ 314 00ca 00       		.byte	0
+ 315 00cb 07       		.uleb128 0x7
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 10
+
+
+ 316 00cc 11000000 		.4byte	.LASF18
+ 317 00d0 03       		.byte	0x3
+ 318 00d1 71       		.byte	0x71
+ 319 00d2 77000000 		.4byte	0x77
+ 320 00d6 02       		.byte	0x2
+ 321 00d7 07       		.uleb128 0x7
+ 322 00d8 18000000 		.4byte	.LASF19
+ 323 00dc 03       		.byte	0x3
+ 324 00dd 73       		.byte	0x73
+ 325 00de 77000000 		.4byte	0x77
+ 326 00e2 04       		.byte	0x4
+ 327 00e3 07       		.uleb128 0x7
+ 328 00e4 5B010000 		.4byte	.LASF20
+ 329 00e8 03       		.byte	0x3
+ 330 00e9 86       		.byte	0x86
+ 331 00ea 6B000000 		.4byte	0x6b
+ 332 00ee 06       		.byte	0x6
+ 333 00ef 00       		.byte	0
+ 334 00f0 08       		.uleb128 0x8
+ 335 00f1 C6010000 		.4byte	.LASF21
+ 336 00f5 03       		.byte	0x3
+ 337 00f6 8B       		.byte	0x8b
+ 338 00f7 B7000000 		.4byte	0xb7
+ 339 00fb 09       		.uleb128 0x9
+ 340 00fc 06010000 		.4byte	.LASF22
+ 341 0100 01       		.byte	0x1
+ 342 0101 2A       		.byte	0x2a
+ 343 0102 01       		.byte	0x1
+ 344 0103 0A       		.uleb128 0xa
+ 345 0104 FB000000 		.4byte	0xfb
+ 346 0108 00000000 		.4byte	.LFB0
+ 347 010c 1C000000 		.4byte	.LFE0-.LFB0
+ 348 0110 01       		.uleb128 0x1
+ 349 0111 9C       		.byte	0x9c
+ 350 0112 32010000 		.4byte	0x132
+ 351 0116 0B       		.uleb128 0xb
+ 352 0117 06000000 		.4byte	.LVL0
+ 353 011b 16020000 		.4byte	0x216
+ 354 011f 0B       		.uleb128 0xb
+ 355 0120 0E000000 		.4byte	.LVL1
+ 356 0124 21020000 		.4byte	0x221
+ 357 0128 0B       		.uleb128 0xb
+ 358 0129 14000000 		.4byte	.LVL2
+ 359 012d 2C020000 		.4byte	0x22c
+ 360 0131 00       		.byte	0
+ 361 0132 09       		.uleb128 0x9
+ 362 0133 C2000000 		.4byte	.LASF23
+ 363 0137 01       		.byte	0x1
+ 364 0138 58       		.byte	0x58
+ 365 0139 01       		.byte	0x1
+ 366 013a 0A       		.uleb128 0xa
+ 367 013b 32010000 		.4byte	0x132
+ 368 013f 00000000 		.4byte	.LFB1
+ 369 0143 20000000 		.4byte	.LFE1-.LFB1
+ 370 0147 01       		.uleb128 0x1
+ 371 0148 9C       		.byte	0x9c
+ 372 0149 69010000 		.4byte	0x169
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 11
+
+
+ 373 014d 0B       		.uleb128 0xb
+ 374 014e 0A000000 		.4byte	.LVL3
+ 375 0152 37020000 		.4byte	0x237
+ 376 0156 0B       		.uleb128 0xb
+ 377 0157 10000000 		.4byte	.LVL4
+ 378 015b 42020000 		.4byte	0x242
+ 379 015f 0C       		.uleb128 0xc
+ 380 0160 1A000000 		.4byte	.LVL5
+ 381 0164 4D020000 		.4byte	0x24d
+ 382 0168 00       		.byte	0
+ 383 0169 0D       		.uleb128 0xd
+ 384 016a E4010000 		.4byte	.LASF24
+ 385 016e 01       		.byte	0x1
+ 386 016f 88       		.byte	0x88
+ 387 0170 00000000 		.4byte	.LFB2
+ 388 0174 2C000000 		.4byte	.LFE2-.LFB2
+ 389 0178 01       		.uleb128 0x1
+ 390 0179 9C       		.byte	0x9c
+ 391 017a B7010000 		.4byte	0x1b7
+ 392 017e 0E       		.uleb128 0xe
+ 393 017f FB000000 		.4byte	0xfb
+ 394 0183 10000000 		.4byte	.LBB4
+ 395 0187 1C000000 		.4byte	.LBE4-.LBB4
+ 396 018b 01       		.byte	0x1
+ 397 018c 9B       		.byte	0x9b
+ 398 018d AD010000 		.4byte	0x1ad
+ 399 0191 0B       		.uleb128 0xb
+ 400 0192 14000000 		.4byte	.LVL7
+ 401 0196 16020000 		.4byte	0x216
+ 402 019a 0B       		.uleb128 0xb
+ 403 019b 1A000000 		.4byte	.LVL8
+ 404 019f 21020000 		.4byte	0x221
+ 405 01a3 0B       		.uleb128 0xb
+ 406 01a4 20000000 		.4byte	.LVL9
+ 407 01a8 2C020000 		.4byte	0x22c
+ 408 01ac 00       		.byte	0
+ 409 01ad 0B       		.uleb128 0xb
+ 410 01ae 10000000 		.4byte	.LVL6
+ 411 01b2 58020000 		.4byte	0x258
+ 412 01b6 00       		.byte	0
+ 413 01b7 0D       		.uleb128 0xd
+ 414 01b8 E2020000 		.4byte	.LASF25
+ 415 01bc 01       		.byte	0x1
+ 416 01bd B2       		.byte	0xb2
+ 417 01be 00000000 		.4byte	.LFB3
+ 418 01c2 28000000 		.4byte	.LFE3-.LFB3
+ 419 01c6 01       		.uleb128 0x1
+ 420 01c7 9C       		.byte	0x9c
+ 421 01c8 05020000 		.4byte	0x205
+ 422 01cc 0E       		.uleb128 0xe
+ 423 01cd 32010000 		.4byte	0x132
+ 424 01d1 02000000 		.4byte	.LBB8
+ 425 01d5 14000000 		.4byte	.LBE8-.LBB8
+ 426 01d9 01       		.byte	0x1
+ 427 01da B5       		.byte	0xb5
+ 428 01db FB010000 		.4byte	0x1fb
+ 429 01df 0B       		.uleb128 0xb
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 12
+
+
+ 430 01e0 0A000000 		.4byte	.LVL10
+ 431 01e4 37020000 		.4byte	0x237
+ 432 01e8 0B       		.uleb128 0xb
+ 433 01e9 10000000 		.4byte	.LVL11
+ 434 01ed 42020000 		.4byte	0x242
+ 435 01f1 0B       		.uleb128 0xb
+ 436 01f2 16000000 		.4byte	.LVL12
+ 437 01f6 4D020000 		.4byte	0x24d
+ 438 01fa 00       		.byte	0
+ 439 01fb 0C       		.uleb128 0xc
+ 440 01fc 24000000 		.4byte	.LVL13
+ 441 0200 63020000 		.4byte	0x263
+ 442 0204 00       		.byte	0
+ 443 0205 0F       		.uleb128 0xf
+ 444 0206 91020000 		.4byte	.LASF37
+ 445 020a 01       		.byte	0x1
+ 446 020b 14       		.byte	0x14
+ 447 020c F0000000 		.4byte	0xf0
+ 448 0210 05       		.uleb128 0x5
+ 449 0211 03       		.byte	0x3
+ 450 0212 00000000 		.4byte	VERT_backup
+ 451 0216 10       		.uleb128 0x10
+ 452 0217 8E010000 		.4byte	.LASF26
+ 453 021b 8E010000 		.4byte	.LASF26
+ 454 021f 03       		.byte	0x3
+ 455 0220 C0       		.byte	0xc0
+ 456 0221 10       		.uleb128 0x10
+ 457 0222 E8000000 		.4byte	.LASF27
+ 458 0226 E8000000 		.4byte	.LASF27
+ 459 022a 03       		.byte	0x3
+ 460 022b B3       		.byte	0xb3
+ 461 022c 10       		.uleb128 0x10
+ 462 022d 75010000 		.4byte	.LASF28
+ 463 0231 75010000 		.4byte	.LASF28
+ 464 0235 03       		.byte	0x3
+ 465 0236 9D       		.byte	0x9d
+ 466 0237 10       		.uleb128 0x10
+ 467 0238 00000000 		.4byte	.LASF29
+ 468 023c 00000000 		.4byte	.LASF29
+ 469 0240 03       		.byte	0x3
+ 470 0241 BE       		.byte	0xbe
+ 471 0242 10       		.uleb128 0x10
+ 472 0243 B0000000 		.4byte	.LASF30
+ 473 0247 B0000000 		.4byte	.LASF30
+ 474 024b 03       		.byte	0x3
+ 475 024c BA       		.byte	0xba
+ 476 024d 10       		.uleb128 0x10
+ 477 024e A7020000 		.4byte	.LASF31
+ 478 0252 A7020000 		.4byte	.LASF31
+ 479 0256 03       		.byte	0x3
+ 480 0257 9E       		.byte	0x9e
+ 481 0258 10       		.uleb128 0x10
+ 482 0259 39010000 		.4byte	.LASF32
+ 483 025d 39010000 		.4byte	.LASF32
+ 484 0261 03       		.byte	0x3
+ 485 0262 93       		.byte	0x93
+ 486 0263 10       		.uleb128 0x10
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 13
+
+
+ 487 0264 D8010000 		.4byte	.LASF33
+ 488 0268 D8010000 		.4byte	.LASF33
+ 489 026c 03       		.byte	0x3
+ 490 026d DB       		.byte	0xdb
+ 491 026e 00       		.byte	0
+ 492              		.section	.debug_abbrev,"",%progbits
+ 493              	.Ldebug_abbrev0:
+ 494 0000 01       		.uleb128 0x1
+ 495 0001 11       		.uleb128 0x11
+ 496 0002 01       		.byte	0x1
+ 497 0003 25       		.uleb128 0x25
+ 498 0004 0E       		.uleb128 0xe
+ 499 0005 13       		.uleb128 0x13
+ 500 0006 0B       		.uleb128 0xb
+ 501 0007 03       		.uleb128 0x3
+ 502 0008 0E       		.uleb128 0xe
+ 503 0009 1B       		.uleb128 0x1b
+ 504 000a 0E       		.uleb128 0xe
+ 505 000b 55       		.uleb128 0x55
+ 506 000c 17       		.uleb128 0x17
+ 507 000d 11       		.uleb128 0x11
+ 508 000e 01       		.uleb128 0x1
+ 509 000f 10       		.uleb128 0x10
+ 510 0010 17       		.uleb128 0x17
+ 511 0011 00       		.byte	0
+ 512 0012 00       		.byte	0
+ 513 0013 02       		.uleb128 0x2
+ 514 0014 24       		.uleb128 0x24
+ 515 0015 00       		.byte	0
+ 516 0016 0B       		.uleb128 0xb
+ 517 0017 0B       		.uleb128 0xb
+ 518 0018 3E       		.uleb128 0x3e
+ 519 0019 0B       		.uleb128 0xb
+ 520 001a 03       		.uleb128 0x3
+ 521 001b 0E       		.uleb128 0xe
+ 522 001c 00       		.byte	0
+ 523 001d 00       		.byte	0
+ 524 001e 03       		.uleb128 0x3
+ 525 001f 24       		.uleb128 0x24
+ 526 0020 00       		.byte	0
+ 527 0021 0B       		.uleb128 0xb
+ 528 0022 0B       		.uleb128 0xb
+ 529 0023 3E       		.uleb128 0x3e
+ 530 0024 0B       		.uleb128 0xb
+ 531 0025 03       		.uleb128 0x3
+ 532 0026 08       		.uleb128 0x8
+ 533 0027 00       		.byte	0
+ 534 0028 00       		.byte	0
+ 535 0029 04       		.uleb128 0x4
+ 536 002a 16       		.uleb128 0x16
+ 537 002b 00       		.byte	0
+ 538 002c 03       		.uleb128 0x3
+ 539 002d 0E       		.uleb128 0xe
+ 540 002e 3A       		.uleb128 0x3a
+ 541 002f 0B       		.uleb128 0xb
+ 542 0030 3B       		.uleb128 0x3b
+ 543 0031 05       		.uleb128 0x5
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 14
+
+
+ 544 0032 49       		.uleb128 0x49
+ 545 0033 13       		.uleb128 0x13
+ 546 0034 00       		.byte	0
+ 547 0035 00       		.byte	0
+ 548 0036 05       		.uleb128 0x5
+ 549 0037 35       		.uleb128 0x35
+ 550 0038 00       		.byte	0
+ 551 0039 49       		.uleb128 0x49
+ 552 003a 13       		.uleb128 0x13
+ 553 003b 00       		.byte	0
+ 554 003c 00       		.byte	0
+ 555 003d 06       		.uleb128 0x6
+ 556 003e 13       		.uleb128 0x13
+ 557 003f 01       		.byte	0x1
+ 558 0040 0B       		.uleb128 0xb
+ 559 0041 0B       		.uleb128 0xb
+ 560 0042 3A       		.uleb128 0x3a
+ 561 0043 0B       		.uleb128 0xb
+ 562 0044 3B       		.uleb128 0x3b
+ 563 0045 0B       		.uleb128 0xb
+ 564 0046 01       		.uleb128 0x1
+ 565 0047 13       		.uleb128 0x13
+ 566 0048 00       		.byte	0
+ 567 0049 00       		.byte	0
+ 568 004a 07       		.uleb128 0x7
+ 569 004b 0D       		.uleb128 0xd
+ 570 004c 00       		.byte	0
+ 571 004d 03       		.uleb128 0x3
+ 572 004e 0E       		.uleb128 0xe
+ 573 004f 3A       		.uleb128 0x3a
+ 574 0050 0B       		.uleb128 0xb
+ 575 0051 3B       		.uleb128 0x3b
+ 576 0052 0B       		.uleb128 0xb
+ 577 0053 49       		.uleb128 0x49
+ 578 0054 13       		.uleb128 0x13
+ 579 0055 38       		.uleb128 0x38
+ 580 0056 0B       		.uleb128 0xb
+ 581 0057 00       		.byte	0
+ 582 0058 00       		.byte	0
+ 583 0059 08       		.uleb128 0x8
+ 584 005a 16       		.uleb128 0x16
+ 585 005b 00       		.byte	0
+ 586 005c 03       		.uleb128 0x3
+ 587 005d 0E       		.uleb128 0xe
+ 588 005e 3A       		.uleb128 0x3a
+ 589 005f 0B       		.uleb128 0xb
+ 590 0060 3B       		.uleb128 0x3b
+ 591 0061 0B       		.uleb128 0xb
+ 592 0062 49       		.uleb128 0x49
+ 593 0063 13       		.uleb128 0x13
+ 594 0064 00       		.byte	0
+ 595 0065 00       		.byte	0
+ 596 0066 09       		.uleb128 0x9
+ 597 0067 2E       		.uleb128 0x2e
+ 598 0068 00       		.byte	0
+ 599 0069 3F       		.uleb128 0x3f
+ 600 006a 19       		.uleb128 0x19
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 15
+
+
+ 601 006b 03       		.uleb128 0x3
+ 602 006c 0E       		.uleb128 0xe
+ 603 006d 3A       		.uleb128 0x3a
+ 604 006e 0B       		.uleb128 0xb
+ 605 006f 3B       		.uleb128 0x3b
+ 606 0070 0B       		.uleb128 0xb
+ 607 0071 27       		.uleb128 0x27
+ 608 0072 19       		.uleb128 0x19
+ 609 0073 20       		.uleb128 0x20
+ 610 0074 0B       		.uleb128 0xb
+ 611 0075 00       		.byte	0
+ 612 0076 00       		.byte	0
+ 613 0077 0A       		.uleb128 0xa
+ 614 0078 2E       		.uleb128 0x2e
+ 615 0079 01       		.byte	0x1
+ 616 007a 31       		.uleb128 0x31
+ 617 007b 13       		.uleb128 0x13
+ 618 007c 11       		.uleb128 0x11
+ 619 007d 01       		.uleb128 0x1
+ 620 007e 12       		.uleb128 0x12
+ 621 007f 06       		.uleb128 0x6
+ 622 0080 40       		.uleb128 0x40
+ 623 0081 18       		.uleb128 0x18
+ 624 0082 9742     		.uleb128 0x2117
+ 625 0084 19       		.uleb128 0x19
+ 626 0085 01       		.uleb128 0x1
+ 627 0086 13       		.uleb128 0x13
+ 628 0087 00       		.byte	0
+ 629 0088 00       		.byte	0
+ 630 0089 0B       		.uleb128 0xb
+ 631 008a 898201   		.uleb128 0x4109
+ 632 008d 00       		.byte	0
+ 633 008e 11       		.uleb128 0x11
+ 634 008f 01       		.uleb128 0x1
+ 635 0090 31       		.uleb128 0x31
+ 636 0091 13       		.uleb128 0x13
+ 637 0092 00       		.byte	0
+ 638 0093 00       		.byte	0
+ 639 0094 0C       		.uleb128 0xc
+ 640 0095 898201   		.uleb128 0x4109
+ 641 0098 00       		.byte	0
+ 642 0099 11       		.uleb128 0x11
+ 643 009a 01       		.uleb128 0x1
+ 644 009b 9542     		.uleb128 0x2115
+ 645 009d 19       		.uleb128 0x19
+ 646 009e 31       		.uleb128 0x31
+ 647 009f 13       		.uleb128 0x13
+ 648 00a0 00       		.byte	0
+ 649 00a1 00       		.byte	0
+ 650 00a2 0D       		.uleb128 0xd
+ 651 00a3 2E       		.uleb128 0x2e
+ 652 00a4 01       		.byte	0x1
+ 653 00a5 3F       		.uleb128 0x3f
+ 654 00a6 19       		.uleb128 0x19
+ 655 00a7 03       		.uleb128 0x3
+ 656 00a8 0E       		.uleb128 0xe
+ 657 00a9 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 16
+
+
+ 658 00aa 0B       		.uleb128 0xb
+ 659 00ab 3B       		.uleb128 0x3b
+ 660 00ac 0B       		.uleb128 0xb
+ 661 00ad 27       		.uleb128 0x27
+ 662 00ae 19       		.uleb128 0x19
+ 663 00af 11       		.uleb128 0x11
+ 664 00b0 01       		.uleb128 0x1
+ 665 00b1 12       		.uleb128 0x12
+ 666 00b2 06       		.uleb128 0x6
+ 667 00b3 40       		.uleb128 0x40
+ 668 00b4 18       		.uleb128 0x18
+ 669 00b5 9742     		.uleb128 0x2117
+ 670 00b7 19       		.uleb128 0x19
+ 671 00b8 01       		.uleb128 0x1
+ 672 00b9 13       		.uleb128 0x13
+ 673 00ba 00       		.byte	0
+ 674 00bb 00       		.byte	0
+ 675 00bc 0E       		.uleb128 0xe
+ 676 00bd 1D       		.uleb128 0x1d
+ 677 00be 01       		.byte	0x1
+ 678 00bf 31       		.uleb128 0x31
+ 679 00c0 13       		.uleb128 0x13
+ 680 00c1 11       		.uleb128 0x11
+ 681 00c2 01       		.uleb128 0x1
+ 682 00c3 12       		.uleb128 0x12
+ 683 00c4 06       		.uleb128 0x6
+ 684 00c5 58       		.uleb128 0x58
+ 685 00c6 0B       		.uleb128 0xb
+ 686 00c7 59       		.uleb128 0x59
+ 687 00c8 0B       		.uleb128 0xb
+ 688 00c9 01       		.uleb128 0x1
+ 689 00ca 13       		.uleb128 0x13
+ 690 00cb 00       		.byte	0
+ 691 00cc 00       		.byte	0
+ 692 00cd 0F       		.uleb128 0xf
+ 693 00ce 34       		.uleb128 0x34
+ 694 00cf 00       		.byte	0
+ 695 00d0 03       		.uleb128 0x3
+ 696 00d1 0E       		.uleb128 0xe
+ 697 00d2 3A       		.uleb128 0x3a
+ 698 00d3 0B       		.uleb128 0xb
+ 699 00d4 3B       		.uleb128 0x3b
+ 700 00d5 0B       		.uleb128 0xb
+ 701 00d6 49       		.uleb128 0x49
+ 702 00d7 13       		.uleb128 0x13
+ 703 00d8 02       		.uleb128 0x2
+ 704 00d9 18       		.uleb128 0x18
+ 705 00da 00       		.byte	0
+ 706 00db 00       		.byte	0
+ 707 00dc 10       		.uleb128 0x10
+ 708 00dd 2E       		.uleb128 0x2e
+ 709 00de 00       		.byte	0
+ 710 00df 3F       		.uleb128 0x3f
+ 711 00e0 19       		.uleb128 0x19
+ 712 00e1 3C       		.uleb128 0x3c
+ 713 00e2 19       		.uleb128 0x19
+ 714 00e3 6E       		.uleb128 0x6e
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 17
+
+
+ 715 00e4 0E       		.uleb128 0xe
+ 716 00e5 03       		.uleb128 0x3
+ 717 00e6 0E       		.uleb128 0xe
+ 718 00e7 3A       		.uleb128 0x3a
+ 719 00e8 0B       		.uleb128 0xb
+ 720 00e9 3B       		.uleb128 0x3b
+ 721 00ea 0B       		.uleb128 0xb
+ 722 00eb 00       		.byte	0
+ 723 00ec 00       		.byte	0
+ 724 00ed 00       		.byte	0
+ 725              		.section	.debug_aranges,"",%progbits
+ 726 0000 34000000 		.4byte	0x34
+ 727 0004 0200     		.2byte	0x2
+ 728 0006 00000000 		.4byte	.Ldebug_info0
+ 729 000a 04       		.byte	0x4
+ 730 000b 00       		.byte	0
+ 731 000c 0000     		.2byte	0
+ 732 000e 0000     		.2byte	0
+ 733 0010 00000000 		.4byte	.LFB0
+ 734 0014 1C000000 		.4byte	.LFE0-.LFB0
+ 735 0018 00000000 		.4byte	.LFB1
+ 736 001c 20000000 		.4byte	.LFE1-.LFB1
+ 737 0020 00000000 		.4byte	.LFB2
+ 738 0024 2C000000 		.4byte	.LFE2-.LFB2
+ 739 0028 00000000 		.4byte	.LFB3
+ 740 002c 28000000 		.4byte	.LFE3-.LFB3
+ 741 0030 00000000 		.4byte	0
+ 742 0034 00000000 		.4byte	0
+ 743              		.section	.debug_ranges,"",%progbits
+ 744              	.Ldebug_ranges0:
+ 745 0000 00000000 		.4byte	.LFB0
+ 746 0004 1C000000 		.4byte	.LFE0
+ 747 0008 00000000 		.4byte	.LFB1
+ 748 000c 20000000 		.4byte	.LFE1
+ 749 0010 00000000 		.4byte	.LFB2
+ 750 0014 2C000000 		.4byte	.LFE2
+ 751 0018 00000000 		.4byte	.LFB3
+ 752 001c 28000000 		.4byte	.LFE3
+ 753 0020 00000000 		.4byte	0
+ 754 0024 00000000 		.4byte	0
+ 755              		.section	.debug_line,"",%progbits
+ 756              	.Ldebug_line0:
+ 757 0000 B9000000 		.section	.debug_str,"MS",%progbits,1
+ 757      02004E00 
+ 757      00000201 
+ 757      FB0E0D00 
+ 757      01010101 
+ 758              	.LASF29:
+ 759 0000 56455254 		.ascii	"VERT_WritePeriod\000"
+ 759      5F577269 
+ 759      74655065 
+ 759      72696F64 
+ 759      00
+ 760              	.LASF18:
+ 761 0011 50574D55 		.ascii	"PWMUdb\000"
+ 761      646200
+ 762              	.LASF19:
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 18
+
+
+ 763 0018 50574D50 		.ascii	"PWMPeriod\000"
+ 763      6572696F 
+ 763      6400
+ 764              	.LASF34:
+ 765 0022 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 765      43313120 
+ 765      352E342E 
+ 765      31203230 
+ 765      31363036 
+ 766 0055 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 766      20726576 
+ 766      6973696F 
+ 766      6E203233 
+ 766      37373135 
+ 767 0088 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects\000"
+ 767      66756E63 
+ 767      74696F6E 
+ 767      2D736563 
+ 767      74696F6E 
+ 768              	.LASF30:
+ 769 00b0 56455254 		.ascii	"VERT_WriteCounter\000"
+ 769      5F577269 
+ 769      7465436F 
+ 769      756E7465 
+ 769      7200
+ 770              	.LASF23:
+ 771 00c2 56455254 		.ascii	"VERT_RestoreConfig\000"
+ 771      5F526573 
+ 771      746F7265 
+ 771      436F6E66 
+ 771      696700
+ 772              	.LASF3:
+ 773 00d5 73686F72 		.ascii	"short unsigned int\000"
+ 773      7420756E 
+ 773      7369676E 
+ 773      65642069 
+ 773      6E7400
+ 774              	.LASF27:
+ 775 00e8 56455254 		.ascii	"VERT_ReadCounter\000"
+ 775      5F526561 
+ 775      64436F75 
+ 775      6E746572 
+ 775      00
+ 776              	.LASF8:
+ 777 00f9 756E7369 		.ascii	"unsigned int\000"
+ 777      676E6564 
+ 777      20696E74 
+ 777      00
+ 778              	.LASF22:
+ 779 0106 56455254 		.ascii	"VERT_SaveConfig\000"
+ 779      5F536176 
+ 779      65436F6E 
+ 779      66696700 
+ 780              	.LASF11:
+ 781 0116 666C6F61 		.ascii	"float\000"
+ 781      7400
+ 782              	.LASF1:
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 19
+
+
+ 783 011c 756E7369 		.ascii	"unsigned char\000"
+ 783      676E6564 
+ 783      20636861 
+ 783      7200
+ 784              	.LASF17:
+ 785 012a 50574D45 		.ascii	"PWMEnableState\000"
+ 785      6E61626C 
+ 785      65537461 
+ 785      746500
+ 786              	.LASF32:
+ 787 0139 56455254 		.ascii	"VERT_Stop\000"
+ 787      5F53746F 
+ 787      7000
+ 788              	.LASF5:
+ 789 0143 6C6F6E67 		.ascii	"long unsigned int\000"
+ 789      20756E73 
+ 789      69676E65 
+ 789      6420696E 
+ 789      7400
+ 790              	.LASF9:
+ 791 0155 75696E74 		.ascii	"uint8\000"
+ 791      3800
+ 792              	.LASF20:
+ 793 015b 50574D43 		.ascii	"PWMControlRegister\000"
+ 793      6F6E7472 
+ 793      6F6C5265 
+ 793      67697374 
+ 793      657200
+ 794              	.LASF12:
+ 795 016e 646F7562 		.ascii	"double\000"
+ 795      6C6500
+ 796              	.LASF28:
+ 797 0175 56455254 		.ascii	"VERT_ReadControlRegister\000"
+ 797      5F526561 
+ 797      64436F6E 
+ 797      74726F6C 
+ 797      52656769 
+ 798              	.LASF26:
+ 799 018e 56455254 		.ascii	"VERT_ReadPeriod\000"
+ 799      5F526561 
+ 799      64506572 
+ 799      696F6400 
+ 800              	.LASF35:
+ 801 019e 47656E65 		.ascii	"Generated_Source\\PSoC5\\VERT_PM.c\000"
+ 801      72617465 
+ 801      645F536F 
+ 801      75726365 
+ 801      5C50536F 
+ 802              	.LASF10:
+ 803 01bf 75696E74 		.ascii	"uint16\000"
+ 803      313600
+ 804              	.LASF21:
+ 805 01c6 56455254 		.ascii	"VERT_backupStruct\000"
+ 805      5F626163 
+ 805      6B757053 
+ 805      74727563 
+ 805      7400
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 20
+
+
+ 806              	.LASF33:
+ 807 01d8 56455254 		.ascii	"VERT_Enable\000"
+ 807      5F456E61 
+ 807      626C6500 
+ 808              	.LASF24:
+ 809 01e4 56455254 		.ascii	"VERT_Sleep\000"
+ 809      5F536C65 
+ 809      657000
+ 810              	.LASF36:
+ 811 01ef 433A5C55 		.ascii	"C:\\Users\\info\\Desktop\\Spring 2019 Classes\\6.11"
+ 811      73657273 
+ 811      5C696E66 
+ 811      6F5C4465 
+ 811      736B746F 
+ 812 021d 355C362E 		.ascii	"5\\6.115-final\\PSoCCreator\\Final Project\\FinalEm"
+ 812      3131352D 
+ 812      66696E61 
+ 812      6C5C5053 
+ 812      6F434372 
+ 813 024c 756C6174 		.ascii	"ulator.cydsn\000"
+ 813      6F722E63 
+ 813      7964736E 
+ 813      00
+ 814              	.LASF7:
+ 815 0259 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 815      206C6F6E 
+ 815      6720756E 
+ 815      7369676E 
+ 815      65642069 
+ 816              	.LASF14:
+ 817 0270 72656738 		.ascii	"reg8\000"
+ 817      00
+ 818              	.LASF16:
+ 819 0275 73697A65 		.ascii	"sizetype\000"
+ 819      74797065 
+ 819      00
+ 820              	.LASF6:
+ 821 027e 6C6F6E67 		.ascii	"long long int\000"
+ 821      206C6F6E 
+ 821      6720696E 
+ 821      7400
+ 822              	.LASF13:
+ 823 028c 63686172 		.ascii	"char\000"
+ 823      00
+ 824              	.LASF37:
+ 825 0291 56455254 		.ascii	"VERT_backup\000"
+ 825      5F626163 
+ 825      6B757000 
+ 826              	.LASF2:
+ 827 029d 73686F72 		.ascii	"short int\000"
+ 827      7420696E 
+ 827      7400
+ 828              	.LASF31:
+ 829 02a7 56455254 		.ascii	"VERT_WriteControlRegister\000"
+ 829      5F577269 
+ 829      7465436F 
+ 829      6E74726F 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cck8h5lV.s 			page 21
+
+
+ 829      6C526567 
+ 830              	.LASF4:
+ 831 02c1 6C6F6E67 		.ascii	"long int\000"
+ 831      20696E74 
+ 831      00
+ 832              	.LASF15:
+ 833 02ca 6C6F6E67 		.ascii	"long double\000"
+ 833      20646F75 
+ 833      626C6500 
+ 834              	.LASF0:
+ 835 02d6 7369676E 		.ascii	"signed char\000"
+ 835      65642063 
+ 835      68617200 
+ 836              	.LASF25:
+ 837 02e2 56455254 		.ascii	"VERT_Wakeup\000"
+ 837      5F57616B 
+ 837      65757000 
+ 838              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

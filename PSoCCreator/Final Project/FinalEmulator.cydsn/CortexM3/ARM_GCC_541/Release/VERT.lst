@@ -1,0 +1,2886 @@
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"VERT.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.VERT_Start,"ax",%progbits
+  20              		.align	2
+  21              		.global	VERT_Start
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	VERT_Start, %function
+  25              	VERT_Start:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC5\\VERT.c"
+   1:Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/VERT.c **** * File Name: VERT.c
+   3:Generated_Source\PSoC5/VERT.c **** * Version 3.30
+   4:Generated_Source\PSoC5/VERT.c **** *
+   5:Generated_Source\PSoC5/VERT.c **** * Description:
+   6:Generated_Source\PSoC5/VERT.c **** *  The PWM User Module consist of an 8 or 16-bit counter with two 8 or 16-bit
+   7:Generated_Source\PSoC5/VERT.c **** *  comparitors. Each instance of this user module is capable of generating
+   8:Generated_Source\PSoC5/VERT.c **** *  two PWM outputs with the same period. The pulse width is selectable between
+   9:Generated_Source\PSoC5/VERT.c **** *  1 and 255/65535. The period is selectable between 2 and 255/65536 clocks.
+  10:Generated_Source\PSoC5/VERT.c **** *  The compare value output may be configured to be active when the present
+  11:Generated_Source\PSoC5/VERT.c **** *  counter is less than or less than/equal to the compare value.
+  12:Generated_Source\PSoC5/VERT.c **** *  A terminal count output is also provided. It generates a pulse one clock
+  13:Generated_Source\PSoC5/VERT.c **** *  width wide when the counter is equal to zero.
+  14:Generated_Source\PSoC5/VERT.c **** *
+  15:Generated_Source\PSoC5/VERT.c **** * Note:
+  16:Generated_Source\PSoC5/VERT.c **** *
+  17:Generated_Source\PSoC5/VERT.c **** *******************************************************************************
+  18:Generated_Source\PSoC5/VERT.c **** * Copyright 2008-2014, Cypress Semiconductor Corporation.  All rights reserved.
+  19:Generated_Source\PSoC5/VERT.c **** * You may use this file only in accordance with the license, terms, conditions,
+  20:Generated_Source\PSoC5/VERT.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  21:Generated_Source\PSoC5/VERT.c **** * the software package with which this file was provided.
+  22:Generated_Source\PSoC5/VERT.c **** ********************************************************************************/
+  23:Generated_Source\PSoC5/VERT.c **** 
+  24:Generated_Source\PSoC5/VERT.c **** #include "VERT.h"
+  25:Generated_Source\PSoC5/VERT.c **** 
+  26:Generated_Source\PSoC5/VERT.c **** /* Error message for removed <resource> through optimization */
+  27:Generated_Source\PSoC5/VERT.c **** #ifdef VERT_PWMUDB_genblk1_ctrlreg__REMOVED
+  28:Generated_Source\PSoC5/VERT.c ****     #error PWM_v3_30 detected with a constant 0 for the enable or \
+  29:Generated_Source\PSoC5/VERT.c ****          constant 1 for reset. This will prevent the component from operating.
+  30:Generated_Source\PSoC5/VERT.c **** #endif /* VERT_PWMUDB_genblk1_ctrlreg__REMOVED */
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 2
+
+
+  31:Generated_Source\PSoC5/VERT.c **** 
+  32:Generated_Source\PSoC5/VERT.c **** uint8 VERT_initVar = 0u;
+  33:Generated_Source\PSoC5/VERT.c **** 
+  34:Generated_Source\PSoC5/VERT.c **** 
+  35:Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+  36:Generated_Source\PSoC5/VERT.c **** * Function Name: VERT_Start
+  37:Generated_Source\PSoC5/VERT.c **** ********************************************************************************
+  38:Generated_Source\PSoC5/VERT.c **** *
+  39:Generated_Source\PSoC5/VERT.c **** * Summary:
+  40:Generated_Source\PSoC5/VERT.c **** *  The start function initializes the pwm with the default values, the
+  41:Generated_Source\PSoC5/VERT.c **** *  enables the counter to begin counting.  It does not enable interrupts,
+  42:Generated_Source\PSoC5/VERT.c **** *  the EnableInt command should be called if interrupt generation is required.
+  43:Generated_Source\PSoC5/VERT.c **** *
+  44:Generated_Source\PSoC5/VERT.c **** * Parameters:
+  45:Generated_Source\PSoC5/VERT.c **** *  None
+  46:Generated_Source\PSoC5/VERT.c **** *
+  47:Generated_Source\PSoC5/VERT.c **** * Return:
+  48:Generated_Source\PSoC5/VERT.c **** *  None
+  49:Generated_Source\PSoC5/VERT.c **** *
+  50:Generated_Source\PSoC5/VERT.c **** * Global variables:
+  51:Generated_Source\PSoC5/VERT.c **** *  VERT_initVar: Is modified when this function is called for the
+  52:Generated_Source\PSoC5/VERT.c **** *   first time. Is used to ensure that initialization happens only once.
+  53:Generated_Source\PSoC5/VERT.c **** *
+  54:Generated_Source\PSoC5/VERT.c **** *******************************************************************************/
+  55:Generated_Source\PSoC5/VERT.c **** void VERT_Start(void) 
+  56:Generated_Source\PSoC5/VERT.c **** {
+  28              		.loc 1 56 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  57:Generated_Source\PSoC5/VERT.c ****     /* If not Initialized then initialize all required hardware and software */
+  58:Generated_Source\PSoC5/VERT.c ****     if(VERT_initVar == 0u)
+  33              		.loc 1 58 0
+  34 0000 164A     		ldr	r2, .L6
+  35 0002 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  36 0004 1BBB     		cbnz	r3, .L4
+  37              	.LBB18:
+  38              	.LBB19:
+  39              	.LBB20:
+  40              	.LBB21:
+  59:Generated_Source\PSoC5/VERT.c ****     {
+  60:Generated_Source\PSoC5/VERT.c ****         VERT_Init();
+  61:Generated_Source\PSoC5/VERT.c ****         VERT_initVar = 1u;
+  62:Generated_Source\PSoC5/VERT.c ****     }
+  63:Generated_Source\PSoC5/VERT.c ****     VERT_Enable();
+  64:Generated_Source\PSoC5/VERT.c **** 
+  65:Generated_Source\PSoC5/VERT.c **** }
+  66:Generated_Source\PSoC5/VERT.c **** 
+  67:Generated_Source\PSoC5/VERT.c **** 
+  68:Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+  69:Generated_Source\PSoC5/VERT.c **** * Function Name: VERT_Init
+  70:Generated_Source\PSoC5/VERT.c **** ********************************************************************************
+  71:Generated_Source\PSoC5/VERT.c **** *
+  72:Generated_Source\PSoC5/VERT.c **** * Summary:
+  73:Generated_Source\PSoC5/VERT.c **** *  Initialize component's parameters to the parameters set by user in the
+  74:Generated_Source\PSoC5/VERT.c **** *  customizer of the component placed onto schematic. Usually called in
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 3
+
+
+  75:Generated_Source\PSoC5/VERT.c **** *  VERT_Start().
+  76:Generated_Source\PSoC5/VERT.c **** *
+  77:Generated_Source\PSoC5/VERT.c **** * Parameters:
+  78:Generated_Source\PSoC5/VERT.c **** *  None
+  79:Generated_Source\PSoC5/VERT.c **** *
+  80:Generated_Source\PSoC5/VERT.c **** * Return:
+  81:Generated_Source\PSoC5/VERT.c **** *  None
+  82:Generated_Source\PSoC5/VERT.c **** *
+  83:Generated_Source\PSoC5/VERT.c **** *******************************************************************************/
+  84:Generated_Source\PSoC5/VERT.c **** void VERT_Init(void) 
+  85:Generated_Source\PSoC5/VERT.c **** {
+  86:Generated_Source\PSoC5/VERT.c ****     #if (VERT_UsingFixedFunction || VERT_UseControl)
+  87:Generated_Source\PSoC5/VERT.c ****         uint8 ctrl;
+  88:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction || VERT_UseControl) */
+  89:Generated_Source\PSoC5/VERT.c **** 
+  90:Generated_Source\PSoC5/VERT.c ****     #if(!VERT_UsingFixedFunction)
+  91:Generated_Source\PSoC5/VERT.c ****         #if(VERT_UseStatus)
+  92:Generated_Source\PSoC5/VERT.c ****             /* Interrupt State Backup for Critical Region*/
+  93:Generated_Source\PSoC5/VERT.c ****             uint8 VERT_interruptState;
+  94:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UseStatus) */
+  95:Generated_Source\PSoC5/VERT.c ****     #endif /* (!VERT_UsingFixedFunction) */
+  96:Generated_Source\PSoC5/VERT.c **** 
+  97:Generated_Source\PSoC5/VERT.c ****     #if (VERT_UsingFixedFunction)
+  98:Generated_Source\PSoC5/VERT.c ****         /* You are allowed to write the compare value (FF only) */
+  99:Generated_Source\PSoC5/VERT.c ****         VERT_CONTROL |= VERT_CFG0_MODE;
+ 100:Generated_Source\PSoC5/VERT.c ****         #if (VERT_DeadBand2_4)
+ 101:Generated_Source\PSoC5/VERT.c ****             VERT_CONTROL |= VERT_CFG0_DB;
+ 102:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_DeadBand2_4) */
+ 103:Generated_Source\PSoC5/VERT.c **** 
+ 104:Generated_Source\PSoC5/VERT.c ****         ctrl = VERT_CONTROL3 & ((uint8 )(~VERT_CTRL_CMPMODE1_MASK));
+ 105:Generated_Source\PSoC5/VERT.c ****         VERT_CONTROL3 = ctrl | VERT_DEFAULT_COMPARE1_MODE;
+ 106:Generated_Source\PSoC5/VERT.c **** 
+ 107:Generated_Source\PSoC5/VERT.c ****          /* Clear and Set SYNCTC and SYNCCMP bits of RT1 register */
+ 108:Generated_Source\PSoC5/VERT.c ****         VERT_RT1 &= ((uint8)(~VERT_RT1_MASK));
+ 109:Generated_Source\PSoC5/VERT.c ****         VERT_RT1 |= VERT_SYNC;
+ 110:Generated_Source\PSoC5/VERT.c **** 
+ 111:Generated_Source\PSoC5/VERT.c ****         /*Enable DSI Sync all all inputs of the PWM*/
+ 112:Generated_Source\PSoC5/VERT.c ****         VERT_RT1 &= ((uint8)(~VERT_SYNCDSI_MASK));
+ 113:Generated_Source\PSoC5/VERT.c ****         VERT_RT1 |= VERT_SYNCDSI_EN;
+ 114:Generated_Source\PSoC5/VERT.c **** 
+ 115:Generated_Source\PSoC5/VERT.c ****     #elif (VERT_UseControl)
+ 116:Generated_Source\PSoC5/VERT.c ****         /* Set the default compare mode defined in the parameter */
+ 117:Generated_Source\PSoC5/VERT.c ****         ctrl = VERT_CONTROL & ((uint8)(~VERT_CTRL_CMPMODE2_MASK)) &
+ 118:Generated_Source\PSoC5/VERT.c ****                 ((uint8)(~VERT_CTRL_CMPMODE1_MASK));
+ 119:Generated_Source\PSoC5/VERT.c ****         VERT_CONTROL = ctrl | VERT_DEFAULT_COMPARE2_MODE |
+ 120:Generated_Source\PSoC5/VERT.c ****                                    VERT_DEFAULT_COMPARE1_MODE;
+ 121:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 122:Generated_Source\PSoC5/VERT.c **** 
+ 123:Generated_Source\PSoC5/VERT.c ****     #if (!VERT_UsingFixedFunction)
+ 124:Generated_Source\PSoC5/VERT.c ****         #if (VERT_Resolution == 8)
+ 125:Generated_Source\PSoC5/VERT.c ****             /* Set FIFO 0 to 1 byte register for period*/
+ 126:Generated_Source\PSoC5/VERT.c ****             VERT_AUX_CONTROLDP0 |= (VERT_AUX_CTRL_FIFO0_CLR);
+ 127:Generated_Source\PSoC5/VERT.c ****         #else /* (VERT_Resolution == 16)*/
+ 128:Generated_Source\PSoC5/VERT.c ****             /* Set FIFO 0 to 1 byte register for period */
+ 129:Generated_Source\PSoC5/VERT.c ****             VERT_AUX_CONTROLDP0 |= (VERT_AUX_CTRL_FIFO0_CLR);
+ 130:Generated_Source\PSoC5/VERT.c ****             VERT_AUX_CONTROLDP1 |= (VERT_AUX_CTRL_FIFO0_CLR);
+ 131:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_Resolution == 8) */
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 4
+
+
+ 132:Generated_Source\PSoC5/VERT.c **** 
+ 133:Generated_Source\PSoC5/VERT.c ****         VERT_WriteCounter(VERT_INIT_PERIOD_VALUE);
+ 134:Generated_Source\PSoC5/VERT.c ****     #endif /* (!VERT_UsingFixedFunction) */
+ 135:Generated_Source\PSoC5/VERT.c **** 
+ 136:Generated_Source\PSoC5/VERT.c ****     VERT_WritePeriod(VERT_INIT_PERIOD_VALUE);
+ 137:Generated_Source\PSoC5/VERT.c **** 
+ 138:Generated_Source\PSoC5/VERT.c ****         #if (VERT_UseOneCompareMode)
+ 139:Generated_Source\PSoC5/VERT.c ****             VERT_WriteCompare(VERT_INIT_COMPARE_VALUE1);
+ 140:Generated_Source\PSoC5/VERT.c ****         #else
+ 141:Generated_Source\PSoC5/VERT.c ****             VERT_WriteCompare1(VERT_INIT_COMPARE_VALUE1);
+ 142:Generated_Source\PSoC5/VERT.c ****             VERT_WriteCompare2(VERT_INIT_COMPARE_VALUE2);
+ 143:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UseOneCompareMode) */
+ 144:Generated_Source\PSoC5/VERT.c **** 
+ 145:Generated_Source\PSoC5/VERT.c ****         #if (VERT_KillModeMinTime)
+ 146:Generated_Source\PSoC5/VERT.c ****             VERT_WriteKillTime(VERT_MinimumKillTime);
+ 147:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_KillModeMinTime) */
+ 148:Generated_Source\PSoC5/VERT.c **** 
+ 149:Generated_Source\PSoC5/VERT.c ****         #if (VERT_DeadBandUsed)
+ 150:Generated_Source\PSoC5/VERT.c ****             VERT_WriteDeadTime(VERT_INIT_DEAD_TIME);
+ 151:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_DeadBandUsed) */
+ 152:Generated_Source\PSoC5/VERT.c **** 
+ 153:Generated_Source\PSoC5/VERT.c ****     #if (VERT_UseStatus || VERT_UsingFixedFunction)
+ 154:Generated_Source\PSoC5/VERT.c ****         VERT_SetInterruptMode(VERT_INIT_INTERRUPTS_MODE);
+ 155:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UseStatus || VERT_UsingFixedFunction) */
+ 156:Generated_Source\PSoC5/VERT.c **** 
+ 157:Generated_Source\PSoC5/VERT.c ****     #if (VERT_UsingFixedFunction)
+ 158:Generated_Source\PSoC5/VERT.c ****         /* Globally Enable the Fixed Function Block chosen */
+ 159:Generated_Source\PSoC5/VERT.c ****         VERT_GLOBAL_ENABLE |= VERT_BLOCK_EN_MASK;
+ 160:Generated_Source\PSoC5/VERT.c ****         /* Set the Interrupt source to come from the status register */
+ 161:Generated_Source\PSoC5/VERT.c ****         VERT_CONTROL2 |= VERT_CTRL2_IRQ_SEL;
+ 162:Generated_Source\PSoC5/VERT.c ****     #else
+ 163:Generated_Source\PSoC5/VERT.c ****         #if(VERT_UseStatus)
+ 164:Generated_Source\PSoC5/VERT.c **** 
+ 165:Generated_Source\PSoC5/VERT.c ****             /* CyEnterCriticalRegion and CyExitCriticalRegion are used to mark following region cri
+ 166:Generated_Source\PSoC5/VERT.c ****             /* Enter Critical Region*/
+ 167:Generated_Source\PSoC5/VERT.c ****             VERT_interruptState = CyEnterCriticalSection();
+ 168:Generated_Source\PSoC5/VERT.c ****             /* Use the interrupt output of the status register for IRQ output */
+ 169:Generated_Source\PSoC5/VERT.c ****             VERT_STATUS_AUX_CTRL |= VERT_STATUS_ACTL_INT_EN_MASK;
+ 170:Generated_Source\PSoC5/VERT.c **** 
+ 171:Generated_Source\PSoC5/VERT.c ****              /* Exit Critical Region*/
+ 172:Generated_Source\PSoC5/VERT.c ****             CyExitCriticalSection(VERT_interruptState);
+ 173:Generated_Source\PSoC5/VERT.c **** 
+ 174:Generated_Source\PSoC5/VERT.c ****             /* Clear the FIFO to enable the VERT_STATUS_FIFOFULL
+ 175:Generated_Source\PSoC5/VERT.c ****                    bit to be set on FIFO full. */
+ 176:Generated_Source\PSoC5/VERT.c ****             VERT_ClearFIFO();
+ 177:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UseStatus) */
+ 178:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 179:Generated_Source\PSoC5/VERT.c **** }
+ 180:Generated_Source\PSoC5/VERT.c **** 
+ 181:Generated_Source\PSoC5/VERT.c **** 
+ 182:Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+ 183:Generated_Source\PSoC5/VERT.c **** * Function Name: VERT_Enable
+ 184:Generated_Source\PSoC5/VERT.c **** ********************************************************************************
+ 185:Generated_Source\PSoC5/VERT.c **** *
+ 186:Generated_Source\PSoC5/VERT.c **** * Summary:
+ 187:Generated_Source\PSoC5/VERT.c **** *  Enables the PWM block operation
+ 188:Generated_Source\PSoC5/VERT.c **** *
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 5
+
+
+ 189:Generated_Source\PSoC5/VERT.c **** * Parameters:
+ 190:Generated_Source\PSoC5/VERT.c **** *  None
+ 191:Generated_Source\PSoC5/VERT.c **** *
+ 192:Generated_Source\PSoC5/VERT.c **** * Return:
+ 193:Generated_Source\PSoC5/VERT.c **** *  None
+ 194:Generated_Source\PSoC5/VERT.c **** *
+ 195:Generated_Source\PSoC5/VERT.c **** * Side Effects:
+ 196:Generated_Source\PSoC5/VERT.c **** *  This works only if software enable mode is chosen
+ 197:Generated_Source\PSoC5/VERT.c **** *
+ 198:Generated_Source\PSoC5/VERT.c **** *******************************************************************************/
+ 199:Generated_Source\PSoC5/VERT.c **** void VERT_Enable(void) 
+ 200:Generated_Source\PSoC5/VERT.c **** {
+ 201:Generated_Source\PSoC5/VERT.c ****     /* Globally Enable the Fixed Function Block chosen */
+ 202:Generated_Source\PSoC5/VERT.c ****     #if (VERT_UsingFixedFunction)
+ 203:Generated_Source\PSoC5/VERT.c ****         VERT_GLOBAL_ENABLE |= VERT_BLOCK_EN_MASK;
+ 204:Generated_Source\PSoC5/VERT.c ****         VERT_GLOBAL_STBY_ENABLE |= VERT_BLOCK_STBY_EN_MASK;
+ 205:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 206:Generated_Source\PSoC5/VERT.c **** 
+ 207:Generated_Source\PSoC5/VERT.c ****     /* Enable the PWM from the control register  */
+ 208:Generated_Source\PSoC5/VERT.c ****     #if (VERT_UseControl || VERT_UsingFixedFunction)
+ 209:Generated_Source\PSoC5/VERT.c ****         VERT_CONTROL |= VERT_CTRL_ENABLE;
+ 210:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UseControl || VERT_UsingFixedFunction) */
+ 211:Generated_Source\PSoC5/VERT.c **** }
+ 212:Generated_Source\PSoC5/VERT.c **** 
+ 213:Generated_Source\PSoC5/VERT.c **** 
+ 214:Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+ 215:Generated_Source\PSoC5/VERT.c **** * Function Name: VERT_Stop
+ 216:Generated_Source\PSoC5/VERT.c **** ********************************************************************************
+ 217:Generated_Source\PSoC5/VERT.c **** *
+ 218:Generated_Source\PSoC5/VERT.c **** * Summary:
+ 219:Generated_Source\PSoC5/VERT.c **** *  The stop function halts the PWM, but does not change any modes or disable
+ 220:Generated_Source\PSoC5/VERT.c **** *  interrupts.
+ 221:Generated_Source\PSoC5/VERT.c **** *
+ 222:Generated_Source\PSoC5/VERT.c **** * Parameters:
+ 223:Generated_Source\PSoC5/VERT.c **** *  None
+ 224:Generated_Source\PSoC5/VERT.c **** *
+ 225:Generated_Source\PSoC5/VERT.c **** * Return:
+ 226:Generated_Source\PSoC5/VERT.c **** *  None
+ 227:Generated_Source\PSoC5/VERT.c **** *
+ 228:Generated_Source\PSoC5/VERT.c **** * Side Effects:
+ 229:Generated_Source\PSoC5/VERT.c **** *  If the Enable mode is set to Hardware only then this function
+ 230:Generated_Source\PSoC5/VERT.c **** *  has no effect on the operation of the PWM
+ 231:Generated_Source\PSoC5/VERT.c **** *
+ 232:Generated_Source\PSoC5/VERT.c **** *******************************************************************************/
+ 233:Generated_Source\PSoC5/VERT.c **** void VERT_Stop(void) 
+ 234:Generated_Source\PSoC5/VERT.c **** {
+ 235:Generated_Source\PSoC5/VERT.c ****     #if (VERT_UseControl || VERT_UsingFixedFunction)
+ 236:Generated_Source\PSoC5/VERT.c ****         VERT_CONTROL &= ((uint8)(~VERT_CTRL_ENABLE));
+ 237:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UseControl || VERT_UsingFixedFunction) */
+ 238:Generated_Source\PSoC5/VERT.c **** 
+ 239:Generated_Source\PSoC5/VERT.c ****     /* Globally disable the Fixed Function Block chosen */
+ 240:Generated_Source\PSoC5/VERT.c ****     #if (VERT_UsingFixedFunction)
+ 241:Generated_Source\PSoC5/VERT.c ****         VERT_GLOBAL_ENABLE &= ((uint8)(~VERT_BLOCK_EN_MASK));
+ 242:Generated_Source\PSoC5/VERT.c ****         VERT_GLOBAL_STBY_ENABLE &= ((uint8)(~VERT_BLOCK_STBY_EN_MASK));
+ 243:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 244:Generated_Source\PSoC5/VERT.c **** }
+ 245:Generated_Source\PSoC5/VERT.c **** 
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 6
+
+
+ 246:Generated_Source\PSoC5/VERT.c **** #if (VERT_UseOneCompareMode)
+ 247:Generated_Source\PSoC5/VERT.c ****     #if (VERT_CompareMode1SW)
+ 248:Generated_Source\PSoC5/VERT.c **** 
+ 249:Generated_Source\PSoC5/VERT.c **** 
+ 250:Generated_Source\PSoC5/VERT.c ****         /*******************************************************************************
+ 251:Generated_Source\PSoC5/VERT.c ****         * Function Name: VERT_SetCompareMode
+ 252:Generated_Source\PSoC5/VERT.c ****         ********************************************************************************
+ 253:Generated_Source\PSoC5/VERT.c ****         *
+ 254:Generated_Source\PSoC5/VERT.c ****         * Summary:
+ 255:Generated_Source\PSoC5/VERT.c ****         *  This function writes the Compare Mode for the pwm output when in Dither mode,
+ 256:Generated_Source\PSoC5/VERT.c ****         *  Center Align Mode or One Output Mode.
+ 257:Generated_Source\PSoC5/VERT.c ****         *
+ 258:Generated_Source\PSoC5/VERT.c ****         * Parameters:
+ 259:Generated_Source\PSoC5/VERT.c ****         *  comparemode:  The new compare mode for the PWM output. Use the compare types
+ 260:Generated_Source\PSoC5/VERT.c ****         *                defined in the H file as input arguments.
+ 261:Generated_Source\PSoC5/VERT.c ****         *
+ 262:Generated_Source\PSoC5/VERT.c ****         * Return:
+ 263:Generated_Source\PSoC5/VERT.c ****         *  None
+ 264:Generated_Source\PSoC5/VERT.c ****         *
+ 265:Generated_Source\PSoC5/VERT.c ****         *******************************************************************************/
+ 266:Generated_Source\PSoC5/VERT.c ****         void VERT_SetCompareMode(uint8 comparemode) 
+ 267:Generated_Source\PSoC5/VERT.c ****         {
+ 268:Generated_Source\PSoC5/VERT.c ****             #if(VERT_UsingFixedFunction)
+ 269:Generated_Source\PSoC5/VERT.c **** 
+ 270:Generated_Source\PSoC5/VERT.c ****                 #if(0 != VERT_CTRL_CMPMODE1_SHIFT)
+ 271:Generated_Source\PSoC5/VERT.c ****                     uint8 comparemodemasked = ((uint8)((uint8)comparemode << VERT_CTRL_CMPMODE1_SHI
+ 272:Generated_Source\PSoC5/VERT.c ****                 #else
+ 273:Generated_Source\PSoC5/VERT.c ****                     uint8 comparemodemasked = comparemode;
+ 274:Generated_Source\PSoC5/VERT.c ****                 #endif /* (0 != VERT_CTRL_CMPMODE1_SHIFT) */
+ 275:Generated_Source\PSoC5/VERT.c **** 
+ 276:Generated_Source\PSoC5/VERT.c ****                 VERT_CONTROL3 &= ((uint8)(~VERT_CTRL_CMPMODE1_MASK)); /*Clear Existing Data */
+ 277:Generated_Source\PSoC5/VERT.c ****                 VERT_CONTROL3 |= comparemodemasked;
+ 278:Generated_Source\PSoC5/VERT.c **** 
+ 279:Generated_Source\PSoC5/VERT.c ****             #elif (VERT_UseControl)
+ 280:Generated_Source\PSoC5/VERT.c **** 
+ 281:Generated_Source\PSoC5/VERT.c ****                 #if(0 != VERT_CTRL_CMPMODE1_SHIFT)
+ 282:Generated_Source\PSoC5/VERT.c ****                     uint8 comparemode1masked = ((uint8)((uint8)comparemode << VERT_CTRL_CMPMODE1_SH
+ 283:Generated_Source\PSoC5/VERT.c ****                                                 VERT_CTRL_CMPMODE1_MASK;
+ 284:Generated_Source\PSoC5/VERT.c ****                 #else
+ 285:Generated_Source\PSoC5/VERT.c ****                     uint8 comparemode1masked = comparemode & VERT_CTRL_CMPMODE1_MASK;
+ 286:Generated_Source\PSoC5/VERT.c ****                 #endif /* (0 != VERT_CTRL_CMPMODE1_SHIFT) */
+ 287:Generated_Source\PSoC5/VERT.c **** 
+ 288:Generated_Source\PSoC5/VERT.c ****                 #if(0 != VERT_CTRL_CMPMODE2_SHIFT)
+ 289:Generated_Source\PSoC5/VERT.c ****                     uint8 comparemode2masked = ((uint8)((uint8)comparemode << VERT_CTRL_CMPMODE2_SH
+ 290:Generated_Source\PSoC5/VERT.c ****                                                VERT_CTRL_CMPMODE2_MASK;
+ 291:Generated_Source\PSoC5/VERT.c ****                 #else
+ 292:Generated_Source\PSoC5/VERT.c ****                     uint8 comparemode2masked = comparemode & VERT_CTRL_CMPMODE2_MASK;
+ 293:Generated_Source\PSoC5/VERT.c ****                 #endif /* (0 != VERT_CTRL_CMPMODE2_SHIFT) */
+ 294:Generated_Source\PSoC5/VERT.c **** 
+ 295:Generated_Source\PSoC5/VERT.c ****                 /*Clear existing mode */
+ 296:Generated_Source\PSoC5/VERT.c ****                 VERT_CONTROL &= ((uint8)(~(VERT_CTRL_CMPMODE1_MASK |
+ 297:Generated_Source\PSoC5/VERT.c ****                                             VERT_CTRL_CMPMODE2_MASK)));
+ 298:Generated_Source\PSoC5/VERT.c ****                 VERT_CONTROL |= (comparemode1masked | comparemode2masked);
+ 299:Generated_Source\PSoC5/VERT.c **** 
+ 300:Generated_Source\PSoC5/VERT.c ****             #else
+ 301:Generated_Source\PSoC5/VERT.c ****                 uint8 temp = comparemode;
+ 302:Generated_Source\PSoC5/VERT.c ****             #endif /* (VERT_UsingFixedFunction) */
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 7
+
+
+ 303:Generated_Source\PSoC5/VERT.c ****         }
+ 304:Generated_Source\PSoC5/VERT.c ****     #endif /* VERT_CompareMode1SW */
+ 305:Generated_Source\PSoC5/VERT.c **** 
+ 306:Generated_Source\PSoC5/VERT.c **** #else /* UseOneCompareMode */
+ 307:Generated_Source\PSoC5/VERT.c **** 
+ 308:Generated_Source\PSoC5/VERT.c ****     #if (VERT_CompareMode1SW)
+ 309:Generated_Source\PSoC5/VERT.c **** 
+ 310:Generated_Source\PSoC5/VERT.c **** 
+ 311:Generated_Source\PSoC5/VERT.c ****         /*******************************************************************************
+ 312:Generated_Source\PSoC5/VERT.c ****         * Function Name: VERT_SetCompareMode1
+ 313:Generated_Source\PSoC5/VERT.c ****         ********************************************************************************
+ 314:Generated_Source\PSoC5/VERT.c ****         *
+ 315:Generated_Source\PSoC5/VERT.c ****         * Summary:
+ 316:Generated_Source\PSoC5/VERT.c ****         *  This function writes the Compare Mode for the pwm or pwm1 output
+ 317:Generated_Source\PSoC5/VERT.c ****         *
+ 318:Generated_Source\PSoC5/VERT.c ****         * Parameters:
+ 319:Generated_Source\PSoC5/VERT.c ****         *  comparemode:  The new compare mode for the PWM output. Use the compare types
+ 320:Generated_Source\PSoC5/VERT.c ****         *                defined in the H file as input arguments.
+ 321:Generated_Source\PSoC5/VERT.c ****         *
+ 322:Generated_Source\PSoC5/VERT.c ****         * Return:
+ 323:Generated_Source\PSoC5/VERT.c ****         *  None
+ 324:Generated_Source\PSoC5/VERT.c ****         *
+ 325:Generated_Source\PSoC5/VERT.c ****         *******************************************************************************/
+ 326:Generated_Source\PSoC5/VERT.c ****         void VERT_SetCompareMode1(uint8 comparemode) 
+ 327:Generated_Source\PSoC5/VERT.c ****         {
+ 328:Generated_Source\PSoC5/VERT.c ****             #if(0 != VERT_CTRL_CMPMODE1_SHIFT)
+ 329:Generated_Source\PSoC5/VERT.c ****                 uint8 comparemodemasked = ((uint8)((uint8)comparemode << VERT_CTRL_CMPMODE1_SHIFT))
+ 330:Generated_Source\PSoC5/VERT.c ****                                            VERT_CTRL_CMPMODE1_MASK;
+ 331:Generated_Source\PSoC5/VERT.c ****             #else
+ 332:Generated_Source\PSoC5/VERT.c ****                 uint8 comparemodemasked = comparemode & VERT_CTRL_CMPMODE1_MASK;
+ 333:Generated_Source\PSoC5/VERT.c ****             #endif /* (0 != VERT_CTRL_CMPMODE1_SHIFT) */
+ 334:Generated_Source\PSoC5/VERT.c **** 
+ 335:Generated_Source\PSoC5/VERT.c ****             #if (VERT_UseControl)
+ 336:Generated_Source\PSoC5/VERT.c ****                 VERT_CONTROL &= ((uint8)(~VERT_CTRL_CMPMODE1_MASK)); /*Clear existing mode */
+ 337:Generated_Source\PSoC5/VERT.c ****                 VERT_CONTROL |= comparemodemasked;
+ 338:Generated_Source\PSoC5/VERT.c ****             #endif /* (VERT_UseControl) */
+ 339:Generated_Source\PSoC5/VERT.c ****         }
+ 340:Generated_Source\PSoC5/VERT.c ****     #endif /* VERT_CompareMode1SW */
+ 341:Generated_Source\PSoC5/VERT.c **** 
+ 342:Generated_Source\PSoC5/VERT.c **** #if (VERT_CompareMode2SW)
+ 343:Generated_Source\PSoC5/VERT.c **** 
+ 344:Generated_Source\PSoC5/VERT.c **** 
+ 345:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 346:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_SetCompareMode2
+ 347:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 348:Generated_Source\PSoC5/VERT.c ****     *
+ 349:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 350:Generated_Source\PSoC5/VERT.c ****     *  This function writes the Compare Mode for the pwm or pwm2 output
+ 351:Generated_Source\PSoC5/VERT.c ****     *
+ 352:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 353:Generated_Source\PSoC5/VERT.c ****     *  comparemode:  The new compare mode for the PWM output. Use the compare types
+ 354:Generated_Source\PSoC5/VERT.c ****     *                defined in the H file as input arguments.
+ 355:Generated_Source\PSoC5/VERT.c ****     *
+ 356:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 357:Generated_Source\PSoC5/VERT.c ****     *  None
+ 358:Generated_Source\PSoC5/VERT.c ****     *
+ 359:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 8
+
+
+ 360:Generated_Source\PSoC5/VERT.c ****     void VERT_SetCompareMode2(uint8 comparemode) 
+ 361:Generated_Source\PSoC5/VERT.c ****     {
+ 362:Generated_Source\PSoC5/VERT.c **** 
+ 363:Generated_Source\PSoC5/VERT.c ****         #if(0 != VERT_CTRL_CMPMODE2_SHIFT)
+ 364:Generated_Source\PSoC5/VERT.c ****             uint8 comparemodemasked = ((uint8)((uint8)comparemode << VERT_CTRL_CMPMODE2_SHIFT)) &
+ 365:Generated_Source\PSoC5/VERT.c ****                                                  VERT_CTRL_CMPMODE2_MASK;
+ 366:Generated_Source\PSoC5/VERT.c ****         #else
+ 367:Generated_Source\PSoC5/VERT.c ****             uint8 comparemodemasked = comparemode & VERT_CTRL_CMPMODE2_MASK;
+ 368:Generated_Source\PSoC5/VERT.c ****         #endif /* (0 != VERT_CTRL_CMPMODE2_SHIFT) */
+ 369:Generated_Source\PSoC5/VERT.c **** 
+ 370:Generated_Source\PSoC5/VERT.c ****         #if (VERT_UseControl)
+ 371:Generated_Source\PSoC5/VERT.c ****             VERT_CONTROL &= ((uint8)(~VERT_CTRL_CMPMODE2_MASK)); /*Clear existing mode */
+ 372:Generated_Source\PSoC5/VERT.c ****             VERT_CONTROL |= comparemodemasked;
+ 373:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UseControl) */
+ 374:Generated_Source\PSoC5/VERT.c ****     }
+ 375:Generated_Source\PSoC5/VERT.c ****     #endif /*VERT_CompareMode2SW */
+ 376:Generated_Source\PSoC5/VERT.c **** 
+ 377:Generated_Source\PSoC5/VERT.c **** #endif /* UseOneCompareMode */
+ 378:Generated_Source\PSoC5/VERT.c **** 
+ 379:Generated_Source\PSoC5/VERT.c **** 
+ 380:Generated_Source\PSoC5/VERT.c **** #if (!VERT_UsingFixedFunction)
+ 381:Generated_Source\PSoC5/VERT.c **** 
+ 382:Generated_Source\PSoC5/VERT.c **** 
+ 383:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 384:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_WriteCounter
+ 385:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 386:Generated_Source\PSoC5/VERT.c ****     *
+ 387:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 388:Generated_Source\PSoC5/VERT.c ****     *  Writes a new counter value directly to the counter register. This will be
+ 389:Generated_Source\PSoC5/VERT.c ****     *  implemented for that currently running period and only that period. This API
+ 390:Generated_Source\PSoC5/VERT.c ****     *  is valid only for UDB implementation and not available for fixed function
+ 391:Generated_Source\PSoC5/VERT.c ****     *  PWM implementation.
+ 392:Generated_Source\PSoC5/VERT.c ****     *
+ 393:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 394:Generated_Source\PSoC5/VERT.c ****     *  counter:  The period new period counter value.
+ 395:Generated_Source\PSoC5/VERT.c ****     *
+ 396:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 397:Generated_Source\PSoC5/VERT.c ****     *  None
+ 398:Generated_Source\PSoC5/VERT.c ****     *
+ 399:Generated_Source\PSoC5/VERT.c ****     * Side Effects:
+ 400:Generated_Source\PSoC5/VERT.c ****     *  The PWM Period will be reloaded when a counter value will be a zero
+ 401:Generated_Source\PSoC5/VERT.c ****     *
+ 402:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 403:Generated_Source\PSoC5/VERT.c ****     void VERT_WriteCounter(uint16 counter) \
+ 404:Generated_Source\PSoC5/VERT.c ****                                        
+ 405:Generated_Source\PSoC5/VERT.c ****     {
+ 406:Generated_Source\PSoC5/VERT.c ****         CY_SET_REG16(VERT_COUNTER_LSB_PTR, counter);
+  41              		.loc 1 406 0
+  42 0006 40F22531 		movw	r1, #805
+  43              	.LBE21:
+  44              	.LBE20:
+  45              	.LBE19:
+  46              	.LBE18:
+  56:Generated_Source\PSoC5/VERT.c ****     /* If not Initialized then initialize all required hardware and software */
+  47              		.loc 1 56 0
+  48 000a F0B4     		push	{r4, r5, r6, r7}
+  49              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 9
+
+
+  50              		.cfi_offset 4, -16
+  51              		.cfi_offset 5, -12
+  52              		.cfi_offset 6, -8
+  53              		.cfi_offset 7, -4
+  54              	.LBB36:
+  55              	.LBB34:
+ 117:Generated_Source\PSoC5/VERT.c ****                 ((uint8)(~VERT_CTRL_CMPMODE1_MASK));
+  56              		.loc 1 117 0
+  57 000c 144D     		ldr	r5, .L6+4
+ 129:Generated_Source\PSoC5/VERT.c ****             VERT_AUX_CONTROLDP1 |= (VERT_AUX_CTRL_FIFO0_CLR);
+  58              		.loc 1 129 0
+  59 000e 154C     		ldr	r4, .L6+8
+ 117:Generated_Source\PSoC5/VERT.c ****                 ((uint8)(~VERT_CTRL_CMPMODE1_MASK));
+  60              		.loc 1 117 0
+  61 0010 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+  62              	.LVL0:
+ 130:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_Resolution == 8) */
+  63              		.loc 1 130 0
+  64 0012 1548     		ldr	r0, .L6+12
+ 119:Generated_Source\PSoC5/VERT.c ****                                    VERT_DEFAULT_COMPARE1_MODE;
+  65              		.loc 1 119 0
+  66 0014 03F0C003 		and	r3, r3, #192
+  67              	.LVL1:
+  68 0018 43F02103 		orr	r3, r3, #33
+  69 001c 2B70     		strb	r3, [r5]
+ 129:Generated_Source\PSoC5/VERT.c ****             VERT_AUX_CONTROLDP1 |= (VERT_AUX_CTRL_FIFO0_CLR);
+  70              		.loc 1 129 0
+  71 001e 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  72              	.LBB24:
+  73              	.LBB22:
+  74              		.loc 1 406 0
+  75 0020 124F     		ldr	r7, .L6+16
+  76              	.LBE22:
+  77              	.LBE24:
+ 129:Generated_Source\PSoC5/VERT.c ****             VERT_AUX_CONTROLDP1 |= (VERT_AUX_CTRL_FIFO0_CLR);
+  78              		.loc 1 129 0
+  79 0022 43F00103 		orr	r3, r3, #1
+  80 0026 2370     		strb	r3, [r4]
+ 130:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_Resolution == 8) */
+  81              		.loc 1 130 0
+  82 0028 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+  83              	.LBB25:
+  84              	.LBB26:
+ 407:Generated_Source\PSoC5/VERT.c ****     }
+ 408:Generated_Source\PSoC5/VERT.c **** 
+ 409:Generated_Source\PSoC5/VERT.c **** 
+ 410:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 411:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadCounter
+ 412:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 413:Generated_Source\PSoC5/VERT.c ****     *
+ 414:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 415:Generated_Source\PSoC5/VERT.c ****     *  This function returns the current value of the counter.  It doesn't matter
+ 416:Generated_Source\PSoC5/VERT.c ****     *  if the counter is enabled or running.
+ 417:Generated_Source\PSoC5/VERT.c ****     *
+ 418:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 419:Generated_Source\PSoC5/VERT.c ****     *  None
+ 420:Generated_Source\PSoC5/VERT.c ****     *
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 10
+
+
+ 421:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 422:Generated_Source\PSoC5/VERT.c ****     *  The current value of the counter.
+ 423:Generated_Source\PSoC5/VERT.c ****     *
+ 424:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 425:Generated_Source\PSoC5/VERT.c ****     uint16 VERT_ReadCounter(void) 
+ 426:Generated_Source\PSoC5/VERT.c ****     {
+ 427:Generated_Source\PSoC5/VERT.c ****         /* Force capture by reading Accumulator */
+ 428:Generated_Source\PSoC5/VERT.c ****         /* Must first do a software capture to be able to read the counter */
+ 429:Generated_Source\PSoC5/VERT.c ****         /* It is up to the user code to make sure there isn't already captured data in the FIFO */
+ 430:Generated_Source\PSoC5/VERT.c ****           (void)CY_GET_REG8(VERT_COUNTERCAP_LSB_PTR_8BIT);
+ 431:Generated_Source\PSoC5/VERT.c **** 
+ 432:Generated_Source\PSoC5/VERT.c ****         /* Read the data from the FIFO */
+ 433:Generated_Source\PSoC5/VERT.c ****         return (CY_GET_REG16(VERT_CAPTURE_LSB_PTR));
+ 434:Generated_Source\PSoC5/VERT.c ****     }
+ 435:Generated_Source\PSoC5/VERT.c **** 
+ 436:Generated_Source\PSoC5/VERT.c ****     #if (VERT_UseStatus)
+ 437:Generated_Source\PSoC5/VERT.c **** 
+ 438:Generated_Source\PSoC5/VERT.c **** 
+ 439:Generated_Source\PSoC5/VERT.c ****         /*******************************************************************************
+ 440:Generated_Source\PSoC5/VERT.c ****         * Function Name: VERT_ClearFIFO
+ 441:Generated_Source\PSoC5/VERT.c ****         ********************************************************************************
+ 442:Generated_Source\PSoC5/VERT.c ****         *
+ 443:Generated_Source\PSoC5/VERT.c ****         * Summary:
+ 444:Generated_Source\PSoC5/VERT.c ****         *  This function clears all capture data from the capture FIFO
+ 445:Generated_Source\PSoC5/VERT.c ****         *
+ 446:Generated_Source\PSoC5/VERT.c ****         * Parameters:
+ 447:Generated_Source\PSoC5/VERT.c ****         *  None
+ 448:Generated_Source\PSoC5/VERT.c ****         *
+ 449:Generated_Source\PSoC5/VERT.c ****         * Return:
+ 450:Generated_Source\PSoC5/VERT.c ****         *  None
+ 451:Generated_Source\PSoC5/VERT.c ****         *
+ 452:Generated_Source\PSoC5/VERT.c ****         *******************************************************************************/
+ 453:Generated_Source\PSoC5/VERT.c ****         void VERT_ClearFIFO(void) 
+ 454:Generated_Source\PSoC5/VERT.c ****         {
+ 455:Generated_Source\PSoC5/VERT.c ****             while(0u != (VERT_ReadStatusRegister() & VERT_STATUS_FIFONEMPTY))
+ 456:Generated_Source\PSoC5/VERT.c ****             {
+ 457:Generated_Source\PSoC5/VERT.c ****                 (void)VERT_ReadCapture();
+ 458:Generated_Source\PSoC5/VERT.c ****             }
+ 459:Generated_Source\PSoC5/VERT.c ****         }
+ 460:Generated_Source\PSoC5/VERT.c **** 
+ 461:Generated_Source\PSoC5/VERT.c ****     #endif /* VERT_UseStatus */
+ 462:Generated_Source\PSoC5/VERT.c **** 
+ 463:Generated_Source\PSoC5/VERT.c **** #endif /* !VERT_UsingFixedFunction */
+ 464:Generated_Source\PSoC5/VERT.c **** 
+ 465:Generated_Source\PSoC5/VERT.c **** 
+ 466:Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+ 467:Generated_Source\PSoC5/VERT.c **** * Function Name: VERT_WritePeriod
+ 468:Generated_Source\PSoC5/VERT.c **** ********************************************************************************
+ 469:Generated_Source\PSoC5/VERT.c **** *
+ 470:Generated_Source\PSoC5/VERT.c **** * Summary:
+ 471:Generated_Source\PSoC5/VERT.c **** *  This function is used to change the period of the counter.  The new period
+ 472:Generated_Source\PSoC5/VERT.c **** *  will be loaded the next time terminal count is detected.
+ 473:Generated_Source\PSoC5/VERT.c **** *
+ 474:Generated_Source\PSoC5/VERT.c **** * Parameters:
+ 475:Generated_Source\PSoC5/VERT.c **** *  period:  Period value. May be between 1 and (2^Resolution)-1.  A value of 0
+ 476:Generated_Source\PSoC5/VERT.c **** *           will result in the counter remaining at zero.
+ 477:Generated_Source\PSoC5/VERT.c **** *
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 11
+
+
+ 478:Generated_Source\PSoC5/VERT.c **** * Return:
+ 479:Generated_Source\PSoC5/VERT.c **** *  None
+ 480:Generated_Source\PSoC5/VERT.c **** *
+ 481:Generated_Source\PSoC5/VERT.c **** *******************************************************************************/
+ 482:Generated_Source\PSoC5/VERT.c **** void VERT_WritePeriod(uint16 period) 
+ 483:Generated_Source\PSoC5/VERT.c **** {
+ 484:Generated_Source\PSoC5/VERT.c ****     #if(VERT_UsingFixedFunction)
+ 485:Generated_Source\PSoC5/VERT.c ****         CY_SET_REG16(VERT_PERIOD_LSB_PTR, (uint16)period);
+ 486:Generated_Source\PSoC5/VERT.c ****     #else
+ 487:Generated_Source\PSoC5/VERT.c ****         CY_SET_REG16(VERT_PERIOD_LSB_PTR, period);
+  85              		.loc 1 487 0
+  86 002a 114E     		ldr	r6, .L6+20
+  87              	.LBE26:
+  88              	.LBE25:
+ 130:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_Resolution == 8) */
+  89              		.loc 1 130 0
+  90 002c 43F00103 		orr	r3, r3, #1
+  91 0030 0370     		strb	r3, [r0]
+  92              	.LVL2:
+  93              	.LBB28:
+  94              	.LBB29:
+ 488:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 489:Generated_Source\PSoC5/VERT.c **** }
+ 490:Generated_Source\PSoC5/VERT.c **** 
+ 491:Generated_Source\PSoC5/VERT.c **** #if (VERT_UseOneCompareMode)
+ 492:Generated_Source\PSoC5/VERT.c **** 
+ 493:Generated_Source\PSoC5/VERT.c **** 
+ 494:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 495:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_WriteCompare
+ 496:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 497:Generated_Source\PSoC5/VERT.c ****     *
+ 498:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 499:Generated_Source\PSoC5/VERT.c ****     *  This funtion is used to change the compare1 value when the PWM is in Dither
+ 500:Generated_Source\PSoC5/VERT.c ****     *  mode. The compare output will reflect the new value on the next UDB clock.
+ 501:Generated_Source\PSoC5/VERT.c ****     *  The compare output will be driven high when the present counter value is
+ 502:Generated_Source\PSoC5/VERT.c ****     *  compared to the compare value based on the compare mode defined in
+ 503:Generated_Source\PSoC5/VERT.c ****     *  Dither Mode.
+ 504:Generated_Source\PSoC5/VERT.c ****     *
+ 505:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 506:Generated_Source\PSoC5/VERT.c ****     *  compare:  New compare value.
+ 507:Generated_Source\PSoC5/VERT.c ****     *
+ 508:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 509:Generated_Source\PSoC5/VERT.c ****     *  None
+ 510:Generated_Source\PSoC5/VERT.c ****     *
+ 511:Generated_Source\PSoC5/VERT.c ****     * Side Effects:
+ 512:Generated_Source\PSoC5/VERT.c ****     *  This function is only available if the PWM mode parameter is set to
+ 513:Generated_Source\PSoC5/VERT.c ****     *  Dither Mode, Center Aligned Mode or One Output Mode
+ 514:Generated_Source\PSoC5/VERT.c ****     *
+ 515:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 516:Generated_Source\PSoC5/VERT.c ****     void VERT_WriteCompare(uint16 compare) \
+ 517:Generated_Source\PSoC5/VERT.c ****                                        
+ 518:Generated_Source\PSoC5/VERT.c ****     {
+ 519:Generated_Source\PSoC5/VERT.c ****         #if(VERT_UsingFixedFunction)
+ 520:Generated_Source\PSoC5/VERT.c ****             CY_SET_REG16(VERT_COMPARE1_LSB_PTR, (uint16)compare);
+ 521:Generated_Source\PSoC5/VERT.c ****         #else
+ 522:Generated_Source\PSoC5/VERT.c ****             CY_SET_REG16(VERT_COMPARE1_LSB_PTR, compare);
+  95              		.loc 1 522 0
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 12
+
+
+  96 0032 2625     		movs	r5, #38
+  97              	.LBE29:
+  98              	.LBE28:
+  99              	.LBE34:
+ 100              	.LBE36:
+  61:Generated_Source\PSoC5/VERT.c ****     }
+ 101              		.loc 1 61 0
+ 102 0034 0123     		movs	r3, #1
+ 103              	.LBB37:
+ 104              	.LBB35:
+ 105              	.LBB31:
+ 106              	.LBB23:
+ 406:Generated_Source\PSoC5/VERT.c ****     }
+ 107              		.loc 1 406 0
+ 108 0036 3980     		strh	r1, [r7]	@ movhi
+ 109              	.LVL3:
+ 110              	.LBE23:
+ 111              	.LBE31:
+ 112              	.LBB32:
+ 113              	.LBB27:
+ 487:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 114              		.loc 1 487 0
+ 115 0038 3180     		strh	r1, [r6]	@ movhi
+ 116              	.LVL4:
+ 117              	.LBE27:
+ 118              	.LBE32:
+ 119              	.LBB33:
+ 120              	.LBB30:
+ 121              		.loc 1 522 0
+ 122 003a A4F8BC53 		strh	r5, [r4, #956]	@ movhi
+ 123              	.LVL5:
+ 124              	.LBE30:
+ 125              	.LBE33:
+ 126              	.LBE35:
+ 127              	.LBE37:
+  61:Generated_Source\PSoC5/VERT.c ****     }
+ 128              		.loc 1 61 0
+ 129 003e 1370     		strb	r3, [r2]
+ 130              	.LBB38:
+ 131              	.LBB39:
+ 209:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UseControl || VERT_UsingFixedFunction) */
+ 132              		.loc 1 209 0
+ 133 0040 074A     		ldr	r2, .L6+4
+ 134 0042 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 135 0044 43F08003 		orr	r3, r3, #128
+ 136 0048 1370     		strb	r3, [r2]
+ 137              	.LBE39:
+ 138              	.LBE38:
+  65:Generated_Source\PSoC5/VERT.c **** 
+ 139              		.loc 1 65 0
+ 140 004a F0BC     		pop	{r4, r5, r6, r7}
+ 141              		.cfi_restore 7
+ 142              		.cfi_restore 6
+ 143              		.cfi_restore 5
+ 144              		.cfi_restore 4
+ 145              		.cfi_def_cfa_offset 0
+ 146 004c 7047     		bx	lr
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 13
+
+
+ 147              	.L4:
+ 148              	.LBB41:
+ 149              	.LBB40:
+ 209:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UseControl || VERT_UsingFixedFunction) */
+ 150              		.loc 1 209 0
+ 151 004e 044A     		ldr	r2, .L6+4
+ 152 0050 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 153 0052 43F08003 		orr	r3, r3, #128
+ 154 0056 1370     		strb	r3, [r2]
+ 155 0058 7047     		bx	lr
+ 156              	.L7:
+ 157 005a 00BF     		.align	2
+ 158              	.L6:
+ 159 005c 00000000 		.word	.LANCHOR0
+ 160 0060 7D640040 		.word	1073767549
+ 161 0064 9C640040 		.word	1073767580
+ 162 0068 9D640040 		.word	1073767581
+ 163 006c 18680040 		.word	1073768472
+ 164 0070 98680040 		.word	1073768600
+ 165              	.LBE40:
+ 166              	.LBE41:
+ 167              		.cfi_endproc
+ 168              	.LFE0:
+ 169              		.size	VERT_Start, .-VERT_Start
+ 170              		.section	.text.VERT_Init,"ax",%progbits
+ 171              		.align	2
+ 172              		.global	VERT_Init
+ 173              		.thumb
+ 174              		.thumb_func
+ 175              		.type	VERT_Init, %function
+ 176              	VERT_Init:
+ 177              	.LFB1:
+  85:Generated_Source\PSoC5/VERT.c ****     #if (VERT_UsingFixedFunction || VERT_UseControl)
+ 178              		.loc 1 85 0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 0, uses_anonymous_args = 0
+ 182              		@ link register save eliminated.
+ 183              	.LBB42:
+ 184              	.LBB43:
+ 406:Generated_Source\PSoC5/VERT.c ****     }
+ 185              		.loc 1 406 0
+ 186 0000 40F22532 		movw	r2, #805
+ 187              	.LBE43:
+ 188              	.LBE42:
+  85:Generated_Source\PSoC5/VERT.c ****     #if (VERT_UsingFixedFunction || VERT_UseControl)
+ 189              		.loc 1 85 0
+ 190 0004 70B4     		push	{r4, r5, r6}
+ 191              		.cfi_def_cfa_offset 12
+ 192              		.cfi_offset 4, -12
+ 193              		.cfi_offset 5, -8
+ 194              		.cfi_offset 6, -4
+ 117:Generated_Source\PSoC5/VERT.c ****                 ((uint8)(~VERT_CTRL_CMPMODE1_MASK));
+ 195              		.loc 1 117 0
+ 196 0006 0D4C     		ldr	r4, .L10
+ 129:Generated_Source\PSoC5/VERT.c ****             VERT_AUX_CONTROLDP1 |= (VERT_AUX_CTRL_FIFO0_CLR);
+ 197              		.loc 1 129 0
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 14
+
+
+ 198 0008 0D48     		ldr	r0, .L10+4
+ 117:Generated_Source\PSoC5/VERT.c ****                 ((uint8)(~VERT_CTRL_CMPMODE1_MASK));
+ 199              		.loc 1 117 0
+ 200 000a 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 201              	.LVL6:
+ 130:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_Resolution == 8) */
+ 202              		.loc 1 130 0
+ 203 000c 0D49     		ldr	r1, .L10+8
+ 119:Generated_Source\PSoC5/VERT.c ****                                    VERT_DEFAULT_COMPARE1_MODE;
+ 204              		.loc 1 119 0
+ 205 000e 03F0C003 		and	r3, r3, #192
+ 206              	.LVL7:
+ 207 0012 43F02103 		orr	r3, r3, #33
+ 208 0016 2370     		strb	r3, [r4]
+ 129:Generated_Source\PSoC5/VERT.c ****             VERT_AUX_CONTROLDP1 |= (VERT_AUX_CTRL_FIFO0_CLR);
+ 209              		.loc 1 129 0
+ 210 0018 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 211              	.LBB46:
+ 212              	.LBB44:
+ 406:Generated_Source\PSoC5/VERT.c ****     }
+ 213              		.loc 1 406 0
+ 214 001a 0B4E     		ldr	r6, .L10+12
+ 215              	.LBE44:
+ 216              	.LBE46:
+ 129:Generated_Source\PSoC5/VERT.c ****             VERT_AUX_CONTROLDP1 |= (VERT_AUX_CTRL_FIFO0_CLR);
+ 217              		.loc 1 129 0
+ 218 001c 43F00103 		orr	r3, r3, #1
+ 219 0020 0370     		strb	r3, [r0]
+ 130:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_Resolution == 8) */
+ 220              		.loc 1 130 0
+ 221 0022 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+ 222              	.LBB47:
+ 223              	.LBB48:
+ 487:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 224              		.loc 1 487 0
+ 225 0024 094D     		ldr	r5, .L10+16
+ 226              	.LBE48:
+ 227              	.LBE47:
+ 130:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_Resolution == 8) */
+ 228              		.loc 1 130 0
+ 229 0026 43F00103 		orr	r3, r3, #1
+ 230 002a 0B70     		strb	r3, [r1]
+ 231              	.LVL8:
+ 232              	.LBB50:
+ 233              	.LBB51:
+ 234              		.loc 1 522 0
+ 235 002c 2624     		movs	r4, #38
+ 236              	.LBE51:
+ 237              	.LBE50:
+ 238              	.LBB53:
+ 239              	.LBB45:
+ 406:Generated_Source\PSoC5/VERT.c ****     }
+ 240              		.loc 1 406 0
+ 241 002e 3280     		strh	r2, [r6]	@ movhi
+ 242              	.LVL9:
+ 243              	.LBE45:
+ 244              	.LBE53:
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 15
+
+
+ 245              	.LBB54:
+ 246              	.LBB49:
+ 487:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 247              		.loc 1 487 0
+ 248 0030 2A80     		strh	r2, [r5]	@ movhi
+ 249              	.LVL10:
+ 250              	.LBE49:
+ 251              	.LBE54:
+ 252              	.LBB55:
+ 253              	.LBB52:
+ 254              		.loc 1 522 0
+ 255 0032 A0F8BC43 		strh	r4, [r0, #956]	@ movhi
+ 256              	.LVL11:
+ 257              	.LBE52:
+ 258              	.LBE55:
+ 179:Generated_Source\PSoC5/VERT.c **** 
+ 259              		.loc 1 179 0
+ 260 0036 70BC     		pop	{r4, r5, r6}
+ 261              		.cfi_restore 6
+ 262              		.cfi_restore 5
+ 263              		.cfi_restore 4
+ 264              		.cfi_def_cfa_offset 0
+ 265 0038 7047     		bx	lr
+ 266              	.L11:
+ 267 003a 00BF     		.align	2
+ 268              	.L10:
+ 269 003c 7D640040 		.word	1073767549
+ 270 0040 9C640040 		.word	1073767580
+ 271 0044 9D640040 		.word	1073767581
+ 272 0048 18680040 		.word	1073768472
+ 273 004c 98680040 		.word	1073768600
+ 274              		.cfi_endproc
+ 275              	.LFE1:
+ 276              		.size	VERT_Init, .-VERT_Init
+ 277              		.section	.text.VERT_Enable,"ax",%progbits
+ 278              		.align	2
+ 279              		.global	VERT_Enable
+ 280              		.thumb
+ 281              		.thumb_func
+ 282              		.type	VERT_Enable, %function
+ 283              	VERT_Enable:
+ 284              	.LFB2:
+ 200:Generated_Source\PSoC5/VERT.c ****     /* Globally Enable the Fixed Function Block chosen */
+ 285              		.loc 1 200 0
+ 286              		.cfi_startproc
+ 287              		@ args = 0, pretend = 0, frame = 0
+ 288              		@ frame_needed = 0, uses_anonymous_args = 0
+ 289              		@ link register save eliminated.
+ 209:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UseControl || VERT_UsingFixedFunction) */
+ 290              		.loc 1 209 0
+ 291 0000 024A     		ldr	r2, .L13
+ 292 0002 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 293 0004 43F08003 		orr	r3, r3, #128
+ 294 0008 1370     		strb	r3, [r2]
+ 295 000a 7047     		bx	lr
+ 296              	.L14:
+ 297              		.align	2
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 16
+
+
+ 298              	.L13:
+ 299 000c 7D640040 		.word	1073767549
+ 300              		.cfi_endproc
+ 301              	.LFE2:
+ 302              		.size	VERT_Enable, .-VERT_Enable
+ 303              		.section	.text.VERT_Stop,"ax",%progbits
+ 304              		.align	2
+ 305              		.global	VERT_Stop
+ 306              		.thumb
+ 307              		.thumb_func
+ 308              		.type	VERT_Stop, %function
+ 309              	VERT_Stop:
+ 310              	.LFB3:
+ 234:Generated_Source\PSoC5/VERT.c ****     #if (VERT_UseControl || VERT_UsingFixedFunction)
+ 311              		.loc 1 234 0
+ 312              		.cfi_startproc
+ 313              		@ args = 0, pretend = 0, frame = 0
+ 314              		@ frame_needed = 0, uses_anonymous_args = 0
+ 315              		@ link register save eliminated.
+ 236:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UseControl || VERT_UsingFixedFunction) */
+ 316              		.loc 1 236 0
+ 317 0000 024A     		ldr	r2, .L16
+ 318 0002 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 319 0004 03F07F03 		and	r3, r3, #127
+ 320 0008 1370     		strb	r3, [r2]
+ 321 000a 7047     		bx	lr
+ 322              	.L17:
+ 323              		.align	2
+ 324              	.L16:
+ 325 000c 7D640040 		.word	1073767549
+ 326              		.cfi_endproc
+ 327              	.LFE3:
+ 328              		.size	VERT_Stop, .-VERT_Stop
+ 329              		.section	.text.VERT_WriteCounter,"ax",%progbits
+ 330              		.align	2
+ 331              		.global	VERT_WriteCounter
+ 332              		.thumb
+ 333              		.thumb_func
+ 334              		.type	VERT_WriteCounter, %function
+ 335              	VERT_WriteCounter:
+ 336              	.LFB4:
+ 405:Generated_Source\PSoC5/VERT.c ****         CY_SET_REG16(VERT_COUNTER_LSB_PTR, counter);
+ 337              		.loc 1 405 0
+ 338              		.cfi_startproc
+ 339              		@ args = 0, pretend = 0, frame = 0
+ 340              		@ frame_needed = 0, uses_anonymous_args = 0
+ 341              		@ link register save eliminated.
+ 342              	.LVL12:
+ 406:Generated_Source\PSoC5/VERT.c ****     }
+ 343              		.loc 1 406 0
+ 344 0000 014B     		ldr	r3, .L19
+ 345 0002 1880     		strh	r0, [r3]	@ movhi
+ 346 0004 7047     		bx	lr
+ 347              	.L20:
+ 348 0006 00BF     		.align	2
+ 349              	.L19:
+ 350 0008 18680040 		.word	1073768472
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 17
+
+
+ 351              		.cfi_endproc
+ 352              	.LFE4:
+ 353              		.size	VERT_WriteCounter, .-VERT_WriteCounter
+ 354              		.section	.text.VERT_ReadCounter,"ax",%progbits
+ 355              		.align	2
+ 356              		.global	VERT_ReadCounter
+ 357              		.thumb
+ 358              		.thumb_func
+ 359              		.type	VERT_ReadCounter, %function
+ 360              	VERT_ReadCounter:
+ 361              	.LFB5:
+ 426:Generated_Source\PSoC5/VERT.c ****         /* Force capture by reading Accumulator */
+ 362              		.loc 1 426 0
+ 363              		.cfi_startproc
+ 364              		@ args = 0, pretend = 0, frame = 0
+ 365              		@ frame_needed = 0, uses_anonymous_args = 0
+ 366              		@ link register save eliminated.
+ 433:Generated_Source\PSoC5/VERT.c ****     }
+ 367              		.loc 1 433 0
+ 368 0000 024B     		ldr	r3, .L22
+ 430:Generated_Source\PSoC5/VERT.c **** 
+ 369              		.loc 1 430 0
+ 370 0002 034A     		ldr	r2, .L22+4
+ 371 0004 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 433:Generated_Source\PSoC5/VERT.c ****     }
+ 372              		.loc 1 433 0
+ 373 0006 1888     		ldrh	r0, [r3]
+ 434:Generated_Source\PSoC5/VERT.c **** 
+ 374              		.loc 1 434 0
+ 375 0008 80B2     		uxth	r0, r0
+ 376 000a 7047     		bx	lr
+ 377              	.L23:
+ 378              		.align	2
+ 379              	.L22:
+ 380 000c B8680040 		.word	1073768632
+ 381 0010 1C640040 		.word	1073767452
+ 382              		.cfi_endproc
+ 383              	.LFE5:
+ 384              		.size	VERT_ReadCounter, .-VERT_ReadCounter
+ 385              		.section	.text.VERT_WritePeriod,"ax",%progbits
+ 386              		.align	2
+ 387              		.global	VERT_WritePeriod
+ 388              		.thumb
+ 389              		.thumb_func
+ 390              		.type	VERT_WritePeriod, %function
+ 391              	VERT_WritePeriod:
+ 392              	.LFB6:
+ 483:Generated_Source\PSoC5/VERT.c ****     #if(VERT_UsingFixedFunction)
+ 393              		.loc 1 483 0
+ 394              		.cfi_startproc
+ 395              		@ args = 0, pretend = 0, frame = 0
+ 396              		@ frame_needed = 0, uses_anonymous_args = 0
+ 397              		@ link register save eliminated.
+ 398              	.LVL13:
+ 487:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 399              		.loc 1 487 0
+ 400 0000 014B     		ldr	r3, .L25
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 18
+
+
+ 401 0002 1880     		strh	r0, [r3]	@ movhi
+ 402 0004 7047     		bx	lr
+ 403              	.L26:
+ 404 0006 00BF     		.align	2
+ 405              	.L25:
+ 406 0008 98680040 		.word	1073768600
+ 407              		.cfi_endproc
+ 408              	.LFE6:
+ 409              		.size	VERT_WritePeriod, .-VERT_WritePeriod
+ 410              		.section	.text.VERT_WriteCompare,"ax",%progbits
+ 411              		.align	2
+ 412              		.global	VERT_WriteCompare
+ 413              		.thumb
+ 414              		.thumb_func
+ 415              		.type	VERT_WriteCompare, %function
+ 416              	VERT_WriteCompare:
+ 417              	.LFB7:
+ 518:Generated_Source\PSoC5/VERT.c ****         #if(VERT_UsingFixedFunction)
+ 418              		.loc 1 518 0
+ 419              		.cfi_startproc
+ 420              		@ args = 0, pretend = 0, frame = 0
+ 421              		@ frame_needed = 0, uses_anonymous_args = 0
+ 422              		@ link register save eliminated.
+ 423              	.LVL14:
+ 424              		.loc 1 522 0
+ 425 0000 014B     		ldr	r3, .L28
+ 426 0002 1880     		strh	r0, [r3]	@ movhi
+ 427 0004 7047     		bx	lr
+ 428              	.L29:
+ 429 0006 00BF     		.align	2
+ 430              	.L28:
+ 431 0008 58680040 		.word	1073768536
+ 432              		.cfi_endproc
+ 433              	.LFE7:
+ 434              		.size	VERT_WriteCompare, .-VERT_WriteCompare
+ 435              		.section	.text.VERT_ReadControlRegister,"ax",%progbits
+ 436              		.align	2
+ 437              		.global	VERT_ReadControlRegister
+ 438              		.thumb
+ 439              		.thumb_func
+ 440              		.type	VERT_ReadControlRegister, %function
+ 441              	VERT_ReadControlRegister:
+ 442              	.LFB8:
+ 523:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UsingFixedFunction) */
+ 524:Generated_Source\PSoC5/VERT.c **** 
+ 525:Generated_Source\PSoC5/VERT.c ****         #if (VERT_PWMMode == VERT__B_PWM__DITHER)
+ 526:Generated_Source\PSoC5/VERT.c ****             #if(VERT_UsingFixedFunction)
+ 527:Generated_Source\PSoC5/VERT.c ****                 CY_SET_REG16(VERT_COMPARE2_LSB_PTR, (uint16)(compare + 1u));
+ 528:Generated_Source\PSoC5/VERT.c ****             #else
+ 529:Generated_Source\PSoC5/VERT.c ****                 CY_SET_REG16(VERT_COMPARE2_LSB_PTR, (compare + 1u));
+ 530:Generated_Source\PSoC5/VERT.c ****             #endif /* (VERT_UsingFixedFunction) */
+ 531:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_PWMMode == VERT__B_PWM__DITHER) */
+ 532:Generated_Source\PSoC5/VERT.c ****     }
+ 533:Generated_Source\PSoC5/VERT.c **** 
+ 534:Generated_Source\PSoC5/VERT.c **** 
+ 535:Generated_Source\PSoC5/VERT.c **** #else
+ 536:Generated_Source\PSoC5/VERT.c **** 
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 19
+
+
+ 537:Generated_Source\PSoC5/VERT.c **** 
+ 538:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 539:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_WriteCompare1
+ 540:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 541:Generated_Source\PSoC5/VERT.c ****     *
+ 542:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 543:Generated_Source\PSoC5/VERT.c ****     *  This funtion is used to change the compare1 value.  The compare output will
+ 544:Generated_Source\PSoC5/VERT.c ****     *  reflect the new value on the next UDB clock.  The compare output will be
+ 545:Generated_Source\PSoC5/VERT.c ****     *  driven high when the present counter value is less than or less than or
+ 546:Generated_Source\PSoC5/VERT.c ****     *  equal to the compare register, depending on the mode.
+ 547:Generated_Source\PSoC5/VERT.c ****     *
+ 548:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 549:Generated_Source\PSoC5/VERT.c ****     *  compare:  New compare value.
+ 550:Generated_Source\PSoC5/VERT.c ****     *
+ 551:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 552:Generated_Source\PSoC5/VERT.c ****     *  None
+ 553:Generated_Source\PSoC5/VERT.c ****     *
+ 554:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 555:Generated_Source\PSoC5/VERT.c ****     void VERT_WriteCompare1(uint16 compare) \
+ 556:Generated_Source\PSoC5/VERT.c ****                                         
+ 557:Generated_Source\PSoC5/VERT.c ****     {
+ 558:Generated_Source\PSoC5/VERT.c ****         #if(VERT_UsingFixedFunction)
+ 559:Generated_Source\PSoC5/VERT.c ****             CY_SET_REG16(VERT_COMPARE1_LSB_PTR, (uint16)compare);
+ 560:Generated_Source\PSoC5/VERT.c ****         #else
+ 561:Generated_Source\PSoC5/VERT.c ****             CY_SET_REG16(VERT_COMPARE1_LSB_PTR, compare);
+ 562:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UsingFixedFunction) */
+ 563:Generated_Source\PSoC5/VERT.c ****     }
+ 564:Generated_Source\PSoC5/VERT.c **** 
+ 565:Generated_Source\PSoC5/VERT.c **** 
+ 566:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 567:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_WriteCompare2
+ 568:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 569:Generated_Source\PSoC5/VERT.c ****     *
+ 570:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 571:Generated_Source\PSoC5/VERT.c ****     *  This funtion is used to change the compare value, for compare1 output.
+ 572:Generated_Source\PSoC5/VERT.c ****     *  The compare output will reflect the new value on the next UDB clock.
+ 573:Generated_Source\PSoC5/VERT.c ****     *  The compare output will be driven high when the present counter value is
+ 574:Generated_Source\PSoC5/VERT.c ****     *  less than or less than or equal to the compare register, depending on the
+ 575:Generated_Source\PSoC5/VERT.c ****     *  mode.
+ 576:Generated_Source\PSoC5/VERT.c ****     *
+ 577:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 578:Generated_Source\PSoC5/VERT.c ****     *  compare:  New compare value.
+ 579:Generated_Source\PSoC5/VERT.c ****     *
+ 580:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 581:Generated_Source\PSoC5/VERT.c ****     *  None
+ 582:Generated_Source\PSoC5/VERT.c ****     *
+ 583:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 584:Generated_Source\PSoC5/VERT.c ****     void VERT_WriteCompare2(uint16 compare) \
+ 585:Generated_Source\PSoC5/VERT.c ****                                         
+ 586:Generated_Source\PSoC5/VERT.c ****     {
+ 587:Generated_Source\PSoC5/VERT.c ****         #if(VERT_UsingFixedFunction)
+ 588:Generated_Source\PSoC5/VERT.c ****             CY_SET_REG16(VERT_COMPARE2_LSB_PTR, compare);
+ 589:Generated_Source\PSoC5/VERT.c ****         #else
+ 590:Generated_Source\PSoC5/VERT.c ****             CY_SET_REG16(VERT_COMPARE2_LSB_PTR, compare);
+ 591:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UsingFixedFunction) */
+ 592:Generated_Source\PSoC5/VERT.c ****     }
+ 593:Generated_Source\PSoC5/VERT.c **** #endif /* UseOneCompareMode */
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 20
+
+
+ 594:Generated_Source\PSoC5/VERT.c **** 
+ 595:Generated_Source\PSoC5/VERT.c **** #if (VERT_DeadBandUsed)
+ 596:Generated_Source\PSoC5/VERT.c **** 
+ 597:Generated_Source\PSoC5/VERT.c **** 
+ 598:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 599:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_WriteDeadTime
+ 600:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 601:Generated_Source\PSoC5/VERT.c ****     *
+ 602:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 603:Generated_Source\PSoC5/VERT.c ****     *  This function writes the dead-band counts to the corresponding register
+ 604:Generated_Source\PSoC5/VERT.c ****     *
+ 605:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 606:Generated_Source\PSoC5/VERT.c ****     *  deadtime:  Number of counts for dead time
+ 607:Generated_Source\PSoC5/VERT.c ****     *
+ 608:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 609:Generated_Source\PSoC5/VERT.c ****     *  None
+ 610:Generated_Source\PSoC5/VERT.c ****     *
+ 611:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 612:Generated_Source\PSoC5/VERT.c ****     void VERT_WriteDeadTime(uint8 deadtime) 
+ 613:Generated_Source\PSoC5/VERT.c ****     {
+ 614:Generated_Source\PSoC5/VERT.c ****         /* If using the Dead Band 1-255 mode then just write the register */
+ 615:Generated_Source\PSoC5/VERT.c ****         #if(!VERT_DeadBand2_4)
+ 616:Generated_Source\PSoC5/VERT.c ****             CY_SET_REG8(VERT_DEADBAND_COUNT_PTR, deadtime);
+ 617:Generated_Source\PSoC5/VERT.c ****         #else
+ 618:Generated_Source\PSoC5/VERT.c ****             /* Otherwise the data has to be masked and offset */
+ 619:Generated_Source\PSoC5/VERT.c ****             /* Clear existing data */
+ 620:Generated_Source\PSoC5/VERT.c ****             VERT_DEADBAND_COUNT &= ((uint8)(~VERT_DEADBAND_COUNT_MASK));
+ 621:Generated_Source\PSoC5/VERT.c **** 
+ 622:Generated_Source\PSoC5/VERT.c ****             /* Set new dead time */
+ 623:Generated_Source\PSoC5/VERT.c ****             #if(VERT_DEADBAND_COUNT_SHIFT)
+ 624:Generated_Source\PSoC5/VERT.c ****                 VERT_DEADBAND_COUNT |= ((uint8)((uint8)deadtime << VERT_DEADBAND_COUNT_SHIFT)) &
+ 625:Generated_Source\PSoC5/VERT.c ****                                                     VERT_DEADBAND_COUNT_MASK;
+ 626:Generated_Source\PSoC5/VERT.c ****             #else
+ 627:Generated_Source\PSoC5/VERT.c ****                 VERT_DEADBAND_COUNT |= deadtime & VERT_DEADBAND_COUNT_MASK;
+ 628:Generated_Source\PSoC5/VERT.c ****             #endif /* (VERT_DEADBAND_COUNT_SHIFT) */
+ 629:Generated_Source\PSoC5/VERT.c **** 
+ 630:Generated_Source\PSoC5/VERT.c ****         #endif /* (!VERT_DeadBand2_4) */
+ 631:Generated_Source\PSoC5/VERT.c ****     }
+ 632:Generated_Source\PSoC5/VERT.c **** 
+ 633:Generated_Source\PSoC5/VERT.c **** 
+ 634:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 635:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadDeadTime
+ 636:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 637:Generated_Source\PSoC5/VERT.c ****     *
+ 638:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 639:Generated_Source\PSoC5/VERT.c ****     *  This function reads the dead-band counts from the corresponding register
+ 640:Generated_Source\PSoC5/VERT.c ****     *
+ 641:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 642:Generated_Source\PSoC5/VERT.c ****     *  None
+ 643:Generated_Source\PSoC5/VERT.c ****     *
+ 644:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 645:Generated_Source\PSoC5/VERT.c ****     *  Dead Band Counts
+ 646:Generated_Source\PSoC5/VERT.c ****     *
+ 647:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 648:Generated_Source\PSoC5/VERT.c ****     uint8 VERT_ReadDeadTime(void) 
+ 649:Generated_Source\PSoC5/VERT.c ****     {
+ 650:Generated_Source\PSoC5/VERT.c ****         /* If using the Dead Band 1-255 mode then just read the register */
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 21
+
+
+ 651:Generated_Source\PSoC5/VERT.c ****         #if(!VERT_DeadBand2_4)
+ 652:Generated_Source\PSoC5/VERT.c ****             return (CY_GET_REG8(VERT_DEADBAND_COUNT_PTR));
+ 653:Generated_Source\PSoC5/VERT.c ****         #else
+ 654:Generated_Source\PSoC5/VERT.c **** 
+ 655:Generated_Source\PSoC5/VERT.c ****             /* Otherwise the data has to be masked and offset */
+ 656:Generated_Source\PSoC5/VERT.c ****             #if(VERT_DEADBAND_COUNT_SHIFT)
+ 657:Generated_Source\PSoC5/VERT.c ****                 return ((uint8)(((uint8)(VERT_DEADBAND_COUNT & VERT_DEADBAND_COUNT_MASK)) >>
+ 658:Generated_Source\PSoC5/VERT.c ****                                                                            VERT_DEADBAND_COUNT_SHIF
+ 659:Generated_Source\PSoC5/VERT.c ****             #else
+ 660:Generated_Source\PSoC5/VERT.c ****                 return (VERT_DEADBAND_COUNT & VERT_DEADBAND_COUNT_MASK);
+ 661:Generated_Source\PSoC5/VERT.c ****             #endif /* (VERT_DEADBAND_COUNT_SHIFT) */
+ 662:Generated_Source\PSoC5/VERT.c ****         #endif /* (!VERT_DeadBand2_4) */
+ 663:Generated_Source\PSoC5/VERT.c ****     }
+ 664:Generated_Source\PSoC5/VERT.c **** #endif /* DeadBandUsed */
+ 665:Generated_Source\PSoC5/VERT.c **** 
+ 666:Generated_Source\PSoC5/VERT.c **** #if (VERT_UseStatus || VERT_UsingFixedFunction)
+ 667:Generated_Source\PSoC5/VERT.c **** 
+ 668:Generated_Source\PSoC5/VERT.c **** 
+ 669:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 670:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_SetInterruptMode
+ 671:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 672:Generated_Source\PSoC5/VERT.c ****     *
+ 673:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 674:Generated_Source\PSoC5/VERT.c ****     *  This function configures the interrupts mask control of theinterrupt
+ 675:Generated_Source\PSoC5/VERT.c ****     *  source status register.
+ 676:Generated_Source\PSoC5/VERT.c ****     *
+ 677:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 678:Generated_Source\PSoC5/VERT.c ****     *  uint8 interruptMode: Bit field containing the interrupt sources enabled
+ 679:Generated_Source\PSoC5/VERT.c ****     *
+ 680:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 681:Generated_Source\PSoC5/VERT.c ****     *  None
+ 682:Generated_Source\PSoC5/VERT.c ****     *
+ 683:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 684:Generated_Source\PSoC5/VERT.c ****     void VERT_SetInterruptMode(uint8 interruptMode) 
+ 685:Generated_Source\PSoC5/VERT.c ****     {
+ 686:Generated_Source\PSoC5/VERT.c ****         CY_SET_REG8(VERT_STATUS_MASK_PTR, interruptMode);
+ 687:Generated_Source\PSoC5/VERT.c ****     }
+ 688:Generated_Source\PSoC5/VERT.c **** 
+ 689:Generated_Source\PSoC5/VERT.c **** 
+ 690:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 691:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadStatusRegister
+ 692:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 693:Generated_Source\PSoC5/VERT.c ****     *
+ 694:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 695:Generated_Source\PSoC5/VERT.c ****     *  This function returns the current state of the status register.
+ 696:Generated_Source\PSoC5/VERT.c ****     *
+ 697:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 698:Generated_Source\PSoC5/VERT.c ****     *  None
+ 699:Generated_Source\PSoC5/VERT.c ****     *
+ 700:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 701:Generated_Source\PSoC5/VERT.c ****     *  uint8 : Current status register value. The status register bits are:
+ 702:Generated_Source\PSoC5/VERT.c ****     *  [7:6] : Unused(0)
+ 703:Generated_Source\PSoC5/VERT.c ****     *  [5]   : Kill event output
+ 704:Generated_Source\PSoC5/VERT.c ****     *  [4]   : FIFO not empty
+ 705:Generated_Source\PSoC5/VERT.c ****     *  [3]   : FIFO full
+ 706:Generated_Source\PSoC5/VERT.c ****     *  [2]   : Terminal count
+ 707:Generated_Source\PSoC5/VERT.c ****     *  [1]   : Compare output 2
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 22
+
+
+ 708:Generated_Source\PSoC5/VERT.c ****     *  [0]   : Compare output 1
+ 709:Generated_Source\PSoC5/VERT.c ****     *
+ 710:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 711:Generated_Source\PSoC5/VERT.c ****     uint8 VERT_ReadStatusRegister(void) 
+ 712:Generated_Source\PSoC5/VERT.c ****     {
+ 713:Generated_Source\PSoC5/VERT.c ****         return (CY_GET_REG8(VERT_STATUS_PTR));
+ 714:Generated_Source\PSoC5/VERT.c ****     }
+ 715:Generated_Source\PSoC5/VERT.c **** 
+ 716:Generated_Source\PSoC5/VERT.c **** #endif /* (VERT_UseStatus || VERT_UsingFixedFunction) */
+ 717:Generated_Source\PSoC5/VERT.c **** 
+ 718:Generated_Source\PSoC5/VERT.c **** 
+ 719:Generated_Source\PSoC5/VERT.c **** #if (VERT_UseControl)
+ 720:Generated_Source\PSoC5/VERT.c **** 
+ 721:Generated_Source\PSoC5/VERT.c **** 
+ 722:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 723:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadControlRegister
+ 724:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 725:Generated_Source\PSoC5/VERT.c ****     *
+ 726:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 727:Generated_Source\PSoC5/VERT.c ****     *  Returns the current state of the control register. This API is available
+ 728:Generated_Source\PSoC5/VERT.c ****     *  only if the control register is not removed.
+ 729:Generated_Source\PSoC5/VERT.c ****     *
+ 730:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 731:Generated_Source\PSoC5/VERT.c ****     *  None
+ 732:Generated_Source\PSoC5/VERT.c ****     *
+ 733:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 734:Generated_Source\PSoC5/VERT.c ****     *  uint8 : Current control register value
+ 735:Generated_Source\PSoC5/VERT.c ****     *
+ 736:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 737:Generated_Source\PSoC5/VERT.c ****     uint8 VERT_ReadControlRegister(void) 
+ 738:Generated_Source\PSoC5/VERT.c ****     {
+ 443              		.loc 1 738 0
+ 444              		.cfi_startproc
+ 445              		@ args = 0, pretend = 0, frame = 0
+ 446              		@ frame_needed = 0, uses_anonymous_args = 0
+ 447              		@ link register save eliminated.
+ 739:Generated_Source\PSoC5/VERT.c ****         uint8 result;
+ 740:Generated_Source\PSoC5/VERT.c **** 
+ 741:Generated_Source\PSoC5/VERT.c ****         result = CY_GET_REG8(VERT_CONTROL_PTR);
+ 448              		.loc 1 741 0
+ 449 0000 014B     		ldr	r3, .L31
+ 450 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 451              	.LVL15:
+ 742:Generated_Source\PSoC5/VERT.c ****         return (result);
+ 743:Generated_Source\PSoC5/VERT.c ****     }
+ 452              		.loc 1 743 0
+ 453 0004 7047     		bx	lr
+ 454              	.L32:
+ 455 0006 00BF     		.align	2
+ 456              	.L31:
+ 457 0008 7D640040 		.word	1073767549
+ 458              		.cfi_endproc
+ 459              	.LFE8:
+ 460              		.size	VERT_ReadControlRegister, .-VERT_ReadControlRegister
+ 461              		.section	.text.VERT_WriteControlRegister,"ax",%progbits
+ 462              		.align	2
+ 463              		.global	VERT_WriteControlRegister
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 23
+
+
+ 464              		.thumb
+ 465              		.thumb_func
+ 466              		.type	VERT_WriteControlRegister, %function
+ 467              	VERT_WriteControlRegister:
+ 468              	.LFB9:
+ 744:Generated_Source\PSoC5/VERT.c **** 
+ 745:Generated_Source\PSoC5/VERT.c **** 
+ 746:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 747:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_WriteControlRegister
+ 748:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 749:Generated_Source\PSoC5/VERT.c ****     *
+ 750:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 751:Generated_Source\PSoC5/VERT.c ****     *  Sets the bit field of the control register. This API is available only if
+ 752:Generated_Source\PSoC5/VERT.c ****     *  the control register is not removed.
+ 753:Generated_Source\PSoC5/VERT.c ****     *
+ 754:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 755:Generated_Source\PSoC5/VERT.c ****     *  uint8 control: Control register bit field, The status register bits are:
+ 756:Generated_Source\PSoC5/VERT.c ****     *  [7]   : PWM Enable
+ 757:Generated_Source\PSoC5/VERT.c ****     *  [6]   : Reset
+ 758:Generated_Source\PSoC5/VERT.c ****     *  [5:3] : Compare Mode2
+ 759:Generated_Source\PSoC5/VERT.c ****     *  [2:0] : Compare Mode2
+ 760:Generated_Source\PSoC5/VERT.c ****     *
+ 761:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 762:Generated_Source\PSoC5/VERT.c ****     *  None
+ 763:Generated_Source\PSoC5/VERT.c ****     *
+ 764:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 765:Generated_Source\PSoC5/VERT.c ****     void VERT_WriteControlRegister(uint8 control) 
+ 766:Generated_Source\PSoC5/VERT.c ****     {
+ 469              		.loc 1 766 0
+ 470              		.cfi_startproc
+ 471              		@ args = 0, pretend = 0, frame = 0
+ 472              		@ frame_needed = 0, uses_anonymous_args = 0
+ 473              		@ link register save eliminated.
+ 474              	.LVL16:
+ 767:Generated_Source\PSoC5/VERT.c ****         CY_SET_REG8(VERT_CONTROL_PTR, control);
+ 475              		.loc 1 767 0
+ 476 0000 014B     		ldr	r3, .L34
+ 477 0002 1870     		strb	r0, [r3]
+ 478 0004 7047     		bx	lr
+ 479              	.L35:
+ 480 0006 00BF     		.align	2
+ 481              	.L34:
+ 482 0008 7D640040 		.word	1073767549
+ 483              		.cfi_endproc
+ 484              	.LFE9:
+ 485              		.size	VERT_WriteControlRegister, .-VERT_WriteControlRegister
+ 486              		.section	.text.VERT_ReadCapture,"ax",%progbits
+ 487              		.align	2
+ 488              		.global	VERT_ReadCapture
+ 489              		.thumb
+ 490              		.thumb_func
+ 491              		.type	VERT_ReadCapture, %function
+ 492              	VERT_ReadCapture:
+ 493              	.LFB10:
+ 768:Generated_Source\PSoC5/VERT.c ****     }
+ 769:Generated_Source\PSoC5/VERT.c **** 
+ 770:Generated_Source\PSoC5/VERT.c **** #endif /* (VERT_UseControl) */
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 24
+
+
+ 771:Generated_Source\PSoC5/VERT.c **** 
+ 772:Generated_Source\PSoC5/VERT.c **** 
+ 773:Generated_Source\PSoC5/VERT.c **** #if (!VERT_UsingFixedFunction)
+ 774:Generated_Source\PSoC5/VERT.c **** 
+ 775:Generated_Source\PSoC5/VERT.c **** 
+ 776:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 777:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadCapture
+ 778:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 779:Generated_Source\PSoC5/VERT.c ****     *
+ 780:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 781:Generated_Source\PSoC5/VERT.c ****     *  Reads the capture value from the capture FIFO.
+ 782:Generated_Source\PSoC5/VERT.c ****     *
+ 783:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 784:Generated_Source\PSoC5/VERT.c ****     *  None
+ 785:Generated_Source\PSoC5/VERT.c ****     *
+ 786:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 787:Generated_Source\PSoC5/VERT.c ****     *  uint8/uint16: The current capture value
+ 788:Generated_Source\PSoC5/VERT.c ****     *
+ 789:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 790:Generated_Source\PSoC5/VERT.c ****     uint16 VERT_ReadCapture(void) 
+ 791:Generated_Source\PSoC5/VERT.c ****     {
+ 494              		.loc 1 791 0
+ 495              		.cfi_startproc
+ 496              		@ args = 0, pretend = 0, frame = 0
+ 497              		@ frame_needed = 0, uses_anonymous_args = 0
+ 498              		@ link register save eliminated.
+ 792:Generated_Source\PSoC5/VERT.c ****         return (CY_GET_REG16(VERT_CAPTURE_LSB_PTR));
+ 499              		.loc 1 792 0
+ 500 0000 014B     		ldr	r3, .L37
+ 501 0002 1888     		ldrh	r0, [r3]
+ 793:Generated_Source\PSoC5/VERT.c ****     }
+ 502              		.loc 1 793 0
+ 503 0004 80B2     		uxth	r0, r0
+ 504 0006 7047     		bx	lr
+ 505              	.L38:
+ 506              		.align	2
+ 507              	.L37:
+ 508 0008 B8680040 		.word	1073768632
+ 509              		.cfi_endproc
+ 510              	.LFE10:
+ 511              		.size	VERT_ReadCapture, .-VERT_ReadCapture
+ 512              		.section	.text.VERT_ReadCompare,"ax",%progbits
+ 513              		.align	2
+ 514              		.global	VERT_ReadCompare
+ 515              		.thumb
+ 516              		.thumb_func
+ 517              		.type	VERT_ReadCompare, %function
+ 518              	VERT_ReadCompare:
+ 519              	.LFB11:
+ 794:Generated_Source\PSoC5/VERT.c **** 
+ 795:Generated_Source\PSoC5/VERT.c **** #endif /* (!VERT_UsingFixedFunction) */
+ 796:Generated_Source\PSoC5/VERT.c **** 
+ 797:Generated_Source\PSoC5/VERT.c **** 
+ 798:Generated_Source\PSoC5/VERT.c **** #if (VERT_UseOneCompareMode)
+ 799:Generated_Source\PSoC5/VERT.c **** 
+ 800:Generated_Source\PSoC5/VERT.c **** 
+ 801:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 25
+
+
+ 802:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadCompare
+ 803:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 804:Generated_Source\PSoC5/VERT.c ****     *
+ 805:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 806:Generated_Source\PSoC5/VERT.c ****     *  Reads the compare value for the compare output when the PWM Mode parameter is
+ 807:Generated_Source\PSoC5/VERT.c ****     *  set to Dither mode, Center Aligned mode, or One Output mode.
+ 808:Generated_Source\PSoC5/VERT.c ****     *
+ 809:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 810:Generated_Source\PSoC5/VERT.c ****     *  None
+ 811:Generated_Source\PSoC5/VERT.c ****     *
+ 812:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 813:Generated_Source\PSoC5/VERT.c ****     *  uint8/uint16: Current compare value
+ 814:Generated_Source\PSoC5/VERT.c ****     *
+ 815:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 816:Generated_Source\PSoC5/VERT.c ****     uint16 VERT_ReadCompare(void) 
+ 817:Generated_Source\PSoC5/VERT.c ****     {
+ 520              		.loc 1 817 0
+ 521              		.cfi_startproc
+ 522              		@ args = 0, pretend = 0, frame = 0
+ 523              		@ frame_needed = 0, uses_anonymous_args = 0
+ 524              		@ link register save eliminated.
+ 818:Generated_Source\PSoC5/VERT.c ****         #if(VERT_UsingFixedFunction)
+ 819:Generated_Source\PSoC5/VERT.c ****             return ((uint16)CY_GET_REG16(VERT_COMPARE1_LSB_PTR));
+ 820:Generated_Source\PSoC5/VERT.c ****         #else
+ 821:Generated_Source\PSoC5/VERT.c ****             return (CY_GET_REG16(VERT_COMPARE1_LSB_PTR));
+ 525              		.loc 1 821 0
+ 526 0000 014B     		ldr	r3, .L40
+ 527 0002 1888     		ldrh	r0, [r3]
+ 822:Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UsingFixedFunction) */
+ 823:Generated_Source\PSoC5/VERT.c ****     }
+ 528              		.loc 1 823 0
+ 529 0004 80B2     		uxth	r0, r0
+ 530 0006 7047     		bx	lr
+ 531              	.L41:
+ 532              		.align	2
+ 533              	.L40:
+ 534 0008 58680040 		.word	1073768536
+ 535              		.cfi_endproc
+ 536              	.LFE11:
+ 537              		.size	VERT_ReadCompare, .-VERT_ReadCompare
+ 538              		.section	.text.VERT_ReadPeriod,"ax",%progbits
+ 539              		.align	2
+ 540              		.global	VERT_ReadPeriod
+ 541              		.thumb
+ 542              		.thumb_func
+ 543              		.type	VERT_ReadPeriod, %function
+ 544              	VERT_ReadPeriod:
+ 545              	.LFB12:
+ 824:Generated_Source\PSoC5/VERT.c **** 
+ 825:Generated_Source\PSoC5/VERT.c **** #else
+ 826:Generated_Source\PSoC5/VERT.c **** 
+ 827:Generated_Source\PSoC5/VERT.c **** 
+ 828:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 829:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadCompare1
+ 830:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 831:Generated_Source\PSoC5/VERT.c ****     *
+ 832:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 26
+
+
+ 833:Generated_Source\PSoC5/VERT.c ****     *  Reads the compare value for the compare1 output.
+ 834:Generated_Source\PSoC5/VERT.c ****     *
+ 835:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 836:Generated_Source\PSoC5/VERT.c ****     *  None
+ 837:Generated_Source\PSoC5/VERT.c ****     *
+ 838:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 839:Generated_Source\PSoC5/VERT.c ****     *  uint8/uint16: Current compare value.
+ 840:Generated_Source\PSoC5/VERT.c ****     *
+ 841:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 842:Generated_Source\PSoC5/VERT.c ****     uint16 VERT_ReadCompare1(void) 
+ 843:Generated_Source\PSoC5/VERT.c ****     {
+ 844:Generated_Source\PSoC5/VERT.c ****         return (CY_GET_REG16(VERT_COMPARE1_LSB_PTR));
+ 845:Generated_Source\PSoC5/VERT.c ****     }
+ 846:Generated_Source\PSoC5/VERT.c **** 
+ 847:Generated_Source\PSoC5/VERT.c **** 
+ 848:Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 849:Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadCompare2
+ 850:Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 851:Generated_Source\PSoC5/VERT.c ****     *
+ 852:Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 853:Generated_Source\PSoC5/VERT.c ****     *  Reads the compare value for the compare2 output.
+ 854:Generated_Source\PSoC5/VERT.c ****     *
+ 855:Generated_Source\PSoC5/VERT.c ****     * Parameters:
+ 856:Generated_Source\PSoC5/VERT.c ****     *  None
+ 857:Generated_Source\PSoC5/VERT.c ****     *
+ 858:Generated_Source\PSoC5/VERT.c ****     * Return:
+ 859:Generated_Source\PSoC5/VERT.c ****     *  uint8/uint16: Current compare value.
+ 860:Generated_Source\PSoC5/VERT.c ****     *
+ 861:Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 862:Generated_Source\PSoC5/VERT.c ****     uint16 VERT_ReadCompare2(void) 
+ 863:Generated_Source\PSoC5/VERT.c ****     {
+ 864:Generated_Source\PSoC5/VERT.c ****         return (CY_GET_REG16(VERT_COMPARE2_LSB_PTR));
+ 865:Generated_Source\PSoC5/VERT.c ****     }
+ 866:Generated_Source\PSoC5/VERT.c **** 
+ 867:Generated_Source\PSoC5/VERT.c **** #endif /* (VERT_UseOneCompareMode) */
+ 868:Generated_Source\PSoC5/VERT.c **** 
+ 869:Generated_Source\PSoC5/VERT.c **** 
+ 870:Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+ 871:Generated_Source\PSoC5/VERT.c **** * Function Name: VERT_ReadPeriod
+ 872:Generated_Source\PSoC5/VERT.c **** ********************************************************************************
+ 873:Generated_Source\PSoC5/VERT.c **** *
+ 874:Generated_Source\PSoC5/VERT.c **** * Summary:
+ 875:Generated_Source\PSoC5/VERT.c **** *  Reads the period value used by the PWM hardware.
+ 876:Generated_Source\PSoC5/VERT.c **** *
+ 877:Generated_Source\PSoC5/VERT.c **** * Parameters:
+ 878:Generated_Source\PSoC5/VERT.c **** *  None
+ 879:Generated_Source\PSoC5/VERT.c **** *
+ 880:Generated_Source\PSoC5/VERT.c **** * Return:
+ 881:Generated_Source\PSoC5/VERT.c **** *  uint8/16: Period value
+ 882:Generated_Source\PSoC5/VERT.c **** *
+ 883:Generated_Source\PSoC5/VERT.c **** *******************************************************************************/
+ 884:Generated_Source\PSoC5/VERT.c **** uint16 VERT_ReadPeriod(void) 
+ 885:Generated_Source\PSoC5/VERT.c **** {
+ 546              		.loc 1 885 0
+ 547              		.cfi_startproc
+ 548              		@ args = 0, pretend = 0, frame = 0
+ 549              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 27
+
+
+ 550              		@ link register save eliminated.
+ 886:Generated_Source\PSoC5/VERT.c ****     #if(VERT_UsingFixedFunction)
+ 887:Generated_Source\PSoC5/VERT.c ****         return ((uint16)CY_GET_REG16(VERT_PERIOD_LSB_PTR));
+ 888:Generated_Source\PSoC5/VERT.c ****     #else
+ 889:Generated_Source\PSoC5/VERT.c ****         return (CY_GET_REG16(VERT_PERIOD_LSB_PTR));
+ 551              		.loc 1 889 0
+ 552 0000 014B     		ldr	r3, .L43
+ 553 0002 1888     		ldrh	r0, [r3]
+ 890:Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 891:Generated_Source\PSoC5/VERT.c **** }
+ 554              		.loc 1 891 0
+ 555 0004 80B2     		uxth	r0, r0
+ 556 0006 7047     		bx	lr
+ 557              	.L44:
+ 558              		.align	2
+ 559              	.L43:
+ 560 0008 98680040 		.word	1073768600
+ 561              		.cfi_endproc
+ 562              	.LFE12:
+ 563              		.size	VERT_ReadPeriod, .-VERT_ReadPeriod
+ 564              		.global	VERT_initVar
+ 565              		.bss
+ 566              		.set	.LANCHOR0,. + 0
+ 567              		.type	VERT_initVar, %object
+ 568              		.size	VERT_initVar, 1
+ 569              	VERT_initVar:
+ 570 0000 00       		.space	1
+ 571              		.text
+ 572              	.Letext0:
+ 573              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 574              		.section	.debug_info,"",%progbits
+ 575              	.Ldebug_info0:
+ 576 0000 66030000 		.4byte	0x366
+ 577 0004 0400     		.2byte	0x4
+ 578 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 579 000a 04       		.byte	0x4
+ 580 000b 01       		.uleb128 0x1
+ 581 000c 10000000 		.4byte	.LASF31
+ 582 0010 0C       		.byte	0xc
+ 583 0011 1C020000 		.4byte	.LASF32
+ 584 0015 83010000 		.4byte	.LASF33
+ 585 0019 D8000000 		.4byte	.Ldebug_ranges0+0xd8
+ 586 001d 00000000 		.4byte	0
+ 587 0021 00000000 		.4byte	.Ldebug_line0
+ 588 0025 02       		.uleb128 0x2
+ 589 0026 01       		.byte	0x1
+ 590 0027 06       		.byte	0x6
+ 591 0028 D3020000 		.4byte	.LASF0
+ 592 002c 02       		.uleb128 0x2
+ 593 002d 01       		.byte	0x1
+ 594 002e 08       		.byte	0x8
+ 595 002f E9000000 		.4byte	.LASF1
+ 596 0033 02       		.uleb128 0x2
+ 597 0034 02       		.byte	0x2
+ 598 0035 05       		.byte	0x5
+ 599 0036 6E020000 		.4byte	.LASF2
+ 600 003a 02       		.uleb128 0x2
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 28
+
+
+ 601 003b 02       		.byte	0x2
+ 602 003c 07       		.byte	0x7
+ 603 003d B7000000 		.4byte	.LASF3
+ 604 0041 02       		.uleb128 0x2
+ 605 0042 04       		.byte	0x4
+ 606 0043 05       		.byte	0x5
+ 607 0044 B9020000 		.4byte	.LASF4
+ 608 0048 02       		.uleb128 0x2
+ 609 0049 04       		.byte	0x4
+ 610 004a 07       		.byte	0x7
+ 611 004b 06010000 		.4byte	.LASF5
+ 612 004f 02       		.uleb128 0x2
+ 613 0050 08       		.byte	0x8
+ 614 0051 05       		.byte	0x5
+ 615 0052 43020000 		.4byte	.LASF6
+ 616 0056 02       		.uleb128 0x2
+ 617 0057 08       		.byte	0x8
+ 618 0058 07       		.byte	0x7
+ 619 0059 ED010000 		.4byte	.LASF7
+ 620 005d 03       		.uleb128 0x3
+ 621 005e 04       		.byte	0x4
+ 622 005f 05       		.byte	0x5
+ 623 0060 696E7400 		.ascii	"int\000"
+ 624 0064 02       		.uleb128 0x2
+ 625 0065 04       		.byte	0x4
+ 626 0066 07       		.byte	0x7
+ 627 0067 76010000 		.4byte	.LASF8
+ 628 006b 04       		.uleb128 0x4
+ 629 006c 18010000 		.4byte	.LASF9
+ 630 0070 02       		.byte	0x2
+ 631 0071 E401     		.2byte	0x1e4
+ 632 0073 2C000000 		.4byte	0x2c
+ 633 0077 04       		.uleb128 0x4
+ 634 0078 63010000 		.4byte	.LASF10
+ 635 007c 02       		.byte	0x2
+ 636 007d E501     		.2byte	0x1e5
+ 637 007f 3A000000 		.4byte	0x3a
+ 638 0083 02       		.uleb128 0x2
+ 639 0084 04       		.byte	0x4
+ 640 0085 04       		.byte	0x4
+ 641 0086 DB000000 		.4byte	.LASF11
+ 642 008a 02       		.uleb128 0x2
+ 643 008b 08       		.byte	0x8
+ 644 008c 04       		.byte	0x4
+ 645 008d 33010000 		.4byte	.LASF12
+ 646 0091 02       		.uleb128 0x2
+ 647 0092 01       		.byte	0x1
+ 648 0093 08       		.byte	0x8
+ 649 0094 C2020000 		.4byte	.LASF13
+ 650 0098 04       		.uleb128 0x4
+ 651 0099 F7000000 		.4byte	.LASF14
+ 652 009d 02       		.byte	0x2
+ 653 009e 8E02     		.2byte	0x28e
+ 654 00a0 A4000000 		.4byte	0xa4
+ 655 00a4 05       		.uleb128 0x5
+ 656 00a5 6B000000 		.4byte	0x6b
+ 657 00a9 04       		.uleb128 0x4
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 29
+
+
+ 658 00aa 00000000 		.4byte	.LASF15
+ 659 00ae 02       		.byte	0x2
+ 660 00af 8F02     		.2byte	0x28f
+ 661 00b1 B5000000 		.4byte	0xb5
+ 662 00b5 05       		.uleb128 0x5
+ 663 00b6 77000000 		.4byte	0x77
+ 664 00ba 02       		.uleb128 0x2
+ 665 00bb 08       		.byte	0x8
+ 666 00bc 04       		.byte	0x4
+ 667 00bd C7020000 		.4byte	.LASF16
+ 668 00c1 02       		.uleb128 0x2
+ 669 00c2 04       		.byte	0x4
+ 670 00c3 07       		.byte	0x7
+ 671 00c4 3A020000 		.4byte	.LASF17
+ 672 00c8 06       		.uleb128 0x6
+ 673 00c9 51020000 		.4byte	.LASF18
+ 674 00cd 01       		.byte	0x1
+ 675 00ce 0402     		.2byte	0x204
+ 676 00d0 01       		.byte	0x1
+ 677 00d1 E2000000 		.4byte	0xe2
+ 678 00d5 07       		.uleb128 0x7
+ 679 00d6 DF020000 		.4byte	.LASF20
+ 680 00da 01       		.byte	0x1
+ 681 00db 0402     		.2byte	0x204
+ 682 00dd 77000000 		.4byte	0x77
+ 683 00e1 00       		.byte	0
+ 684 00e2 06       		.uleb128 0x6
+ 685 00e3 0B020000 		.4byte	.LASF19
+ 686 00e7 01       		.byte	0x1
+ 687 00e8 E201     		.2byte	0x1e2
+ 688 00ea 01       		.byte	0x1
+ 689 00eb FC000000 		.4byte	0xfc
+ 690 00ef 07       		.uleb128 0x7
+ 691 00f0 B0000000 		.4byte	.LASF21
+ 692 00f4 01       		.byte	0x1
+ 693 00f5 E201     		.2byte	0x1e2
+ 694 00f7 77000000 		.4byte	0x77
+ 695 00fb 00       		.byte	0
+ 696 00fc 06       		.uleb128 0x6
+ 697 00fd 9E000000 		.4byte	.LASF22
+ 698 0101 01       		.byte	0x1
+ 699 0102 9301     		.2byte	0x193
+ 700 0104 01       		.byte	0x1
+ 701 0105 16010000 		.4byte	0x116
+ 702 0109 07       		.uleb128 0x7
+ 703 010a E1000000 		.4byte	.LASF23
+ 704 010e 01       		.byte	0x1
+ 705 010f 9301     		.2byte	0x193
+ 706 0111 77000000 		.4byte	0x77
+ 707 0115 00       		.byte	0
+ 708 0116 08       		.uleb128 0x8
+ 709 0117 06000000 		.4byte	.LASF24
+ 710 011b 01       		.byte	0x1
+ 711 011c 54       		.byte	0x54
+ 712 011d 01       		.byte	0x1
+ 713 011e 2E010000 		.4byte	0x12e
+ 714 0122 09       		.uleb128 0x9
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 30
+
+
+ 715 0123 A3020000 		.4byte	.LASF34
+ 716 0127 01       		.byte	0x1
+ 717 0128 57       		.byte	0x57
+ 718 0129 6B000000 		.4byte	0x6b
+ 719 012d 00       		.byte	0
+ 720 012e 0A       		.uleb128 0xa
+ 721 012f 6A010000 		.4byte	.LASF35
+ 722 0133 01       		.byte	0x1
+ 723 0134 C7       		.byte	0xc7
+ 724 0135 01       		.byte	0x1
+ 725 0136 0B       		.uleb128 0xb
+ 726 0137 63020000 		.4byte	.LASF25
+ 727 013b 01       		.byte	0x1
+ 728 013c 37       		.byte	0x37
+ 729 013d 00000000 		.4byte	.LFB0
+ 730 0141 74000000 		.4byte	.LFE0-.LFB0
+ 731 0145 01       		.uleb128 0x1
+ 732 0146 9C       		.byte	0x9c
+ 733 0147 D1010000 		.4byte	0x1d1
+ 734 014b 0C       		.uleb128 0xc
+ 735 014c 16010000 		.4byte	0x116
+ 736 0150 06000000 		.4byte	.LBB18
+ 737 0154 00000000 		.4byte	.Ldebug_ranges0+0
+ 738 0158 01       		.byte	0x1
+ 739 0159 3C       		.byte	0x3c
+ 740 015a C1010000 		.4byte	0x1c1
+ 741 015e 0D       		.uleb128 0xd
+ 742 015f 00000000 		.4byte	.Ldebug_ranges0+0
+ 743 0163 0E       		.uleb128 0xe
+ 744 0164 22010000 		.4byte	0x122
+ 745 0168 00000000 		.4byte	.LLST0
+ 746 016c 0C       		.uleb128 0xc
+ 747 016d FC000000 		.4byte	0xfc
+ 748 0171 06000000 		.4byte	.LBB20
+ 749 0175 20000000 		.4byte	.Ldebug_ranges0+0x20
+ 750 0179 01       		.byte	0x1
+ 751 017a 85       		.byte	0x85
+ 752 017b 89010000 		.4byte	0x189
+ 753 017f 0F       		.uleb128 0xf
+ 754 0180 09010000 		.4byte	0x109
+ 755 0184 18000000 		.4byte	.LLST1
+ 756 0188 00       		.byte	0
+ 757 0189 0C       		.uleb128 0xc
+ 758 018a E2000000 		.4byte	0xe2
+ 759 018e 2A000000 		.4byte	.LBB25
+ 760 0192 40000000 		.4byte	.Ldebug_ranges0+0x40
+ 761 0196 01       		.byte	0x1
+ 762 0197 88       		.byte	0x88
+ 763 0198 A6010000 		.4byte	0x1a6
+ 764 019c 0F       		.uleb128 0xf
+ 765 019d EF000000 		.4byte	0xef
+ 766 01a1 2E000000 		.4byte	.LLST2
+ 767 01a5 00       		.byte	0
+ 768 01a6 10       		.uleb128 0x10
+ 769 01a7 C8000000 		.4byte	0xc8
+ 770 01ab 32000000 		.4byte	.LBB28
+ 771 01af 58000000 		.4byte	.Ldebug_ranges0+0x58
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 31
+
+
+ 772 01b3 01       		.byte	0x1
+ 773 01b4 8B       		.byte	0x8b
+ 774 01b5 0F       		.uleb128 0xf
+ 775 01b6 D5000000 		.4byte	0xd5
+ 776 01ba 44000000 		.4byte	.LLST3
+ 777 01be 00       		.byte	0
+ 778 01bf 00       		.byte	0
+ 779 01c0 00       		.byte	0
+ 780 01c1 11       		.uleb128 0x11
+ 781 01c2 2E010000 		.4byte	0x12e
+ 782 01c6 40000000 		.4byte	.LBB38
+ 783 01ca 70000000 		.4byte	.Ldebug_ranges0+0x70
+ 784 01ce 01       		.byte	0x1
+ 785 01cf 3F       		.byte	0x3f
+ 786 01d0 00       		.byte	0
+ 787 01d1 12       		.uleb128 0x12
+ 788 01d2 16010000 		.4byte	0x116
+ 789 01d6 00000000 		.4byte	.LFB1
+ 790 01da 50000000 		.4byte	.LFE1-.LFB1
+ 791 01de 01       		.uleb128 0x1
+ 792 01df 9C       		.byte	0x9c
+ 793 01e0 41020000 		.4byte	0x241
+ 794 01e4 0E       		.uleb128 0xe
+ 795 01e5 22010000 		.4byte	0x122
+ 796 01e9 59000000 		.4byte	.LLST4
+ 797 01ed 0C       		.uleb128 0xc
+ 798 01ee FC000000 		.4byte	0xfc
+ 799 01f2 00000000 		.4byte	.LBB42
+ 800 01f6 88000000 		.4byte	.Ldebug_ranges0+0x88
+ 801 01fa 01       		.byte	0x1
+ 802 01fb 85       		.byte	0x85
+ 803 01fc 0A020000 		.4byte	0x20a
+ 804 0200 0F       		.uleb128 0xf
+ 805 0201 09010000 		.4byte	0x109
+ 806 0205 71000000 		.4byte	.LLST5
+ 807 0209 00       		.byte	0
+ 808 020a 0C       		.uleb128 0xc
+ 809 020b E2000000 		.4byte	0xe2
+ 810 020f 24000000 		.4byte	.LBB47
+ 811 0213 A8000000 		.4byte	.Ldebug_ranges0+0xa8
+ 812 0217 01       		.byte	0x1
+ 813 0218 88       		.byte	0x88
+ 814 0219 27020000 		.4byte	0x227
+ 815 021d 0F       		.uleb128 0xf
+ 816 021e EF000000 		.4byte	0xef
+ 817 0222 87000000 		.4byte	.LLST6
+ 818 0226 00       		.byte	0
+ 819 0227 10       		.uleb128 0x10
+ 820 0228 C8000000 		.4byte	0xc8
+ 821 022c 2C000000 		.4byte	.LBB50
+ 822 0230 C0000000 		.4byte	.Ldebug_ranges0+0xc0
+ 823 0234 01       		.byte	0x1
+ 824 0235 8B       		.byte	0x8b
+ 825 0236 0F       		.uleb128 0xf
+ 826 0237 D5000000 		.4byte	0xd5
+ 827 023b 9D000000 		.4byte	.LLST7
+ 828 023f 00       		.byte	0
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 32
+
+
+ 829 0240 00       		.byte	0
+ 830 0241 13       		.uleb128 0x13
+ 831 0242 2E010000 		.4byte	0x12e
+ 832 0246 00000000 		.4byte	.LFB2
+ 833 024a 10000000 		.4byte	.LFE2-.LFB2
+ 834 024e 01       		.uleb128 0x1
+ 835 024f 9C       		.byte	0x9c
+ 836 0250 14       		.uleb128 0x14
+ 837 0251 FC000000 		.4byte	.LASF36
+ 838 0255 01       		.byte	0x1
+ 839 0256 E9       		.byte	0xe9
+ 840 0257 00000000 		.4byte	.LFB3
+ 841 025b 10000000 		.4byte	.LFE3-.LFB3
+ 842 025f 01       		.uleb128 0x1
+ 843 0260 9C       		.byte	0x9c
+ 844 0261 12       		.uleb128 0x12
+ 845 0262 FC000000 		.4byte	0xfc
+ 846 0266 00000000 		.4byte	.LFB4
+ 847 026a 0C000000 		.4byte	.LFE4-.LFB4
+ 848 026e 01       		.uleb128 0x1
+ 849 026f 9C       		.byte	0x9c
+ 850 0270 7C020000 		.4byte	0x27c
+ 851 0274 15       		.uleb128 0x15
+ 852 0275 09010000 		.4byte	0x109
+ 853 0279 01       		.uleb128 0x1
+ 854 027a 50       		.byte	0x50
+ 855 027b 00       		.byte	0
+ 856 027c 16       		.uleb128 0x16
+ 857 027d CA000000 		.4byte	.LASF27
+ 858 0281 01       		.byte	0x1
+ 859 0282 A901     		.2byte	0x1a9
+ 860 0284 77000000 		.4byte	0x77
+ 861 0288 00000000 		.4byte	.LFB5
+ 862 028c 14000000 		.4byte	.LFE5-.LFB5
+ 863 0290 01       		.uleb128 0x1
+ 864 0291 9C       		.byte	0x9c
+ 865 0292 12       		.uleb128 0x12
+ 866 0293 E2000000 		.4byte	0xe2
+ 867 0297 00000000 		.4byte	.LFB6
+ 868 029b 0C000000 		.4byte	.LFE6-.LFB6
+ 869 029f 01       		.uleb128 0x1
+ 870 02a0 9C       		.byte	0x9c
+ 871 02a1 AD020000 		.4byte	0x2ad
+ 872 02a5 15       		.uleb128 0x15
+ 873 02a6 EF000000 		.4byte	0xef
+ 874 02aa 01       		.uleb128 0x1
+ 875 02ab 50       		.byte	0x50
+ 876 02ac 00       		.byte	0
+ 877 02ad 12       		.uleb128 0x12
+ 878 02ae C8000000 		.4byte	0xc8
+ 879 02b2 00000000 		.4byte	.LFB7
+ 880 02b6 0C000000 		.4byte	.LFE7-.LFB7
+ 881 02ba 01       		.uleb128 0x1
+ 882 02bb 9C       		.byte	0x9c
+ 883 02bc C8020000 		.4byte	0x2c8
+ 884 02c0 15       		.uleb128 0x15
+ 885 02c1 D5000000 		.4byte	0xd5
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 33
+
+
+ 886 02c5 01       		.uleb128 0x1
+ 887 02c6 50       		.byte	0x50
+ 888 02c7 00       		.byte	0
+ 889 02c8 17       		.uleb128 0x17
+ 890 02c9 3A010000 		.4byte	.LASF37
+ 891 02cd 01       		.byte	0x1
+ 892 02ce E102     		.2byte	0x2e1
+ 893 02d0 6B000000 		.4byte	0x6b
+ 894 02d4 00000000 		.4byte	.LFB8
+ 895 02d8 0C000000 		.4byte	.LFE8-.LFB8
+ 896 02dc 01       		.uleb128 0x1
+ 897 02dd 9C       		.byte	0x9c
+ 898 02de F1020000 		.4byte	0x2f1
+ 899 02e2 18       		.uleb128 0x18
+ 900 02e3 04020000 		.4byte	.LASF38
+ 901 02e7 01       		.byte	0x1
+ 902 02e8 E302     		.2byte	0x2e3
+ 903 02ea 6B000000 		.4byte	0x6b
+ 904 02ee 01       		.uleb128 0x1
+ 905 02ef 50       		.byte	0x50
+ 906 02f0 00       		.byte	0
+ 907 02f1 19       		.uleb128 0x19
+ 908 02f2 89020000 		.4byte	.LASF26
+ 909 02f6 01       		.byte	0x1
+ 910 02f7 FD02     		.2byte	0x2fd
+ 911 02f9 00000000 		.4byte	.LFB9
+ 912 02fd 0C000000 		.4byte	.LFE9-.LFB9
+ 913 0301 01       		.uleb128 0x1
+ 914 0302 9C       		.byte	0x9c
+ 915 0303 16030000 		.4byte	0x316
+ 916 0307 1A       		.uleb128 0x1a
+ 917 0308 1E010000 		.4byte	.LASF39
+ 918 030c 01       		.byte	0x1
+ 919 030d FD02     		.2byte	0x2fd
+ 920 030f 6B000000 		.4byte	0x6b
+ 921 0313 01       		.uleb128 0x1
+ 922 0314 50       		.byte	0x50
+ 923 0315 00       		.byte	0
+ 924 0316 16       		.uleb128 0x16
+ 925 0317 A8020000 		.4byte	.LASF28
+ 926 031b 01       		.byte	0x1
+ 927 031c 1603     		.2byte	0x316
+ 928 031e 77000000 		.4byte	0x77
+ 929 0322 00000000 		.4byte	.LFB10
+ 930 0326 0C000000 		.4byte	.LFE10-.LFB10
+ 931 032a 01       		.uleb128 0x1
+ 932 032b 9C       		.byte	0x9c
+ 933 032c 16       		.uleb128 0x16
+ 934 032d 78020000 		.4byte	.LASF29
+ 935 0331 01       		.byte	0x1
+ 936 0332 3003     		.2byte	0x330
+ 937 0334 77000000 		.4byte	0x77
+ 938 0338 00000000 		.4byte	.LFB11
+ 939 033c 0C000000 		.4byte	.LFE11-.LFB11
+ 940 0340 01       		.uleb128 0x1
+ 941 0341 9C       		.byte	0x9c
+ 942 0342 16       		.uleb128 0x16
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 34
+
+
+ 943 0343 53010000 		.4byte	.LASF30
+ 944 0347 01       		.byte	0x1
+ 945 0348 7403     		.2byte	0x374
+ 946 034a 77000000 		.4byte	0x77
+ 947 034e 00000000 		.4byte	.LFB12
+ 948 0352 0C000000 		.4byte	.LFE12-.LFB12
+ 949 0356 01       		.uleb128 0x1
+ 950 0357 9C       		.byte	0x9c
+ 951 0358 1B       		.uleb128 0x1b
+ 952 0359 26010000 		.4byte	.LASF40
+ 953 035d 01       		.byte	0x1
+ 954 035e 20       		.byte	0x20
+ 955 035f 6B000000 		.4byte	0x6b
+ 956 0363 05       		.uleb128 0x5
+ 957 0364 03       		.byte	0x3
+ 958 0365 00000000 		.4byte	VERT_initVar
+ 959 0369 00       		.byte	0
+ 960              		.section	.debug_abbrev,"",%progbits
+ 961              	.Ldebug_abbrev0:
+ 962 0000 01       		.uleb128 0x1
+ 963 0001 11       		.uleb128 0x11
+ 964 0002 01       		.byte	0x1
+ 965 0003 25       		.uleb128 0x25
+ 966 0004 0E       		.uleb128 0xe
+ 967 0005 13       		.uleb128 0x13
+ 968 0006 0B       		.uleb128 0xb
+ 969 0007 03       		.uleb128 0x3
+ 970 0008 0E       		.uleb128 0xe
+ 971 0009 1B       		.uleb128 0x1b
+ 972 000a 0E       		.uleb128 0xe
+ 973 000b 55       		.uleb128 0x55
+ 974 000c 17       		.uleb128 0x17
+ 975 000d 11       		.uleb128 0x11
+ 976 000e 01       		.uleb128 0x1
+ 977 000f 10       		.uleb128 0x10
+ 978 0010 17       		.uleb128 0x17
+ 979 0011 00       		.byte	0
+ 980 0012 00       		.byte	0
+ 981 0013 02       		.uleb128 0x2
+ 982 0014 24       		.uleb128 0x24
+ 983 0015 00       		.byte	0
+ 984 0016 0B       		.uleb128 0xb
+ 985 0017 0B       		.uleb128 0xb
+ 986 0018 3E       		.uleb128 0x3e
+ 987 0019 0B       		.uleb128 0xb
+ 988 001a 03       		.uleb128 0x3
+ 989 001b 0E       		.uleb128 0xe
+ 990 001c 00       		.byte	0
+ 991 001d 00       		.byte	0
+ 992 001e 03       		.uleb128 0x3
+ 993 001f 24       		.uleb128 0x24
+ 994 0020 00       		.byte	0
+ 995 0021 0B       		.uleb128 0xb
+ 996 0022 0B       		.uleb128 0xb
+ 997 0023 3E       		.uleb128 0x3e
+ 998 0024 0B       		.uleb128 0xb
+ 999 0025 03       		.uleb128 0x3
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 35
+
+
+ 1000 0026 08       		.uleb128 0x8
+ 1001 0027 00       		.byte	0
+ 1002 0028 00       		.byte	0
+ 1003 0029 04       		.uleb128 0x4
+ 1004 002a 16       		.uleb128 0x16
+ 1005 002b 00       		.byte	0
+ 1006 002c 03       		.uleb128 0x3
+ 1007 002d 0E       		.uleb128 0xe
+ 1008 002e 3A       		.uleb128 0x3a
+ 1009 002f 0B       		.uleb128 0xb
+ 1010 0030 3B       		.uleb128 0x3b
+ 1011 0031 05       		.uleb128 0x5
+ 1012 0032 49       		.uleb128 0x49
+ 1013 0033 13       		.uleb128 0x13
+ 1014 0034 00       		.byte	0
+ 1015 0035 00       		.byte	0
+ 1016 0036 05       		.uleb128 0x5
+ 1017 0037 35       		.uleb128 0x35
+ 1018 0038 00       		.byte	0
+ 1019 0039 49       		.uleb128 0x49
+ 1020 003a 13       		.uleb128 0x13
+ 1021 003b 00       		.byte	0
+ 1022 003c 00       		.byte	0
+ 1023 003d 06       		.uleb128 0x6
+ 1024 003e 2E       		.uleb128 0x2e
+ 1025 003f 01       		.byte	0x1
+ 1026 0040 3F       		.uleb128 0x3f
+ 1027 0041 19       		.uleb128 0x19
+ 1028 0042 03       		.uleb128 0x3
+ 1029 0043 0E       		.uleb128 0xe
+ 1030 0044 3A       		.uleb128 0x3a
+ 1031 0045 0B       		.uleb128 0xb
+ 1032 0046 3B       		.uleb128 0x3b
+ 1033 0047 05       		.uleb128 0x5
+ 1034 0048 27       		.uleb128 0x27
+ 1035 0049 19       		.uleb128 0x19
+ 1036 004a 20       		.uleb128 0x20
+ 1037 004b 0B       		.uleb128 0xb
+ 1038 004c 01       		.uleb128 0x1
+ 1039 004d 13       		.uleb128 0x13
+ 1040 004e 00       		.byte	0
+ 1041 004f 00       		.byte	0
+ 1042 0050 07       		.uleb128 0x7
+ 1043 0051 05       		.uleb128 0x5
+ 1044 0052 00       		.byte	0
+ 1045 0053 03       		.uleb128 0x3
+ 1046 0054 0E       		.uleb128 0xe
+ 1047 0055 3A       		.uleb128 0x3a
+ 1048 0056 0B       		.uleb128 0xb
+ 1049 0057 3B       		.uleb128 0x3b
+ 1050 0058 05       		.uleb128 0x5
+ 1051 0059 49       		.uleb128 0x49
+ 1052 005a 13       		.uleb128 0x13
+ 1053 005b 00       		.byte	0
+ 1054 005c 00       		.byte	0
+ 1055 005d 08       		.uleb128 0x8
+ 1056 005e 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 36
+
+
+ 1057 005f 01       		.byte	0x1
+ 1058 0060 3F       		.uleb128 0x3f
+ 1059 0061 19       		.uleb128 0x19
+ 1060 0062 03       		.uleb128 0x3
+ 1061 0063 0E       		.uleb128 0xe
+ 1062 0064 3A       		.uleb128 0x3a
+ 1063 0065 0B       		.uleb128 0xb
+ 1064 0066 3B       		.uleb128 0x3b
+ 1065 0067 0B       		.uleb128 0xb
+ 1066 0068 27       		.uleb128 0x27
+ 1067 0069 19       		.uleb128 0x19
+ 1068 006a 20       		.uleb128 0x20
+ 1069 006b 0B       		.uleb128 0xb
+ 1070 006c 01       		.uleb128 0x1
+ 1071 006d 13       		.uleb128 0x13
+ 1072 006e 00       		.byte	0
+ 1073 006f 00       		.byte	0
+ 1074 0070 09       		.uleb128 0x9
+ 1075 0071 34       		.uleb128 0x34
+ 1076 0072 00       		.byte	0
+ 1077 0073 03       		.uleb128 0x3
+ 1078 0074 0E       		.uleb128 0xe
+ 1079 0075 3A       		.uleb128 0x3a
+ 1080 0076 0B       		.uleb128 0xb
+ 1081 0077 3B       		.uleb128 0x3b
+ 1082 0078 0B       		.uleb128 0xb
+ 1083 0079 49       		.uleb128 0x49
+ 1084 007a 13       		.uleb128 0x13
+ 1085 007b 00       		.byte	0
+ 1086 007c 00       		.byte	0
+ 1087 007d 0A       		.uleb128 0xa
+ 1088 007e 2E       		.uleb128 0x2e
+ 1089 007f 00       		.byte	0
+ 1090 0080 3F       		.uleb128 0x3f
+ 1091 0081 19       		.uleb128 0x19
+ 1092 0082 03       		.uleb128 0x3
+ 1093 0083 0E       		.uleb128 0xe
+ 1094 0084 3A       		.uleb128 0x3a
+ 1095 0085 0B       		.uleb128 0xb
+ 1096 0086 3B       		.uleb128 0x3b
+ 1097 0087 0B       		.uleb128 0xb
+ 1098 0088 27       		.uleb128 0x27
+ 1099 0089 19       		.uleb128 0x19
+ 1100 008a 20       		.uleb128 0x20
+ 1101 008b 0B       		.uleb128 0xb
+ 1102 008c 00       		.byte	0
+ 1103 008d 00       		.byte	0
+ 1104 008e 0B       		.uleb128 0xb
+ 1105 008f 2E       		.uleb128 0x2e
+ 1106 0090 01       		.byte	0x1
+ 1107 0091 3F       		.uleb128 0x3f
+ 1108 0092 19       		.uleb128 0x19
+ 1109 0093 03       		.uleb128 0x3
+ 1110 0094 0E       		.uleb128 0xe
+ 1111 0095 3A       		.uleb128 0x3a
+ 1112 0096 0B       		.uleb128 0xb
+ 1113 0097 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 37
+
+
+ 1114 0098 0B       		.uleb128 0xb
+ 1115 0099 27       		.uleb128 0x27
+ 1116 009a 19       		.uleb128 0x19
+ 1117 009b 11       		.uleb128 0x11
+ 1118 009c 01       		.uleb128 0x1
+ 1119 009d 12       		.uleb128 0x12
+ 1120 009e 06       		.uleb128 0x6
+ 1121 009f 40       		.uleb128 0x40
+ 1122 00a0 18       		.uleb128 0x18
+ 1123 00a1 9742     		.uleb128 0x2117
+ 1124 00a3 19       		.uleb128 0x19
+ 1125 00a4 01       		.uleb128 0x1
+ 1126 00a5 13       		.uleb128 0x13
+ 1127 00a6 00       		.byte	0
+ 1128 00a7 00       		.byte	0
+ 1129 00a8 0C       		.uleb128 0xc
+ 1130 00a9 1D       		.uleb128 0x1d
+ 1131 00aa 01       		.byte	0x1
+ 1132 00ab 31       		.uleb128 0x31
+ 1133 00ac 13       		.uleb128 0x13
+ 1134 00ad 52       		.uleb128 0x52
+ 1135 00ae 01       		.uleb128 0x1
+ 1136 00af 55       		.uleb128 0x55
+ 1137 00b0 17       		.uleb128 0x17
+ 1138 00b1 58       		.uleb128 0x58
+ 1139 00b2 0B       		.uleb128 0xb
+ 1140 00b3 59       		.uleb128 0x59
+ 1141 00b4 0B       		.uleb128 0xb
+ 1142 00b5 01       		.uleb128 0x1
+ 1143 00b6 13       		.uleb128 0x13
+ 1144 00b7 00       		.byte	0
+ 1145 00b8 00       		.byte	0
+ 1146 00b9 0D       		.uleb128 0xd
+ 1147 00ba 0B       		.uleb128 0xb
+ 1148 00bb 01       		.byte	0x1
+ 1149 00bc 55       		.uleb128 0x55
+ 1150 00bd 17       		.uleb128 0x17
+ 1151 00be 00       		.byte	0
+ 1152 00bf 00       		.byte	0
+ 1153 00c0 0E       		.uleb128 0xe
+ 1154 00c1 34       		.uleb128 0x34
+ 1155 00c2 00       		.byte	0
+ 1156 00c3 31       		.uleb128 0x31
+ 1157 00c4 13       		.uleb128 0x13
+ 1158 00c5 02       		.uleb128 0x2
+ 1159 00c6 17       		.uleb128 0x17
+ 1160 00c7 00       		.byte	0
+ 1161 00c8 00       		.byte	0
+ 1162 00c9 0F       		.uleb128 0xf
+ 1163 00ca 05       		.uleb128 0x5
+ 1164 00cb 00       		.byte	0
+ 1165 00cc 31       		.uleb128 0x31
+ 1166 00cd 13       		.uleb128 0x13
+ 1167 00ce 02       		.uleb128 0x2
+ 1168 00cf 17       		.uleb128 0x17
+ 1169 00d0 00       		.byte	0
+ 1170 00d1 00       		.byte	0
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 38
+
+
+ 1171 00d2 10       		.uleb128 0x10
+ 1172 00d3 1D       		.uleb128 0x1d
+ 1173 00d4 01       		.byte	0x1
+ 1174 00d5 31       		.uleb128 0x31
+ 1175 00d6 13       		.uleb128 0x13
+ 1176 00d7 52       		.uleb128 0x52
+ 1177 00d8 01       		.uleb128 0x1
+ 1178 00d9 55       		.uleb128 0x55
+ 1179 00da 17       		.uleb128 0x17
+ 1180 00db 58       		.uleb128 0x58
+ 1181 00dc 0B       		.uleb128 0xb
+ 1182 00dd 59       		.uleb128 0x59
+ 1183 00de 0B       		.uleb128 0xb
+ 1184 00df 00       		.byte	0
+ 1185 00e0 00       		.byte	0
+ 1186 00e1 11       		.uleb128 0x11
+ 1187 00e2 1D       		.uleb128 0x1d
+ 1188 00e3 00       		.byte	0
+ 1189 00e4 31       		.uleb128 0x31
+ 1190 00e5 13       		.uleb128 0x13
+ 1191 00e6 52       		.uleb128 0x52
+ 1192 00e7 01       		.uleb128 0x1
+ 1193 00e8 55       		.uleb128 0x55
+ 1194 00e9 17       		.uleb128 0x17
+ 1195 00ea 58       		.uleb128 0x58
+ 1196 00eb 0B       		.uleb128 0xb
+ 1197 00ec 59       		.uleb128 0x59
+ 1198 00ed 0B       		.uleb128 0xb
+ 1199 00ee 00       		.byte	0
+ 1200 00ef 00       		.byte	0
+ 1201 00f0 12       		.uleb128 0x12
+ 1202 00f1 2E       		.uleb128 0x2e
+ 1203 00f2 01       		.byte	0x1
+ 1204 00f3 31       		.uleb128 0x31
+ 1205 00f4 13       		.uleb128 0x13
+ 1206 00f5 11       		.uleb128 0x11
+ 1207 00f6 01       		.uleb128 0x1
+ 1208 00f7 12       		.uleb128 0x12
+ 1209 00f8 06       		.uleb128 0x6
+ 1210 00f9 40       		.uleb128 0x40
+ 1211 00fa 18       		.uleb128 0x18
+ 1212 00fb 9742     		.uleb128 0x2117
+ 1213 00fd 19       		.uleb128 0x19
+ 1214 00fe 01       		.uleb128 0x1
+ 1215 00ff 13       		.uleb128 0x13
+ 1216 0100 00       		.byte	0
+ 1217 0101 00       		.byte	0
+ 1218 0102 13       		.uleb128 0x13
+ 1219 0103 2E       		.uleb128 0x2e
+ 1220 0104 00       		.byte	0
+ 1221 0105 31       		.uleb128 0x31
+ 1222 0106 13       		.uleb128 0x13
+ 1223 0107 11       		.uleb128 0x11
+ 1224 0108 01       		.uleb128 0x1
+ 1225 0109 12       		.uleb128 0x12
+ 1226 010a 06       		.uleb128 0x6
+ 1227 010b 40       		.uleb128 0x40
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 39
+
+
+ 1228 010c 18       		.uleb128 0x18
+ 1229 010d 9742     		.uleb128 0x2117
+ 1230 010f 19       		.uleb128 0x19
+ 1231 0110 00       		.byte	0
+ 1232 0111 00       		.byte	0
+ 1233 0112 14       		.uleb128 0x14
+ 1234 0113 2E       		.uleb128 0x2e
+ 1235 0114 00       		.byte	0
+ 1236 0115 3F       		.uleb128 0x3f
+ 1237 0116 19       		.uleb128 0x19
+ 1238 0117 03       		.uleb128 0x3
+ 1239 0118 0E       		.uleb128 0xe
+ 1240 0119 3A       		.uleb128 0x3a
+ 1241 011a 0B       		.uleb128 0xb
+ 1242 011b 3B       		.uleb128 0x3b
+ 1243 011c 0B       		.uleb128 0xb
+ 1244 011d 27       		.uleb128 0x27
+ 1245 011e 19       		.uleb128 0x19
+ 1246 011f 11       		.uleb128 0x11
+ 1247 0120 01       		.uleb128 0x1
+ 1248 0121 12       		.uleb128 0x12
+ 1249 0122 06       		.uleb128 0x6
+ 1250 0123 40       		.uleb128 0x40
+ 1251 0124 18       		.uleb128 0x18
+ 1252 0125 9742     		.uleb128 0x2117
+ 1253 0127 19       		.uleb128 0x19
+ 1254 0128 00       		.byte	0
+ 1255 0129 00       		.byte	0
+ 1256 012a 15       		.uleb128 0x15
+ 1257 012b 05       		.uleb128 0x5
+ 1258 012c 00       		.byte	0
+ 1259 012d 31       		.uleb128 0x31
+ 1260 012e 13       		.uleb128 0x13
+ 1261 012f 02       		.uleb128 0x2
+ 1262 0130 18       		.uleb128 0x18
+ 1263 0131 00       		.byte	0
+ 1264 0132 00       		.byte	0
+ 1265 0133 16       		.uleb128 0x16
+ 1266 0134 2E       		.uleb128 0x2e
+ 1267 0135 00       		.byte	0
+ 1268 0136 3F       		.uleb128 0x3f
+ 1269 0137 19       		.uleb128 0x19
+ 1270 0138 03       		.uleb128 0x3
+ 1271 0139 0E       		.uleb128 0xe
+ 1272 013a 3A       		.uleb128 0x3a
+ 1273 013b 0B       		.uleb128 0xb
+ 1274 013c 3B       		.uleb128 0x3b
+ 1275 013d 05       		.uleb128 0x5
+ 1276 013e 27       		.uleb128 0x27
+ 1277 013f 19       		.uleb128 0x19
+ 1278 0140 49       		.uleb128 0x49
+ 1279 0141 13       		.uleb128 0x13
+ 1280 0142 11       		.uleb128 0x11
+ 1281 0143 01       		.uleb128 0x1
+ 1282 0144 12       		.uleb128 0x12
+ 1283 0145 06       		.uleb128 0x6
+ 1284 0146 40       		.uleb128 0x40
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 40
+
+
+ 1285 0147 18       		.uleb128 0x18
+ 1286 0148 9742     		.uleb128 0x2117
+ 1287 014a 19       		.uleb128 0x19
+ 1288 014b 00       		.byte	0
+ 1289 014c 00       		.byte	0
+ 1290 014d 17       		.uleb128 0x17
+ 1291 014e 2E       		.uleb128 0x2e
+ 1292 014f 01       		.byte	0x1
+ 1293 0150 3F       		.uleb128 0x3f
+ 1294 0151 19       		.uleb128 0x19
+ 1295 0152 03       		.uleb128 0x3
+ 1296 0153 0E       		.uleb128 0xe
+ 1297 0154 3A       		.uleb128 0x3a
+ 1298 0155 0B       		.uleb128 0xb
+ 1299 0156 3B       		.uleb128 0x3b
+ 1300 0157 05       		.uleb128 0x5
+ 1301 0158 27       		.uleb128 0x27
+ 1302 0159 19       		.uleb128 0x19
+ 1303 015a 49       		.uleb128 0x49
+ 1304 015b 13       		.uleb128 0x13
+ 1305 015c 11       		.uleb128 0x11
+ 1306 015d 01       		.uleb128 0x1
+ 1307 015e 12       		.uleb128 0x12
+ 1308 015f 06       		.uleb128 0x6
+ 1309 0160 40       		.uleb128 0x40
+ 1310 0161 18       		.uleb128 0x18
+ 1311 0162 9742     		.uleb128 0x2117
+ 1312 0164 19       		.uleb128 0x19
+ 1313 0165 01       		.uleb128 0x1
+ 1314 0166 13       		.uleb128 0x13
+ 1315 0167 00       		.byte	0
+ 1316 0168 00       		.byte	0
+ 1317 0169 18       		.uleb128 0x18
+ 1318 016a 34       		.uleb128 0x34
+ 1319 016b 00       		.byte	0
+ 1320 016c 03       		.uleb128 0x3
+ 1321 016d 0E       		.uleb128 0xe
+ 1322 016e 3A       		.uleb128 0x3a
+ 1323 016f 0B       		.uleb128 0xb
+ 1324 0170 3B       		.uleb128 0x3b
+ 1325 0171 05       		.uleb128 0x5
+ 1326 0172 49       		.uleb128 0x49
+ 1327 0173 13       		.uleb128 0x13
+ 1328 0174 02       		.uleb128 0x2
+ 1329 0175 18       		.uleb128 0x18
+ 1330 0176 00       		.byte	0
+ 1331 0177 00       		.byte	0
+ 1332 0178 19       		.uleb128 0x19
+ 1333 0179 2E       		.uleb128 0x2e
+ 1334 017a 01       		.byte	0x1
+ 1335 017b 3F       		.uleb128 0x3f
+ 1336 017c 19       		.uleb128 0x19
+ 1337 017d 03       		.uleb128 0x3
+ 1338 017e 0E       		.uleb128 0xe
+ 1339 017f 3A       		.uleb128 0x3a
+ 1340 0180 0B       		.uleb128 0xb
+ 1341 0181 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 41
+
+
+ 1342 0182 05       		.uleb128 0x5
+ 1343 0183 27       		.uleb128 0x27
+ 1344 0184 19       		.uleb128 0x19
+ 1345 0185 11       		.uleb128 0x11
+ 1346 0186 01       		.uleb128 0x1
+ 1347 0187 12       		.uleb128 0x12
+ 1348 0188 06       		.uleb128 0x6
+ 1349 0189 40       		.uleb128 0x40
+ 1350 018a 18       		.uleb128 0x18
+ 1351 018b 9742     		.uleb128 0x2117
+ 1352 018d 19       		.uleb128 0x19
+ 1353 018e 01       		.uleb128 0x1
+ 1354 018f 13       		.uleb128 0x13
+ 1355 0190 00       		.byte	0
+ 1356 0191 00       		.byte	0
+ 1357 0192 1A       		.uleb128 0x1a
+ 1358 0193 05       		.uleb128 0x5
+ 1359 0194 00       		.byte	0
+ 1360 0195 03       		.uleb128 0x3
+ 1361 0196 0E       		.uleb128 0xe
+ 1362 0197 3A       		.uleb128 0x3a
+ 1363 0198 0B       		.uleb128 0xb
+ 1364 0199 3B       		.uleb128 0x3b
+ 1365 019a 05       		.uleb128 0x5
+ 1366 019b 49       		.uleb128 0x49
+ 1367 019c 13       		.uleb128 0x13
+ 1368 019d 02       		.uleb128 0x2
+ 1369 019e 18       		.uleb128 0x18
+ 1370 019f 00       		.byte	0
+ 1371 01a0 00       		.byte	0
+ 1372 01a1 1B       		.uleb128 0x1b
+ 1373 01a2 34       		.uleb128 0x34
+ 1374 01a3 00       		.byte	0
+ 1375 01a4 03       		.uleb128 0x3
+ 1376 01a5 0E       		.uleb128 0xe
+ 1377 01a6 3A       		.uleb128 0x3a
+ 1378 01a7 0B       		.uleb128 0xb
+ 1379 01a8 3B       		.uleb128 0x3b
+ 1380 01a9 0B       		.uleb128 0xb
+ 1381 01aa 49       		.uleb128 0x49
+ 1382 01ab 13       		.uleb128 0x13
+ 1383 01ac 3F       		.uleb128 0x3f
+ 1384 01ad 19       		.uleb128 0x19
+ 1385 01ae 02       		.uleb128 0x2
+ 1386 01af 18       		.uleb128 0x18
+ 1387 01b0 00       		.byte	0
+ 1388 01b1 00       		.byte	0
+ 1389 01b2 00       		.byte	0
+ 1390              		.section	.debug_loc,"",%progbits
+ 1391              	.Ldebug_loc0:
+ 1392              	.LLST0:
+ 1393 0000 12000000 		.4byte	.LVL0
+ 1394 0004 18000000 		.4byte	.LVL1
+ 1395 0008 0600     		.2byte	0x6
+ 1396 000a 73       		.byte	0x73
+ 1397 000b 00       		.sleb128 0
+ 1398 000c 09       		.byte	0x9
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 42
+
+
+ 1399 000d C0       		.byte	0xc0
+ 1400 000e 1A       		.byte	0x1a
+ 1401 000f 9F       		.byte	0x9f
+ 1402 0010 00000000 		.4byte	0
+ 1403 0014 00000000 		.4byte	0
+ 1404              	.LLST1:
+ 1405 0018 32000000 		.4byte	.LVL2
+ 1406 001c 38000000 		.4byte	.LVL3
+ 1407 0020 0400     		.2byte	0x4
+ 1408 0022 0A       		.byte	0xa
+ 1409 0023 2503     		.2byte	0x325
+ 1410 0025 9F       		.byte	0x9f
+ 1411 0026 00000000 		.4byte	0
+ 1412 002a 00000000 		.4byte	0
+ 1413              	.LLST2:
+ 1414 002e 38000000 		.4byte	.LVL3
+ 1415 0032 3A000000 		.4byte	.LVL4
+ 1416 0036 0400     		.2byte	0x4
+ 1417 0038 0A       		.byte	0xa
+ 1418 0039 2503     		.2byte	0x325
+ 1419 003b 9F       		.byte	0x9f
+ 1420 003c 00000000 		.4byte	0
+ 1421 0040 00000000 		.4byte	0
+ 1422              	.LLST3:
+ 1423 0044 3A000000 		.4byte	.LVL4
+ 1424 0048 3E000000 		.4byte	.LVL5
+ 1425 004c 0300     		.2byte	0x3
+ 1426 004e 08       		.byte	0x8
+ 1427 004f 26       		.byte	0x26
+ 1428 0050 9F       		.byte	0x9f
+ 1429 0051 00000000 		.4byte	0
+ 1430 0055 00000000 		.4byte	0
+ 1431              	.LLST4:
+ 1432 0059 0C000000 		.4byte	.LVL6
+ 1433 005d 12000000 		.4byte	.LVL7
+ 1434 0061 0600     		.2byte	0x6
+ 1435 0063 73       		.byte	0x73
+ 1436 0064 00       		.sleb128 0
+ 1437 0065 09       		.byte	0x9
+ 1438 0066 C0       		.byte	0xc0
+ 1439 0067 1A       		.byte	0x1a
+ 1440 0068 9F       		.byte	0x9f
+ 1441 0069 00000000 		.4byte	0
+ 1442 006d 00000000 		.4byte	0
+ 1443              	.LLST5:
+ 1444 0071 2C000000 		.4byte	.LVL8
+ 1445 0075 30000000 		.4byte	.LVL9
+ 1446 0079 0400     		.2byte	0x4
+ 1447 007b 0A       		.byte	0xa
+ 1448 007c 2503     		.2byte	0x325
+ 1449 007e 9F       		.byte	0x9f
+ 1450 007f 00000000 		.4byte	0
+ 1451 0083 00000000 		.4byte	0
+ 1452              	.LLST6:
+ 1453 0087 30000000 		.4byte	.LVL9
+ 1454 008b 32000000 		.4byte	.LVL10
+ 1455 008f 0400     		.2byte	0x4
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 43
+
+
+ 1456 0091 0A       		.byte	0xa
+ 1457 0092 2503     		.2byte	0x325
+ 1458 0094 9F       		.byte	0x9f
+ 1459 0095 00000000 		.4byte	0
+ 1460 0099 00000000 		.4byte	0
+ 1461              	.LLST7:
+ 1462 009d 32000000 		.4byte	.LVL10
+ 1463 00a1 36000000 		.4byte	.LVL11
+ 1464 00a5 0300     		.2byte	0x3
+ 1465 00a7 08       		.byte	0x8
+ 1466 00a8 26       		.byte	0x26
+ 1467 00a9 9F       		.byte	0x9f
+ 1468 00aa 00000000 		.4byte	0
+ 1469 00ae 00000000 		.4byte	0
+ 1470              		.section	.debug_aranges,"",%progbits
+ 1471 0000 7C000000 		.4byte	0x7c
+ 1472 0004 0200     		.2byte	0x2
+ 1473 0006 00000000 		.4byte	.Ldebug_info0
+ 1474 000a 04       		.byte	0x4
+ 1475 000b 00       		.byte	0
+ 1476 000c 0000     		.2byte	0
+ 1477 000e 0000     		.2byte	0
+ 1478 0010 00000000 		.4byte	.LFB0
+ 1479 0014 74000000 		.4byte	.LFE0-.LFB0
+ 1480 0018 00000000 		.4byte	.LFB1
+ 1481 001c 50000000 		.4byte	.LFE1-.LFB1
+ 1482 0020 00000000 		.4byte	.LFB2
+ 1483 0024 10000000 		.4byte	.LFE2-.LFB2
+ 1484 0028 00000000 		.4byte	.LFB3
+ 1485 002c 10000000 		.4byte	.LFE3-.LFB3
+ 1486 0030 00000000 		.4byte	.LFB4
+ 1487 0034 0C000000 		.4byte	.LFE4-.LFB4
+ 1488 0038 00000000 		.4byte	.LFB5
+ 1489 003c 14000000 		.4byte	.LFE5-.LFB5
+ 1490 0040 00000000 		.4byte	.LFB6
+ 1491 0044 0C000000 		.4byte	.LFE6-.LFB6
+ 1492 0048 00000000 		.4byte	.LFB7
+ 1493 004c 0C000000 		.4byte	.LFE7-.LFB7
+ 1494 0050 00000000 		.4byte	.LFB8
+ 1495 0054 0C000000 		.4byte	.LFE8-.LFB8
+ 1496 0058 00000000 		.4byte	.LFB9
+ 1497 005c 0C000000 		.4byte	.LFE9-.LFB9
+ 1498 0060 00000000 		.4byte	.LFB10
+ 1499 0064 0C000000 		.4byte	.LFE10-.LFB10
+ 1500 0068 00000000 		.4byte	.LFB11
+ 1501 006c 0C000000 		.4byte	.LFE11-.LFB11
+ 1502 0070 00000000 		.4byte	.LFB12
+ 1503 0074 0C000000 		.4byte	.LFE12-.LFB12
+ 1504 0078 00000000 		.4byte	0
+ 1505 007c 00000000 		.4byte	0
+ 1506              		.section	.debug_ranges,"",%progbits
+ 1507              	.Ldebug_ranges0:
+ 1508 0000 06000000 		.4byte	.LBB18
+ 1509 0004 0A000000 		.4byte	.LBE18
+ 1510 0008 0C000000 		.4byte	.LBB36
+ 1511 000c 34000000 		.4byte	.LBE36
+ 1512 0010 36000000 		.4byte	.LBB37
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 44
+
+
+ 1513 0014 3E000000 		.4byte	.LBE37
+ 1514 0018 00000000 		.4byte	0
+ 1515 001c 00000000 		.4byte	0
+ 1516 0020 06000000 		.4byte	.LBB20
+ 1517 0024 0A000000 		.4byte	.LBE20
+ 1518 0028 20000000 		.4byte	.LBB24
+ 1519 002c 22000000 		.4byte	.LBE24
+ 1520 0030 36000000 		.4byte	.LBB31
+ 1521 0034 38000000 		.4byte	.LBE31
+ 1522 0038 00000000 		.4byte	0
+ 1523 003c 00000000 		.4byte	0
+ 1524 0040 2A000000 		.4byte	.LBB25
+ 1525 0044 2C000000 		.4byte	.LBE25
+ 1526 0048 38000000 		.4byte	.LBB32
+ 1527 004c 3A000000 		.4byte	.LBE32
+ 1528 0050 00000000 		.4byte	0
+ 1529 0054 00000000 		.4byte	0
+ 1530 0058 32000000 		.4byte	.LBB28
+ 1531 005c 34000000 		.4byte	.LBE28
+ 1532 0060 3A000000 		.4byte	.LBB33
+ 1533 0064 3E000000 		.4byte	.LBE33
+ 1534 0068 00000000 		.4byte	0
+ 1535 006c 00000000 		.4byte	0
+ 1536 0070 40000000 		.4byte	.LBB38
+ 1537 0074 4A000000 		.4byte	.LBE38
+ 1538 0078 4E000000 		.4byte	.LBB41
+ 1539 007c 74000000 		.4byte	.LBE41
+ 1540 0080 00000000 		.4byte	0
+ 1541 0084 00000000 		.4byte	0
+ 1542 0088 00000000 		.4byte	.LBB42
+ 1543 008c 04000000 		.4byte	.LBE42
+ 1544 0090 1A000000 		.4byte	.LBB46
+ 1545 0094 1C000000 		.4byte	.LBE46
+ 1546 0098 2E000000 		.4byte	.LBB53
+ 1547 009c 30000000 		.4byte	.LBE53
+ 1548 00a0 00000000 		.4byte	0
+ 1549 00a4 00000000 		.4byte	0
+ 1550 00a8 24000000 		.4byte	.LBB47
+ 1551 00ac 26000000 		.4byte	.LBE47
+ 1552 00b0 30000000 		.4byte	.LBB54
+ 1553 00b4 32000000 		.4byte	.LBE54
+ 1554 00b8 00000000 		.4byte	0
+ 1555 00bc 00000000 		.4byte	0
+ 1556 00c0 2C000000 		.4byte	.LBB50
+ 1557 00c4 2E000000 		.4byte	.LBE50
+ 1558 00c8 32000000 		.4byte	.LBB55
+ 1559 00cc 36000000 		.4byte	.LBE55
+ 1560 00d0 00000000 		.4byte	0
+ 1561 00d4 00000000 		.4byte	0
+ 1562 00d8 00000000 		.4byte	.LFB0
+ 1563 00dc 74000000 		.4byte	.LFE0
+ 1564 00e0 00000000 		.4byte	.LFB1
+ 1565 00e4 50000000 		.4byte	.LFE1
+ 1566 00e8 00000000 		.4byte	.LFB2
+ 1567 00ec 10000000 		.4byte	.LFE2
+ 1568 00f0 00000000 		.4byte	.LFB3
+ 1569 00f4 10000000 		.4byte	.LFE3
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 45
+
+
+ 1570 00f8 00000000 		.4byte	.LFB4
+ 1571 00fc 0C000000 		.4byte	.LFE4
+ 1572 0100 00000000 		.4byte	.LFB5
+ 1573 0104 14000000 		.4byte	.LFE5
+ 1574 0108 00000000 		.4byte	.LFB6
+ 1575 010c 0C000000 		.4byte	.LFE6
+ 1576 0110 00000000 		.4byte	.LFB7
+ 1577 0114 0C000000 		.4byte	.LFE7
+ 1578 0118 00000000 		.4byte	.LFB8
+ 1579 011c 0C000000 		.4byte	.LFE8
+ 1580 0120 00000000 		.4byte	.LFB9
+ 1581 0124 0C000000 		.4byte	.LFE9
+ 1582 0128 00000000 		.4byte	.LFB10
+ 1583 012c 0C000000 		.4byte	.LFE10
+ 1584 0130 00000000 		.4byte	.LFB11
+ 1585 0134 0C000000 		.4byte	.LFE11
+ 1586 0138 00000000 		.4byte	.LFB12
+ 1587 013c 0C000000 		.4byte	.LFE12
+ 1588 0140 00000000 		.4byte	0
+ 1589 0144 00000000 		.4byte	0
+ 1590              		.section	.debug_line,"",%progbits
+ 1591              	.Ldebug_line0:
+ 1592 0000 B7010000 		.section	.debug_str,"MS",%progbits,1
+ 1592      02004100 
+ 1592      00000201 
+ 1592      FB0E0D00 
+ 1592      01010101 
+ 1593              	.LASF15:
+ 1594 0000 72656731 		.ascii	"reg16\000"
+ 1594      3600
+ 1595              	.LASF24:
+ 1596 0006 56455254 		.ascii	"VERT_Init\000"
+ 1596      5F496E69 
+ 1596      7400
+ 1597              	.LASF31:
+ 1598 0010 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1598      43313120 
+ 1598      352E342E 
+ 1598      31203230 
+ 1598      31363036 
+ 1599 0043 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1599      20726576 
+ 1599      6973696F 
+ 1599      6E203233 
+ 1599      37373135 
+ 1600 0076 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects\000"
+ 1600      66756E63 
+ 1600      74696F6E 
+ 1600      2D736563 
+ 1600      74696F6E 
+ 1601              	.LASF22:
+ 1602 009e 56455254 		.ascii	"VERT_WriteCounter\000"
+ 1602      5F577269 
+ 1602      7465436F 
+ 1602      756E7465 
+ 1602      7200
+ 1603              	.LASF21:
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 46
+
+
+ 1604 00b0 70657269 		.ascii	"period\000"
+ 1604      6F6400
+ 1605              	.LASF3:
+ 1606 00b7 73686F72 		.ascii	"short unsigned int\000"
+ 1606      7420756E 
+ 1606      7369676E 
+ 1606      65642069 
+ 1606      6E7400
+ 1607              	.LASF27:
+ 1608 00ca 56455254 		.ascii	"VERT_ReadCounter\000"
+ 1608      5F526561 
+ 1608      64436F75 
+ 1608      6E746572 
+ 1608      00
+ 1609              	.LASF11:
+ 1610 00db 666C6F61 		.ascii	"float\000"
+ 1610      7400
+ 1611              	.LASF23:
+ 1612 00e1 636F756E 		.ascii	"counter\000"
+ 1612      74657200 
+ 1613              	.LASF1:
+ 1614 00e9 756E7369 		.ascii	"unsigned char\000"
+ 1614      676E6564 
+ 1614      20636861 
+ 1614      7200
+ 1615              	.LASF14:
+ 1616 00f7 72656738 		.ascii	"reg8\000"
+ 1616      00
+ 1617              	.LASF36:
+ 1618 00fc 56455254 		.ascii	"VERT_Stop\000"
+ 1618      5F53746F 
+ 1618      7000
+ 1619              	.LASF5:
+ 1620 0106 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1620      20756E73 
+ 1620      69676E65 
+ 1620      6420696E 
+ 1620      7400
+ 1621              	.LASF9:
+ 1622 0118 75696E74 		.ascii	"uint8\000"
+ 1622      3800
+ 1623              	.LASF39:
+ 1624 011e 636F6E74 		.ascii	"control\000"
+ 1624      726F6C00 
+ 1625              	.LASF40:
+ 1626 0126 56455254 		.ascii	"VERT_initVar\000"
+ 1626      5F696E69 
+ 1626      74566172 
+ 1626      00
+ 1627              	.LASF12:
+ 1628 0133 646F7562 		.ascii	"double\000"
+ 1628      6C6500
+ 1629              	.LASF37:
+ 1630 013a 56455254 		.ascii	"VERT_ReadControlRegister\000"
+ 1630      5F526561 
+ 1630      64436F6E 
+ 1630      74726F6C 
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 47
+
+
+ 1630      52656769 
+ 1631              	.LASF30:
+ 1632 0153 56455254 		.ascii	"VERT_ReadPeriod\000"
+ 1632      5F526561 
+ 1632      64506572 
+ 1632      696F6400 
+ 1633              	.LASF10:
+ 1634 0163 75696E74 		.ascii	"uint16\000"
+ 1634      313600
+ 1635              	.LASF35:
+ 1636 016a 56455254 		.ascii	"VERT_Enable\000"
+ 1636      5F456E61 
+ 1636      626C6500 
+ 1637              	.LASF8:
+ 1638 0176 756E7369 		.ascii	"unsigned int\000"
+ 1638      676E6564 
+ 1638      20696E74 
+ 1638      00
+ 1639              	.LASF33:
+ 1640 0183 433A5C55 		.ascii	"C:\\Users\\info\\Desktop\\Spring 2019 Classes\\6.11"
+ 1640      73657273 
+ 1640      5C696E66 
+ 1640      6F5C4465 
+ 1640      736B746F 
+ 1641 01b1 355C362E 		.ascii	"5\\6.115-final\\PSoCCreator\\Final Project\\FinalEm"
+ 1641      3131352D 
+ 1641      66696E61 
+ 1641      6C5C5053 
+ 1641      6F434372 
+ 1642 01e0 756C6174 		.ascii	"ulator.cydsn\000"
+ 1642      6F722E63 
+ 1642      7964736E 
+ 1642      00
+ 1643              	.LASF7:
+ 1644 01ed 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1644      206C6F6E 
+ 1644      6720756E 
+ 1644      7369676E 
+ 1644      65642069 
+ 1645              	.LASF38:
+ 1646 0204 72657375 		.ascii	"result\000"
+ 1646      6C7400
+ 1647              	.LASF19:
+ 1648 020b 56455254 		.ascii	"VERT_WritePeriod\000"
+ 1648      5F577269 
+ 1648      74655065 
+ 1648      72696F64 
+ 1648      00
+ 1649              	.LASF32:
+ 1650 021c 47656E65 		.ascii	"Generated_Source\\PSoC5\\VERT.c\000"
+ 1650      72617465 
+ 1650      645F536F 
+ 1650      75726365 
+ 1650      5C50536F 
+ 1651              	.LASF17:
+ 1652 023a 73697A65 		.ascii	"sizetype\000"
+ 1652      74797065 
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 48
+
+
+ 1652      00
+ 1653              	.LASF6:
+ 1654 0243 6C6F6E67 		.ascii	"long long int\000"
+ 1654      206C6F6E 
+ 1654      6720696E 
+ 1654      7400
+ 1655              	.LASF18:
+ 1656 0251 56455254 		.ascii	"VERT_WriteCompare\000"
+ 1656      5F577269 
+ 1656      7465436F 
+ 1656      6D706172 
+ 1656      6500
+ 1657              	.LASF25:
+ 1658 0263 56455254 		.ascii	"VERT_Start\000"
+ 1658      5F537461 
+ 1658      727400
+ 1659              	.LASF2:
+ 1660 026e 73686F72 		.ascii	"short int\000"
+ 1660      7420696E 
+ 1660      7400
+ 1661              	.LASF29:
+ 1662 0278 56455254 		.ascii	"VERT_ReadCompare\000"
+ 1662      5F526561 
+ 1662      64436F6D 
+ 1662      70617265 
+ 1662      00
+ 1663              	.LASF26:
+ 1664 0289 56455254 		.ascii	"VERT_WriteControlRegister\000"
+ 1664      5F577269 
+ 1664      7465436F 
+ 1664      6E74726F 
+ 1664      6C526567 
+ 1665              	.LASF34:
+ 1666 02a3 6374726C 		.ascii	"ctrl\000"
+ 1666      00
+ 1667              	.LASF28:
+ 1668 02a8 56455254 		.ascii	"VERT_ReadCapture\000"
+ 1668      5F526561 
+ 1668      64436170 
+ 1668      74757265 
+ 1668      00
+ 1669              	.LASF4:
+ 1670 02b9 6C6F6E67 		.ascii	"long int\000"
+ 1670      20696E74 
+ 1670      00
+ 1671              	.LASF13:
+ 1672 02c2 63686172 		.ascii	"char\000"
+ 1672      00
+ 1673              	.LASF16:
+ 1674 02c7 6C6F6E67 		.ascii	"long double\000"
+ 1674      20646F75 
+ 1674      626C6500 
+ 1675              	.LASF0:
+ 1676 02d3 7369676E 		.ascii	"signed char\000"
+ 1676      65642063 
+ 1676      68617200 
+ 1677              	.LASF20:
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccavrokM.s 			page 49
+
+
+ 1678 02df 636F6D70 		.ascii	"compare\000"
+ 1678      61726500 
+ 1679              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

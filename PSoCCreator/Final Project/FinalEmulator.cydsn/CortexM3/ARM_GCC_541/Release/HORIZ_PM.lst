@@ -1,0 +1,1217 @@
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"HORIZ_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.HORIZ_SaveConfig,"ax",%progbits
+  20              		.align	2
+  21              		.global	HORIZ_SaveConfig
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	HORIZ_SaveConfig, %function
+  25              	HORIZ_SaveConfig:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC5\\HORIZ_PM.c"
+   1:Generated_Source\PSoC5/HORIZ_PM.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/HORIZ_PM.c **** * File Name: HORIZ_PM.c
+   3:Generated_Source\PSoC5/HORIZ_PM.c **** * Version 3.30
+   4:Generated_Source\PSoC5/HORIZ_PM.c **** *
+   5:Generated_Source\PSoC5/HORIZ_PM.c **** * Description:
+   6:Generated_Source\PSoC5/HORIZ_PM.c **** *  This file provides the power management source code to API for the
+   7:Generated_Source\PSoC5/HORIZ_PM.c **** *  PWM.
+   8:Generated_Source\PSoC5/HORIZ_PM.c **** *
+   9:Generated_Source\PSoC5/HORIZ_PM.c **** * Note:
+  10:Generated_Source\PSoC5/HORIZ_PM.c **** *
+  11:Generated_Source\PSoC5/HORIZ_PM.c **** ********************************************************************************
+  12:Generated_Source\PSoC5/HORIZ_PM.c **** * Copyright 2008-2014, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/HORIZ_PM.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:Generated_Source\PSoC5/HORIZ_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:Generated_Source\PSoC5/HORIZ_PM.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/HORIZ_PM.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/HORIZ_PM.c **** 
+  18:Generated_Source\PSoC5/HORIZ_PM.c **** #include "HORIZ.h"
+  19:Generated_Source\PSoC5/HORIZ_PM.c **** 
+  20:Generated_Source\PSoC5/HORIZ_PM.c **** static HORIZ_backupStruct HORIZ_backup;
+  21:Generated_Source\PSoC5/HORIZ_PM.c **** 
+  22:Generated_Source\PSoC5/HORIZ_PM.c **** 
+  23:Generated_Source\PSoC5/HORIZ_PM.c **** /*******************************************************************************
+  24:Generated_Source\PSoC5/HORIZ_PM.c **** * Function Name: HORIZ_SaveConfig
+  25:Generated_Source\PSoC5/HORIZ_PM.c **** ********************************************************************************
+  26:Generated_Source\PSoC5/HORIZ_PM.c **** *
+  27:Generated_Source\PSoC5/HORIZ_PM.c **** * Summary:
+  28:Generated_Source\PSoC5/HORIZ_PM.c **** *  Saves the current user configuration of the component.
+  29:Generated_Source\PSoC5/HORIZ_PM.c **** *
+  30:Generated_Source\PSoC5/HORIZ_PM.c **** * Parameters:
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 2
+
+
+  31:Generated_Source\PSoC5/HORIZ_PM.c **** *  None
+  32:Generated_Source\PSoC5/HORIZ_PM.c **** *
+  33:Generated_Source\PSoC5/HORIZ_PM.c **** * Return:
+  34:Generated_Source\PSoC5/HORIZ_PM.c **** *  None
+  35:Generated_Source\PSoC5/HORIZ_PM.c **** *
+  36:Generated_Source\PSoC5/HORIZ_PM.c **** * Global variables:
+  37:Generated_Source\PSoC5/HORIZ_PM.c **** *  HORIZ_backup:  Variables of this global structure are modified to
+  38:Generated_Source\PSoC5/HORIZ_PM.c **** *  store the values of non retention configuration registers when Sleep() API is
+  39:Generated_Source\PSoC5/HORIZ_PM.c **** *  called.
+  40:Generated_Source\PSoC5/HORIZ_PM.c **** *
+  41:Generated_Source\PSoC5/HORIZ_PM.c **** *******************************************************************************/
+  42:Generated_Source\PSoC5/HORIZ_PM.c **** void HORIZ_SaveConfig(void) 
+  43:Generated_Source\PSoC5/HORIZ_PM.c **** {
+  28              		.loc 1 43 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 4, -8
+  35              		.cfi_offset 14, -4
+  44:Generated_Source\PSoC5/HORIZ_PM.c **** 
+  45:Generated_Source\PSoC5/HORIZ_PM.c ****     #if(!HORIZ_UsingFixedFunction)
+  46:Generated_Source\PSoC5/HORIZ_PM.c ****         #if(!HORIZ_PWMModeIsCenterAligned)
+  47:Generated_Source\PSoC5/HORIZ_PM.c ****             HORIZ_backup.PWMPeriod = HORIZ_ReadPeriod();
+  36              		.loc 1 47 0
+  37 0002 FFF7FEFF 		bl	HORIZ_ReadPeriod
+  38              	.LVL0:
+  39 0006 044C     		ldr	r4, .L3
+  40 0008 A070     		strb	r0, [r4, #2]
+  48:Generated_Source\PSoC5/HORIZ_PM.c ****         #endif /* (!HORIZ_PWMModeIsCenterAligned) */
+  49:Generated_Source\PSoC5/HORIZ_PM.c ****         HORIZ_backup.PWMUdb = HORIZ_ReadCounter();
+  41              		.loc 1 49 0
+  42 000a FFF7FEFF 		bl	HORIZ_ReadCounter
+  43              	.LVL1:
+  44 000e 6070     		strb	r0, [r4, #1]
+  50:Generated_Source\PSoC5/HORIZ_PM.c ****         #if (HORIZ_UseStatus)
+  51:Generated_Source\PSoC5/HORIZ_PM.c ****             HORIZ_backup.InterruptMaskValue = HORIZ_STATUS_MASK;
+  52:Generated_Source\PSoC5/HORIZ_PM.c ****         #endif /* (HORIZ_UseStatus) */
+  53:Generated_Source\PSoC5/HORIZ_PM.c **** 
+  54:Generated_Source\PSoC5/HORIZ_PM.c ****         #if(HORIZ_DeadBandMode == HORIZ__B_PWM__DBM_256_CLOCKS || \
+  55:Generated_Source\PSoC5/HORIZ_PM.c ****             HORIZ_DeadBandMode == HORIZ__B_PWM__DBM_2_4_CLOCKS)
+  56:Generated_Source\PSoC5/HORIZ_PM.c ****             HORIZ_backup.PWMdeadBandValue = HORIZ_ReadDeadTime();
+  57:Generated_Source\PSoC5/HORIZ_PM.c ****         #endif /*  deadband count is either 2-4 clocks or 256 clocks */
+  58:Generated_Source\PSoC5/HORIZ_PM.c **** 
+  59:Generated_Source\PSoC5/HORIZ_PM.c ****         #if(HORIZ_KillModeMinTime)
+  60:Generated_Source\PSoC5/HORIZ_PM.c ****              HORIZ_backup.PWMKillCounterPeriod = HORIZ_ReadKillTime();
+  61:Generated_Source\PSoC5/HORIZ_PM.c ****         #endif /* (HORIZ_KillModeMinTime) */
+  62:Generated_Source\PSoC5/HORIZ_PM.c **** 
+  63:Generated_Source\PSoC5/HORIZ_PM.c ****         #if(HORIZ_UseControl)
+  64:Generated_Source\PSoC5/HORIZ_PM.c ****             HORIZ_backup.PWMControlRegister = HORIZ_ReadControlRegister();
+  45              		.loc 1 64 0
+  46 0010 FFF7FEFF 		bl	HORIZ_ReadControlRegister
+  47              	.LVL2:
+  48 0014 E070     		strb	r0, [r4, #3]
+  49 0016 10BD     		pop	{r4, pc}
+  50              	.L4:
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 3
+
+
+  51              		.align	2
+  52              	.L3:
+  53 0018 00000000 		.word	.LANCHOR0
+  54              		.cfi_endproc
+  55              	.LFE0:
+  56              		.size	HORIZ_SaveConfig, .-HORIZ_SaveConfig
+  57              		.section	.text.HORIZ_RestoreConfig,"ax",%progbits
+  58              		.align	2
+  59              		.global	HORIZ_RestoreConfig
+  60              		.thumb
+  61              		.thumb_func
+  62              		.type	HORIZ_RestoreConfig, %function
+  63              	HORIZ_RestoreConfig:
+  64              	.LFB1:
+  65:Generated_Source\PSoC5/HORIZ_PM.c ****         #endif /* (HORIZ_UseControl) */
+  66:Generated_Source\PSoC5/HORIZ_PM.c ****     #endif  /* (!HORIZ_UsingFixedFunction) */
+  67:Generated_Source\PSoC5/HORIZ_PM.c **** }
+  68:Generated_Source\PSoC5/HORIZ_PM.c **** 
+  69:Generated_Source\PSoC5/HORIZ_PM.c **** 
+  70:Generated_Source\PSoC5/HORIZ_PM.c **** /*******************************************************************************
+  71:Generated_Source\PSoC5/HORIZ_PM.c **** * Function Name: HORIZ_RestoreConfig
+  72:Generated_Source\PSoC5/HORIZ_PM.c **** ********************************************************************************
+  73:Generated_Source\PSoC5/HORIZ_PM.c **** *
+  74:Generated_Source\PSoC5/HORIZ_PM.c **** * Summary:
+  75:Generated_Source\PSoC5/HORIZ_PM.c **** *  Restores the current user configuration of the component.
+  76:Generated_Source\PSoC5/HORIZ_PM.c **** *
+  77:Generated_Source\PSoC5/HORIZ_PM.c **** * Parameters:
+  78:Generated_Source\PSoC5/HORIZ_PM.c **** *  None
+  79:Generated_Source\PSoC5/HORIZ_PM.c **** *
+  80:Generated_Source\PSoC5/HORIZ_PM.c **** * Return:
+  81:Generated_Source\PSoC5/HORIZ_PM.c **** *  None
+  82:Generated_Source\PSoC5/HORIZ_PM.c **** *
+  83:Generated_Source\PSoC5/HORIZ_PM.c **** * Global variables:
+  84:Generated_Source\PSoC5/HORIZ_PM.c **** *  HORIZ_backup:  Variables of this global structure are used to
+  85:Generated_Source\PSoC5/HORIZ_PM.c **** *  restore the values of non retention registers on wakeup from sleep mode.
+  86:Generated_Source\PSoC5/HORIZ_PM.c **** *
+  87:Generated_Source\PSoC5/HORIZ_PM.c **** *******************************************************************************/
+  88:Generated_Source\PSoC5/HORIZ_PM.c **** void HORIZ_RestoreConfig(void) 
+  89:Generated_Source\PSoC5/HORIZ_PM.c **** {
+  65              		.loc 1 89 0
+  66              		.cfi_startproc
+  67              		@ args = 0, pretend = 0, frame = 0
+  68              		@ frame_needed = 0, uses_anonymous_args = 0
+  69 0000 10B5     		push	{r4, lr}
+  70              		.cfi_def_cfa_offset 8
+  71              		.cfi_offset 4, -8
+  72              		.cfi_offset 14, -4
+  90:Generated_Source\PSoC5/HORIZ_PM.c ****         #if(!HORIZ_UsingFixedFunction)
+  91:Generated_Source\PSoC5/HORIZ_PM.c ****             #if(!HORIZ_PWMModeIsCenterAligned)
+  92:Generated_Source\PSoC5/HORIZ_PM.c ****                 HORIZ_WritePeriod(HORIZ_backup.PWMPeriod);
+  73              		.loc 1 92 0
+  74 0002 064C     		ldr	r4, .L7
+  75 0004 A078     		ldrb	r0, [r4, #2]	@ zero_extendqisi2
+  76 0006 FFF7FEFF 		bl	HORIZ_WritePeriod
+  77              	.LVL3:
+  93:Generated_Source\PSoC5/HORIZ_PM.c ****             #endif /* (!HORIZ_PWMModeIsCenterAligned) */
+  94:Generated_Source\PSoC5/HORIZ_PM.c **** 
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 4
+
+
+  95:Generated_Source\PSoC5/HORIZ_PM.c ****             HORIZ_WriteCounter(HORIZ_backup.PWMUdb);
+  78              		.loc 1 95 0
+  79 000a 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+  80 000c FFF7FEFF 		bl	HORIZ_WriteCounter
+  81              	.LVL4:
+  96:Generated_Source\PSoC5/HORIZ_PM.c **** 
+  97:Generated_Source\PSoC5/HORIZ_PM.c ****             #if (HORIZ_UseStatus)
+  98:Generated_Source\PSoC5/HORIZ_PM.c ****                 HORIZ_STATUS_MASK = HORIZ_backup.InterruptMaskValue;
+  99:Generated_Source\PSoC5/HORIZ_PM.c ****             #endif /* (HORIZ_UseStatus) */
+ 100:Generated_Source\PSoC5/HORIZ_PM.c **** 
+ 101:Generated_Source\PSoC5/HORIZ_PM.c ****             #if(HORIZ_DeadBandMode == HORIZ__B_PWM__DBM_256_CLOCKS || \
+ 102:Generated_Source\PSoC5/HORIZ_PM.c ****                 HORIZ_DeadBandMode == HORIZ__B_PWM__DBM_2_4_CLOCKS)
+ 103:Generated_Source\PSoC5/HORIZ_PM.c ****                 HORIZ_WriteDeadTime(HORIZ_backup.PWMdeadBandValue);
+ 104:Generated_Source\PSoC5/HORIZ_PM.c ****             #endif /* deadband count is either 2-4 clocks or 256 clocks */
+ 105:Generated_Source\PSoC5/HORIZ_PM.c **** 
+ 106:Generated_Source\PSoC5/HORIZ_PM.c ****             #if(HORIZ_KillModeMinTime)
+ 107:Generated_Source\PSoC5/HORIZ_PM.c ****                 HORIZ_WriteKillTime(HORIZ_backup.PWMKillCounterPeriod);
+ 108:Generated_Source\PSoC5/HORIZ_PM.c ****             #endif /* (HORIZ_KillModeMinTime) */
+ 109:Generated_Source\PSoC5/HORIZ_PM.c **** 
+ 110:Generated_Source\PSoC5/HORIZ_PM.c ****             #if(HORIZ_UseControl)
+ 111:Generated_Source\PSoC5/HORIZ_PM.c ****                 HORIZ_WriteControlRegister(HORIZ_backup.PWMControlRegister);
+  82              		.loc 1 111 0
+  83 0010 E078     		ldrb	r0, [r4, #3]	@ zero_extendqisi2
+ 112:Generated_Source\PSoC5/HORIZ_PM.c ****             #endif /* (HORIZ_UseControl) */
+ 113:Generated_Source\PSoC5/HORIZ_PM.c ****         #endif  /* (!HORIZ_UsingFixedFunction) */
+ 114:Generated_Source\PSoC5/HORIZ_PM.c ****     }
+  84              		.loc 1 114 0
+  85 0012 BDE81040 		pop	{r4, lr}
+  86              		.cfi_restore 14
+  87              		.cfi_restore 4
+  88              		.cfi_def_cfa_offset 0
+ 111:Generated_Source\PSoC5/HORIZ_PM.c ****             #endif /* (HORIZ_UseControl) */
+  89              		.loc 1 111 0
+  90 0016 FFF7FEBF 		b	HORIZ_WriteControlRegister
+  91              	.LVL5:
+  92              	.L8:
+  93 001a 00BF     		.align	2
+  94              	.L7:
+  95 001c 00000000 		.word	.LANCHOR0
+  96              		.cfi_endproc
+  97              	.LFE1:
+  98              		.size	HORIZ_RestoreConfig, .-HORIZ_RestoreConfig
+  99              		.section	.text.HORIZ_Sleep,"ax",%progbits
+ 100              		.align	2
+ 101              		.global	HORIZ_Sleep
+ 102              		.thumb
+ 103              		.thumb_func
+ 104              		.type	HORIZ_Sleep, %function
+ 105              	HORIZ_Sleep:
+ 106              	.LFB2:
+ 115:Generated_Source\PSoC5/HORIZ_PM.c **** 
+ 116:Generated_Source\PSoC5/HORIZ_PM.c **** 
+ 117:Generated_Source\PSoC5/HORIZ_PM.c **** /*******************************************************************************
+ 118:Generated_Source\PSoC5/HORIZ_PM.c **** * Function Name: HORIZ_Sleep
+ 119:Generated_Source\PSoC5/HORIZ_PM.c **** ********************************************************************************
+ 120:Generated_Source\PSoC5/HORIZ_PM.c **** *
+ 121:Generated_Source\PSoC5/HORIZ_PM.c **** * Summary:
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 5
+
+
+ 122:Generated_Source\PSoC5/HORIZ_PM.c **** *  Disables block's operation and saves the user configuration. Should be called
+ 123:Generated_Source\PSoC5/HORIZ_PM.c **** *  just prior to entering sleep.
+ 124:Generated_Source\PSoC5/HORIZ_PM.c **** *
+ 125:Generated_Source\PSoC5/HORIZ_PM.c **** * Parameters:
+ 126:Generated_Source\PSoC5/HORIZ_PM.c **** *  None
+ 127:Generated_Source\PSoC5/HORIZ_PM.c **** *
+ 128:Generated_Source\PSoC5/HORIZ_PM.c **** * Return:
+ 129:Generated_Source\PSoC5/HORIZ_PM.c **** *  None
+ 130:Generated_Source\PSoC5/HORIZ_PM.c **** *
+ 131:Generated_Source\PSoC5/HORIZ_PM.c **** * Global variables:
+ 132:Generated_Source\PSoC5/HORIZ_PM.c **** *  HORIZ_backup.PWMEnableState:  Is modified depending on the enable
+ 133:Generated_Source\PSoC5/HORIZ_PM.c **** *  state of the block before entering sleep mode.
+ 134:Generated_Source\PSoC5/HORIZ_PM.c **** *
+ 135:Generated_Source\PSoC5/HORIZ_PM.c **** *******************************************************************************/
+ 136:Generated_Source\PSoC5/HORIZ_PM.c **** void HORIZ_Sleep(void) 
+ 137:Generated_Source\PSoC5/HORIZ_PM.c **** {
+ 107              		.loc 1 137 0
+ 108              		.cfi_startproc
+ 109              		@ args = 0, pretend = 0, frame = 0
+ 110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 111 0000 10B5     		push	{r4, lr}
+ 112              		.cfi_def_cfa_offset 8
+ 113              		.cfi_offset 4, -8
+ 114              		.cfi_offset 14, -4
+ 138:Generated_Source\PSoC5/HORIZ_PM.c ****     #if(HORIZ_UseControl)
+ 139:Generated_Source\PSoC5/HORIZ_PM.c ****         if(HORIZ_CTRL_ENABLE == (HORIZ_CONTROL & HORIZ_CTRL_ENABLE))
+ 115              		.loc 1 139 0
+ 116 0002 084B     		ldr	r3, .L11
+ 117 0004 084C     		ldr	r4, .L11+4
+ 118 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 119 0008 DB09     		lsrs	r3, r3, #7
+ 120 000a 2370     		strb	r3, [r4]
+ 140:Generated_Source\PSoC5/HORIZ_PM.c ****         {
+ 141:Generated_Source\PSoC5/HORIZ_PM.c ****             /*Component is enabled */
+ 142:Generated_Source\PSoC5/HORIZ_PM.c ****             HORIZ_backup.PWMEnableState = 1u;
+ 143:Generated_Source\PSoC5/HORIZ_PM.c ****         }
+ 144:Generated_Source\PSoC5/HORIZ_PM.c ****         else
+ 145:Generated_Source\PSoC5/HORIZ_PM.c ****         {
+ 146:Generated_Source\PSoC5/HORIZ_PM.c ****             /* Component is disabled */
+ 147:Generated_Source\PSoC5/HORIZ_PM.c ****             HORIZ_backup.PWMEnableState = 0u;
+ 148:Generated_Source\PSoC5/HORIZ_PM.c ****         }
+ 149:Generated_Source\PSoC5/HORIZ_PM.c ****     #endif /* (HORIZ_UseControl) */
+ 150:Generated_Source\PSoC5/HORIZ_PM.c **** 
+ 151:Generated_Source\PSoC5/HORIZ_PM.c ****     /* Stop component */
+ 152:Generated_Source\PSoC5/HORIZ_PM.c ****     HORIZ_Stop();
+ 121              		.loc 1 152 0
+ 122 000c FFF7FEFF 		bl	HORIZ_Stop
+ 123              	.LVL6:
+ 124              	.LBB4:
+ 125              	.LBB5:
+  47:Generated_Source\PSoC5/HORIZ_PM.c ****         #endif /* (!HORIZ_PWMModeIsCenterAligned) */
+ 126              		.loc 1 47 0
+ 127 0010 FFF7FEFF 		bl	HORIZ_ReadPeriod
+ 128              	.LVL7:
+ 129 0014 A070     		strb	r0, [r4, #2]
+  49:Generated_Source\PSoC5/HORIZ_PM.c ****         #if (HORIZ_UseStatus)
+ 130              		.loc 1 49 0
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 6
+
+
+ 131 0016 FFF7FEFF 		bl	HORIZ_ReadCounter
+ 132              	.LVL8:
+ 133 001a 6070     		strb	r0, [r4, #1]
+  64:Generated_Source\PSoC5/HORIZ_PM.c ****         #endif /* (HORIZ_UseControl) */
+ 134              		.loc 1 64 0
+ 135 001c FFF7FEFF 		bl	HORIZ_ReadControlRegister
+ 136              	.LVL9:
+ 137 0020 E070     		strb	r0, [r4, #3]
+ 138 0022 10BD     		pop	{r4, pc}
+ 139              	.L12:
+ 140              		.align	2
+ 141              	.L11:
+ 142 0024 7E640040 		.word	1073767550
+ 143 0028 00000000 		.word	.LANCHOR0
+ 144              	.LBE5:
+ 145              	.LBE4:
+ 146              		.cfi_endproc
+ 147              	.LFE2:
+ 148              		.size	HORIZ_Sleep, .-HORIZ_Sleep
+ 149              		.section	.text.HORIZ_Wakeup,"ax",%progbits
+ 150              		.align	2
+ 151              		.global	HORIZ_Wakeup
+ 152              		.thumb
+ 153              		.thumb_func
+ 154              		.type	HORIZ_Wakeup, %function
+ 155              	HORIZ_Wakeup:
+ 156              	.LFB3:
+ 153:Generated_Source\PSoC5/HORIZ_PM.c **** 
+ 154:Generated_Source\PSoC5/HORIZ_PM.c ****     /* Save registers configuration */
+ 155:Generated_Source\PSoC5/HORIZ_PM.c ****     HORIZ_SaveConfig();
+ 156:Generated_Source\PSoC5/HORIZ_PM.c **** }
+ 157:Generated_Source\PSoC5/HORIZ_PM.c **** 
+ 158:Generated_Source\PSoC5/HORIZ_PM.c **** 
+ 159:Generated_Source\PSoC5/HORIZ_PM.c **** /*******************************************************************************
+ 160:Generated_Source\PSoC5/HORIZ_PM.c **** * Function Name: HORIZ_Wakeup
+ 161:Generated_Source\PSoC5/HORIZ_PM.c **** ********************************************************************************
+ 162:Generated_Source\PSoC5/HORIZ_PM.c **** *
+ 163:Generated_Source\PSoC5/HORIZ_PM.c **** * Summary:
+ 164:Generated_Source\PSoC5/HORIZ_PM.c **** *  Restores and enables the user configuration. Should be called just after
+ 165:Generated_Source\PSoC5/HORIZ_PM.c **** *  awaking from sleep.
+ 166:Generated_Source\PSoC5/HORIZ_PM.c **** *
+ 167:Generated_Source\PSoC5/HORIZ_PM.c **** * Parameters:
+ 168:Generated_Source\PSoC5/HORIZ_PM.c **** *  None
+ 169:Generated_Source\PSoC5/HORIZ_PM.c **** *
+ 170:Generated_Source\PSoC5/HORIZ_PM.c **** * Return:
+ 171:Generated_Source\PSoC5/HORIZ_PM.c **** *  None
+ 172:Generated_Source\PSoC5/HORIZ_PM.c **** *
+ 173:Generated_Source\PSoC5/HORIZ_PM.c **** * Global variables:
+ 174:Generated_Source\PSoC5/HORIZ_PM.c **** *  HORIZ_backup.pwmEnable:  Is used to restore the enable state of
+ 175:Generated_Source\PSoC5/HORIZ_PM.c **** *  block on wakeup from sleep mode.
+ 176:Generated_Source\PSoC5/HORIZ_PM.c **** *
+ 177:Generated_Source\PSoC5/HORIZ_PM.c **** *******************************************************************************/
+ 178:Generated_Source\PSoC5/HORIZ_PM.c **** void HORIZ_Wakeup(void) 
+ 179:Generated_Source\PSoC5/HORIZ_PM.c **** {
+ 157              		.loc 1 179 0
+ 158              		.cfi_startproc
+ 159              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 7
+
+
+ 160              		@ frame_needed = 0, uses_anonymous_args = 0
+ 161 0000 10B5     		push	{r4, lr}
+ 162              		.cfi_def_cfa_offset 8
+ 163              		.cfi_offset 4, -8
+ 164              		.cfi_offset 14, -4
+ 165              	.LBB8:
+ 166              	.LBB9:
+  92:Generated_Source\PSoC5/HORIZ_PM.c ****             #endif /* (!HORIZ_PWMModeIsCenterAligned) */
+ 167              		.loc 1 92 0
+ 168 0002 084C     		ldr	r4, .L18
+ 169 0004 A078     		ldrb	r0, [r4, #2]	@ zero_extendqisi2
+ 170 0006 FFF7FEFF 		bl	HORIZ_WritePeriod
+ 171              	.LVL10:
+  95:Generated_Source\PSoC5/HORIZ_PM.c **** 
+ 172              		.loc 1 95 0
+ 173 000a 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 174 000c FFF7FEFF 		bl	HORIZ_WriteCounter
+ 175              	.LVL11:
+ 111:Generated_Source\PSoC5/HORIZ_PM.c ****             #endif /* (HORIZ_UseControl) */
+ 176              		.loc 1 111 0
+ 177 0010 E078     		ldrb	r0, [r4, #3]	@ zero_extendqisi2
+ 178 0012 FFF7FEFF 		bl	HORIZ_WriteControlRegister
+ 179              	.LVL12:
+ 180              	.LBE9:
+ 181              	.LBE8:
+ 180:Generated_Source\PSoC5/HORIZ_PM.c ****      /* Restore registers values */
+ 181:Generated_Source\PSoC5/HORIZ_PM.c ****     HORIZ_RestoreConfig();
+ 182:Generated_Source\PSoC5/HORIZ_PM.c **** 
+ 183:Generated_Source\PSoC5/HORIZ_PM.c ****     if(HORIZ_backup.PWMEnableState != 0u)
+ 182              		.loc 1 183 0
+ 183 0016 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 184 0018 03B9     		cbnz	r3, .L17
+ 185 001a 10BD     		pop	{r4, pc}
+ 186              	.L17:
+ 184:Generated_Source\PSoC5/HORIZ_PM.c ****     {
+ 185:Generated_Source\PSoC5/HORIZ_PM.c ****         /* Enable component's operation */
+ 186:Generated_Source\PSoC5/HORIZ_PM.c ****         HORIZ_Enable();
+ 187:Generated_Source\PSoC5/HORIZ_PM.c ****     } /* Do nothing if component's block was disabled before */
+ 188:Generated_Source\PSoC5/HORIZ_PM.c **** 
+ 189:Generated_Source\PSoC5/HORIZ_PM.c **** }
+ 187              		.loc 1 189 0
+ 188 001c BDE81040 		pop	{r4, lr}
+ 189              		.cfi_restore 14
+ 190              		.cfi_restore 4
+ 191              		.cfi_def_cfa_offset 0
+ 186:Generated_Source\PSoC5/HORIZ_PM.c ****     } /* Do nothing if component's block was disabled before */
+ 192              		.loc 1 186 0
+ 193 0020 FFF7FEBF 		b	HORIZ_Enable
+ 194              	.LVL13:
+ 195              	.L19:
+ 196              		.align	2
+ 197              	.L18:
+ 198 0024 00000000 		.word	.LANCHOR0
+ 199              		.cfi_endproc
+ 200              	.LFE3:
+ 201              		.size	HORIZ_Wakeup, .-HORIZ_Wakeup
+ 202              		.bss
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 8
+
+
+ 203              		.align	2
+ 204              		.set	.LANCHOR0,. + 0
+ 205              		.type	HORIZ_backup, %object
+ 206              		.size	HORIZ_backup, 4
+ 207              	HORIZ_backup:
+ 208 0000 00000000 		.space	4
+ 209              		.text
+ 210              	.Letext0:
+ 211              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 212              		.file 3 "Generated_Source\\PSoC5\\HORIZ.h"
+ 213              		.section	.debug_info,"",%progbits
+ 214              	.Ldebug_info0:
+ 215 0000 5F020000 		.4byte	0x25f
+ 216 0004 0400     		.2byte	0x4
+ 217 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 218 000a 04       		.byte	0x4
+ 219 000b 01       		.uleb128 0x1
+ 220 000c 2C000000 		.4byte	.LASF33
+ 221 0010 0C       		.byte	0xc
+ 222 0011 C1020000 		.4byte	.LASF34
+ 223 0015 AB010000 		.4byte	.LASF35
+ 224 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 225 001d 00000000 		.4byte	0
+ 226 0021 00000000 		.4byte	.Ldebug_line0
+ 227 0025 02       		.uleb128 0x2
+ 228 0026 01       		.byte	0x1
+ 229 0027 06       		.byte	0x6
+ 230 0028 AA020000 		.4byte	.LASF0
+ 231 002c 02       		.uleb128 0x2
+ 232 002d 01       		.byte	0x1
+ 233 002e 08       		.byte	0x8
+ 234 002f F1000000 		.4byte	.LASF1
+ 235 0033 02       		.uleb128 0x2
+ 236 0034 02       		.byte	0x2
+ 237 0035 05       		.byte	0x5
+ 238 0036 79020000 		.4byte	.LASF2
+ 239 003a 02       		.uleb128 0x2
+ 240 003b 02       		.byte	0x2
+ 241 003c 07       		.byte	0x7
+ 242 003d D8000000 		.4byte	.LASF3
+ 243 0041 02       		.uleb128 0x2
+ 244 0042 04       		.byte	0x4
+ 245 0043 05       		.byte	0x5
+ 246 0044 95020000 		.4byte	.LASF4
+ 247 0048 02       		.uleb128 0x2
+ 248 0049 04       		.byte	0x4
+ 249 004a 07       		.byte	0x7
+ 250 004b 1F010000 		.4byte	.LASF5
+ 251 004f 02       		.uleb128 0x2
+ 252 0050 08       		.byte	0x8
+ 253 0051 05       		.byte	0x5
+ 254 0052 66020000 		.4byte	.LASF6
+ 255 0056 02       		.uleb128 0x2
+ 256 0057 08       		.byte	0x8
+ 257 0058 07       		.byte	0x7
+ 258 0059 15020000 		.4byte	.LASF7
+ 259 005d 03       		.uleb128 0x3
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 9
+
+
+ 260 005e 04       		.byte	0x4
+ 261 005f 05       		.byte	0x5
+ 262 0060 696E7400 		.ascii	"int\000"
+ 263 0064 02       		.uleb128 0x2
+ 264 0065 04       		.byte	0x4
+ 265 0066 07       		.byte	0x7
+ 266 0067 9E010000 		.4byte	.LASF8
+ 267 006b 04       		.uleb128 0x4
+ 268 006c 31010000 		.4byte	.LASF12
+ 269 0070 02       		.byte	0x2
+ 270 0071 E401     		.2byte	0x1e4
+ 271 0073 2C000000 		.4byte	0x2c
+ 272 0077 02       		.uleb128 0x2
+ 273 0078 04       		.byte	0x4
+ 274 0079 04       		.byte	0x4
+ 275 007a EB000000 		.4byte	.LASF9
+ 276 007e 02       		.uleb128 0x2
+ 277 007f 08       		.byte	0x8
+ 278 0080 04       		.byte	0x4
+ 279 0081 77010000 		.4byte	.LASF10
+ 280 0085 02       		.uleb128 0x2
+ 281 0086 01       		.byte	0x1
+ 282 0087 08       		.byte	0x8
+ 283 0088 74020000 		.4byte	.LASF11
+ 284 008c 04       		.uleb128 0x4
+ 285 008d 3E020000 		.4byte	.LASF13
+ 286 0091 02       		.byte	0x2
+ 287 0092 8E02     		.2byte	0x28e
+ 288 0094 98000000 		.4byte	0x98
+ 289 0098 05       		.uleb128 0x5
+ 290 0099 6B000000 		.4byte	0x6b
+ 291 009d 02       		.uleb128 0x2
+ 292 009e 08       		.byte	0x8
+ 293 009f 04       		.byte	0x4
+ 294 00a0 9E020000 		.4byte	.LASF14
+ 295 00a4 02       		.uleb128 0x2
+ 296 00a5 04       		.byte	0x4
+ 297 00a6 07       		.byte	0x7
+ 298 00a7 43020000 		.4byte	.LASF15
+ 299 00ab 06       		.uleb128 0x6
+ 300 00ac 04       		.byte	0x4
+ 301 00ad 03       		.byte	0x3
+ 302 00ae 6B       		.byte	0x6b
+ 303 00af E4000000 		.4byte	0xe4
+ 304 00b3 07       		.uleb128 0x7
+ 305 00b4 10010000 		.4byte	.LASF16
+ 306 00b8 03       		.byte	0x3
+ 307 00b9 6E       		.byte	0x6e
+ 308 00ba 6B000000 		.4byte	0x6b
+ 309 00be 00       		.byte	0
+ 310 00bf 07       		.uleb128 0x7
+ 311 00c0 00000000 		.4byte	.LASF17
+ 312 00c4 03       		.byte	0x3
+ 313 00c5 71       		.byte	0x71
+ 314 00c6 6B000000 		.4byte	0x6b
+ 315 00ca 01       		.byte	0x1
+ 316 00cb 07       		.uleb128 0x7
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 10
+
+
+ 317 00cc 07000000 		.4byte	.LASF18
+ 318 00d0 03       		.byte	0x3
+ 319 00d1 73       		.byte	0x73
+ 320 00d2 6B000000 		.4byte	0x6b
+ 321 00d6 02       		.byte	0x2
+ 322 00d7 07       		.uleb128 0x7
+ 323 00d8 4A010000 		.4byte	.LASF19
+ 324 00dc 03       		.byte	0x3
+ 325 00dd 86       		.byte	0x86
+ 326 00de 6B000000 		.4byte	0x6b
+ 327 00e2 03       		.byte	0x3
+ 328 00e3 00       		.byte	0
+ 329 00e4 08       		.uleb128 0x8
+ 330 00e5 37010000 		.4byte	.LASF20
+ 331 00e9 03       		.byte	0x3
+ 332 00ea 8B       		.byte	0x8b
+ 333 00eb AB000000 		.4byte	0xab
+ 334 00ef 09       		.uleb128 0x9
+ 335 00f0 C7000000 		.4byte	.LASF21
+ 336 00f4 01       		.byte	0x1
+ 337 00f5 2A       		.byte	0x2a
+ 338 00f6 01       		.byte	0x1
+ 339 00f7 0A       		.uleb128 0xa
+ 340 00f8 EF000000 		.4byte	0xef
+ 341 00fc 00000000 		.4byte	.LFB0
+ 342 0100 1C000000 		.4byte	.LFE0-.LFB0
+ 343 0104 01       		.uleb128 0x1
+ 344 0105 9C       		.byte	0x9c
+ 345 0106 26010000 		.4byte	0x126
+ 346 010a 0B       		.uleb128 0xb
+ 347 010b 06000000 		.4byte	.LVL0
+ 348 010f 0A020000 		.4byte	0x20a
+ 349 0113 0B       		.uleb128 0xb
+ 350 0114 0E000000 		.4byte	.LVL1
+ 351 0118 15020000 		.4byte	0x215
+ 352 011c 0B       		.uleb128 0xb
+ 353 011d 14000000 		.4byte	.LVL2
+ 354 0121 20020000 		.4byte	0x220
+ 355 0125 00       		.byte	0
+ 356 0126 09       		.uleb128 0x9
+ 357 0127 7E010000 		.4byte	.LASF22
+ 358 012b 01       		.byte	0x1
+ 359 012c 58       		.byte	0x58
+ 360 012d 01       		.byte	0x1
+ 361 012e 0A       		.uleb128 0xa
+ 362 012f 26010000 		.4byte	0x126
+ 363 0133 00000000 		.4byte	.LFB1
+ 364 0137 20000000 		.4byte	.LFE1-.LFB1
+ 365 013b 01       		.uleb128 0x1
+ 366 013c 9C       		.byte	0x9c
+ 367 013d 5D010000 		.4byte	0x15d
+ 368 0141 0B       		.uleb128 0xb
+ 369 0142 0A000000 		.4byte	.LVL3
+ 370 0146 2B020000 		.4byte	0x22b
+ 371 014a 0B       		.uleb128 0xb
+ 372 014b 10000000 		.4byte	.LVL4
+ 373 014f 36020000 		.4byte	0x236
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 11
+
+
+ 374 0153 0C       		.uleb128 0xc
+ 375 0154 1A000000 		.4byte	.LVL5
+ 376 0158 41020000 		.4byte	0x241
+ 377 015c 00       		.byte	0
+ 378 015d 0D       		.uleb128 0xd
+ 379 015e 92010000 		.4byte	.LASF23
+ 380 0162 01       		.byte	0x1
+ 381 0163 88       		.byte	0x88
+ 382 0164 00000000 		.4byte	.LFB2
+ 383 0168 2C000000 		.4byte	.LFE2-.LFB2
+ 384 016c 01       		.uleb128 0x1
+ 385 016d 9C       		.byte	0x9c
+ 386 016e AB010000 		.4byte	0x1ab
+ 387 0172 0E       		.uleb128 0xe
+ 388 0173 EF000000 		.4byte	0xef
+ 389 0177 10000000 		.4byte	.LBB4
+ 390 017b 1C000000 		.4byte	.LBE4-.LBB4
+ 391 017f 01       		.byte	0x1
+ 392 0180 9B       		.byte	0x9b
+ 393 0181 A1010000 		.4byte	0x1a1
+ 394 0185 0B       		.uleb128 0xb
+ 395 0186 14000000 		.4byte	.LVL7
+ 396 018a 0A020000 		.4byte	0x20a
+ 397 018e 0B       		.uleb128 0xb
+ 398 018f 1A000000 		.4byte	.LVL8
+ 399 0193 15020000 		.4byte	0x215
+ 400 0197 0B       		.uleb128 0xb
+ 401 0198 20000000 		.4byte	.LVL9
+ 402 019c 20020000 		.4byte	0x220
+ 403 01a0 00       		.byte	0
+ 404 01a1 0B       		.uleb128 0xb
+ 405 01a2 10000000 		.4byte	.LVL6
+ 406 01a6 4C020000 		.4byte	0x24c
+ 407 01aa 00       		.byte	0
+ 408 01ab 0D       		.uleb128 0xd
+ 409 01ac 6A010000 		.4byte	.LASF24
+ 410 01b0 01       		.byte	0x1
+ 411 01b1 B2       		.byte	0xb2
+ 412 01b2 00000000 		.4byte	.LFB3
+ 413 01b6 28000000 		.4byte	.LFE3-.LFB3
+ 414 01ba 01       		.uleb128 0x1
+ 415 01bb 9C       		.byte	0x9c
+ 416 01bc F9010000 		.4byte	0x1f9
+ 417 01c0 0E       		.uleb128 0xe
+ 418 01c1 26010000 		.4byte	0x126
+ 419 01c5 02000000 		.4byte	.LBB8
+ 420 01c9 14000000 		.4byte	.LBE8-.LBB8
+ 421 01cd 01       		.byte	0x1
+ 422 01ce B5       		.byte	0xb5
+ 423 01cf EF010000 		.4byte	0x1ef
+ 424 01d3 0B       		.uleb128 0xb
+ 425 01d4 0A000000 		.4byte	.LVL10
+ 426 01d8 2B020000 		.4byte	0x22b
+ 427 01dc 0B       		.uleb128 0xb
+ 428 01dd 10000000 		.4byte	.LVL11
+ 429 01e1 36020000 		.4byte	0x236
+ 430 01e5 0B       		.uleb128 0xb
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 12
+
+
+ 431 01e6 16000000 		.4byte	.LVL12
+ 432 01ea 41020000 		.4byte	0x241
+ 433 01ee 00       		.byte	0
+ 434 01ef 0C       		.uleb128 0xc
+ 435 01f0 24000000 		.4byte	.LVL13
+ 436 01f4 57020000 		.4byte	0x257
+ 437 01f8 00       		.byte	0
+ 438 01f9 0F       		.uleb128 0xf
+ 439 01fa 5D010000 		.4byte	.LASF36
+ 440 01fe 01       		.byte	0x1
+ 441 01ff 14       		.byte	0x14
+ 442 0200 E4000000 		.4byte	0xe4
+ 443 0204 05       		.uleb128 0x5
+ 444 0205 03       		.byte	0x3
+ 445 0206 00000000 		.4byte	HORIZ_backup
+ 446 020a 10       		.uleb128 0x10
+ 447 020b FF000000 		.4byte	.LASF25
+ 448 020f FF000000 		.4byte	.LASF25
+ 449 0213 03       		.byte	0x3
+ 450 0214 C0       		.byte	0xc0
+ 451 0215 10       		.uleb128 0x10
+ 452 0216 2C020000 		.4byte	.LASF26
+ 453 021a 2C020000 		.4byte	.LASF26
+ 454 021e 03       		.byte	0x3
+ 455 021f B3       		.byte	0xb3
+ 456 0220 10       		.uleb128 0x10
+ 457 0221 4C020000 		.4byte	.LASF27
+ 458 0225 4C020000 		.4byte	.LASF27
+ 459 0229 03       		.byte	0x3
+ 460 022a 9D       		.byte	0x9d
+ 461 022b 10       		.uleb128 0x10
+ 462 022c 83020000 		.4byte	.LASF28
+ 463 0230 83020000 		.4byte	.LASF28
+ 464 0234 03       		.byte	0x3
+ 465 0235 BE       		.byte	0xbe
+ 466 0236 10       		.uleb128 0x10
+ 467 0237 E3020000 		.4byte	.LASF29
+ 468 023b E3020000 		.4byte	.LASF29
+ 469 023f 03       		.byte	0x3
+ 470 0240 BA       		.byte	0xba
+ 471 0241 10       		.uleb128 0x10
+ 472 0242 11000000 		.4byte	.LASF30
+ 473 0246 11000000 		.4byte	.LASF30
+ 474 024a 03       		.byte	0x3
+ 475 024b 9E       		.byte	0x9e
+ 476 024c 10       		.uleb128 0x10
+ 477 024d B6020000 		.4byte	.LASF31
+ 478 0251 B6020000 		.4byte	.LASF31
+ 479 0255 03       		.byte	0x3
+ 480 0256 93       		.byte	0x93
+ 481 0257 10       		.uleb128 0x10
+ 482 0258 BA000000 		.4byte	.LASF32
+ 483 025c BA000000 		.4byte	.LASF32
+ 484 0260 03       		.byte	0x3
+ 485 0261 DB       		.byte	0xdb
+ 486 0262 00       		.byte	0
+ 487              		.section	.debug_abbrev,"",%progbits
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 13
+
+
+ 488              	.Ldebug_abbrev0:
+ 489 0000 01       		.uleb128 0x1
+ 490 0001 11       		.uleb128 0x11
+ 491 0002 01       		.byte	0x1
+ 492 0003 25       		.uleb128 0x25
+ 493 0004 0E       		.uleb128 0xe
+ 494 0005 13       		.uleb128 0x13
+ 495 0006 0B       		.uleb128 0xb
+ 496 0007 03       		.uleb128 0x3
+ 497 0008 0E       		.uleb128 0xe
+ 498 0009 1B       		.uleb128 0x1b
+ 499 000a 0E       		.uleb128 0xe
+ 500 000b 55       		.uleb128 0x55
+ 501 000c 17       		.uleb128 0x17
+ 502 000d 11       		.uleb128 0x11
+ 503 000e 01       		.uleb128 0x1
+ 504 000f 10       		.uleb128 0x10
+ 505 0010 17       		.uleb128 0x17
+ 506 0011 00       		.byte	0
+ 507 0012 00       		.byte	0
+ 508 0013 02       		.uleb128 0x2
+ 509 0014 24       		.uleb128 0x24
+ 510 0015 00       		.byte	0
+ 511 0016 0B       		.uleb128 0xb
+ 512 0017 0B       		.uleb128 0xb
+ 513 0018 3E       		.uleb128 0x3e
+ 514 0019 0B       		.uleb128 0xb
+ 515 001a 03       		.uleb128 0x3
+ 516 001b 0E       		.uleb128 0xe
+ 517 001c 00       		.byte	0
+ 518 001d 00       		.byte	0
+ 519 001e 03       		.uleb128 0x3
+ 520 001f 24       		.uleb128 0x24
+ 521 0020 00       		.byte	0
+ 522 0021 0B       		.uleb128 0xb
+ 523 0022 0B       		.uleb128 0xb
+ 524 0023 3E       		.uleb128 0x3e
+ 525 0024 0B       		.uleb128 0xb
+ 526 0025 03       		.uleb128 0x3
+ 527 0026 08       		.uleb128 0x8
+ 528 0027 00       		.byte	0
+ 529 0028 00       		.byte	0
+ 530 0029 04       		.uleb128 0x4
+ 531 002a 16       		.uleb128 0x16
+ 532 002b 00       		.byte	0
+ 533 002c 03       		.uleb128 0x3
+ 534 002d 0E       		.uleb128 0xe
+ 535 002e 3A       		.uleb128 0x3a
+ 536 002f 0B       		.uleb128 0xb
+ 537 0030 3B       		.uleb128 0x3b
+ 538 0031 05       		.uleb128 0x5
+ 539 0032 49       		.uleb128 0x49
+ 540 0033 13       		.uleb128 0x13
+ 541 0034 00       		.byte	0
+ 542 0035 00       		.byte	0
+ 543 0036 05       		.uleb128 0x5
+ 544 0037 35       		.uleb128 0x35
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 14
+
+
+ 545 0038 00       		.byte	0
+ 546 0039 49       		.uleb128 0x49
+ 547 003a 13       		.uleb128 0x13
+ 548 003b 00       		.byte	0
+ 549 003c 00       		.byte	0
+ 550 003d 06       		.uleb128 0x6
+ 551 003e 13       		.uleb128 0x13
+ 552 003f 01       		.byte	0x1
+ 553 0040 0B       		.uleb128 0xb
+ 554 0041 0B       		.uleb128 0xb
+ 555 0042 3A       		.uleb128 0x3a
+ 556 0043 0B       		.uleb128 0xb
+ 557 0044 3B       		.uleb128 0x3b
+ 558 0045 0B       		.uleb128 0xb
+ 559 0046 01       		.uleb128 0x1
+ 560 0047 13       		.uleb128 0x13
+ 561 0048 00       		.byte	0
+ 562 0049 00       		.byte	0
+ 563 004a 07       		.uleb128 0x7
+ 564 004b 0D       		.uleb128 0xd
+ 565 004c 00       		.byte	0
+ 566 004d 03       		.uleb128 0x3
+ 567 004e 0E       		.uleb128 0xe
+ 568 004f 3A       		.uleb128 0x3a
+ 569 0050 0B       		.uleb128 0xb
+ 570 0051 3B       		.uleb128 0x3b
+ 571 0052 0B       		.uleb128 0xb
+ 572 0053 49       		.uleb128 0x49
+ 573 0054 13       		.uleb128 0x13
+ 574 0055 38       		.uleb128 0x38
+ 575 0056 0B       		.uleb128 0xb
+ 576 0057 00       		.byte	0
+ 577 0058 00       		.byte	0
+ 578 0059 08       		.uleb128 0x8
+ 579 005a 16       		.uleb128 0x16
+ 580 005b 00       		.byte	0
+ 581 005c 03       		.uleb128 0x3
+ 582 005d 0E       		.uleb128 0xe
+ 583 005e 3A       		.uleb128 0x3a
+ 584 005f 0B       		.uleb128 0xb
+ 585 0060 3B       		.uleb128 0x3b
+ 586 0061 0B       		.uleb128 0xb
+ 587 0062 49       		.uleb128 0x49
+ 588 0063 13       		.uleb128 0x13
+ 589 0064 00       		.byte	0
+ 590 0065 00       		.byte	0
+ 591 0066 09       		.uleb128 0x9
+ 592 0067 2E       		.uleb128 0x2e
+ 593 0068 00       		.byte	0
+ 594 0069 3F       		.uleb128 0x3f
+ 595 006a 19       		.uleb128 0x19
+ 596 006b 03       		.uleb128 0x3
+ 597 006c 0E       		.uleb128 0xe
+ 598 006d 3A       		.uleb128 0x3a
+ 599 006e 0B       		.uleb128 0xb
+ 600 006f 3B       		.uleb128 0x3b
+ 601 0070 0B       		.uleb128 0xb
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 15
+
+
+ 602 0071 27       		.uleb128 0x27
+ 603 0072 19       		.uleb128 0x19
+ 604 0073 20       		.uleb128 0x20
+ 605 0074 0B       		.uleb128 0xb
+ 606 0075 00       		.byte	0
+ 607 0076 00       		.byte	0
+ 608 0077 0A       		.uleb128 0xa
+ 609 0078 2E       		.uleb128 0x2e
+ 610 0079 01       		.byte	0x1
+ 611 007a 31       		.uleb128 0x31
+ 612 007b 13       		.uleb128 0x13
+ 613 007c 11       		.uleb128 0x11
+ 614 007d 01       		.uleb128 0x1
+ 615 007e 12       		.uleb128 0x12
+ 616 007f 06       		.uleb128 0x6
+ 617 0080 40       		.uleb128 0x40
+ 618 0081 18       		.uleb128 0x18
+ 619 0082 9742     		.uleb128 0x2117
+ 620 0084 19       		.uleb128 0x19
+ 621 0085 01       		.uleb128 0x1
+ 622 0086 13       		.uleb128 0x13
+ 623 0087 00       		.byte	0
+ 624 0088 00       		.byte	0
+ 625 0089 0B       		.uleb128 0xb
+ 626 008a 898201   		.uleb128 0x4109
+ 627 008d 00       		.byte	0
+ 628 008e 11       		.uleb128 0x11
+ 629 008f 01       		.uleb128 0x1
+ 630 0090 31       		.uleb128 0x31
+ 631 0091 13       		.uleb128 0x13
+ 632 0092 00       		.byte	0
+ 633 0093 00       		.byte	0
+ 634 0094 0C       		.uleb128 0xc
+ 635 0095 898201   		.uleb128 0x4109
+ 636 0098 00       		.byte	0
+ 637 0099 11       		.uleb128 0x11
+ 638 009a 01       		.uleb128 0x1
+ 639 009b 9542     		.uleb128 0x2115
+ 640 009d 19       		.uleb128 0x19
+ 641 009e 31       		.uleb128 0x31
+ 642 009f 13       		.uleb128 0x13
+ 643 00a0 00       		.byte	0
+ 644 00a1 00       		.byte	0
+ 645 00a2 0D       		.uleb128 0xd
+ 646 00a3 2E       		.uleb128 0x2e
+ 647 00a4 01       		.byte	0x1
+ 648 00a5 3F       		.uleb128 0x3f
+ 649 00a6 19       		.uleb128 0x19
+ 650 00a7 03       		.uleb128 0x3
+ 651 00a8 0E       		.uleb128 0xe
+ 652 00a9 3A       		.uleb128 0x3a
+ 653 00aa 0B       		.uleb128 0xb
+ 654 00ab 3B       		.uleb128 0x3b
+ 655 00ac 0B       		.uleb128 0xb
+ 656 00ad 27       		.uleb128 0x27
+ 657 00ae 19       		.uleb128 0x19
+ 658 00af 11       		.uleb128 0x11
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 16
+
+
+ 659 00b0 01       		.uleb128 0x1
+ 660 00b1 12       		.uleb128 0x12
+ 661 00b2 06       		.uleb128 0x6
+ 662 00b3 40       		.uleb128 0x40
+ 663 00b4 18       		.uleb128 0x18
+ 664 00b5 9742     		.uleb128 0x2117
+ 665 00b7 19       		.uleb128 0x19
+ 666 00b8 01       		.uleb128 0x1
+ 667 00b9 13       		.uleb128 0x13
+ 668 00ba 00       		.byte	0
+ 669 00bb 00       		.byte	0
+ 670 00bc 0E       		.uleb128 0xe
+ 671 00bd 1D       		.uleb128 0x1d
+ 672 00be 01       		.byte	0x1
+ 673 00bf 31       		.uleb128 0x31
+ 674 00c0 13       		.uleb128 0x13
+ 675 00c1 11       		.uleb128 0x11
+ 676 00c2 01       		.uleb128 0x1
+ 677 00c3 12       		.uleb128 0x12
+ 678 00c4 06       		.uleb128 0x6
+ 679 00c5 58       		.uleb128 0x58
+ 680 00c6 0B       		.uleb128 0xb
+ 681 00c7 59       		.uleb128 0x59
+ 682 00c8 0B       		.uleb128 0xb
+ 683 00c9 01       		.uleb128 0x1
+ 684 00ca 13       		.uleb128 0x13
+ 685 00cb 00       		.byte	0
+ 686 00cc 00       		.byte	0
+ 687 00cd 0F       		.uleb128 0xf
+ 688 00ce 34       		.uleb128 0x34
+ 689 00cf 00       		.byte	0
+ 690 00d0 03       		.uleb128 0x3
+ 691 00d1 0E       		.uleb128 0xe
+ 692 00d2 3A       		.uleb128 0x3a
+ 693 00d3 0B       		.uleb128 0xb
+ 694 00d4 3B       		.uleb128 0x3b
+ 695 00d5 0B       		.uleb128 0xb
+ 696 00d6 49       		.uleb128 0x49
+ 697 00d7 13       		.uleb128 0x13
+ 698 00d8 02       		.uleb128 0x2
+ 699 00d9 18       		.uleb128 0x18
+ 700 00da 00       		.byte	0
+ 701 00db 00       		.byte	0
+ 702 00dc 10       		.uleb128 0x10
+ 703 00dd 2E       		.uleb128 0x2e
+ 704 00de 00       		.byte	0
+ 705 00df 3F       		.uleb128 0x3f
+ 706 00e0 19       		.uleb128 0x19
+ 707 00e1 3C       		.uleb128 0x3c
+ 708 00e2 19       		.uleb128 0x19
+ 709 00e3 6E       		.uleb128 0x6e
+ 710 00e4 0E       		.uleb128 0xe
+ 711 00e5 03       		.uleb128 0x3
+ 712 00e6 0E       		.uleb128 0xe
+ 713 00e7 3A       		.uleb128 0x3a
+ 714 00e8 0B       		.uleb128 0xb
+ 715 00e9 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 17
+
+
+ 716 00ea 0B       		.uleb128 0xb
+ 717 00eb 00       		.byte	0
+ 718 00ec 00       		.byte	0
+ 719 00ed 00       		.byte	0
+ 720              		.section	.debug_aranges,"",%progbits
+ 721 0000 34000000 		.4byte	0x34
+ 722 0004 0200     		.2byte	0x2
+ 723 0006 00000000 		.4byte	.Ldebug_info0
+ 724 000a 04       		.byte	0x4
+ 725 000b 00       		.byte	0
+ 726 000c 0000     		.2byte	0
+ 727 000e 0000     		.2byte	0
+ 728 0010 00000000 		.4byte	.LFB0
+ 729 0014 1C000000 		.4byte	.LFE0-.LFB0
+ 730 0018 00000000 		.4byte	.LFB1
+ 731 001c 20000000 		.4byte	.LFE1-.LFB1
+ 732 0020 00000000 		.4byte	.LFB2
+ 733 0024 2C000000 		.4byte	.LFE2-.LFB2
+ 734 0028 00000000 		.4byte	.LFB3
+ 735 002c 28000000 		.4byte	.LFE3-.LFB3
+ 736 0030 00000000 		.4byte	0
+ 737 0034 00000000 		.4byte	0
+ 738              		.section	.debug_ranges,"",%progbits
+ 739              	.Ldebug_ranges0:
+ 740 0000 00000000 		.4byte	.LFB0
+ 741 0004 1C000000 		.4byte	.LFE0
+ 742 0008 00000000 		.4byte	.LFB1
+ 743 000c 20000000 		.4byte	.LFE1
+ 744 0010 00000000 		.4byte	.LFB2
+ 745 0014 2C000000 		.4byte	.LFE2
+ 746 0018 00000000 		.4byte	.LFB3
+ 747 001c 28000000 		.4byte	.LFE3
+ 748 0020 00000000 		.4byte	0
+ 749 0024 00000000 		.4byte	0
+ 750              		.section	.debug_line,"",%progbits
+ 751              	.Ldebug_line0:
+ 752 0000 BB000000 		.section	.debug_str,"MS",%progbits,1
+ 752      02005000 
+ 752      00000201 
+ 752      FB0E0D00 
+ 752      01010101 
+ 753              	.LASF17:
+ 754 0000 50574D55 		.ascii	"PWMUdb\000"
+ 754      646200
+ 755              	.LASF18:
+ 756 0007 50574D50 		.ascii	"PWMPeriod\000"
+ 756      6572696F 
+ 756      6400
+ 757              	.LASF30:
+ 758 0011 484F5249 		.ascii	"HORIZ_WriteControlRegister\000"
+ 758      5A5F5772 
+ 758      69746543 
+ 758      6F6E7472 
+ 758      6F6C5265 
+ 759              	.LASF33:
+ 760 002c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 760      43313120 
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 18
+
+
+ 760      352E342E 
+ 760      31203230 
+ 760      31363036 
+ 761 005f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 761      20726576 
+ 761      6973696F 
+ 761      6E203233 
+ 761      37373135 
+ 762 0092 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects\000"
+ 762      66756E63 
+ 762      74696F6E 
+ 762      2D736563 
+ 762      74696F6E 
+ 763              	.LASF32:
+ 764 00ba 484F5249 		.ascii	"HORIZ_Enable\000"
+ 764      5A5F456E 
+ 764      61626C65 
+ 764      00
+ 765              	.LASF21:
+ 766 00c7 484F5249 		.ascii	"HORIZ_SaveConfig\000"
+ 766      5A5F5361 
+ 766      7665436F 
+ 766      6E666967 
+ 766      00
+ 767              	.LASF3:
+ 768 00d8 73686F72 		.ascii	"short unsigned int\000"
+ 768      7420756E 
+ 768      7369676E 
+ 768      65642069 
+ 768      6E7400
+ 769              	.LASF9:
+ 770 00eb 666C6F61 		.ascii	"float\000"
+ 770      7400
+ 771              	.LASF1:
+ 772 00f1 756E7369 		.ascii	"unsigned char\000"
+ 772      676E6564 
+ 772      20636861 
+ 772      7200
+ 773              	.LASF25:
+ 774 00ff 484F5249 		.ascii	"HORIZ_ReadPeriod\000"
+ 774      5A5F5265 
+ 774      61645065 
+ 774      72696F64 
+ 774      00
+ 775              	.LASF16:
+ 776 0110 50574D45 		.ascii	"PWMEnableState\000"
+ 776      6E61626C 
+ 776      65537461 
+ 776      746500
+ 777              	.LASF5:
+ 778 011f 6C6F6E67 		.ascii	"long unsigned int\000"
+ 778      20756E73 
+ 778      69676E65 
+ 778      6420696E 
+ 778      7400
+ 779              	.LASF12:
+ 780 0131 75696E74 		.ascii	"uint8\000"
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 19
+
+
+ 780      3800
+ 781              	.LASF20:
+ 782 0137 484F5249 		.ascii	"HORIZ_backupStruct\000"
+ 782      5A5F6261 
+ 782      636B7570 
+ 782      53747275 
+ 782      637400
+ 783              	.LASF19:
+ 784 014a 50574D43 		.ascii	"PWMControlRegister\000"
+ 784      6F6E7472 
+ 784      6F6C5265 
+ 784      67697374 
+ 784      657200
+ 785              	.LASF36:
+ 786 015d 484F5249 		.ascii	"HORIZ_backup\000"
+ 786      5A5F6261 
+ 786      636B7570 
+ 786      00
+ 787              	.LASF24:
+ 788 016a 484F5249 		.ascii	"HORIZ_Wakeup\000"
+ 788      5A5F5761 
+ 788      6B657570 
+ 788      00
+ 789              	.LASF10:
+ 790 0177 646F7562 		.ascii	"double\000"
+ 790      6C6500
+ 791              	.LASF22:
+ 792 017e 484F5249 		.ascii	"HORIZ_RestoreConfig\000"
+ 792      5A5F5265 
+ 792      73746F72 
+ 792      65436F6E 
+ 792      66696700 
+ 793              	.LASF23:
+ 794 0192 484F5249 		.ascii	"HORIZ_Sleep\000"
+ 794      5A5F536C 
+ 794      65657000 
+ 795              	.LASF8:
+ 796 019e 756E7369 		.ascii	"unsigned int\000"
+ 796      676E6564 
+ 796      20696E74 
+ 796      00
+ 797              	.LASF35:
+ 798 01ab 433A5C55 		.ascii	"C:\\Users\\info\\Desktop\\Spring 2019 Classes\\6.11"
+ 798      73657273 
+ 798      5C696E66 
+ 798      6F5C4465 
+ 798      736B746F 
+ 799 01d9 355C362E 		.ascii	"5\\6.115-final\\PSoCCreator\\Final Project\\FinalEm"
+ 799      3131352D 
+ 799      66696E61 
+ 799      6C5C5053 
+ 799      6F434372 
+ 800 0208 756C6174 		.ascii	"ulator.cydsn\000"
+ 800      6F722E63 
+ 800      7964736E 
+ 800      00
+ 801              	.LASF7:
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 20
+
+
+ 802 0215 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 802      206C6F6E 
+ 802      6720756E 
+ 802      7369676E 
+ 802      65642069 
+ 803              	.LASF26:
+ 804 022c 484F5249 		.ascii	"HORIZ_ReadCounter\000"
+ 804      5A5F5265 
+ 804      6164436F 
+ 804      756E7465 
+ 804      7200
+ 805              	.LASF13:
+ 806 023e 72656738 		.ascii	"reg8\000"
+ 806      00
+ 807              	.LASF15:
+ 808 0243 73697A65 		.ascii	"sizetype\000"
+ 808      74797065 
+ 808      00
+ 809              	.LASF27:
+ 810 024c 484F5249 		.ascii	"HORIZ_ReadControlRegister\000"
+ 810      5A5F5265 
+ 810      6164436F 
+ 810      6E74726F 
+ 810      6C526567 
+ 811              	.LASF6:
+ 812 0266 6C6F6E67 		.ascii	"long long int\000"
+ 812      206C6F6E 
+ 812      6720696E 
+ 812      7400
+ 813              	.LASF11:
+ 814 0274 63686172 		.ascii	"char\000"
+ 814      00
+ 815              	.LASF2:
+ 816 0279 73686F72 		.ascii	"short int\000"
+ 816      7420696E 
+ 816      7400
+ 817              	.LASF28:
+ 818 0283 484F5249 		.ascii	"HORIZ_WritePeriod\000"
+ 818      5A5F5772 
+ 818      69746550 
+ 818      6572696F 
+ 818      6400
+ 819              	.LASF4:
+ 820 0295 6C6F6E67 		.ascii	"long int\000"
+ 820      20696E74 
+ 820      00
+ 821              	.LASF14:
+ 822 029e 6C6F6E67 		.ascii	"long double\000"
+ 822      20646F75 
+ 822      626C6500 
+ 823              	.LASF0:
+ 824 02aa 7369676E 		.ascii	"signed char\000"
+ 824      65642063 
+ 824      68617200 
+ 825              	.LASF31:
+ 826 02b6 484F5249 		.ascii	"HORIZ_Stop\000"
+ 826      5A5F5374 
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccO3Fvby.s 			page 21
+
+
+ 826      6F7000
+ 827              	.LASF34:
+ 828 02c1 47656E65 		.ascii	"Generated_Source\\PSoC5\\HORIZ_PM.c\000"
+ 828      72617465 
+ 828      645F536F 
+ 828      75726365 
+ 828      5C50536F 
+ 829              	.LASF29:
+ 830 02e3 484F5249 		.ascii	"HORIZ_WriteCounter\000"
+ 830      5A5F5772 
+ 830      69746543 
+ 830      6F756E74 
+ 830      657200
+ 831              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
