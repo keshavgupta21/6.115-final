@@ -1,0 +1,1772 @@
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"spi_oled_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.section	.gnu.lto_.profile.791faa6b,"",%progbits
+  19 0000 789C6361 		.ascii	"x\234ca`d`a`\000\222\272|\000\000\322\000F"
+  19      60646061 
+  19      600092BA 
+  19      7C0000D2 
+  19      0046
+  20              		.text
+  21              		.section	.gnu.lto_.inline.791faa6b,"",%progbits
+  22 0000 789C6361 		.ascii	"x\234ca`d\000\201h\006\004`a``fbd`\0022\331\026\310"
+  22      60640081 
+  22      68060460 
+  22      61606066 
+  22      62646002 
+  23 0018 8328A022 		.ascii	"\203(\240\"t\021&\006\016\001\240\010\307\001;\204\""
+  23      74112606 
+  23      0E01A008 
+  23      C7013B84 
+  23      22
+  24 0029 2EB0660E 		.ascii	".\260f\016a\2408\333\007=Tq0\301\000\000\0341\006\034"
+  24      61A038DB 
+  24      073D5471 
+  24      30C10000 
+  24      1C31061C 
+  25              		.text
+  26              		.section	.gnu.lto_.jmpfuncs.791faa6b,"",%progbits
+  27 0000 789C6361 		.ascii	"x\234ca`d\000\001A\006\004`\001b\240(\023\224\311\300"
+  27      60640001 
+  27      41060460 
+  27      0162A028 
+  27      1394C9C0 
+  28 0014 00000346 		.ascii	"\000\000\003F\000\""
+  28      0022
+  29              		.text
+  30              		.section	.gnu.lto_.pureconst.791faa6b,"",%progbits
+  31 0000 789C6361 		.ascii	"x\234ca`d\340d```a\0002\230\244X$\000\001y\000L"
+  31      6064E064 
+  31      60606061 
+  31      003298A4 
+  31      58240001 
+  32              		.text
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 2
+
+
+  33              		.section	.gnu.lto_spi_oled_SaveConfig.791faa6b,"",%progbits
+  34 0000 789C6361 		.ascii	"x\234ca`d\000\201j V\007bi fdf`d\232p\216\201\241\221"
+  34      60640081 
+  34      6A205607 
+  34      62692066 
+  34      64666064 
+  35 001a 83899111 		.ascii	"\203\211\221\021\304h\340`d\250gb\254g\374\312\364\227"
+  35      C468E060 
+  35      64A86762 
+  35      AC67FCCA 
+  35      F497
+  36 002c 89F150FB 		.ascii	"\211\361P\373\263\235L\232\313\033\200\340\301\322i"
+  36      B39D4C9A 
+  36      CB1B80E0 
+  36      C1D269
+  37 003b CC0D2B0E 		.ascii	"\314\015+\0160\266230\374g\002\233\304\300\270\234Q"
+  37      30B63233 
+  37      30FC6702 
+  37      9BC4C0B8 
+  37      9C51
+  38 004d 9301A8EC 		.ascii	"\223\001\250\354\321\306\177Sy\331Z@\312\024 \222\214"
+  38      D1C67F53 
+  38      79D95A40 
+  38      CA142092 
+  38      8C
+  39 005e 2B18D940 		.ascii	"+\030\331@\326\255\017:\320\360\377\177s\303\201\255"
+  39      D6AD0F3A 
+  39      D0F0FF7F 
+  39      73C381AD 
+  40 006e AC1F9980 		.ascii	"\254\037\231\200\022\037\200\030d\015\210\003\244\231"
+  40      121F8018 
+  40      640D8803 
+  40      A499
+  41 007c 5F313281 		.ascii	"_12\201\224\202M\373\300\304\010\022\003\252PuO\315"
+  41      94824DFB 
+  41      C0C40812 
+  41      03AA5075 
+  41      4FCD
+  42 008e 4B2D4A2C 		.ascii	"K-J,IM\211\017\316/-JN\215\011\010\316w6\215).\310\214"
+  42      494D890F 
+  42      CE2F2D4A 
+  42      4E8D0908 
+  42      CE77368D 
+  43 00a6 CFCF018A 		.ascii	"\317\317\001\212\006\370\352%3\000\000~,:)"
+  43      06F8EA25 
+  43      3300007E 
+  43      2C3A29
+  44              		.text
+  45              		.section	.gnu.lto_spi_oled_RestoreConfig.791faa6b,"",%progbits
+  46 0000 789C6361 		.ascii	"x\234ca`d\000\201j V\007bi fdf`d\232p\216\201\241\221"
+  46      60640081 
+  46      6A205607 
+  46      62692066 
+  46      64666064 
+  47 001a 83899111 		.ascii	"\203\211\221\021\304h\340`d\250gb\254g\374\312\364\227"
+  47      C468E060 
+  47      64A86762 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 3
+
+
+  47      AC67FCCA 
+  47      F497
+  48 002c 89F150FB 		.ascii	"\211\361P\373\263\235L\232\313\033\200\340\301\322\371"
+  48      B39D4C9A 
+  48      CB1B80E0 
+  48      C1D2F9
+  49 003b CC0D2B0E 		.ascii	"\314\015+\0160\266230\374g\002\233\304\300\270\234Q"
+  49      30B63233 
+  49      30FC6702 
+  49      9BC4C0B8 
+  49      9C51
+  50 004d 9301A8EC 		.ascii	"\223\001\250\354\321\306\177Sy\331Z@\312\024 \222\214"
+  50      D1C67F53 
+  50      79D95A40 
+  50      CA142092 
+  50      8C
+  51 005e 2B18D940 		.ascii	"+\030\331@\326\255\017:\320\360\377\177s\303\201\277"
+  51      D6AD0F3A 
+  51      D0F0FF7F 
+  51      73C381BF 
+  52 006e AC0B7980 		.ascii	"\254\013y\200\022\037\200\030d\315G&&\020\315\374\212"
+  52      121F8018 
+  52      64CD4726 
+  52      2610CDFC 
+  52      8A
+  53 007f 9109A414 		.ascii	"\221\011\244\024l\332\007&F\220\030P\205\252{j^jQbI"
+  53      6CDA0726 
+  53      46901850 
+  53      85AA7B6A 
+  53      5E6A5162 
+  54 0094 6A4A7C70 		.ascii	"jJ|p~iQrjL@p\276\263iLqAf|~\016P4\300W/\231\001\000"
+  54      7E695172 
+  54      6A4C4070 
+  54      BEB3694C 
+  54      7141667C 
+  55 00b2 84643A34 		.ascii	"\204d:4"
+  56              		.text
+  57              		.section	.gnu.lto_spi_oled_Sleep.791faa6b,"",%progbits
+  58 0000 789C6550 		.ascii	"x\234ePAKTQ\024>\337\275o\336L\206\340>\027.\222p\243"
+  58      414B5451 
+  58      143EDFBD 
+  58      6FDE4C86 
+  58      E03E172E 
+  59 0017 6DFA0581 		.ascii	"m\372\005\201\255\002\311U \210\350,\204h\304r=w|>l"
+  59      AD02C955 
+  59      2088E82C 
+  59      8468C472 
+  59      3D777C3E 
+  60 002c 5A849B66 		.ascii	"Z\204\233f\023\342RKm\324\2058\013\3415\210\233D!\260"
+  60      13E2524B 
+  60      6DD48538 
+  60      0BE13588 
+  60      9B4421B0 
+  61 0040 456D546A 		.ascii	"EmTj\010s1#\272\320\322\351;\357m\204\016\334{\3569"
+  61      08733123 
+  61      BAD0D2E9 
+  61      3BEF6D84 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 4
+
+
+  61      0EDC7BEE 
+  62 0055 E7BBE7FB 		.ascii	"\347\273\347\373\370<\201h|c\272\307|\207\007V`fvE\012"
+  62      F83C8168 
+  62      7C63BAC7 
+  62      7C870756 
+  62      60667645 
+  63 006a 1903E8C3 		.ascii	"\031\003\350\303e y\203<\316\315\225Au\272V1]\363\216"
+  63      65207983 
+  63      3CCECD95 
+  63      4175BA56 
+  63      315DF38E 
+  64 007e 71F0F3F7 		.ascii	"q\360\363\367}\267\020!\264\"M\023o\022\314\243K\010"
+  64      7DB71021 
+  64      B4224D13 
+  64      6F12CCA3 
+  64      4B08
+  65 0090 3B5ABD7E 		.ascii	";Z\275~\333\352O)\254#\031b\001\276\322\225\237D\256"
+  65      DBEA4F29 
+  65      AC231962 
+  65      01BED295 
+  65      9F44AE
+  66 00a3 D90C5CD4 		.ascii	"\331\014\\\324\360?]\372\334\035Zr\362\362x\231\224"
+  66      F03F5DFA 
+  66      DC1D5A72 
+  66      F2F27899 
+  66      94
+  67 00b4 BE44EAFC 		.ascii	"\276D\352\374\241\334\015c4\333\032\252\227\257\277"
+  67      A1DC0D63 
+  67      34DB1AAA 
+  67      97AFBF
+  68 00c3 BEDB806E 		.ascii	"\276\333\200n\011\254%C)\254\356\245\317Lh\211gYl\354"
+  68      09AC2543 
+  68      29ACEEA5 
+  68      CF4C6889 
+  68      67596CEC 
+  69 00d7 9FB52465 		.ascii	"\237\265$e\351s\301ylm\356\356U\2759\314\026\246(\321"
+  69      E973C179 
+  69      6C6DEEEE 
+  69      55BD39CC 
+  69      16A628D1 
+  70 00eb C307B4E3 		.ascii	"\303\007\264\343=\332\251d\021s\220\032\202\277\275"
+  70      3DDAA964 
+  70      1173901A 
+  70      82BFBD
+  71 00fa 125824EB 		.ascii	"\022X$\353\276\324wfo\353\177\240\015K\204q\276>\375"
+  71      BED47766 
+  71      6FEB7FA0 
+  71      0D4B8471 
+  71      BE3EFD
+  72 010d C34B083D 		.ascii	"\303K\010=\342\010*\237T.Z\023\220`9\006M\236\246\023"
+  72      E2082A9F 
+  72      542E5A13 
+  72      90603906 
+  72      4D9EA613 
+  73 0121 488A28AD 		.ascii	"H\212(\255K\207w\265qSa*VX\251\234|O\347\257\334+\347"
+  73      4B8777B5 
+  73      7153612A 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 5
+
+
+  73      5658A99C 
+  73      7C4FE7AF 
+  74 0138 DAD82BD2 		.ascii	"\332\330+\3225m\037\357\354o\265\250J\027\367}\224i"
+  74      356D1FEF 
+  74      EC6FB5A8 
+  74      4A17F77D 
+  74      9469
+  75 014a F547D5C9 		.ascii	"\365G\325\311\341\233\215\225b\246gYmtOC\233\306\012"
+  75      E19B8D95 
+  75      62A66759 
+  75      6D744F43 
+  75      9BC60A
+  76 015d A55FC75E 		.ascii	"\245_\307^c\025=d\225_\010\242\213m\243\234\377\263"
+  76      63153D64 
+  76      955F08A2 
+  76      8B6DA39C 
+  76      FFB3
+  77 016f 649A866E 		.ascii	"d\232\206nb\015y\372zK\2161\031\375\351\215\241\032"
+  77      620D79FA 
+  77      7A4B8E31 
+  77      19FDE98D 
+  77      A11A
+  78 0181 750EE92E 		.ascii	"u\016\351.\327u>\312>\317\216\017\275\314\216\014\366"
+  78      D7753ECA 
+  78      3ECF8E0F 
+  78      BDCC8E0C 
+  78      F6
+  79 0192 E726C687 		.ascii	"\347&\306\207\263\003}\375\271\207\017\006^\214\215"
+  79      B3037DFD 
+  79      B9870F06 
+  79      5E8C8D
+  80 01a1 0EE69EB1 		.ascii	"\016\346\236\261\333\367\270{X\376\001\346\341\260\226"
+  80      DBF7B87B 
+  80      58FE01E6 
+  80      E1B096
+  81              		.text
+  82              		.section	.gnu.lto_spi_oled_backup.791faa6b,"",%progbits
+  83 0000 789C6361 		.ascii	"x\234ca`d\000\001g \206\260\030\030\37621\256\373\364"
+  83      60640001 
+  83      672086B0 
+  83      1818FE32 
+  83      31AEFBF4 
+  84 0014 651DDB17 		.ascii	"e\035\333\027\246Vf\006F~ w\375\233\235?y!\\\220\354"
+  84      A6566606 
+  84      467E2077 
+  84      FD9B9D3F 
+  84      79215C90 
+  85 0029 9E398BAF 		.ascii	"\2369\213\2573Zlk\350X\320\240\320\312\314\370\217\211"
+  85      335A6C6B 
+  85      E858D0A0 
+  85      D0CACCF8 
+  85      8F89
+  86 003b 817105A3 		.ascii	"\201q\005\243\314?&F\306\345\2142\014\214+\031-\030"
+  86      CC3F2646 
+  86      C6E58C32 
+  86      0C8C2B19 
+  86      2D18
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 6
+
+
+  87 004d 00BFD917 		.ascii	"\000\277\331\027\372"
+  87      FA
+  88              		.text
+  89              		.section	.gnu.lto_spi_oled_Wakeup.791faa6b,"",%progbits
+  90 0000 789C754F 		.ascii	"x\234uO=KCA\020\334\271\273|\020\014\370\003$\330\210"
+  90      3D4B4341 
+  90      10DCB9BB 
+  90      7C100CF8 
+  90      0324D888 
+  91 0014 A4D058E8 		.ascii	"\244\320X\350/\260\020\004A\264\025\202\304\024\202"
+  91      2FB01004 
+  91      41B41582 
+  91      C41482
+  92 0023 18F1A37E 		.ascii	"\030\361\243~\027\223\207\246\021\033\355\304\322oc"
+  92      179387A6 
+  92      111BEDC4 
+  92      D26F63
+  93 0032 2A7DA99E 		.ascii	"*}\251\236\301JDQ\214M\032\265\020\011\026\012Z\210"
+  93      C14A4451 
+  93      8C4D1AB5 
+  93      1009160A 
+  93      5A88
+  94 0044 E873EF45 		.ascii	"\350s\357E\260\020\027\216=fgvv\024\201Le\271\265s\357"
+  94      B010178E 
+  94      3D666776 
+  94      7614814C 
+  94      65B9B573 
+  95 0059 E6870041 		.ascii	"\346\207\000A,\2373\030\026B\226c\244#\352&A\272IB5"
+  95      2C9F3318 
+  95      16429663 
+  95      A423EA26 
+  95      41BA4942 
+  96 006e 6005988F 		.ascii	"`\005\230\217\016\203,!\025,\274\211O\201\312\302\203"
+  96      0E832C21 
+  96      152CBC89 
+  96      4F81CAC2 
+  96      83
+  97 007f 23E21B9A 		.ascii	"#\342\033\232\353\326\366\272\364\246\013[\022y\302"
+  97      EBD6F6BA 
+  97      F4A60B5B 
+  97      1279C2
+  98 008e B7206C20 		.ascii	"\267 l NL\273/}\255D\203yCkm\014\261\211\240\271\243"
+  98      4E4CBB2F 
+  98      7DAD4483 
+  98      79436B6D 
+  98      0CB189A0 
+  99 00a4 38E46ACF 		.ascii	"8\344j\317\313i\367#t|\035\011*\262%\303\317L1v/B\230"
+  99      CB69F723 
+  99      747C1D09 
+  99      2AB225C3 
+  99      CF4C3176 
+ 100 00bb 2E1F9173 		.ascii	".\037\221s\017O\205\021\231u\216\363T\013Y\237zQ\353"
+ 100      0F4F8511 
+ 100      99758EF3 
+ 100      540B599F 
+ 100      7A51EB
+ 101 00ce 665B0A4F 		.ascii	"f[\012O\260\004[\260X,\351\001\363\345\322\305U\310"
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 7
+
+
+ 101      B0045BB0 
+ 101      582CE901 
+ 101      F3E5D2C5 
+ 101      55C8
+ 102 00e0 90735231 		.ascii	"\220sR1}\325\256\\\204^\205\315g\377U\253\002\337k\340"
+ 102      7DD5AE5C 
+ 102      845E85CD 
+ 102      67FF55AB 
+ 102      02DF6BE0 
+ 103 00f4 FA59F524 		.ascii	"\372Y\365$\262\216\265\254\366\361\000v8\3446Z\374\341"
+ 103      B28EB5AC 
+ 103      F6F10076 
+ 103      38E4365A 
+ 103      FCE1
+ 104 0106 D2D14121 		.ascii	"\322\321A!\234\350\260e\020\273X\307\227\237\017{H\320"
+ 104      9CE8B065 
+ 104      10BB58C7 
+ 104      979F0F7B 
+ 104      48D0
+ 105 0118 1DF2B55C 		.ascii	"\035\362\265\\\354\327\254\370\344\274G\215\031@\330"
+ 105      ECD7ACF8 
+ 105      E4BC478D 
+ 105      1940D8
+ 106 0127 37723239 		.ascii	"7r29$\225c~\214\313\323\246\177c\360V\024\177b\030\221"
+ 106      2495637E 
+ 106      8CCBD3A6 
+ 106      7F63F056 
+ 106      147F6218 
+ 107 013c F2C3D731 		.ascii	"\362\303\3271\357V\373}\221\251gN\3130s\333\372\322"
+ 107      EF56FB7D 
+ 107      91A9674E 
+ 107      CB3073DB 
+ 107      FAD2
+ 108 014e 93E9E9D1 		.ascii	"\223\351\351\321\331\364Xr837\235J\217\014\016gz{Ff"
+ 108      D9F45872 
+ 108      3833379D 
+ 108      4A8F0C0E 
+ 108      677A7B46 
+ 109 0163 A6C69399 		.ascii	"\246\306\223\231\011F\007\007:S\364\015:\177\2276"
+ 109      09460707 
+ 109      3A53F40D 
+ 109      3A7F9736 
+ 110              		.text
+ 111              		.section	.gnu.lto_.symbol_nodes.791faa6b,"",%progbits
+ 112 0000 789C558A 		.ascii	"x\234U\212\273\025@P\020Dg\177O\256\002z\320\337\276"
+ 112      BB154050 
+ 112      1044677F 
+ 112      4FAE027A 
+ 112      D0DFBE
+ 113 0013 4001121D 		.ascii	"@\001\022\035\210\344:\020\253\201F\034Kd'\231s\357"
+ 113      88E43A10 
+ 113      AB81461C 
+ 113      4B642799 
+ 113      73EF
+ 114 0025 8C823023 		.ascii	"\214\2020#\302\344\300t\000Qk\355C\260S\026\342\234"
+ 114      C2E4C074 
+ 114      00516BED 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 8
+
+
+ 114      43B05316 
+ 114      E29C
+ 115 0037 8401B505 		.ascii	"\204\001\265\005\204\325%\015d\256\237\210C\355\202"
+ 115      84D5250D 
+ 115      64AE9F88 
+ 115      43ED82
+ 116 0046 1BB7C4C5 		.ascii	"\033\267\304\305\313\237\205\015\373u\223h\203\345|"
+ 116      CB9F850D 
+ 116      FB759368 
+ 116      83E57C
+ 117 0055 BB60DC06 		.ascii	"\273`\334\006<\033&\037\275"
+ 117      3C1B261F 
+ 117      BD
+ 118              		.text
+ 119              		.section	.gnu.lto_.refs.791faa6b,"",%progbits
+ 120 0000 789C6361 		.ascii	"x\234ca`d\340f```dbdfeda`fb\000\000\001\237\000'"
+ 120      6064E066 
+ 120      60606064 
+ 120      62646665 
+ 120      64616066 
+ 121              		.text
+ 122              		.section	.gnu.lto_.decls.791faa6b,"",%progbits
+ 123 0000 789C8D54 		.ascii	"x\234\215ToL[U\024\177\347\275\322B\351\330\002f\341"
+ 123      6F4C5B55 
+ 123      147FE7BD 
+ 123      D242E9D8 
+ 123      0266E1
+ 124 0013 433F5402 		.ascii	"C?T\002\011\237P\\L\026\277\250k`3F!\003\346\027\022"
+ 124      099F505C 
+ 124      4C16BFA8 
+ 124      6B603346 
+ 124      2103E617 
+ 125 0028 04F63609 		.ascii	"\004\3666\011\015mJ1!~\271\003\346\346\276\360g\302"
+ 125      0D6D4A31 
+ 125      217EB903 
+ 125      E6E6BEF0 
+ 125      67C2
+ 126 003a 6C2DA440 		.ascii	"l-\244@2\206\003Z`\374\023\324\012R@`\2231\300e\306"
+ 126      3286035A 
+ 126      60FC13D4 
+ 126      0A524060 
+ 126      9331C065 
+ 127 004f 91814650 		.ascii	"\221\201FP7\310HtD\254\347\336\367^_1%z\223\323\336"
+ 127      37C84874 
+ 127      44ACE7DE 
+ 127      F75E5F31 
+ 127      257A93D3 
+ 128 0064 73DFEFF7 		.ascii	"s\337\357\367;\347\236s\336\323p\300\3215\247\345\270"
+ 128      3BE79E73 
+ 128      DED370C0 
+ 128      D135A7E5 
+ 128      B8
+ 129 0075 57716B41 		.ascii	"WqkA\013\342B\227;\303\251K\207\326\215\346E\353E\353"
+ 129      0BE24297 
+ 129      3BC3A94B 
+ 129      87D68DE6 
+ 129      45EB45EB 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 9
+
+
+ 130 0089 471B401B 		.ascii	"G\033@\033B\033A\243*\263\334\376\325-\237+: \237\375"
+ 130      421B41A3 
+ 130      2AB3DCFE 
+ 130      D52D9F2B 
+ 130      3A209FFD 
+ 131 009d 7B7923E0 		.ascii	"{y#\340\274\021p4\256^\306\031\321\346\321\226\320\026"
+ 131      BC117034 
+ 131      AE5EC619 
+ 131      D1E6D196 
+ 131      D016
+ 132 00af D196D166 		.ascii	"\321\226\321f\320\306\321V\320\272d\235I4^\346\016\034"
+ 132      D0C6D156 
+ 132      D0BA649D 
+ 132      49345EE6 
+ 132      0E1C
+ 133 00c1 90E7AC8C 		.ascii	"\220\347\254\2141\312\032\274\314\013D\310\201\223\357"
+ 133      31CA1ABC 
+ 133      CC0B44C8 
+ 133      8193EF
+ 134 00d0 AE0BCB43 		.ascii	"\256\013\313C\211\027\236\203\022[\220\361\264FC\007"
+ 134      89179E83 
+ 134      125B90F1 
+ 134      B4464307 
+ 135 00e0 C4DFE3A1 		.ascii	"\304\337\343\241\372\321\246'\372\001\334\007\340\200"
+ 135      FAD1A627 
+ 135      FA01DC07 
+ 135      E080
+ 136 00ee 2D4EEE0B 		.ascii	"-N\356\013GO\344\177\272\001\311\341\225:A\250b\362"
+ 136      474FE47F 
+ 136      BA01C9E1 
+ 136      953A41A8 
+ 136      62F2
+ 137 0100 86C181E3 		.ascii	"\206\301\201\343\031\036\302\036\354\303\261\036\263"
+ 137      191EC21E 
+ 137      ECC3B11E 
+ 137      B3
+ 138 010d A51E4168 		.ascii	"\245\036Ah)H\330/JUU\027}^%\204\351\311\331\313\361"
+ 138      2948D82F 
+ 138      4A555517 
+ 138      7D5E2584 
+ 138      E9C9D9CB 
+ 139 0122 213C2C93 		.ascii	"!<,\223\026\224K\267/T\335\326\013\250\211\373\207\317"
+ 139      16944BB7 
+ 139      2F54DDD6 
+ 139      0BA889FB 
+ 139      87CF
+ 140 0134 6E64A675 		.ascii	"nd\246u\021\\u\204\360ije\026j|na\207\207x=h\320\335"
+ 140      115C7584 
+ 140      F0696A65 
+ 140      166A7C6E 
+ 140      61878778 
+ 141 014c 9E77ADC5 		.ascii	"\236w\255\305\241\373\234\036L\350\356\315|\352\342"
+ 141      A1FB9C1E 
+ 141      4CE8EECD 
+ 141      7CEAE2
+ 142 015b 139B18AF 		.ascii	"\023\233\030\257\232\2304p\346(\334\004#|\006\330\030"
+ 142      9A983470 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 10
+
+
+ 142      E628DC04 
+ 142      237C06D8 
+ 142      18
+ 143 016c E88244FC 		.ascii	"\350\202D\374-\322HJ\023n\177\203.\311C|>\262\032\\"
+ 143      2DD2484A 
+ 143      136E7F83 
+ 143      2EC9437C 
+ 143      3EB21A5C 
+ 144 0180 7FC949FC 		.ascii	"\177\311I\3745H\343)\012n\200\000\235@\303\322-\375"
+ 144      3548E329 
+ 144      0A6E8000 
+ 144      9D40C3D2 
+ 144      2DFD
+ 145 0192 EB800798 		.ascii	"\353\200\007\230|7$!s3\330\261\013B\006Kt\351'w@V\361"
+ 145      7C372421 
+ 145      7333D8B1 
+ 145      0B42064B 
+ 145      74E92777 
+ 146 01a9 EF8AE423 		.ascii	"\357\212\344#\224\3200\211\036U\242'\\\302\313$\376"
+ 146      94D03089 
+ 146      1E55A227 
+ 146      5CC2CB24 
+ 146      FE
+ 147 01ba F2ECB569 		.ascii	"\362\354\265i\205|&\341\251jl\216B\011\017J\374\030"
+ 147      857C26E1 
+ 147      A96A6C8E 
+ 147      42090F4A 
+ 147      FC18
+ 148 01cc 3090BA0B 		.ascii	"0\220\272\013\204\274\3064|\252\206/\\\243\227i|<\273"
+ 148      84BCC634 
+ 148      7CAA862F 
+ 148      5CA39769 
+ 148      7C3CBB
+ 149 01df FE442B94 		.ascii	"\376D+\2242\215\321\376\352q\255\254\361\347T\270F\237"
+ 149      328DD1FE 
+ 149      EA71ADAC 
+ 149      F1E754B8 
+ 149      469F
+ 150 01f1 AAD117AE 		.ascii	"\252\321\027\256\321\3174\356\326\377\\\033#|\3004j"
+ 150      D1CF34EE 
+ 150      D6FF5C1B 
+ 150      237CC034 
+ 150      6A
+ 151 0202 5796B7A9 		.ascii	"W\226\267\251\306*!\253\375W\262\266\373HM\014\223\270"
+ 151      C62A21AB 
+ 151      FD57B2B6 
+ 151      FB484D0C 
+ 151      93B8
+ 152 0214 A54ADC02 		.ascii	"\245J\334\002\251]0\300\350\303M;\3768\241\013\030\377"
+ 152      A95D30C0 
+ 152      E8C34D3B 
+ 152      FE38A10B 
+ 152      18FF
+ 153 0226 FBE6CE41 		.ascii	"\373\346\316A\215\304\367\017\007\014\376:`\354A\225"
+ 153      8DC4F70F 
+ 153      070CFE3A 
+ 153      60EC4195 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 11
+
+
+ 154 0236 3DA8B087 		.ascii	"=\250\260\207\030\373I\317\326\036\010c\022\273\265"
+ 154      18FB49CF 
+ 154      D61E0863 
+ 154      12BBB5
+ 155 0245 C56D92C9 		.ascii	"\305m\222\311\356\251\020yX%\017+\344\021F~\2729v\015"
+ 155      EEA91079 
+ 155      58250F2B 
+ 155      E411467E 
+ 155      BA39760D 
+ 156 0259 843B1279 		.ascii	"\204;\022y2\370\207\377\2604\025<\275\325\326\\s\254"
+ 156      32F887FF 
+ 156      B034153C 
+ 156      BDD5D65C 
+ 156      73AC
+ 157 026b 341547D0 		.ascii	"4\025G\320\035o\372\341\236Ax(A\275\027\327;\243\361"
+ 157      1D6FFAE1 
+ 157      9E417828 
+ 157      41BD17D7 
+ 157      3BA3F1
+ 158 027e 99510F41 		.ascii	"\231Q\017A\240\376o#\317\016I>}\354\254_\373;V\370\225"
+ 158      A0FE6F23 
+ 158      CF0E493E 
+ 158      7DECAC5F 
+ 158      FB3B56F8 
+ 159 0293 61F9C5B5 		.ascii	"a\371\305\265\233\033\032H\325_\247\003\265\272X{\356"
+ 159      9B1B1A48 
+ 159      D55FA703 
+ 159      B5BA587B 
+ 159      EE
+ 160 02a4 DA253A21 		.ascii	"\332%:!\343\240\007\277\232\230\221~\204.\023RE\266"
+ 160      E3A007BF 
+ 160      9A98917E 
+ 160      842E1352 
+ 160      45B6
+ 161 02b6 DA883691 		.ascii	"\332\2106\221\203cFx\321\310\301\327\220JU)\012\276"
+ 161      83634678 
+ 161      D1C8C1D7 
+ 161      904A5529 
+ 161      0ABE
+ 162 02c8 C221FC12 		.ascii	"\302!\374\022\207\020#\354\324}\330\005\302U6\347\232"
+ 162      871023EC 
+ 162      D47DD805 
+ 162      C25536E7 
+ 162      9A
+ 163 02d9 C71DCE3D 		.ascii	"\307\035\316=\035$$'\247\326\263\241\365\023B_\2221"
+ 163      1D242427 
+ 163      A7D6B3A1 
+ 163      F513425F 
+ 163      9231
+ 164 02eb 848FB299 		.ascii	"\204\217\262\231\375\006\022\250\002L\241\330$$C\000"
+ 164      FD0612A8 
+ 164      024CA1D8 
+ 164      24244300 
+ 165 02fb 925915DA 		.ascii	"\222Y\025\332h<lSF\357\332E\342{\227\345\364\005\346"
+ 165      683C6C53 
+ 165      46EFDA45 
+ 165      E27B97E5 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 12
+
+
+ 165      F405E6
+ 166 030e 44F172FC 		.ascii	"D\361r\374\027(?\335\250\200\375M\201X\0059\021\001"
+ 166      17283FDD 
+ 166      A880FD4D 
+ 166      81580539 
+ 166      1101
+ 167 0320 798C22D9 		.ascii	"y\214\"\331M\375\3658\205$\232\"8\371\222\362\333\367"
+ 167      4DFDF538 
+ 167      85249A22 
+ 167      38F992F2 
+ 167      DBF7
+ 168 0332 4BCBF4EF 		.ascii	"K\313\364\357 \264\260\334\371\006\347\345W !r\342\360"
+ 168      20B4B0DC 
+ 168      F906E7E5 
+ 168      57202172 
+ 168      E2F0
+ 169 0344 2DE67B50 		.ascii	"-\346{P\356R\020g\000h\220\031\004M\253\305\2441Y(\367"
+ 169      EE521067 
+ 169      00689019 
+ 169      044DABC5 
+ 169      A4315928 
+ 170 0359 A39DF6A8 		.ascii	"\243\235\366\250\224vBp&\202\276\312\253\204\234b\330"
+ 170      94764270 
+ 170      2682BECA 
+ 170      AB849C62 
+ 170      D8
+ 171 036a CF256C58 		.ascii	"\317%lX\211\350I.\317\301,\244 o~r\361\023\2350 \225"
+ 171      89E8492E 
+ 171      CFC12CA4 
+ 171      206F7E72 
+ 171      F1139D30 
+ 172 0380 77C3DBDA 		.ascii	"w\303\333\332\244\207\030# \030R/\261\036UyL\020\352"
+ 172      A4871823 
+ 172      2018522F 
+ 172      B11E5579 
+ 172      4C10EA
+ 173 0393 D17798DA 		.ascii	"\321w\230\332<\304\240\312m\204\334A=\027\346DO\\\004"
+ 173      3CC4A0CA 
+ 173      6D84DC41 
+ 173      3D17E644 
+ 173      4F5C04
+ 174 03a6 5B7A846D 		.ascii	"[z\204m\257+\337!\216\2720'\017\"M\027}\332\322\232"
+ 174      AF2BDF21 
+ 174      8EBA3027 
+ 174      0F224D17 
+ 174      7DDAD29A 
+ 175 03ba A7CB5A3D 		.ascii	"\247\313Z=\342\253\377\337\010\314o\264\006u\302\250"
+ 175      E2ABFFDF 
+ 175      08CC6FB4 
+ 175      0675C2A8 
+ 176 03ca 54C6FE46 		.ascii	"T\306\376Fg\243\016\364\251\021\350\367\"\320\225Y\314"
+ 176      67A30EF4 
+ 176      A911E8F7 
+ 176      22D09559 
+ 176      CC
+ 177 03db 72355C20 		.ascii	"r5\\ &X\304n\336U\313\267\000z\251|\235\217'\374`\270"
+ 177      2658C46E 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 13
+
+
+ 177      DE55CBB7 
+ 177      007AA97C 
+ 177      9D8F27FC 
+ 178 03f1 426F8C5F 		.ascii	"Bo\214_\302\370S\014\250~\012\227\300\300\362\307\177"
+ 178      C2F8530C 
+ 178      A87E0A97 
+ 178      C0C0F2C7 
+ 178      7F
+ 179 0402 04B7ED4E 		.ascii	"\004\267\355N{b\303\301\264\320*xY\006/3\260\353\276"
+ 179      7B62C3C1 
+ 179      B4D02A78 
+ 179      59062F33 
+ 179      B0EBBE
+ 180 0415 7B363A1C 		.ascii	"{6:\034L\337S\025\274\002\006%\031\334r\011\345\266"
+ 180      4CDF5315 
+ 180      BC020625 
+ 180      19DC7209 
+ 180      E5B6
+ 181 0427 9202AB45 		.ascii	"\222\002\253E<[\220S\370\276h\266\226\235+9\037}\362"
+ 181      3C5B9053 
+ 181      F8BE68B6 
+ 181      969D2B39 
+ 181      1F7DF2
+ 182 043a ED3C9339 		.ascii	"\355<\2239=\235K9)\226\211\366B\007}j\255\260\027\213"
+ 182      3D9D4B39 
+ 182      299689F6 
+ 182      42077D6A 
+ 182      ADB0178B 
+ 183 044e F9D93956 		.ascii	"\371\3319V\363\313\371!N\366[i\305\334\321\220{Z,wX"
+ 183      F3CBF921 
+ 183      4EF65B69 
+ 183      C5DCD190 
+ 183      7B5A2C77 
+ 184 0463 EDB24A9C 		.ascii	"\355\262J\234\252l\021E\333\341\220\373Na\251Xa;\244"
+ 184      AA6C1145 
+ 184      DBE190FB 
+ 184      4E61A958 
+ 184      613BA4
+ 185 0476 3E76586D 		.ascii	">vXmI\377\021)\355=N\025\310(+,\262\210\361!\337l\021"
+ 185      49FF1129 
+ 185      ED3D4E15 
+ 185      C8282B2C 
+ 185      B288F121 
+ 186 048d 0BED996F 		.ascii	"\013\355\231odf\251\220\242\302\342\322\012[\254\310"
+ 186      6466A990 
+ 186      A2C2E2D2 
+ 186      0A5BACC8 
+ 187 049d 90390E14 		.ascii	"\2209\016\024\216\252()s\034\177\376\2008\305\225\216"
+ 187      8EAA2829 
+ 187      731C7FFE 
+ 187      8038C595 
+ 187      8E
+ 188 04ae 4A9B588E 		.ascii	"J\233X\216a\364\305e\016{\266h/\261\236U/v\342u\363"
+ 188      61F4C565 
+ 188      0E7BB668 
+ 188      2FB19E55 
+ 188      2F76E275 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 14
+
+
+ 189 04c3 9B79D905 		.ascii	"\233y\331\0059\271\247\363\314\271Q\005'\254V\213\306"
+ 189      39B9A7F3 
+ 189      CCB95105 
+ 189      27AC568B 
+ 189      C6
+ 190 04d4 2E9E3FFE 		.ascii	".\236?\376\017\300\001p\002"
+ 190      0FC00170 
+ 190      02
+ 191              		.text
+ 192              		.section	.gnu.lto_.symtab.791faa6b,"",%progbits
+ 193 0000 7370695F 		.ascii	"spi_oled_SaveConfig\000"
+ 193      6F6C6564 
+ 193      5F536176 
+ 193      65436F6E 
+ 193      66696700 
+ 194 0014 00       		.ascii	"\000"
+ 195 0015 00       		.ascii	"\000"
+ 196 0016 00       		.ascii	"\000"
+ 197 0017 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 197      00000000 
+ 198 001f AD000000 		.ascii	"\255\000\000\000"
+ 199 0023 7370695F 		.ascii	"spi_oled_RestoreConfig\000"
+ 199      6F6C6564 
+ 199      5F526573 
+ 199      746F7265 
+ 199      436F6E66 
+ 200 003a 00       		.ascii	"\000"
+ 201 003b 00       		.ascii	"\000"
+ 202 003c 00       		.ascii	"\000"
+ 203 003d 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 203      00000000 
+ 204 0045 AF000000 		.ascii	"\257\000\000\000"
+ 205 0049 7370695F 		.ascii	"spi_oled_Sleep\000"
+ 205      6F6C6564 
+ 205      5F536C65 
+ 205      657000
+ 206 0058 00       		.ascii	"\000"
+ 207 0059 00       		.ascii	"\000"
+ 208 005a 00       		.ascii	"\000"
+ 209 005b 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 209      00000000 
+ 210 0063 B1000000 		.ascii	"\261\000\000\000"
+ 211 0067 7370695F 		.ascii	"spi_oled_Wakeup\000"
+ 211      6F6C6564 
+ 211      5F57616B 
+ 211      65757000 
+ 212 0077 00       		.ascii	"\000"
+ 213 0078 00       		.ascii	"\000"
+ 214 0079 00       		.ascii	"\000"
+ 215 007a 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 215      00000000 
+ 216 0082 B3000000 		.ascii	"\263\000\000\000"
+ 217 0086 7370695F 		.ascii	"spi_oled_Stop\000"
+ 217      6F6C6564 
+ 217      5F53746F 
+ 217      7000
+ 218 0094 00       		.ascii	"\000"
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 15
+
+
+ 219 0095 02       		.ascii	"\002"
+ 220 0096 00       		.ascii	"\000"
+ 221 0097 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 221      00000000 
+ 222 009f B5000000 		.ascii	"\265\000\000\000"
+ 223 00a3 7370695F 		.ascii	"spi_oled_Enable\000"
+ 223      6F6C6564 
+ 223      5F456E61 
+ 223      626C6500 
+ 224 00b3 00       		.ascii	"\000"
+ 225 00b4 02       		.ascii	"\002"
+ 226 00b5 00       		.ascii	"\000"
+ 227 00b6 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 227      00000000 
+ 228 00be B7000000 		.ascii	"\267\000\000\000"
+ 229 00c2 7370695F 		.ascii	"spi_oled_ClearFIFO\000"
+ 229      6F6C6564 
+ 229      5F436C65 
+ 229      61724649 
+ 229      464F00
+ 230 00d5 00       		.ascii	"\000"
+ 231 00d6 02       		.ascii	"\002"
+ 232 00d7 00       		.ascii	"\000"
+ 233 00d8 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 233      00000000 
+ 234 00e0 B9000000 		.ascii	"\271\000\000\000"
+ 235              		.text
+ 236              		.section	.gnu.lto_.opts,"",%progbits
+ 237 0000 272D666D 		.ascii	"'-fmath-errno' '-fsigned-zeros' '-ftrapping-math' '"
+ 237      6174682D 
+ 237      6572726E 
+ 237      6F272027 
+ 237      2D667369 
+ 238 0033 2D666E6F 		.ascii	"-fno-trapv' '-fno-strict-overflow' '-fno-openmp' '-"
+ 238      2D747261 
+ 238      70762720 
+ 238      272D666E 
+ 238      6F2D7374 
+ 239 0066 666E6F2D 		.ascii	"fno-openacc' '-mcpu=cortex-m3' '-mthumb' '-g' '-Og'"
+ 239      6F70656E 
+ 239      61636327 
+ 239      20272D6D 
+ 239      6370753D 
+ 240 0099 20272D66 		.ascii	" '-ffunction-sections' '-ffat-lto-objects' '-flto'\000"
+ 240      66756E63 
+ 240      74696F6E 
+ 240      2D736563 
+ 240      74696F6E 
+ 241              		.text
+ 242              		.cfi_sections	.debug_frame
+ 243              		.section	.text.spi_oled_SaveConfig,"ax",%progbits
+ 244              		.align	2
+ 245              		.global	spi_oled_SaveConfig
+ 246              		.thumb
+ 247              		.thumb_func
+ 248              		.type	spi_oled_SaveConfig, %function
+ 249              	spi_oled_SaveConfig:
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 16
+
+
+ 250              	.LFB0:
+ 251              		.file 1 "Generated_Source\\PSoC5\\spi_oled_PM.c"
+   1:Generated_Source\PSoC5/spi_oled_PM.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/spi_oled_PM.c **** * File Name: spi_oled_PM.c
+   3:Generated_Source\PSoC5/spi_oled_PM.c **** * Version 2.50
+   4:Generated_Source\PSoC5/spi_oled_PM.c **** *
+   5:Generated_Source\PSoC5/spi_oled_PM.c **** * Description:
+   6:Generated_Source\PSoC5/spi_oled_PM.c **** *  This file contains the setup, control and status commands to support
+   7:Generated_Source\PSoC5/spi_oled_PM.c **** *  component operations in low power mode.
+   8:Generated_Source\PSoC5/spi_oled_PM.c **** *
+   9:Generated_Source\PSoC5/spi_oled_PM.c **** * Note:
+  10:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  11:Generated_Source\PSoC5/spi_oled_PM.c **** ********************************************************************************
+  12:Generated_Source\PSoC5/spi_oled_PM.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/spi_oled_PM.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:Generated_Source\PSoC5/spi_oled_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:Generated_Source\PSoC5/spi_oled_PM.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/spi_oled_PM.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/spi_oled_PM.c **** 
+  18:Generated_Source\PSoC5/spi_oled_PM.c **** #include "spi_oled_PVT.h"
+  19:Generated_Source\PSoC5/spi_oled_PM.c **** 
+  20:Generated_Source\PSoC5/spi_oled_PM.c **** static spi_oled_BACKUP_STRUCT spi_oled_backup =
+  21:Generated_Source\PSoC5/spi_oled_PM.c **** {
+  22:Generated_Source\PSoC5/spi_oled_PM.c ****     spi_oled_DISABLED,
+  23:Generated_Source\PSoC5/spi_oled_PM.c ****     spi_oled_BITCTR_INIT,
+  24:Generated_Source\PSoC5/spi_oled_PM.c **** };
+  25:Generated_Source\PSoC5/spi_oled_PM.c **** 
+  26:Generated_Source\PSoC5/spi_oled_PM.c **** 
+  27:Generated_Source\PSoC5/spi_oled_PM.c **** /*******************************************************************************
+  28:Generated_Source\PSoC5/spi_oled_PM.c **** * Function Name: spi_oled_SaveConfig
+  29:Generated_Source\PSoC5/spi_oled_PM.c **** ********************************************************************************
+  30:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  31:Generated_Source\PSoC5/spi_oled_PM.c **** * Summary:
+  32:Generated_Source\PSoC5/spi_oled_PM.c **** *  Empty function. Included for consistency with other components.
+  33:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  34:Generated_Source\PSoC5/spi_oled_PM.c **** * Parameters:
+  35:Generated_Source\PSoC5/spi_oled_PM.c **** *  None.
+  36:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  37:Generated_Source\PSoC5/spi_oled_PM.c **** * Return:
+  38:Generated_Source\PSoC5/spi_oled_PM.c **** *  None.
+  39:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  40:Generated_Source\PSoC5/spi_oled_PM.c **** *******************************************************************************/
+  41:Generated_Source\PSoC5/spi_oled_PM.c **** void spi_oled_SaveConfig(void) 
+  42:Generated_Source\PSoC5/spi_oled_PM.c **** {
+ 252              		.loc 1 42 0
+ 253              		.cfi_startproc
+ 254              		@ args = 0, pretend = 0, frame = 0
+ 255              		@ frame_needed = 0, uses_anonymous_args = 0
+ 256              		@ link register save eliminated.
+ 257 0000 7047     		bx	lr
+ 258              		.cfi_endproc
+ 259              	.LFE0:
+ 260              		.size	spi_oled_SaveConfig, .-spi_oled_SaveConfig
+ 261 0002 00BF     		.section	.text.spi_oled_RestoreConfig,"ax",%progbits
+ 262              		.align	2
+ 263              		.global	spi_oled_RestoreConfig
+ 264              		.thumb
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 17
+
+
+ 265              		.thumb_func
+ 266              		.type	spi_oled_RestoreConfig, %function
+ 267              	spi_oled_RestoreConfig:
+ 268              	.LFB1:
+  43:Generated_Source\PSoC5/spi_oled_PM.c **** 
+  44:Generated_Source\PSoC5/spi_oled_PM.c **** }
+  45:Generated_Source\PSoC5/spi_oled_PM.c **** 
+  46:Generated_Source\PSoC5/spi_oled_PM.c **** 
+  47:Generated_Source\PSoC5/spi_oled_PM.c **** /*******************************************************************************
+  48:Generated_Source\PSoC5/spi_oled_PM.c **** * Function Name: spi_oled_RestoreConfig
+  49:Generated_Source\PSoC5/spi_oled_PM.c **** ********************************************************************************
+  50:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  51:Generated_Source\PSoC5/spi_oled_PM.c **** * Summary:
+  52:Generated_Source\PSoC5/spi_oled_PM.c **** *  Empty function. Included for consistency with other components.
+  53:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  54:Generated_Source\PSoC5/spi_oled_PM.c **** * Parameters:
+  55:Generated_Source\PSoC5/spi_oled_PM.c **** *  None.
+  56:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  57:Generated_Source\PSoC5/spi_oled_PM.c **** * Return:
+  58:Generated_Source\PSoC5/spi_oled_PM.c **** *  None.
+  59:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  60:Generated_Source\PSoC5/spi_oled_PM.c **** *******************************************************************************/
+  61:Generated_Source\PSoC5/spi_oled_PM.c **** void spi_oled_RestoreConfig(void) 
+  62:Generated_Source\PSoC5/spi_oled_PM.c **** {
+ 269              		.loc 1 62 0
+ 270              		.cfi_startproc
+ 271              		@ args = 0, pretend = 0, frame = 0
+ 272              		@ frame_needed = 0, uses_anonymous_args = 0
+ 273              		@ link register save eliminated.
+ 274 0000 7047     		bx	lr
+ 275              		.cfi_endproc
+ 276              	.LFE1:
+ 277              		.size	spi_oled_RestoreConfig, .-spi_oled_RestoreConfig
+ 278 0002 00BF     		.section	.text.spi_oled_Sleep,"ax",%progbits
+ 279              		.align	2
+ 280              		.global	spi_oled_Sleep
+ 281              		.thumb
+ 282              		.thumb_func
+ 283              		.type	spi_oled_Sleep, %function
+ 284              	spi_oled_Sleep:
+ 285              	.LFB2:
+  63:Generated_Source\PSoC5/spi_oled_PM.c **** 
+  64:Generated_Source\PSoC5/spi_oled_PM.c **** }
+  65:Generated_Source\PSoC5/spi_oled_PM.c **** 
+  66:Generated_Source\PSoC5/spi_oled_PM.c **** 
+  67:Generated_Source\PSoC5/spi_oled_PM.c **** /*******************************************************************************
+  68:Generated_Source\PSoC5/spi_oled_PM.c **** * Function Name: spi_oled_Sleep
+  69:Generated_Source\PSoC5/spi_oled_PM.c **** ********************************************************************************
+  70:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  71:Generated_Source\PSoC5/spi_oled_PM.c **** * Summary:
+  72:Generated_Source\PSoC5/spi_oled_PM.c **** *  Prepare SPIM Component goes to sleep.
+  73:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  74:Generated_Source\PSoC5/spi_oled_PM.c **** * Parameters:
+  75:Generated_Source\PSoC5/spi_oled_PM.c **** *  None.
+  76:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  77:Generated_Source\PSoC5/spi_oled_PM.c **** * Return:
+  78:Generated_Source\PSoC5/spi_oled_PM.c **** *  None.
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 18
+
+
+  79:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  80:Generated_Source\PSoC5/spi_oled_PM.c **** * Global Variables:
+  81:Generated_Source\PSoC5/spi_oled_PM.c **** *  spi_oled_backup - modified when non-retention registers are saved.
+  82:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  83:Generated_Source\PSoC5/spi_oled_PM.c **** * Reentrant:
+  84:Generated_Source\PSoC5/spi_oled_PM.c **** *  No.
+  85:Generated_Source\PSoC5/spi_oled_PM.c **** *
+  86:Generated_Source\PSoC5/spi_oled_PM.c **** *******************************************************************************/
+  87:Generated_Source\PSoC5/spi_oled_PM.c **** void spi_oled_Sleep(void) 
+  88:Generated_Source\PSoC5/spi_oled_PM.c **** {
+ 286              		.loc 1 88 0
+ 287              		.cfi_startproc
+ 288              		@ args = 0, pretend = 0, frame = 0
+ 289              		@ frame_needed = 0, uses_anonymous_args = 0
+ 290              		.loc 1 88 0
+ 291 0000 08B5     		push	{r3, lr}
+ 292              		.cfi_def_cfa_offset 8
+ 293              		.cfi_offset 3, -8
+ 294              		.cfi_offset 14, -4
+  89:Generated_Source\PSoC5/spi_oled_PM.c ****     /* Save components enable state */
+  90:Generated_Source\PSoC5/spi_oled_PM.c ****     spi_oled_backup.enableState = ((uint8) spi_oled_IS_ENABLED);
+ 295              		.loc 1 90 0
+ 296 0002 044B     		ldr	r3, .L5
+ 297 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 298 0006 C3F30013 		ubfx	r3, r3, #4, #1
+ 299 000a 034A     		ldr	r2, .L5+4
+ 300 000c 1370     		strb	r3, [r2]
+  91:Generated_Source\PSoC5/spi_oled_PM.c **** 
+  92:Generated_Source\PSoC5/spi_oled_PM.c ****     spi_oled_Stop();
+ 301              		.loc 1 92 0
+ 302 000e FFF7FEFF 		bl	spi_oled_Stop
+ 303              	.LVL0:
+ 304 0012 08BD     		pop	{r3, pc}
+ 305              	.L6:
+ 306              		.align	2
+ 307              	.L5:
+ 308 0014 96650040 		.word	1073767830
+ 309 0018 00000000 		.word	.LANCHOR0
+ 310              		.cfi_endproc
+ 311              	.LFE2:
+ 312              		.size	spi_oled_Sleep, .-spi_oled_Sleep
+ 313              		.section	.text.spi_oled_Wakeup,"ax",%progbits
+ 314              		.align	2
+ 315              		.global	spi_oled_Wakeup
+ 316              		.thumb
+ 317              		.thumb_func
+ 318              		.type	spi_oled_Wakeup, %function
+ 319              	spi_oled_Wakeup:
+ 320              	.LFB3:
+  93:Generated_Source\PSoC5/spi_oled_PM.c **** }
+  94:Generated_Source\PSoC5/spi_oled_PM.c **** 
+  95:Generated_Source\PSoC5/spi_oled_PM.c **** 
+  96:Generated_Source\PSoC5/spi_oled_PM.c **** /*******************************************************************************
+  97:Generated_Source\PSoC5/spi_oled_PM.c **** * Function Name: spi_oled_Wakeup
+  98:Generated_Source\PSoC5/spi_oled_PM.c **** ********************************************************************************
+  99:Generated_Source\PSoC5/spi_oled_PM.c **** *
+ 100:Generated_Source\PSoC5/spi_oled_PM.c **** * Summary:
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 19
+
+
+ 101:Generated_Source\PSoC5/spi_oled_PM.c **** *  Prepare SPIM Component to wake up.
+ 102:Generated_Source\PSoC5/spi_oled_PM.c **** *
+ 103:Generated_Source\PSoC5/spi_oled_PM.c **** * Parameters:
+ 104:Generated_Source\PSoC5/spi_oled_PM.c **** *  None.
+ 105:Generated_Source\PSoC5/spi_oled_PM.c **** *
+ 106:Generated_Source\PSoC5/spi_oled_PM.c **** * Return:
+ 107:Generated_Source\PSoC5/spi_oled_PM.c **** *  None.
+ 108:Generated_Source\PSoC5/spi_oled_PM.c **** *
+ 109:Generated_Source\PSoC5/spi_oled_PM.c **** * Global Variables:
+ 110:Generated_Source\PSoC5/spi_oled_PM.c **** *  spi_oled_backup - used when non-retention registers are restored.
+ 111:Generated_Source\PSoC5/spi_oled_PM.c **** *  spi_oled_txBufferWrite - modified every function call - resets to
+ 112:Generated_Source\PSoC5/spi_oled_PM.c **** *  zero.
+ 113:Generated_Source\PSoC5/spi_oled_PM.c **** *  spi_oled_txBufferRead - modified every function call - resets to
+ 114:Generated_Source\PSoC5/spi_oled_PM.c **** *  zero.
+ 115:Generated_Source\PSoC5/spi_oled_PM.c **** *  spi_oled_rxBufferWrite - modified every function call - resets to
+ 116:Generated_Source\PSoC5/spi_oled_PM.c **** *  zero.
+ 117:Generated_Source\PSoC5/spi_oled_PM.c **** *  spi_oled_rxBufferRead - modified every function call - resets to
+ 118:Generated_Source\PSoC5/spi_oled_PM.c **** *  zero.
+ 119:Generated_Source\PSoC5/spi_oled_PM.c **** *
+ 120:Generated_Source\PSoC5/spi_oled_PM.c **** * Reentrant:
+ 121:Generated_Source\PSoC5/spi_oled_PM.c **** *  No.
+ 122:Generated_Source\PSoC5/spi_oled_PM.c **** *
+ 123:Generated_Source\PSoC5/spi_oled_PM.c **** *******************************************************************************/
+ 124:Generated_Source\PSoC5/spi_oled_PM.c **** void spi_oled_Wakeup(void) 
+ 125:Generated_Source\PSoC5/spi_oled_PM.c **** {
+ 321              		.loc 1 125 0
+ 322              		.cfi_startproc
+ 323              		@ args = 0, pretend = 0, frame = 0
+ 324              		@ frame_needed = 0, uses_anonymous_args = 0
+ 325 0000 08B5     		push	{r3, lr}
+ 326              		.cfi_def_cfa_offset 8
+ 327              		.cfi_offset 3, -8
+ 328              		.cfi_offset 14, -4
+ 126:Generated_Source\PSoC5/spi_oled_PM.c ****     #if(spi_oled_RX_SOFTWARE_BUF_ENABLED)
+ 127:Generated_Source\PSoC5/spi_oled_PM.c ****         spi_oled_rxBufferFull  = 0u;
+ 128:Generated_Source\PSoC5/spi_oled_PM.c ****         spi_oled_rxBufferRead  = 0u;
+ 129:Generated_Source\PSoC5/spi_oled_PM.c ****         spi_oled_rxBufferWrite = 0u;
+ 130:Generated_Source\PSoC5/spi_oled_PM.c ****     #endif /* (spi_oled_RX_SOFTWARE_BUF_ENABLED) */
+ 131:Generated_Source\PSoC5/spi_oled_PM.c **** 
+ 132:Generated_Source\PSoC5/spi_oled_PM.c ****     #if(spi_oled_TX_SOFTWARE_BUF_ENABLED)
+ 133:Generated_Source\PSoC5/spi_oled_PM.c ****         spi_oled_txBufferFull  = 0u;
+ 134:Generated_Source\PSoC5/spi_oled_PM.c ****         spi_oled_txBufferRead  = 0u;
+ 135:Generated_Source\PSoC5/spi_oled_PM.c ****         spi_oled_txBufferWrite = 0u;
+ 136:Generated_Source\PSoC5/spi_oled_PM.c ****     #endif /* (spi_oled_TX_SOFTWARE_BUF_ENABLED) */
+ 137:Generated_Source\PSoC5/spi_oled_PM.c **** 
+ 138:Generated_Source\PSoC5/spi_oled_PM.c ****     /* Clear any data from the RX and TX FIFO */
+ 139:Generated_Source\PSoC5/spi_oled_PM.c ****     spi_oled_ClearFIFO();
+ 329              		.loc 1 139 0
+ 330 0002 FFF7FEFF 		bl	spi_oled_ClearFIFO
+ 331              	.LVL1:
+ 140:Generated_Source\PSoC5/spi_oled_PM.c **** 
+ 141:Generated_Source\PSoC5/spi_oled_PM.c ****     /* Restore components block enable state */
+ 142:Generated_Source\PSoC5/spi_oled_PM.c ****     if(0u != spi_oled_backup.enableState)
+ 332              		.loc 1 142 0
+ 333 0006 034B     		ldr	r3, .L10
+ 334 0008 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 335 000a 0BB1     		cbz	r3, .L7
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 20
+
+
+ 143:Generated_Source\PSoC5/spi_oled_PM.c ****     {
+ 144:Generated_Source\PSoC5/spi_oled_PM.c ****         spi_oled_Enable();
+ 336              		.loc 1 144 0
+ 337 000c FFF7FEFF 		bl	spi_oled_Enable
+ 338              	.LVL2:
+ 339              	.L7:
+ 340 0010 08BD     		pop	{r3, pc}
+ 341              	.L11:
+ 342 0012 00BF     		.align	2
+ 343              	.L10:
+ 344 0014 00000000 		.word	.LANCHOR0
+ 345              		.cfi_endproc
+ 346              	.LFE3:
+ 347              		.size	spi_oled_Wakeup, .-spi_oled_Wakeup
+ 348              		.data
+ 349              		.align	2
+ 350              		.set	.LANCHOR0,. + 0
+ 351              		.type	spi_oled_backup, %object
+ 352              		.size	spi_oled_backup, 2
+ 353              	spi_oled_backup:
+ 354 0000 00       		.byte	0
+ 355 0001 0F       		.byte	15
+ 356              		.text
+ 357              	.Letext0:
+ 358              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 359              		.file 3 "Generated_Source\\PSoC5\\spi_oled.h"
+ 360              		.section	.debug_info,"",%progbits
+ 361              	.Ldebug_info0:
+ 362 0000 6F010000 		.4byte	0x16f
+ 363 0004 0400     		.2byte	0x4
+ 364 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 365 000a 04       		.byte	0x4
+ 366 000b 01       		.uleb128 0x1
+ 367 000c 71000000 		.4byte	.LASF26
+ 368 0010 0C       		.byte	0xc
+ 369 0011 40020000 		.4byte	.LASF27
+ 370 0015 79010000 		.4byte	.LASF28
+ 371 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 372 001d 00000000 		.4byte	0
+ 373 0021 00000000 		.4byte	.Ldebug_line0
+ 374 0025 02       		.uleb128 0x2
+ 375 0026 01       		.byte	0x1
+ 376 0027 06       		.byte	0x6
+ 377 0028 86020000 		.4byte	.LASF0
+ 378 002c 02       		.uleb128 0x2
+ 379 002d 01       		.byte	0x1
+ 380 002e 08       		.byte	0x8
+ 381 002f 2C010000 		.4byte	.LASF1
+ 382 0033 02       		.uleb128 0x2
+ 383 0034 02       		.byte	0x2
+ 384 0035 05       		.byte	0x5
+ 385 0036 36020000 		.4byte	.LASF2
+ 386 003a 02       		.uleb128 0x2
+ 387 003b 02       		.byte	0x2
+ 388 003c 07       		.byte	0x7
+ 389 003d 37000000 		.4byte	.LASF3
+ 390 0041 02       		.uleb128 0x2
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 21
+
+
+ 391 0042 04       		.byte	0x4
+ 392 0043 05       		.byte	0x5
+ 393 0044 65020000 		.4byte	.LASF4
+ 394 0048 02       		.uleb128 0x2
+ 395 0049 04       		.byte	0x4
+ 396 004a 07       		.byte	0x7
+ 397 004b 05010000 		.4byte	.LASF5
+ 398 004f 02       		.uleb128 0x2
+ 399 0050 08       		.byte	0x8
+ 400 0051 05       		.byte	0x5
+ 401 0052 08020000 		.4byte	.LASF6
+ 402 0056 02       		.uleb128 0x2
+ 403 0057 08       		.byte	0x8
+ 404 0058 07       		.byte	0x7
+ 405 0059 E3010000 		.4byte	.LASF7
+ 406 005d 03       		.uleb128 0x3
+ 407 005e 04       		.byte	0x4
+ 408 005f 05       		.byte	0x5
+ 409 0060 696E7400 		.ascii	"int\000"
+ 410 0064 02       		.uleb128 0x2
+ 411 0065 04       		.byte	0x4
+ 412 0066 07       		.byte	0x7
+ 413 0067 6C010000 		.4byte	.LASF8
+ 414 006b 04       		.uleb128 0x4
+ 415 006c 17010000 		.4byte	.LASF12
+ 416 0070 02       		.byte	0x2
+ 417 0071 E401     		.2byte	0x1e4
+ 418 0073 2C000000 		.4byte	0x2c
+ 419 0077 02       		.uleb128 0x2
+ 420 0078 04       		.byte	0x4
+ 421 0079 04       		.byte	0x4
+ 422 007a 58000000 		.4byte	.LASF9
+ 423 007e 02       		.uleb128 0x2
+ 424 007f 08       		.byte	0x8
+ 425 0080 04       		.byte	0x4
+ 426 0081 3A010000 		.4byte	.LASF10
+ 427 0085 02       		.uleb128 0x2
+ 428 0086 01       		.byte	0x1
+ 429 0087 08       		.byte	0x8
+ 430 0088 26020000 		.4byte	.LASF11
+ 431 008c 04       		.uleb128 0x4
+ 432 008d FA010000 		.4byte	.LASF13
+ 433 0091 02       		.byte	0x2
+ 434 0092 8E02     		.2byte	0x28e
+ 435 0094 98000000 		.4byte	0x98
+ 436 0098 05       		.uleb128 0x5
+ 437 0099 6B000000 		.4byte	0x6b
+ 438 009d 02       		.uleb128 0x2
+ 439 009e 08       		.byte	0x8
+ 440 009f 04       		.byte	0x4
+ 441 00a0 7A020000 		.4byte	.LASF14
+ 442 00a4 02       		.uleb128 0x2
+ 443 00a5 04       		.byte	0x4
+ 444 00a6 07       		.byte	0x7
+ 445 00a7 FF010000 		.4byte	.LASF15
+ 446 00ab 06       		.uleb128 0x6
+ 447 00ac 02       		.byte	0x2
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 22
+
+
+ 448 00ad 03       		.byte	0x3
+ 449 00ae 40       		.byte	0x40
+ 450 00af CC000000 		.4byte	0xcc
+ 451 00b3 07       		.uleb128 0x7
+ 452 00b4 6E020000 		.4byte	.LASF16
+ 453 00b8 03       		.byte	0x3
+ 454 00b9 42       		.byte	0x42
+ 455 00ba 6B000000 		.4byte	0x6b
+ 456 00be 00       		.byte	0
+ 457 00bf 07       		.uleb128 0x7
+ 458 00c0 2B020000 		.4byte	.LASF17
+ 459 00c4 03       		.byte	0x3
+ 460 00c5 43       		.byte	0x43
+ 461 00c6 6B000000 		.4byte	0x6b
+ 462 00ca 01       		.byte	0x1
+ 463 00cb 00       		.byte	0
+ 464 00cc 08       		.uleb128 0x8
+ 465 00cd 55010000 		.4byte	.LASF18
+ 466 00d1 03       		.byte	0x3
+ 467 00d2 44       		.byte	0x44
+ 468 00d3 AB000000 		.4byte	0xab
+ 469 00d7 09       		.uleb128 0x9
+ 470 00d8 41010000 		.4byte	.LASF19
+ 471 00dc 01       		.byte	0x1
+ 472 00dd 29       		.byte	0x29
+ 473 00de 00000000 		.4byte	.LFB0
+ 474 00e2 02000000 		.4byte	.LFE0-.LFB0
+ 475 00e6 01       		.uleb128 0x1
+ 476 00e7 9C       		.byte	0x9c
+ 477 00e8 09       		.uleb128 0x9
+ 478 00e9 20000000 		.4byte	.LASF20
+ 479 00ed 01       		.byte	0x1
+ 480 00ee 3D       		.byte	0x3d
+ 481 00ef 00000000 		.4byte	.LFB1
+ 482 00f3 02000000 		.4byte	.LFE1-.LFB1
+ 483 00f7 01       		.uleb128 0x1
+ 484 00f8 9C       		.byte	0x9c
+ 485 00f9 0A       		.uleb128 0xa
+ 486 00fa 1D010000 		.4byte	.LASF21
+ 487 00fe 01       		.byte	0x1
+ 488 00ff 57       		.byte	0x57
+ 489 0100 00000000 		.4byte	.LFB2
+ 490 0104 1C000000 		.4byte	.LFE2-.LFB2
+ 491 0108 01       		.uleb128 0x1
+ 492 0109 9C       		.byte	0x9c
+ 493 010a 18010000 		.4byte	0x118
+ 494 010e 0B       		.uleb128 0xb
+ 495 010f 12000000 		.4byte	.LVL0
+ 496 0113 51010000 		.4byte	0x151
+ 497 0117 00       		.byte	0
+ 498 0118 0A       		.uleb128 0xa
+ 499 0119 00000000 		.4byte	.LASF22
+ 500 011d 01       		.byte	0x1
+ 501 011e 7C       		.byte	0x7c
+ 502 011f 00000000 		.4byte	.LFB3
+ 503 0123 18000000 		.4byte	.LFE3-.LFB3
+ 504 0127 01       		.uleb128 0x1
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 23
+
+
+ 505 0128 9C       		.byte	0x9c
+ 506 0129 40010000 		.4byte	0x140
+ 507 012d 0B       		.uleb128 0xb
+ 508 012e 06000000 		.4byte	.LVL1
+ 509 0132 5C010000 		.4byte	0x15c
+ 510 0136 0B       		.uleb128 0xb
+ 511 0137 10000000 		.4byte	.LVL2
+ 512 013b 67010000 		.4byte	0x167
+ 513 013f 00       		.byte	0
+ 514 0140 0C       		.uleb128 0xc
+ 515 0141 10000000 		.4byte	.LASF29
+ 516 0145 01       		.byte	0x1
+ 517 0146 14       		.byte	0x14
+ 518 0147 CC000000 		.4byte	0xcc
+ 519 014b 05       		.uleb128 0x5
+ 520 014c 03       		.byte	0x3
+ 521 014d 00000000 		.4byte	spi_oled_backup
+ 522 0151 0D       		.uleb128 0xd
+ 523 0152 4A000000 		.4byte	.LASF23
+ 524 0156 4A000000 		.4byte	.LASF23
+ 525 015a 03       		.byte	0x3
+ 526 015b 4E       		.byte	0x4e
+ 527 015c 0D       		.uleb128 0xd
+ 528 015d 5E000000 		.4byte	.LASF24
+ 529 0161 5E000000 		.4byte	.LASF24
+ 530 0165 03       		.byte	0x3
+ 531 0166 66       		.byte	0x66
+ 532 0167 0D       		.uleb128 0xd
+ 533 0168 16020000 		.4byte	.LASF25
+ 534 016c 16020000 		.4byte	.LASF25
+ 535 0170 03       		.byte	0x3
+ 536 0171 4C       		.byte	0x4c
+ 537 0172 00       		.byte	0
+ 538              		.section	.debug_abbrev,"",%progbits
+ 539              	.Ldebug_abbrev0:
+ 540 0000 01       		.uleb128 0x1
+ 541 0001 11       		.uleb128 0x11
+ 542 0002 01       		.byte	0x1
+ 543 0003 25       		.uleb128 0x25
+ 544 0004 0E       		.uleb128 0xe
+ 545 0005 13       		.uleb128 0x13
+ 546 0006 0B       		.uleb128 0xb
+ 547 0007 03       		.uleb128 0x3
+ 548 0008 0E       		.uleb128 0xe
+ 549 0009 1B       		.uleb128 0x1b
+ 550 000a 0E       		.uleb128 0xe
+ 551 000b 55       		.uleb128 0x55
+ 552 000c 17       		.uleb128 0x17
+ 553 000d 11       		.uleb128 0x11
+ 554 000e 01       		.uleb128 0x1
+ 555 000f 10       		.uleb128 0x10
+ 556 0010 17       		.uleb128 0x17
+ 557 0011 00       		.byte	0
+ 558 0012 00       		.byte	0
+ 559 0013 02       		.uleb128 0x2
+ 560 0014 24       		.uleb128 0x24
+ 561 0015 00       		.byte	0
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 24
+
+
+ 562 0016 0B       		.uleb128 0xb
+ 563 0017 0B       		.uleb128 0xb
+ 564 0018 3E       		.uleb128 0x3e
+ 565 0019 0B       		.uleb128 0xb
+ 566 001a 03       		.uleb128 0x3
+ 567 001b 0E       		.uleb128 0xe
+ 568 001c 00       		.byte	0
+ 569 001d 00       		.byte	0
+ 570 001e 03       		.uleb128 0x3
+ 571 001f 24       		.uleb128 0x24
+ 572 0020 00       		.byte	0
+ 573 0021 0B       		.uleb128 0xb
+ 574 0022 0B       		.uleb128 0xb
+ 575 0023 3E       		.uleb128 0x3e
+ 576 0024 0B       		.uleb128 0xb
+ 577 0025 03       		.uleb128 0x3
+ 578 0026 08       		.uleb128 0x8
+ 579 0027 00       		.byte	0
+ 580 0028 00       		.byte	0
+ 581 0029 04       		.uleb128 0x4
+ 582 002a 16       		.uleb128 0x16
+ 583 002b 00       		.byte	0
+ 584 002c 03       		.uleb128 0x3
+ 585 002d 0E       		.uleb128 0xe
+ 586 002e 3A       		.uleb128 0x3a
+ 587 002f 0B       		.uleb128 0xb
+ 588 0030 3B       		.uleb128 0x3b
+ 589 0031 05       		.uleb128 0x5
+ 590 0032 49       		.uleb128 0x49
+ 591 0033 13       		.uleb128 0x13
+ 592 0034 00       		.byte	0
+ 593 0035 00       		.byte	0
+ 594 0036 05       		.uleb128 0x5
+ 595 0037 35       		.uleb128 0x35
+ 596 0038 00       		.byte	0
+ 597 0039 49       		.uleb128 0x49
+ 598 003a 13       		.uleb128 0x13
+ 599 003b 00       		.byte	0
+ 600 003c 00       		.byte	0
+ 601 003d 06       		.uleb128 0x6
+ 602 003e 13       		.uleb128 0x13
+ 603 003f 01       		.byte	0x1
+ 604 0040 0B       		.uleb128 0xb
+ 605 0041 0B       		.uleb128 0xb
+ 606 0042 3A       		.uleb128 0x3a
+ 607 0043 0B       		.uleb128 0xb
+ 608 0044 3B       		.uleb128 0x3b
+ 609 0045 0B       		.uleb128 0xb
+ 610 0046 01       		.uleb128 0x1
+ 611 0047 13       		.uleb128 0x13
+ 612 0048 00       		.byte	0
+ 613 0049 00       		.byte	0
+ 614 004a 07       		.uleb128 0x7
+ 615 004b 0D       		.uleb128 0xd
+ 616 004c 00       		.byte	0
+ 617 004d 03       		.uleb128 0x3
+ 618 004e 0E       		.uleb128 0xe
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 25
+
+
+ 619 004f 3A       		.uleb128 0x3a
+ 620 0050 0B       		.uleb128 0xb
+ 621 0051 3B       		.uleb128 0x3b
+ 622 0052 0B       		.uleb128 0xb
+ 623 0053 49       		.uleb128 0x49
+ 624 0054 13       		.uleb128 0x13
+ 625 0055 38       		.uleb128 0x38
+ 626 0056 0B       		.uleb128 0xb
+ 627 0057 00       		.byte	0
+ 628 0058 00       		.byte	0
+ 629 0059 08       		.uleb128 0x8
+ 630 005a 16       		.uleb128 0x16
+ 631 005b 00       		.byte	0
+ 632 005c 03       		.uleb128 0x3
+ 633 005d 0E       		.uleb128 0xe
+ 634 005e 3A       		.uleb128 0x3a
+ 635 005f 0B       		.uleb128 0xb
+ 636 0060 3B       		.uleb128 0x3b
+ 637 0061 0B       		.uleb128 0xb
+ 638 0062 49       		.uleb128 0x49
+ 639 0063 13       		.uleb128 0x13
+ 640 0064 00       		.byte	0
+ 641 0065 00       		.byte	0
+ 642 0066 09       		.uleb128 0x9
+ 643 0067 2E       		.uleb128 0x2e
+ 644 0068 00       		.byte	0
+ 645 0069 3F       		.uleb128 0x3f
+ 646 006a 19       		.uleb128 0x19
+ 647 006b 03       		.uleb128 0x3
+ 648 006c 0E       		.uleb128 0xe
+ 649 006d 3A       		.uleb128 0x3a
+ 650 006e 0B       		.uleb128 0xb
+ 651 006f 3B       		.uleb128 0x3b
+ 652 0070 0B       		.uleb128 0xb
+ 653 0071 27       		.uleb128 0x27
+ 654 0072 19       		.uleb128 0x19
+ 655 0073 11       		.uleb128 0x11
+ 656 0074 01       		.uleb128 0x1
+ 657 0075 12       		.uleb128 0x12
+ 658 0076 06       		.uleb128 0x6
+ 659 0077 40       		.uleb128 0x40
+ 660 0078 18       		.uleb128 0x18
+ 661 0079 9742     		.uleb128 0x2117
+ 662 007b 19       		.uleb128 0x19
+ 663 007c 00       		.byte	0
+ 664 007d 00       		.byte	0
+ 665 007e 0A       		.uleb128 0xa
+ 666 007f 2E       		.uleb128 0x2e
+ 667 0080 01       		.byte	0x1
+ 668 0081 3F       		.uleb128 0x3f
+ 669 0082 19       		.uleb128 0x19
+ 670 0083 03       		.uleb128 0x3
+ 671 0084 0E       		.uleb128 0xe
+ 672 0085 3A       		.uleb128 0x3a
+ 673 0086 0B       		.uleb128 0xb
+ 674 0087 3B       		.uleb128 0x3b
+ 675 0088 0B       		.uleb128 0xb
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 26
+
+
+ 676 0089 27       		.uleb128 0x27
+ 677 008a 19       		.uleb128 0x19
+ 678 008b 11       		.uleb128 0x11
+ 679 008c 01       		.uleb128 0x1
+ 680 008d 12       		.uleb128 0x12
+ 681 008e 06       		.uleb128 0x6
+ 682 008f 40       		.uleb128 0x40
+ 683 0090 18       		.uleb128 0x18
+ 684 0091 9742     		.uleb128 0x2117
+ 685 0093 19       		.uleb128 0x19
+ 686 0094 01       		.uleb128 0x1
+ 687 0095 13       		.uleb128 0x13
+ 688 0096 00       		.byte	0
+ 689 0097 00       		.byte	0
+ 690 0098 0B       		.uleb128 0xb
+ 691 0099 898201   		.uleb128 0x4109
+ 692 009c 00       		.byte	0
+ 693 009d 11       		.uleb128 0x11
+ 694 009e 01       		.uleb128 0x1
+ 695 009f 31       		.uleb128 0x31
+ 696 00a0 13       		.uleb128 0x13
+ 697 00a1 00       		.byte	0
+ 698 00a2 00       		.byte	0
+ 699 00a3 0C       		.uleb128 0xc
+ 700 00a4 34       		.uleb128 0x34
+ 701 00a5 00       		.byte	0
+ 702 00a6 03       		.uleb128 0x3
+ 703 00a7 0E       		.uleb128 0xe
+ 704 00a8 3A       		.uleb128 0x3a
+ 705 00a9 0B       		.uleb128 0xb
+ 706 00aa 3B       		.uleb128 0x3b
+ 707 00ab 0B       		.uleb128 0xb
+ 708 00ac 49       		.uleb128 0x49
+ 709 00ad 13       		.uleb128 0x13
+ 710 00ae 02       		.uleb128 0x2
+ 711 00af 18       		.uleb128 0x18
+ 712 00b0 00       		.byte	0
+ 713 00b1 00       		.byte	0
+ 714 00b2 0D       		.uleb128 0xd
+ 715 00b3 2E       		.uleb128 0x2e
+ 716 00b4 00       		.byte	0
+ 717 00b5 3F       		.uleb128 0x3f
+ 718 00b6 19       		.uleb128 0x19
+ 719 00b7 3C       		.uleb128 0x3c
+ 720 00b8 19       		.uleb128 0x19
+ 721 00b9 6E       		.uleb128 0x6e
+ 722 00ba 0E       		.uleb128 0xe
+ 723 00bb 03       		.uleb128 0x3
+ 724 00bc 0E       		.uleb128 0xe
+ 725 00bd 3A       		.uleb128 0x3a
+ 726 00be 0B       		.uleb128 0xb
+ 727 00bf 3B       		.uleb128 0x3b
+ 728 00c0 0B       		.uleb128 0xb
+ 729 00c1 00       		.byte	0
+ 730 00c2 00       		.byte	0
+ 731 00c3 00       		.byte	0
+ 732              		.section	.debug_aranges,"",%progbits
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 27
+
+
+ 733 0000 34000000 		.4byte	0x34
+ 734 0004 0200     		.2byte	0x2
+ 735 0006 00000000 		.4byte	.Ldebug_info0
+ 736 000a 04       		.byte	0x4
+ 737 000b 00       		.byte	0
+ 738 000c 0000     		.2byte	0
+ 739 000e 0000     		.2byte	0
+ 740 0010 00000000 		.4byte	.LFB0
+ 741 0014 02000000 		.4byte	.LFE0-.LFB0
+ 742 0018 00000000 		.4byte	.LFB1
+ 743 001c 02000000 		.4byte	.LFE1-.LFB1
+ 744 0020 00000000 		.4byte	.LFB2
+ 745 0024 1C000000 		.4byte	.LFE2-.LFB2
+ 746 0028 00000000 		.4byte	.LFB3
+ 747 002c 18000000 		.4byte	.LFE3-.LFB3
+ 748 0030 00000000 		.4byte	0
+ 749 0034 00000000 		.4byte	0
+ 750              		.section	.debug_ranges,"",%progbits
+ 751              	.Ldebug_ranges0:
+ 752 0000 00000000 		.4byte	.LFB0
+ 753 0004 02000000 		.4byte	.LFE0
+ 754 0008 00000000 		.4byte	.LFB1
+ 755 000c 02000000 		.4byte	.LFE1
+ 756 0010 00000000 		.4byte	.LFB2
+ 757 0014 1C000000 		.4byte	.LFE2
+ 758 0018 00000000 		.4byte	.LFB3
+ 759 001c 18000000 		.4byte	.LFE3
+ 760 0020 00000000 		.4byte	0
+ 761 0024 00000000 		.4byte	0
+ 762              		.section	.debug_line,"",%progbits
+ 763              	.Ldebug_line0:
+ 764 0000 A2000000 		.section	.debug_str,"MS",%progbits,1
+ 764      02005600 
+ 764      00000201 
+ 764      FB0E0D00 
+ 764      01010101 
+ 765              	.LASF22:
+ 766 0000 7370695F 		.ascii	"spi_oled_Wakeup\000"
+ 766      6F6C6564 
+ 766      5F57616B 
+ 766      65757000 
+ 767              	.LASF29:
+ 768 0010 7370695F 		.ascii	"spi_oled_backup\000"
+ 768      6F6C6564 
+ 768      5F626163 
+ 768      6B757000 
+ 769              	.LASF20:
+ 770 0020 7370695F 		.ascii	"spi_oled_RestoreConfig\000"
+ 770      6F6C6564 
+ 770      5F526573 
+ 770      746F7265 
+ 770      436F6E66 
+ 771              	.LASF3:
+ 772 0037 73686F72 		.ascii	"short unsigned int\000"
+ 772      7420756E 
+ 772      7369676E 
+ 772      65642069 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 28
+
+
+ 772      6E7400
+ 773              	.LASF23:
+ 774 004a 7370695F 		.ascii	"spi_oled_Stop\000"
+ 774      6F6C6564 
+ 774      5F53746F 
+ 774      7000
+ 775              	.LASF9:
+ 776 0058 666C6F61 		.ascii	"float\000"
+ 776      7400
+ 777              	.LASF24:
+ 778 005e 7370695F 		.ascii	"spi_oled_ClearFIFO\000"
+ 778      6F6C6564 
+ 778      5F436C65 
+ 778      61724649 
+ 778      464F00
+ 779              	.LASF26:
+ 780 0071 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 780      43313120 
+ 780      352E342E 
+ 780      31203230 
+ 780      31363036 
+ 781 00a4 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 781      20726576 
+ 781      6973696F 
+ 781      6E203233 
+ 781      37373135 
+ 782 00d7 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects -flto\000"
+ 782      66756E63 
+ 782      74696F6E 
+ 782      2D736563 
+ 782      74696F6E 
+ 783              	.LASF5:
+ 784 0105 6C6F6E67 		.ascii	"long unsigned int\000"
+ 784      20756E73 
+ 784      69676E65 
+ 784      6420696E 
+ 784      7400
+ 785              	.LASF12:
+ 786 0117 75696E74 		.ascii	"uint8\000"
+ 786      3800
+ 787              	.LASF21:
+ 788 011d 7370695F 		.ascii	"spi_oled_Sleep\000"
+ 788      6F6C6564 
+ 788      5F536C65 
+ 788      657000
+ 789              	.LASF1:
+ 790 012c 756E7369 		.ascii	"unsigned char\000"
+ 790      676E6564 
+ 790      20636861 
+ 790      7200
+ 791              	.LASF10:
+ 792 013a 646F7562 		.ascii	"double\000"
+ 792      6C6500
+ 793              	.LASF19:
+ 794 0141 7370695F 		.ascii	"spi_oled_SaveConfig\000"
+ 794      6F6C6564 
+ 794      5F536176 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 29
+
+
+ 794      65436F6E 
+ 794      66696700 
+ 795              	.LASF18:
+ 796 0155 7370695F 		.ascii	"spi_oled_BACKUP_STRUCT\000"
+ 796      6F6C6564 
+ 796      5F424143 
+ 796      4B55505F 
+ 796      53545255 
+ 797              	.LASF8:
+ 798 016c 756E7369 		.ascii	"unsigned int\000"
+ 798      676E6564 
+ 798      20696E74 
+ 798      00
+ 799              	.LASF28:
+ 800 0179 433A5C55 		.ascii	"C:\\Users\\info\\Desktop\\Spring 2019 Classes\\6.11"
+ 800      73657273 
+ 800      5C696E66 
+ 800      6F5C4465 
+ 800      736B746F 
+ 801 01a7 355C362E 		.ascii	"5\\6.115-final\\PSoCCreator\\Final Project\\FinalEm"
+ 801      3131352D 
+ 801      66696E61 
+ 801      6C5C5053 
+ 801      6F434372 
+ 802 01d6 756C6174 		.ascii	"ulator.cydsn\000"
+ 802      6F722E63 
+ 802      7964736E 
+ 802      00
+ 803              	.LASF7:
+ 804 01e3 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 804      206C6F6E 
+ 804      6720756E 
+ 804      7369676E 
+ 804      65642069 
+ 805              	.LASF13:
+ 806 01fa 72656738 		.ascii	"reg8\000"
+ 806      00
+ 807              	.LASF15:
+ 808 01ff 73697A65 		.ascii	"sizetype\000"
+ 808      74797065 
+ 808      00
+ 809              	.LASF6:
+ 810 0208 6C6F6E67 		.ascii	"long long int\000"
+ 810      206C6F6E 
+ 810      6720696E 
+ 810      7400
+ 811              	.LASF25:
+ 812 0216 7370695F 		.ascii	"spi_oled_Enable\000"
+ 812      6F6C6564 
+ 812      5F456E61 
+ 812      626C6500 
+ 813              	.LASF11:
+ 814 0226 63686172 		.ascii	"char\000"
+ 814      00
+ 815              	.LASF17:
+ 816 022b 636E7472 		.ascii	"cntrPeriod\000"
+ 816      50657269 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cc9bFqLK.s 			page 30
+
+
+ 816      6F6400
+ 817              	.LASF2:
+ 818 0236 73686F72 		.ascii	"short int\000"
+ 818      7420696E 
+ 818      7400
+ 819              	.LASF27:
+ 820 0240 47656E65 		.ascii	"Generated_Source\\PSoC5\\spi_oled_PM.c\000"
+ 820      72617465 
+ 820      645F536F 
+ 820      75726365 
+ 820      5C50536F 
+ 821              	.LASF4:
+ 822 0265 6C6F6E67 		.ascii	"long int\000"
+ 822      20696E74 
+ 822      00
+ 823              	.LASF16:
+ 824 026e 656E6162 		.ascii	"enableState\000"
+ 824      6C655374 
+ 824      61746500 
+ 825              	.LASF14:
+ 826 027a 6C6F6E67 		.ascii	"long double\000"
+ 826      20646F75 
+ 826      626C6500 
+ 827              	.LASF0:
+ 828 0286 7369676E 		.ascii	"signed char\000"
+ 828      65642063 
+ 828      68617200 
+ 829              		.comm	__gnu_lto_v1,1,1
+ 830              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

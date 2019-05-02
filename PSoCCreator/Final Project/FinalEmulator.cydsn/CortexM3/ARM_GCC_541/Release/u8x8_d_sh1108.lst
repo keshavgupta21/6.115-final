@@ -1,0 +1,3237 @@
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"u8x8_d_sh1108.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.u8x8_d_sh1108_160x160,"ax",%progbits
+  20              		.align	2
+  21              		.global	u8x8_d_sh1108_160x160
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	u8x8_d_sh1108_160x160, %function
+  25              	u8x8_d_sh1108_160x160:
+  26              	.LFB1:
+  27              		.file 1 "..\\u8g2-master\\csrc\\u8x8_d_sh1108.c"
+   1:..\u8g2-master\csrc/u8x8_d_sh1108.c **** /*
+   2:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+   3:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   u8x8_d_sh1108.c
+   4:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+   5:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   Universal 8bit Graphics Library (https://github.com/olikraus/u8g2/)
+   6:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+   7:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   Copyright (c) 2018, olikraus@gmail.com
+   8:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   All rights reserved.
+   9:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  10:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   Redistribution and use in source and binary forms, with or without modification, 
+  11:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   are permitted provided that the following conditions are met:
+  12:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  13:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   * Redistributions of source code must retain the above copyright notice, this list 
+  14:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     of conditions and the following disclaimer.
+  15:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     
+  16:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   * Redistributions in binary form must reproduce the above copyright notice, this 
+  17:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     list of conditions and the following disclaimer in the documentation and/or other 
+  18:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     materials provided with the distribution.
+  19:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  20:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+  21:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+  22:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  23:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+  24:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+  25:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  26:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  27:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+  28:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+  29:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+  30:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 2
+
+
+  31:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+  32:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  
+  33:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   
+  34:..\u8g2-master\csrc/u8x8_d_sh1108.c **** */
+  35:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  36:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  37:..\u8g2-master\csrc/u8x8_d_sh1108.c **** #include "u8x8.h"
+  38:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  39:..\u8g2-master\csrc/u8x8_d_sh1108.c **** /* 
+  40:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   code copyied from sh1107
+  41:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   SH1108: 160x160 controller from Sino Wealth
+  42:..\u8g2-master\csrc/u8x8_d_sh1108.c **** */
+  43:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  44:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  45:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  46:..\u8g2-master\csrc/u8x8_d_sh1108.c **** static const uint8_t u8x8_d_sh1108_noname_powersave0_seq[] = {
+  47:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  48:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_C(0x0af),		                /* display on */
+  49:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  50:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_END()             			/* end of sequence */
+  51:..\u8g2-master\csrc/u8x8_d_sh1108.c **** };
+  52:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  53:..\u8g2-master\csrc/u8x8_d_sh1108.c **** static const uint8_t u8x8_d_sh1108_noname_powersave1_seq[] = {
+  54:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  55:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_C(0x0ae),		                /* display off */
+  56:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  57:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_END()             			/* end of sequence */
+  58:..\u8g2-master\csrc/u8x8_d_sh1108.c **** };
+  59:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  60:..\u8g2-master\csrc/u8x8_d_sh1108.c **** static const uint8_t u8x8_d_sh1108_160x160_noname_powersave0_seq[] = {
+  61:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  62:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_C(0x0a0),				/* segment remap a0/a1*/
+  63:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_C(0x0c0),				/* c0: scan dir normal, c8: reverse */
+  64:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  65:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_END()             			/* end of sequence */
+  66:..\u8g2-master\csrc/u8x8_d_sh1108.c **** };
+  67:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  68:..\u8g2-master\csrc/u8x8_d_sh1108.c **** static const uint8_t u8x8_d_sh1108_160x160_noname_powersave1_seq[] = {
+  69:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+  70:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_C(0x0a1),				/* segment remap a0/a1*/
+  71:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_C(0x0c8),				/* c0: scan dir normal, c8: reverse */
+  72:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+  73:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_END()             			/* end of sequence */
+  74:..\u8g2-master\csrc/u8x8_d_sh1108.c **** };
+  75:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  76:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  77:..\u8g2-master\csrc/u8x8_d_sh1108.c **** static uint8_t u8x8_d_sh1108_generic(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
+  78:..\u8g2-master\csrc/u8x8_d_sh1108.c **** {
+  79:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   uint8_t x, c;
+  80:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   uint8_t *ptr;
+  81:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   switch(msg)
+  82:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   {
+  83:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     /* handled by the calling function
+  84:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     case U8X8_MSG_DISPLAY_SETUP_MEMORY:
+  85:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_d_helper_display_setup_memory(u8x8, &u8x8_sh1108_64x128_noname_display_info);
+  86:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       break;
+  87:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     */
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 3
+
+
+  88:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     /* handled by the calling function
+  89:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     case U8X8_MSG_DISPLAY_INIT:
+  90:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_d_helper_display_init(u8x8);
+  91:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_SendSequence(u8x8, u8x8_d_sh1108_64x128_noname_init_seq);    
+  92:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       break;
+  93:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     */
+  94:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     case U8X8_MSG_DISPLAY_SET_POWER_SAVE:
+  95:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       if ( arg_int == 0 )
+  96:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_sh1108_noname_powersave0_seq);
+  97:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       else
+  98:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_sh1108_noname_powersave1_seq);
+  99:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       break;
+ 100:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     case U8X8_MSG_DISPLAY_SET_FLIP_MODE:
+ 101:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       if ( arg_int == 0 )
+ 102:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       {
+ 103:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_sh1108_160x160_noname_powersave0_seq);
+ 104:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	u8x8->x_offset = u8x8->display_info->default_x_offset;
+ 105:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       }
+ 106:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       else
+ 107:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       {
+ 108:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_sh1108_160x160_noname_powersave1_seq);
+ 109:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	u8x8->x_offset = u8x8->display_info->flipmode_x_offset;
+ 110:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       }
+ 111:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       break;
+ 112:..\u8g2-master\csrc/u8x8_d_sh1108.c **** #ifdef U8X8_WITH_SET_CONTRAST
+ 113:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     case U8X8_MSG_DISPLAY_SET_CONTRAST:
+ 114:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_StartTransfer(u8x8);
+ 115:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_SendCmd(u8x8, 0x081 );
+ 116:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_SendArg(u8x8, arg_int );	/* sh1108 has range from 0 to 255 */
+ 117:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_EndTransfer(u8x8);
+ 118:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       break;
+ 119:..\u8g2-master\csrc/u8x8_d_sh1108.c **** #endif
+ 120:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     case U8X8_MSG_DISPLAY_DRAW_TILE:
+ 121:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_StartTransfer(u8x8);
+ 122:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       x = ((u8x8_tile_t *)arg_ptr)->x_pos;    
+ 123:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       x *= 8;
+ 124:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       x += u8x8->x_offset;
+ 125:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+ 126:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       //u8x8_cad_SendCmd(u8x8, 0x040 ); /* set line offset to 0 */
+ 127:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+ 128:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       // set column address
+ 129:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_SendCmd(u8x8, 0x010 | (x >> 4));
+ 130:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_SendCmd(u8x8, 0x000 | ((x & 15))); 
+ 131:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       
+ 132:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       // set page address
+ 133:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_SendCmd(u8x8, 0x0b0 ); 		// page cmd is a two byte command
+ 134:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_SendArg(u8x8, (((u8x8_tile_t *)arg_ptr)->y_pos)); 
+ 135:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     
+ 136:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       do
+ 137:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       {
+ 138:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	c = ((u8x8_tile_t *)arg_ptr)->cnt;
+ 139:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	ptr = ((u8x8_tile_t *)arg_ptr)->tile_ptr;
+ 140:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	u8x8_cad_SendData(u8x8, c*8, ptr); 	/* note: SendData can not handle more than 255 bytes */
+ 141:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	arg_int--;
+ 142:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       } while( arg_int > 0 );
+ 143:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       
+ 144:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_EndTransfer(u8x8);
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 4
+
+
+ 145:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       break;
+ 146:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     default:
+ 147:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       return 0;
+ 148:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   }
+ 149:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   return 1;
+ 150:..\u8g2-master\csrc/u8x8_d_sh1108.c **** }
+ 151:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+ 152:..\u8g2-master\csrc/u8x8_d_sh1108.c **** /*==================================================*/
+ 153:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+ 154:..\u8g2-master\csrc/u8x8_d_sh1108.c **** /* issue #619, 160x160 OLED */
+ 155:..\u8g2-master\csrc/u8x8_d_sh1108.c **** static const uint8_t u8x8_d_sh1108_160x160_noname_init_seq[] = {
+ 156:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     
+ 157:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_START_TRANSFER(),             	/* enable chip, delay is part of the transfer start */
+ 158:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     
+ 159:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_C(0x0ae),		                /* display off */
+ 160:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_CA(0x0d5, 0x060),		/* clock divide ratio and oscillator frequency */
+ 161:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_CA(0x0a9, 0x003), 		/* set display resolution, 0=64x160, 1=96x160, 2=128x160, 3=160x160 */
+ 162:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_C(0x020),		                /* use page addressing mode */
+ 163:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_CA(0x081, 0x01f), 		/* set contrast control */
+ 164:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_CA(0x0ad, 0x80),			/* DC/DC control 80=Use external Vpp, 89=Use internal DC/DC*/
+ 165:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_C(0x030),				/* set discharge VSL level, 0x030..0x03f */
+ 166:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_CA(0x0d9, 0x028), 		/* pre-charge period */
+ 167:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_CA(0x0db, 0x035), 		/* vcomh deselect level */    
+ 168:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_CA(0x0dc, 0x035),		/* VSEGM Deselect Level */
+ 169:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+ 170:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_C(0x0a0),				/* segment remap a0/a1*/
+ 171:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_C(0x0c0),				/* c0: scan dir normal, c8: reverse */
+ 172:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   
+ 173:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_C(0x0a4),				/* output ram to display */
+ 174:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_C(0x0a6),				/* none inverted normal display mode */
+ 175:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     
+ 176:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_END_TRANSFER(),             	/* disable chip */
+ 177:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   U8X8_END()             			/* end of sequence */
+ 178:..\u8g2-master\csrc/u8x8_d_sh1108.c **** };
+ 179:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+ 180:..\u8g2-master\csrc/u8x8_d_sh1108.c **** static const u8x8_display_info_t u8x8_sh1108_160x160_noname_display_info =
+ 181:..\u8g2-master\csrc/u8x8_d_sh1108.c **** {
+ 182:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* chip_enable_level = */ 0,
+ 183:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* chip_disable_level = */ 1,
+ 184:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   
+ 185:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* post_chip_enable_wait_ns = */ 60,
+ 186:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* pre_chip_disable_wait_ns = */ 120,
+ 187:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* reset_pulse_width_ms = */ 100, 	/* sh1108: 3 us */
+ 188:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* post_reset_wait_ms = */ 100, /* sometimes OLEDs need much longer setup time */
+ 189:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* sda_setup_time_ns = */ 100,		/* sh1108: 100ns */
+ 190:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* sck_pulse_width_ns = */ 100,	/* sh1108: 100ns */
+ 191:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* sck_clock_hz = */ 4000000UL,	/* since Arduino 1.6.0, the SPI bus speed in Hz. Should be  10000
+ 192:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* spi_mode = */ 0,		/* active high, rising edge */
+ 193:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* i2c_bus_clock_100kHz = */ 4,
+ 194:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* data_setup_time_ns = */ 40,
+ 195:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* write_pulse_width_ns = */ 150,	/* sh1108: cycle time is 300ns, so use 300/2 = 150 */
+ 196:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* tile_width = */ 20,
+ 197:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* tile_height = */ 20,
+ 198:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* default_x_offset = */ 0,
+ 199:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* flipmode_x_offset = */ 0,
+ 200:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* pixel_width = */ 160,
+ 201:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   /* pixel_height = */ 160
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 5
+
+
+ 202:..\u8g2-master\csrc/u8x8_d_sh1108.c **** };
+ 203:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+ 204:..\u8g2-master\csrc/u8x8_d_sh1108.c **** uint8_t u8x8_d_sh1108_160x160(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
+ 205:..\u8g2-master\csrc/u8x8_d_sh1108.c **** {
+  28              		.loc 1 205 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  34              		.cfi_def_cfa_offset 24
+  35              		.cfi_offset 3, -24
+  36              		.cfi_offset 4, -20
+  37              		.cfi_offset 5, -16
+  38              		.cfi_offset 6, -12
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  41              	.LBB4:
+  42              	.LBB5:
+  81:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   {
+  43              		.loc 1 81 0
+  44 0002 A1F10B07 		sub	r7, r1, #11
+  45              	.LBE5:
+  46              	.LBE4:
+  47              		.loc 1 205 0
+  48 0006 0546     		mov	r5, r0
+  49              	.LVL1:
+  50 0008 1446     		mov	r4, r2
+  51              	.LVL2:
+  52 000a 1E46     		mov	r6, r3
+  53              	.LVL3:
+  54              	.LBB15:
+  55              	.LBB6:
+  81:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   {
+  56              		.loc 1 81 0
+  57 000c 042F     		cmp	r7, #4
+  58 000e 04D8     		bhi	.L2
+  59 0010 DFE807F0 		tbb	[pc, r7]
+  60              	.LVL4:
+  61              	.L4:
+  62 0014 56       		.byte	(.L3-.L4)/2
+  63 0015 03       		.byte	(.L2-.L4)/2
+  64 0016 3D       		.byte	(.L5-.L4)/2
+  65 0017 47       		.byte	(.L6-.L4)/2
+  66 0018 10       		.byte	(.L7-.L4)/2
+  67 0019 00       		.p2align 1
+  68              	.L2:
+  69              	.LBE6:
+  70              	.LBE15:
+ 206:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     
+ 207:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   if ( u8x8_d_sh1108_generic(u8x8, msg, arg_int, arg_ptr) != 0 )
+ 208:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     return 1;
+ 209:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   
+ 210:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   switch(msg)
+  71              		.loc 1 210 0
+  72 001a 0929     		cmp	r1, #9
+  73 001c 56D0     		beq	.L14
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 6
+
+
+  74 001e 0A29     		cmp	r1, #10
+  75 0020 5AD1     		bne	.L22
+ 211:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   {
+ 212:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     case U8X8_MSG_DISPLAY_INIT:
+ 213:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_d_helper_display_init(u8x8);
+  76              		.loc 1 213 0
+  77 0022 2846     		mov	r0, r5
+  78              	.LVL5:
+  79 0024 FFF7FEFF 		bl	u8x8_d_helper_display_init
+  80              	.LVL6:
+ 214:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_SendSequence(u8x8, u8x8_d_sh1108_160x160_noname_init_seq);
+  81              		.loc 1 214 0
+  82 0028 2846     		mov	r0, r5
+  83 002a 3349     		ldr	r1, .L23
+  84 002c FFF7FEFF 		bl	u8x8_cad_SendSequence
+  85              	.LVL7:
+ 215:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       break;
+ 216:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     case U8X8_MSG_DISPLAY_SETUP_MEMORY:
+ 217:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_d_helper_display_setup_memory(u8x8, &u8x8_sh1108_160x160_noname_display_info);
+ 218:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       break;
+ 219:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     default:
+ 220:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       return 0;
+ 221:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   }
+ 222:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   return 1;
+  86              		.loc 1 222 0
+  87 0030 0120     		movs	r0, #1
+ 215:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       break;
+  88              		.loc 1 215 0
+  89 0032 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  90              	.LVL8:
+  91              	.L7:
+  92              	.LBB16:
+  93              	.LBB7:
+ 121:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       x = ((u8x8_tile_t *)arg_ptr)->x_pos;    
+  94              		.loc 1 121 0
+  95 0034 FFF7FEFF 		bl	u8x8_cad_StartTransfer
+  96              	.LVL9:
+ 124:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+  97              		.loc 1 124 0
+  98 0038 95F82230 		ldrb	r3, [r5, #34]	@ zero_extendqisi2
+ 122:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       x *= 8;
+  99              		.loc 1 122 0
+ 100 003c 7779     		ldrb	r7, [r6, #5]	@ zero_extendqisi2
+ 101              	.LVL10:
+ 129:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_SendCmd(u8x8, 0x000 | ((x & 15))); 
+ 102              		.loc 1 129 0
+ 103 003e 2846     		mov	r0, r5
+ 124:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 
+ 104              		.loc 1 124 0
+ 105 0040 03EBC707 		add	r7, r3, r7, lsl #3
+ 106              	.LVL11:
+ 107 0044 07F0FF07 		and	r7, r7, #255
+ 108              	.LVL12:
+ 129:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_SendCmd(u8x8, 0x000 | ((x & 15))); 
+ 109              		.loc 1 129 0
+ 110 0048 3909     		lsrs	r1, r7, #4
+ 111 004a 41F01001 		orr	r1, r1, #16
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 7
+
+
+ 112 004e FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 113              	.LVL13:
+ 130:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       
+ 114              		.loc 1 130 0
+ 115 0052 07F00F01 		and	r1, r7, #15
+ 116 0056 2846     		mov	r0, r5
+ 117 0058 FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 118              	.LVL14:
+ 133:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_SendArg(u8x8, (((u8x8_tile_t *)arg_ptr)->y_pos)); 
+ 119              		.loc 1 133 0
+ 120 005c B021     		movs	r1, #176
+ 121 005e 2846     		mov	r0, r5
+ 122 0060 FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 123              	.LVL15:
+ 134:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     
+ 124              		.loc 1 134 0
+ 125 0064 B179     		ldrb	r1, [r6, #6]	@ zero_extendqisi2
+ 126 0066 2846     		mov	r0, r5
+ 127 0068 FFF7FEFF 		bl	u8x8_cad_SendArg
+ 128              	.LVL16:
+ 129              	.L11:
+ 140:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	arg_int--;
+ 130              		.loc 1 140 0
+ 131 006c 3179     		ldrb	r1, [r6, #4]	@ zero_extendqisi2
+ 132 006e 3268     		ldr	r2, [r6]
+ 133 0070 C900     		lsls	r1, r1, #3
+ 134 0072 01F0F801 		and	r1, r1, #248
+ 135 0076 2846     		mov	r0, r5
+ 136 0078 FFF7FEFF 		bl	u8x8_cad_SendData
+ 137              	.LVL17:
+ 141:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       } while( arg_int > 0 );
+ 138              		.loc 1 141 0
+ 139 007c 621E     		subs	r2, r4, #1
+ 140              	.LVL18:
+ 142:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       
+ 141              		.loc 1 142 0
+ 142 007e 12F0FF04 		ands	r4, r2, #255
+ 143 0082 F3D1     		bne	.L11
+ 144:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       break;
+ 144              		.loc 1 144 0
+ 145 0084 2846     		mov	r0, r5
+ 146 0086 FFF7FEFF 		bl	u8x8_cad_EndTransfer
+ 147              	.LVL19:
+ 148              	.LBE7:
+ 149              	.LBE16:
+ 208:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   
+ 150              		.loc 1 208 0
+ 151 008a 0120     		movs	r0, #1
+ 223:..\u8g2-master\csrc/u8x8_d_sh1108.c **** }
+ 152              		.loc 1 223 0
+ 153 008c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 154              	.LVL20:
+ 155              	.L5:
+ 156              	.LBB17:
+ 157              	.LBB8:
+ 101:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       {
+ 158              		.loc 1 101 0
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 8
+
+
+ 159 008e 52BB     		cbnz	r2, .L10
+ 103:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	u8x8->x_offset = u8x8->display_info->default_x_offset;
+ 160              		.loc 1 103 0
+ 161 0090 1A49     		ldr	r1, .L23+4
+ 162              	.LVL21:
+ 163 0092 FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 164              	.LVL22:
+ 104:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       }
+ 165              		.loc 1 104 0
+ 166 0096 2B68     		ldr	r3, [r5]
+ 167              	.LBE8:
+ 168              	.LBE17:
+ 208:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   
+ 169              		.loc 1 208 0
+ 170 0098 0120     		movs	r0, #1
+ 171              	.LBB18:
+ 172              	.LBB9:
+ 104:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       }
+ 173              		.loc 1 104 0
+ 174 009a 9B7C     		ldrb	r3, [r3, #18]	@ zero_extendqisi2
+ 175 009c 85F82230 		strb	r3, [r5, #34]
+ 176              	.LVL23:
+ 177              	.LBE9:
+ 178              	.LBE18:
+ 179              		.loc 1 223 0
+ 180 00a0 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 181              	.LVL24:
+ 182              	.L6:
+ 183              	.LBB19:
+ 184              	.LBB10:
+ 114:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_SendCmd(u8x8, 0x081 );
+ 185              		.loc 1 114 0
+ 186 00a2 FFF7FEFF 		bl	u8x8_cad_StartTransfer
+ 187              	.LVL25:
+ 115:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_SendArg(u8x8, arg_int );	/* sh1108 has range from 0 to 255 */
+ 188              		.loc 1 115 0
+ 189 00a6 8121     		movs	r1, #129
+ 190 00a8 2846     		mov	r0, r5
+ 191 00aa FFF7FEFF 		bl	u8x8_cad_SendCmd
+ 192              	.LVL26:
+ 116:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       u8x8_cad_EndTransfer(u8x8);
+ 193              		.loc 1 116 0
+ 194 00ae 2146     		mov	r1, r4
+ 195 00b0 2846     		mov	r0, r5
+ 196 00b2 FFF7FEFF 		bl	u8x8_cad_SendArg
+ 197              	.LVL27:
+ 117:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       break;
+ 198              		.loc 1 117 0
+ 199 00b6 2846     		mov	r0, r5
+ 200 00b8 FFF7FEFF 		bl	u8x8_cad_EndTransfer
+ 201              	.LVL28:
+ 202              	.LBE10:
+ 203              	.LBE19:
+ 208:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   
+ 204              		.loc 1 208 0
+ 205 00bc 0120     		movs	r0, #1
+ 206              		.loc 1 223 0
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 9
+
+
+ 207 00be F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 208              	.LVL29:
+ 209              	.L3:
+ 210              	.LBB20:
+ 211              	.LBB11:
+  95:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	u8x8_cad_SendSequence(u8x8, u8x8_d_sh1108_noname_powersave0_seq);
+ 212              		.loc 1 95 0
+ 213 00c0 62B9     		cbnz	r2, .L8
+  96:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       else
+ 214              		.loc 1 96 0
+ 215 00c2 0F49     		ldr	r1, .L23+8
+ 216              	.LVL30:
+ 217 00c4 FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 218              	.LVL31:
+ 219              	.LBE11:
+ 220              	.LBE20:
+ 208:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   
+ 221              		.loc 1 208 0
+ 222 00c8 0120     		movs	r0, #1
+ 223              		.loc 1 223 0
+ 224 00ca F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 225              	.LVL32:
+ 226              	.L14:
+ 217:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       break;
+ 227              		.loc 1 217 0
+ 228 00cc 2846     		mov	r0, r5
+ 229              	.LVL33:
+ 230 00ce 0D49     		ldr	r1, .L23+12
+ 231              	.LVL34:
+ 232 00d0 FFF7FEFF 		bl	u8x8_d_helper_display_setup_memory
+ 233              	.LVL35:
+ 222:..\u8g2-master\csrc/u8x8_d_sh1108.c **** }
+ 234              		.loc 1 222 0
+ 235 00d4 0120     		movs	r0, #1
+ 218:..\u8g2-master\csrc/u8x8_d_sh1108.c ****     default:
+ 236              		.loc 1 218 0
+ 237 00d6 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 238              	.LVL36:
+ 239              	.L22:
+ 220:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   }
+ 240              		.loc 1 220 0
+ 241 00d8 0020     		movs	r0, #0
+ 242              	.LVL37:
+ 243 00da F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 244              	.LVL38:
+ 245              	.L8:
+ 246              	.LBB21:
+ 247              	.LBB12:
+  98:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       break;
+ 248              		.loc 1 98 0
+ 249 00dc 0A49     		ldr	r1, .L23+16
+ 250              	.LVL39:
+ 251 00de FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 252              	.LVL40:
+ 253              	.LBE12:
+ 254              	.LBE21:
+ 208:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 10
+
+
+ 255              		.loc 1 208 0
+ 256 00e2 0120     		movs	r0, #1
+ 257              		.loc 1 223 0
+ 258 00e4 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 259              	.LVL41:
+ 260              	.L10:
+ 261              	.LBB22:
+ 262              	.LBB13:
+ 108:..\u8g2-master\csrc/u8x8_d_sh1108.c **** 	u8x8->x_offset = u8x8->display_info->flipmode_x_offset;
+ 263              		.loc 1 108 0
+ 264 00e6 0949     		ldr	r1, .L23+20
+ 265              	.LVL42:
+ 266 00e8 FFF7FEFF 		bl	u8x8_cad_SendSequence
+ 267              	.LVL43:
+ 109:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       }
+ 268              		.loc 1 109 0
+ 269 00ec 2B68     		ldr	r3, [r5]
+ 270              	.LBE13:
+ 271              	.LBE22:
+ 208:..\u8g2-master\csrc/u8x8_d_sh1108.c ****   
+ 272              		.loc 1 208 0
+ 273 00ee 0120     		movs	r0, #1
+ 274              	.LBB23:
+ 275              	.LBB14:
+ 109:..\u8g2-master\csrc/u8x8_d_sh1108.c ****       }
+ 276              		.loc 1 109 0
+ 277 00f0 DB7C     		ldrb	r3, [r3, #19]	@ zero_extendqisi2
+ 278 00f2 85F82230 		strb	r3, [r5, #34]
+ 279              	.LVL44:
+ 280              	.LBE14:
+ 281              	.LBE23:
+ 282              		.loc 1 223 0
+ 283 00f6 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 284              	.LVL45:
+ 285              	.L24:
+ 286              		.align	2
+ 287              	.L23:
+ 288 00f8 20000000 		.word	.LANCHOR0+32
+ 289 00fc 10000000 		.word	.LANCHOR0+16
+ 290 0100 00000000 		.word	.LANCHOR0
+ 291 0104 50000000 		.word	.LANCHOR0+80
+ 292 0108 08000000 		.word	.LANCHOR0+8
+ 293 010c 18000000 		.word	.LANCHOR0+24
+ 294              		.cfi_endproc
+ 295              	.LFE1:
+ 296              		.size	u8x8_d_sh1108_160x160, .-u8x8_d_sh1108_160x160
+ 297              		.section	.rodata
+ 298              		.align	2
+ 299              		.set	.LANCHOR0,. + 0
+ 300              		.type	u8x8_d_sh1108_noname_powersave0_seq, %object
+ 301              		.size	u8x8_d_sh1108_noname_powersave0_seq, 5
+ 302              	u8x8_d_sh1108_noname_powersave0_seq:
+ 303 0000 18       		.byte	24
+ 304 0001 15       		.byte	21
+ 305 0002 AF       		.byte	-81
+ 306 0003 19       		.byte	25
+ 307 0004 FF       		.byte	-1
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 11
+
+
+ 308 0005 000000   		.space	3
+ 309              		.type	u8x8_d_sh1108_noname_powersave1_seq, %object
+ 310              		.size	u8x8_d_sh1108_noname_powersave1_seq, 5
+ 311              	u8x8_d_sh1108_noname_powersave1_seq:
+ 312 0008 18       		.byte	24
+ 313 0009 15       		.byte	21
+ 314 000a AE       		.byte	-82
+ 315 000b 19       		.byte	25
+ 316 000c FF       		.byte	-1
+ 317 000d 000000   		.space	3
+ 318              		.type	u8x8_d_sh1108_160x160_noname_powersave0_seq, %object
+ 319              		.size	u8x8_d_sh1108_160x160_noname_powersave0_seq, 7
+ 320              	u8x8_d_sh1108_160x160_noname_powersave0_seq:
+ 321 0010 18       		.byte	24
+ 322 0011 15       		.byte	21
+ 323 0012 A0       		.byte	-96
+ 324 0013 15       		.byte	21
+ 325 0014 C0       		.byte	-64
+ 326 0015 19       		.byte	25
+ 327 0016 FF       		.byte	-1
+ 328 0017 00       		.space	1
+ 329              		.type	u8x8_d_sh1108_160x160_noname_powersave1_seq, %object
+ 330              		.size	u8x8_d_sh1108_160x160_noname_powersave1_seq, 7
+ 331              	u8x8_d_sh1108_160x160_noname_powersave1_seq:
+ 332 0018 18       		.byte	24
+ 333 0019 15       		.byte	21
+ 334 001a A1       		.byte	-95
+ 335 001b 15       		.byte	21
+ 336 001c C8       		.byte	-56
+ 337 001d 19       		.byte	25
+ 338 001e FF       		.byte	-1
+ 339 001f 00       		.space	1
+ 340              		.type	u8x8_d_sh1108_160x160_noname_init_seq, %object
+ 341              		.size	u8x8_d_sh1108_160x160_noname_init_seq, 45
+ 342              	u8x8_d_sh1108_160x160_noname_init_seq:
+ 343 0020 18       		.byte	24
+ 344 0021 15       		.byte	21
+ 345 0022 AE       		.byte	-82
+ 346 0023 15       		.byte	21
+ 347 0024 D5       		.byte	-43
+ 348 0025 16       		.byte	22
+ 349 0026 60       		.byte	96
+ 350 0027 15       		.byte	21
+ 351 0028 A9       		.byte	-87
+ 352 0029 16       		.byte	22
+ 353 002a 03       		.byte	3
+ 354 002b 15       		.byte	21
+ 355 002c 20       		.byte	32
+ 356 002d 15       		.byte	21
+ 357 002e 81       		.byte	-127
+ 358 002f 16       		.byte	22
+ 359 0030 1F       		.byte	31
+ 360 0031 15       		.byte	21
+ 361 0032 AD       		.byte	-83
+ 362 0033 16       		.byte	22
+ 363 0034 80       		.byte	-128
+ 364 0035 15       		.byte	21
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 12
+
+
+ 365 0036 30       		.byte	48
+ 366 0037 15       		.byte	21
+ 367 0038 D9       		.byte	-39
+ 368 0039 16       		.byte	22
+ 369 003a 28       		.byte	40
+ 370 003b 15       		.byte	21
+ 371 003c DB       		.byte	-37
+ 372 003d 16       		.byte	22
+ 373 003e 35       		.byte	53
+ 374 003f 15       		.byte	21
+ 375 0040 DC       		.byte	-36
+ 376 0041 16       		.byte	22
+ 377 0042 35       		.byte	53
+ 378 0043 15       		.byte	21
+ 379 0044 A0       		.byte	-96
+ 380 0045 15       		.byte	21
+ 381 0046 C0       		.byte	-64
+ 382 0047 15       		.byte	21
+ 383 0048 A4       		.byte	-92
+ 384 0049 15       		.byte	21
+ 385 004a A6       		.byte	-90
+ 386 004b 19       		.byte	25
+ 387 004c FF       		.byte	-1
+ 388 004d 000000   		.space	3
+ 389              		.type	u8x8_sh1108_160x160_noname_display_info, %object
+ 390              		.size	u8x8_sh1108_160x160_noname_display_info, 24
+ 391              	u8x8_sh1108_160x160_noname_display_info:
+ 392 0050 00       		.byte	0
+ 393 0051 01       		.byte	1
+ 394 0052 3C       		.byte	60
+ 395 0053 78       		.byte	120
+ 396 0054 64       		.byte	100
+ 397 0055 64       		.byte	100
+ 398 0056 64       		.byte	100
+ 399 0057 64       		.byte	100
+ 400 0058 00093D00 		.word	4000000
+ 401 005c 00       		.byte	0
+ 402 005d 04       		.byte	4
+ 403 005e 28       		.byte	40
+ 404 005f 96       		.byte	-106
+ 405 0060 14       		.byte	20
+ 406 0061 14       		.byte	20
+ 407 0062 00       		.byte	0
+ 408 0063 00       		.byte	0
+ 409 0064 A000     		.short	160
+ 410 0066 A000     		.short	160
+ 411              		.text
+ 412              	.Letext0:
+ 413              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 414              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 415              		.file 4 "..\\u8g2-master\\csrc\\u8x8.h"
+ 416              		.section	.debug_info,"",%progbits
+ 417              	.Ldebug_info0:
+ 418 0000 3E070000 		.4byte	0x73e
+ 419 0004 0400     		.2byte	0x4
+ 420 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 421 000a 04       		.byte	0x4
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 13
+
+
+ 422 000b 01       		.uleb128 0x1
+ 423 000c F8020000 		.4byte	.LASF84
+ 424 0010 0C       		.byte	0xc
+ 425 0011 75060000 		.4byte	.LASF85
+ 426 0015 0A010000 		.4byte	.LASF86
+ 427 0019 58000000 		.4byte	.Ldebug_ranges0+0x58
+ 428 001d 00000000 		.4byte	0
+ 429 0021 00000000 		.4byte	.Ldebug_line0
+ 430 0025 02       		.uleb128 0x2
+ 431 0026 01       		.byte	0x1
+ 432 0027 06       		.byte	0x6
+ 433 0028 BF030000 		.4byte	.LASF0
+ 434 002c 03       		.uleb128 0x3
+ 435 002d E3020000 		.4byte	.LASF3
+ 436 0031 02       		.byte	0x2
+ 437 0032 1D       		.byte	0x1d
+ 438 0033 37000000 		.4byte	0x37
+ 439 0037 02       		.uleb128 0x2
+ 440 0038 01       		.byte	0x1
+ 441 0039 08       		.byte	0x8
+ 442 003a B1030000 		.4byte	.LASF1
+ 443 003e 02       		.uleb128 0x2
+ 444 003f 02       		.byte	0x2
+ 445 0040 05       		.byte	0x5
+ 446 0041 86000000 		.4byte	.LASF2
+ 447 0045 03       		.uleb128 0x3
+ 448 0046 74010000 		.4byte	.LASF4
+ 449 004a 02       		.byte	0x2
+ 450 004b 2B       		.byte	0x2b
+ 451 004c 50000000 		.4byte	0x50
+ 452 0050 02       		.uleb128 0x2
+ 453 0051 02       		.byte	0x2
+ 454 0052 07       		.byte	0x7
+ 455 0053 80040000 		.4byte	.LASF5
+ 456 0057 02       		.uleb128 0x2
+ 457 0058 04       		.byte	0x4
+ 458 0059 05       		.byte	0x5
+ 459 005a BF020000 		.4byte	.LASF6
+ 460 005e 03       		.uleb128 0x3
+ 461 005f FF000000 		.4byte	.LASF7
+ 462 0063 02       		.byte	0x2
+ 463 0064 41       		.byte	0x41
+ 464 0065 69000000 		.4byte	0x69
+ 465 0069 02       		.uleb128 0x2
+ 466 006a 04       		.byte	0x4
+ 467 006b 07       		.byte	0x7
+ 468 006c 08050000 		.4byte	.LASF8
+ 469 0070 02       		.uleb128 0x2
+ 470 0071 08       		.byte	0x8
+ 471 0072 05       		.byte	0x5
+ 472 0073 66020000 		.4byte	.LASF9
+ 473 0077 02       		.uleb128 0x2
+ 474 0078 08       		.byte	0x8
+ 475 0079 07       		.byte	0x7
+ 476 007a CB030000 		.4byte	.LASF10
+ 477 007e 04       		.uleb128 0x4
+ 478 007f 04       		.byte	0x4
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 14
+
+
+ 479 0080 05       		.byte	0x5
+ 480 0081 696E7400 		.ascii	"int\000"
+ 481 0085 02       		.uleb128 0x2
+ 482 0086 04       		.byte	0x4
+ 483 0087 07       		.byte	0x7
+ 484 0088 FC030000 		.4byte	.LASF11
+ 485 008c 03       		.uleb128 0x3
+ 486 008d 94010000 		.4byte	.LASF12
+ 487 0091 03       		.byte	0x3
+ 488 0092 18       		.byte	0x18
+ 489 0093 2C000000 		.4byte	0x2c
+ 490 0097 03       		.uleb128 0x3
+ 491 0098 09040000 		.4byte	.LASF13
+ 492 009c 03       		.byte	0x3
+ 493 009d 24       		.byte	0x24
+ 494 009e 45000000 		.4byte	0x45
+ 495 00a2 03       		.uleb128 0x3
+ 496 00a3 E2030000 		.4byte	.LASF14
+ 497 00a7 03       		.byte	0x3
+ 498 00a8 30       		.byte	0x30
+ 499 00a9 5E000000 		.4byte	0x5e
+ 500 00ad 05       		.uleb128 0x5
+ 501 00ae 04       		.byte	0x4
+ 502 00af 02       		.uleb128 0x2
+ 503 00b0 08       		.byte	0x8
+ 504 00b1 04       		.byte	0x4
+ 505 00b2 99030000 		.4byte	.LASF15
+ 506 00b6 03       		.uleb128 0x3
+ 507 00b7 57040000 		.4byte	.LASF16
+ 508 00bb 04       		.byte	0x4
+ 509 00bc C3       		.byte	0xc3
+ 510 00bd C1000000 		.4byte	0xc1
+ 511 00c1 06       		.uleb128 0x6
+ 512 00c2 E0040000 		.4byte	.LASF38
+ 513 00c6 30       		.byte	0x30
+ 514 00c7 04       		.byte	0x4
+ 515 00c8 4601     		.2byte	0x146
+ 516 00ca D3010000 		.4byte	0x1d3
+ 517 00ce 07       		.uleb128 0x7
+ 518 00cf AF040000 		.4byte	.LASF17
+ 519 00d3 04       		.byte	0x4
+ 520 00d4 4801     		.2byte	0x148
+ 521 00d6 80030000 		.4byte	0x380
+ 522 00da 00       		.byte	0
+ 523 00db 07       		.uleb128 0x7
+ 524 00dc 6D060000 		.4byte	.LASF18
+ 525 00e0 04       		.byte	0x4
+ 526 00e1 4901     		.2byte	0x149
+ 527 00e3 55030000 		.4byte	0x355
+ 528 00e7 04       		.byte	0x4
+ 529 00e8 07       		.uleb128 0x7
+ 530 00e9 ED020000 		.4byte	.LASF19
+ 531 00ed 04       		.byte	0x4
+ 532 00ee 4A01     		.2byte	0x14a
+ 533 00f0 20030000 		.4byte	0x320
+ 534 00f4 08       		.byte	0x8
+ 535 00f5 07       		.uleb128 0x7
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 15
+
+
+ 536 00f6 C8050000 		.4byte	.LASF20
+ 537 00fa 04       		.byte	0x4
+ 538 00fb 4B01     		.2byte	0x14b
+ 539 00fd 20030000 		.4byte	0x320
+ 540 0101 0C       		.byte	0xc
+ 541 0102 07       		.uleb128 0x7
+ 542 0103 3E050000 		.4byte	.LASF21
+ 543 0107 04       		.byte	0x4
+ 544 0108 4C01     		.2byte	0x14c
+ 545 010a 20030000 		.4byte	0x320
+ 546 010e 10       		.byte	0x10
+ 547 010f 07       		.uleb128 0x7
+ 548 0110 90000000 		.4byte	.LASF22
+ 549 0114 04       		.byte	0x4
+ 550 0115 4D01     		.2byte	0x14d
+ 551 0117 20030000 		.4byte	0x320
+ 552 011b 14       		.byte	0x14
+ 553 011c 07       		.uleb128 0x7
+ 554 011d 1F020000 		.4byte	.LASF23
+ 555 0121 04       		.byte	0x4
+ 556 0122 4E01     		.2byte	0x14e
+ 557 0124 A2000000 		.4byte	0xa2
+ 558 0128 18       		.byte	0x18
+ 559 0129 07       		.uleb128 0x7
+ 560 012a 6D000000 		.4byte	.LASF24
+ 561 012e 04       		.byte	0x4
+ 562 012f 4F01     		.2byte	0x14f
+ 563 0131 8B030000 		.4byte	0x38b
+ 564 0135 1C       		.byte	0x1c
+ 565 0136 07       		.uleb128 0x7
+ 566 0137 77050000 		.4byte	.LASF25
+ 567 013b 04       		.byte	0x4
+ 568 013c 5001     		.2byte	0x150
+ 569 013e 97000000 		.4byte	0x97
+ 570 0142 20       		.byte	0x20
+ 571 0143 07       		.uleb128 0x7
+ 572 0144 2C000000 		.4byte	.LASF26
+ 573 0148 04       		.byte	0x4
+ 574 0149 5101     		.2byte	0x151
+ 575 014b 8C000000 		.4byte	0x8c
+ 576 014f 22       		.byte	0x22
+ 577 0150 07       		.uleb128 0x7
+ 578 0151 35000000 		.4byte	.LASF27
+ 579 0155 04       		.byte	0x4
+ 580 0156 5201     		.2byte	0x152
+ 581 0158 8C000000 		.4byte	0x8c
+ 582 015c 23       		.byte	0x23
+ 583 015d 07       		.uleb128 0x7
+ 584 015e 59050000 		.4byte	.LASF28
+ 585 0162 04       		.byte	0x4
+ 586 0163 5301     		.2byte	0x153
+ 587 0165 8C000000 		.4byte	0x8c
+ 588 0169 24       		.byte	0x24
+ 589 016a 07       		.uleb128 0x7
+ 590 016b A6050000 		.4byte	.LASF29
+ 591 016f 04       		.byte	0x4
+ 592 0170 5601     		.2byte	0x156
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 16
+
+
+ 593 0172 8C000000 		.4byte	0x8c
+ 594 0176 25       		.byte	0x25
+ 595 0177 07       		.uleb128 0x7
+ 596 0178 FE050000 		.4byte	.LASF30
+ 597 017c 04       		.byte	0x4
+ 598 017d 5701     		.2byte	0x157
+ 599 017f 8C000000 		.4byte	0x8c
+ 600 0183 26       		.byte	0x26
+ 601 0184 07       		.uleb128 0x7
+ 602 0185 D5040000 		.4byte	.LASF31
+ 603 0189 04       		.byte	0x4
+ 604 018a 5801     		.2byte	0x158
+ 605 018c 8C000000 		.4byte	0x8c
+ 606 0190 27       		.byte	0x27
+ 607 0191 07       		.uleb128 0x7
+ 608 0192 74020000 		.4byte	.LASF32
+ 609 0196 04       		.byte	0x4
+ 610 0197 5901     		.2byte	0x159
+ 611 0199 8C000000 		.4byte	0x8c
+ 612 019d 28       		.byte	0x28
+ 613 019e 07       		.uleb128 0x7
+ 614 019f 1E060000 		.4byte	.LASF33
+ 615 01a3 04       		.byte	0x4
+ 616 01a4 5A01     		.2byte	0x15a
+ 617 01a6 8C000000 		.4byte	0x8c
+ 618 01aa 29       		.byte	0x29
+ 619 01ab 07       		.uleb128 0x7
+ 620 01ac 4E020000 		.4byte	.LASF34
+ 621 01b0 04       		.byte	0x4
+ 622 01b1 5B01     		.2byte	0x15b
+ 623 01b3 8C000000 		.4byte	0x8c
+ 624 01b7 2A       		.byte	0x2a
+ 625 01b8 07       		.uleb128 0x7
+ 626 01b9 A0040000 		.4byte	.LASF35
+ 627 01bd 04       		.byte	0x4
+ 628 01be 5C01     		.2byte	0x15c
+ 629 01c0 8C000000 		.4byte	0x8c
+ 630 01c4 2B       		.byte	0x2b
+ 631 01c5 07       		.uleb128 0x7
+ 632 01c6 72000000 		.4byte	.LASF36
+ 633 01ca 04       		.byte	0x4
+ 634 01cb 5D01     		.2byte	0x15d
+ 635 01cd 8C000000 		.4byte	0x8c
+ 636 01d1 2C       		.byte	0x2c
+ 637 01d2 00       		.byte	0
+ 638 01d3 03       		.uleb128 0x3
+ 639 01d4 3A020000 		.4byte	.LASF37
+ 640 01d8 04       		.byte	0x4
+ 641 01d9 C4       		.byte	0xc4
+ 642 01da DE010000 		.4byte	0x1de
+ 643 01de 08       		.uleb128 0x8
+ 644 01df 12040000 		.4byte	.LASF39
+ 645 01e3 18       		.byte	0x18
+ 646 01e4 04       		.byte	0x4
+ 647 01e5 DD       		.byte	0xdd
+ 648 01e6 D8020000 		.4byte	0x2d8
+ 649 01ea 09       		.uleb128 0x9
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 17
+
+
+ 650 01eb 5B000000 		.4byte	.LASF40
+ 651 01ef 04       		.byte	0x4
+ 652 01f0 E1       		.byte	0xe1
+ 653 01f1 8C000000 		.4byte	0x8c
+ 654 01f5 00       		.byte	0
+ 655 01f6 09       		.uleb128 0x9
+ 656 01f7 46050000 		.4byte	.LASF41
+ 657 01fb 04       		.byte	0x4
+ 658 01fc E2       		.byte	0xe2
+ 659 01fd 8C000000 		.4byte	0x8c
+ 660 0201 01       		.byte	0x1
+ 661 0202 09       		.uleb128 0x9
+ 662 0203 9C010000 		.4byte	.LASF42
+ 663 0207 04       		.byte	0x4
+ 664 0208 E4       		.byte	0xe4
+ 665 0209 8C000000 		.4byte	0x8c
+ 666 020d 02       		.byte	0x2
+ 667 020e 09       		.uleb128 0x9
+ 668 020f 99060000 		.4byte	.LASF43
+ 669 0213 04       		.byte	0x4
+ 670 0214 E5       		.byte	0xe5
+ 671 0215 8C000000 		.4byte	0x8c
+ 672 0219 03       		.byte	0x3
+ 673 021a 09       		.uleb128 0x9
+ 674 021b 42040000 		.4byte	.LASF44
+ 675 021f 04       		.byte	0x4
+ 676 0220 E6       		.byte	0xe6
+ 677 0221 8C000000 		.4byte	0x8c
+ 678 0225 04       		.byte	0x4
+ 679 0226 09       		.uleb128 0x9
+ 680 0227 EC000000 		.4byte	.LASF45
+ 681 022b 04       		.byte	0x4
+ 682 022c E7       		.byte	0xe7
+ 683 022d 8C000000 		.4byte	0x8c
+ 684 0231 05       		.byte	0x5
+ 685 0232 09       		.uleb128 0x9
+ 686 0233 DA000000 		.4byte	.LASF46
+ 687 0237 04       		.byte	0x4
+ 688 0238 EE       		.byte	0xee
+ 689 0239 8C000000 		.4byte	0x8c
+ 690 023d 06       		.byte	0x6
+ 691 023e 09       		.uleb128 0x9
+ 692 023f 80020000 		.4byte	.LASF47
+ 693 0243 04       		.byte	0x4
+ 694 0244 F2       		.byte	0xf2
+ 695 0245 8C000000 		.4byte	0x8c
+ 696 0249 07       		.byte	0x7
+ 697 024a 09       		.uleb128 0x9
+ 698 024b 73040000 		.4byte	.LASF48
+ 699 024f 04       		.byte	0x4
+ 700 0250 F5       		.byte	0xf5
+ 701 0251 A2000000 		.4byte	0xa2
+ 702 0255 08       		.byte	0x8
+ 703 0256 09       		.uleb128 0x9
+ 704 0257 4A000000 		.4byte	.LASF49
+ 705 025b 04       		.byte	0x4
+ 706 025c FF       		.byte	0xff
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 18
+
+
+ 707 025d 8C000000 		.4byte	0x8c
+ 708 0261 0C       		.byte	0xc
+ 709 0262 07       		.uleb128 0x7
+ 710 0263 5E040000 		.4byte	.LASF50
+ 711 0267 04       		.byte	0x4
+ 712 0268 0201     		.2byte	0x102
+ 713 026a 8C000000 		.4byte	0x8c
+ 714 026e 0D       		.byte	0xd
+ 715 026f 07       		.uleb128 0x7
+ 716 0270 86030000 		.4byte	.LASF51
+ 717 0274 04       		.byte	0x4
+ 718 0275 0801     		.2byte	0x108
+ 719 0277 8C000000 		.4byte	0x8c
+ 720 027b 0E       		.byte	0xe
+ 721 027c 07       		.uleb128 0x7
+ 722 027d 7F010000 		.4byte	.LASF52
+ 723 0281 04       		.byte	0x4
+ 724 0282 0A01     		.2byte	0x10a
+ 725 0284 8C000000 		.4byte	0x8c
+ 726 0288 0F       		.byte	0xf
+ 727 0289 07       		.uleb128 0x7
+ 728 028a A2000000 		.4byte	.LASF53
+ 729 028e 04       		.byte	0x4
+ 730 028f 0D01     		.2byte	0x10d
+ 731 0291 8C000000 		.4byte	0x8c
+ 732 0295 10       		.byte	0x10
+ 733 0296 07       		.uleb128 0x7
+ 734 0297 A5030000 		.4byte	.LASF54
+ 735 029b 04       		.byte	0x4
+ 736 029c 0E01     		.2byte	0x10e
+ 737 029e 8C000000 		.4byte	0x8c
+ 738 02a2 11       		.byte	0x11
+ 739 02a3 07       		.uleb128 0x7
+ 740 02a4 29020000 		.4byte	.LASF55
+ 741 02a8 04       		.byte	0x4
+ 742 02a9 1001     		.2byte	0x110
+ 743 02ab 8C000000 		.4byte	0x8c
+ 744 02af 12       		.byte	0x12
+ 745 02b0 07       		.uleb128 0x7
+ 746 02b1 65050000 		.4byte	.LASF56
+ 747 02b5 04       		.byte	0x4
+ 748 02b6 1101     		.2byte	0x111
+ 749 02b8 8C000000 		.4byte	0x8c
+ 750 02bc 13       		.byte	0x13
+ 751 02bd 07       		.uleb128 0x7
+ 752 02be C9040000 		.4byte	.LASF57
+ 753 02c2 04       		.byte	0x4
+ 754 02c3 1901     		.2byte	0x119
+ 755 02c5 97000000 		.4byte	0x97
+ 756 02c9 14       		.byte	0x14
+ 757 02ca 07       		.uleb128 0x7
+ 758 02cb BC040000 		.4byte	.LASF58
+ 759 02cf 04       		.byte	0x4
+ 760 02d0 1A01     		.2byte	0x11a
+ 761 02d2 97000000 		.4byte	0x97
+ 762 02d6 16       		.byte	0x16
+ 763 02d7 00       		.byte	0
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 19
+
+
+ 764 02d8 03       		.uleb128 0x3
+ 765 02d9 CF050000 		.4byte	.LASF59
+ 766 02dd 04       		.byte	0x4
+ 767 02de C5       		.byte	0xc5
+ 768 02df E3020000 		.4byte	0x2e3
+ 769 02e3 08       		.uleb128 0x8
+ 770 02e4 EB030000 		.4byte	.LASF60
+ 771 02e8 08       		.byte	0x8
+ 772 02e9 04       		.byte	0x4
+ 773 02ea D4       		.byte	0xd4
+ 774 02eb 20030000 		.4byte	0x320
+ 775 02ef 09       		.uleb128 0x9
+ 776 02f0 E6010000 		.4byte	.LASF61
+ 777 02f4 04       		.byte	0x4
+ 778 02f5 D6       		.byte	0xd6
+ 779 02f6 7A030000 		.4byte	0x37a
+ 780 02fa 00       		.byte	0
+ 781 02fb 0A       		.uleb128 0xa
+ 782 02fc 636E7400 		.ascii	"cnt\000"
+ 783 0300 04       		.byte	0x4
+ 784 0301 D7       		.byte	0xd7
+ 785 0302 8C000000 		.4byte	0x8c
+ 786 0306 04       		.byte	0x4
+ 787 0307 09       		.uleb128 0x9
+ 788 0308 DD020000 		.4byte	.LASF62
+ 789 030c 04       		.byte	0x4
+ 790 030d D8       		.byte	0xd8
+ 791 030e 8C000000 		.4byte	0x8c
+ 792 0312 05       		.byte	0x5
+ 793 0313 09       		.uleb128 0x9
+ 794 0314 EC040000 		.4byte	.LASF63
+ 795 0318 04       		.byte	0x4
+ 796 0319 D9       		.byte	0xd9
+ 797 031a 8C000000 		.4byte	0x8c
+ 798 031e 06       		.byte	0x6
+ 799 031f 00       		.byte	0
+ 800 0320 03       		.uleb128 0x3
+ 801 0321 39060000 		.4byte	.LASF64
+ 802 0325 04       		.byte	0x4
+ 803 0326 C7       		.byte	0xc7
+ 804 0327 2B030000 		.4byte	0x32b
+ 805 032b 0B       		.uleb128 0xb
+ 806 032c 04       		.byte	0x4
+ 807 032d 31030000 		.4byte	0x331
+ 808 0331 0C       		.uleb128 0xc
+ 809 0332 8C000000 		.4byte	0x8c
+ 810 0336 4F030000 		.4byte	0x34f
+ 811 033a 0D       		.uleb128 0xd
+ 812 033b 4F030000 		.4byte	0x34f
+ 813 033f 0D       		.uleb128 0xd
+ 814 0340 8C000000 		.4byte	0x8c
+ 815 0344 0D       		.uleb128 0xd
+ 816 0345 8C000000 		.4byte	0x8c
+ 817 0349 0D       		.uleb128 0xd
+ 818 034a AD000000 		.4byte	0xad
+ 819 034e 00       		.byte	0
+ 820 034f 0B       		.uleb128 0xb
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 20
+
+
+ 821 0350 04       		.byte	0x4
+ 822 0351 B6000000 		.4byte	0xb6
+ 823 0355 03       		.uleb128 0x3
+ 824 0356 93040000 		.4byte	.LASF65
+ 825 035a 04       		.byte	0x4
+ 826 035b C8       		.byte	0xc8
+ 827 035c 60030000 		.4byte	0x360
+ 828 0360 0B       		.uleb128 0xb
+ 829 0361 04       		.byte	0x4
+ 830 0362 66030000 		.4byte	0x366
+ 831 0366 0C       		.uleb128 0xc
+ 832 0367 97000000 		.4byte	0x97
+ 833 036b 7A030000 		.4byte	0x37a
+ 834 036f 0D       		.uleb128 0xd
+ 835 0370 4F030000 		.4byte	0x34f
+ 836 0374 0D       		.uleb128 0xd
+ 837 0375 8C000000 		.4byte	0x8c
+ 838 0379 00       		.byte	0
+ 839 037a 0B       		.uleb128 0xb
+ 840 037b 04       		.byte	0x4
+ 841 037c 8C000000 		.4byte	0x8c
+ 842 0380 0B       		.uleb128 0xb
+ 843 0381 04       		.byte	0x4
+ 844 0382 86030000 		.4byte	0x386
+ 845 0386 0E       		.uleb128 0xe
+ 846 0387 D3010000 		.4byte	0x1d3
+ 847 038b 0B       		.uleb128 0xb
+ 848 038c 04       		.byte	0x4
+ 849 038d 91030000 		.4byte	0x391
+ 850 0391 0E       		.uleb128 0xe
+ 851 0392 8C000000 		.4byte	0x8c
+ 852 0396 0F       		.uleb128 0xf
+ 853 0397 B2050000 		.4byte	.LASF87
+ 854 039b 01       		.byte	0x1
+ 855 039c 4D       		.byte	0x4d
+ 856 039d 8C000000 		.4byte	0x8c
+ 857 03a1 01       		.byte	0x1
+ 858 03a2 F0030000 		.4byte	0x3f0
+ 859 03a6 10       		.uleb128 0x10
+ 860 03a7 B5010000 		.4byte	.LASF66
+ 861 03ab 01       		.byte	0x1
+ 862 03ac 4D       		.byte	0x4d
+ 863 03ad 4F030000 		.4byte	0x34f
+ 864 03b1 11       		.uleb128 0x11
+ 865 03b2 6D736700 		.ascii	"msg\000"
+ 866 03b6 01       		.byte	0x1
+ 867 03b7 4D       		.byte	0x4d
+ 868 03b8 8C000000 		.4byte	0x8c
+ 869 03bc 10       		.uleb128 0x10
+ 870 03bd EF010000 		.4byte	.LASF67
+ 871 03c1 01       		.byte	0x1
+ 872 03c2 4D       		.byte	0x4d
+ 873 03c3 8C000000 		.4byte	0x8c
+ 874 03c7 10       		.uleb128 0x10
+ 875 03c8 53000000 		.4byte	.LASF68
+ 876 03cc 01       		.byte	0x1
+ 877 03cd 4D       		.byte	0x4d
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 21
+
+
+ 878 03ce AD000000 		.4byte	0xad
+ 879 03d2 12       		.uleb128 0x12
+ 880 03d3 7800     		.ascii	"x\000"
+ 881 03d5 01       		.byte	0x1
+ 882 03d6 4F       		.byte	0x4f
+ 883 03d7 8C000000 		.4byte	0x8c
+ 884 03db 12       		.uleb128 0x12
+ 885 03dc 6300     		.ascii	"c\000"
+ 886 03de 01       		.byte	0x1
+ 887 03df 4F       		.byte	0x4f
+ 888 03e0 8C000000 		.4byte	0x8c
+ 889 03e4 12       		.uleb128 0x12
+ 890 03e5 70747200 		.ascii	"ptr\000"
+ 891 03e9 01       		.byte	0x1
+ 892 03ea 50       		.byte	0x50
+ 893 03eb 7A030000 		.4byte	0x37a
+ 894 03ef 00       		.byte	0
+ 895 03f0 13       		.uleb128 0x13
+ 896 03f1 09020000 		.4byte	.LASF88
+ 897 03f5 01       		.byte	0x1
+ 898 03f6 CC       		.byte	0xcc
+ 899 03f7 8C000000 		.4byte	0x8c
+ 900 03fb 00000000 		.4byte	.LFB1
+ 901 03ff 10010000 		.4byte	.LFE1-.LFB1
+ 902 0403 01       		.uleb128 0x1
+ 903 0404 9C       		.byte	0x9c
+ 904 0405 2B060000 		.4byte	0x62b
+ 905 0409 14       		.uleb128 0x14
+ 906 040a B5010000 		.4byte	.LASF66
+ 907 040e 01       		.byte	0x1
+ 908 040f CC       		.byte	0xcc
+ 909 0410 4F030000 		.4byte	0x34f
+ 910 0414 00000000 		.4byte	.LLST0
+ 911 0418 15       		.uleb128 0x15
+ 912 0419 6D736700 		.ascii	"msg\000"
+ 913 041d 01       		.byte	0x1
+ 914 041e CC       		.byte	0xcc
+ 915 041f 8C000000 		.4byte	0x8c
+ 916 0423 DC000000 		.4byte	.LLST1
+ 917 0427 14       		.uleb128 0x14
+ 918 0428 EF010000 		.4byte	.LASF67
+ 919 042c 01       		.byte	0x1
+ 920 042d CC       		.byte	0xcc
+ 921 042e 8C000000 		.4byte	0x8c
+ 922 0432 AC010000 		.4byte	.LLST2
+ 923 0436 14       		.uleb128 0x14
+ 924 0437 53000000 		.4byte	.LASF68
+ 925 043b 01       		.byte	0x1
+ 926 043c CC       		.byte	0xcc
+ 927 043d AD000000 		.4byte	0xad
+ 928 0441 7C020000 		.4byte	.LLST3
+ 929 0445 16       		.uleb128 0x16
+ 930 0446 96030000 		.4byte	0x396
+ 931 044a 02000000 		.4byte	.LBB4
+ 932 044e 00000000 		.4byte	.Ldebug_ranges0+0
+ 933 0452 01       		.byte	0x1
+ 934 0453 CF       		.byte	0xcf
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 22
+
+
+ 935 0454 E0050000 		.4byte	0x5e0
+ 936 0458 17       		.uleb128 0x17
+ 937 0459 C7030000 		.4byte	0x3c7
+ 938 045d A8020000 		.4byte	.LLST4
+ 939 0461 17       		.uleb128 0x17
+ 940 0462 BC030000 		.4byte	0x3bc
+ 941 0466 FD020000 		.4byte	.LLST5
+ 942 046a 17       		.uleb128 0x17
+ 943 046b B1030000 		.4byte	0x3b1
+ 944 046f BC030000 		.4byte	.LLST6
+ 945 0473 17       		.uleb128 0x17
+ 946 0474 A6030000 		.4byte	0x3a6
+ 947 0478 65040000 		.4byte	.LLST7
+ 948 047c 18       		.uleb128 0x18
+ 949 047d 00000000 		.4byte	.Ldebug_ranges0+0
+ 950 0481 19       		.uleb128 0x19
+ 951 0482 D2030000 		.4byte	0x3d2
+ 952 0486 FC040000 		.4byte	.LLST8
+ 953 048a 19       		.uleb128 0x19
+ 954 048b DB030000 		.4byte	0x3db
+ 955 048f 38050000 		.4byte	.LLST9
+ 956 0493 19       		.uleb128 0x19
+ 957 0494 E4030000 		.4byte	0x3e4
+ 958 0498 4C050000 		.4byte	.LLST10
+ 959 049c 1A       		.uleb128 0x1a
+ 960 049d 38000000 		.4byte	.LVL9
+ 961 04a1 E1060000 		.4byte	0x6e1
+ 962 04a5 1B       		.uleb128 0x1b
+ 963 04a6 52000000 		.4byte	.LVL13
+ 964 04aa ED060000 		.4byte	0x6ed
+ 965 04ae C3040000 		.4byte	0x4c3
+ 966 04b2 1C       		.uleb128 0x1c
+ 967 04b3 01       		.uleb128 0x1
+ 968 04b4 50       		.byte	0x50
+ 969 04b5 02       		.uleb128 0x2
+ 970 04b6 75       		.byte	0x75
+ 971 04b7 00       		.sleb128 0
+ 972 04b8 1C       		.uleb128 0x1c
+ 973 04b9 01       		.uleb128 0x1
+ 974 04ba 51       		.byte	0x51
+ 975 04bb 06       		.uleb128 0x6
+ 976 04bc 77       		.byte	0x77
+ 977 04bd 00       		.sleb128 0
+ 978 04be 34       		.byte	0x34
+ 979 04bf 25       		.byte	0x25
+ 980 04c0 40       		.byte	0x40
+ 981 04c1 21       		.byte	0x21
+ 982 04c2 00       		.byte	0
+ 983 04c3 1B       		.uleb128 0x1b
+ 984 04c4 5C000000 		.4byte	.LVL14
+ 985 04c8 ED060000 		.4byte	0x6ed
+ 986 04cc DF040000 		.4byte	0x4df
+ 987 04d0 1C       		.uleb128 0x1c
+ 988 04d1 01       		.uleb128 0x1
+ 989 04d2 50       		.byte	0x50
+ 990 04d3 02       		.uleb128 0x2
+ 991 04d4 75       		.byte	0x75
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 23
+
+
+ 992 04d5 00       		.sleb128 0
+ 993 04d6 1C       		.uleb128 0x1c
+ 994 04d7 01       		.uleb128 0x1
+ 995 04d8 51       		.byte	0x51
+ 996 04d9 04       		.uleb128 0x4
+ 997 04da 77       		.byte	0x77
+ 998 04db 00       		.sleb128 0
+ 999 04dc 3F       		.byte	0x3f
+ 1000 04dd 1A       		.byte	0x1a
+ 1001 04de 00       		.byte	0
+ 1002 04df 1B       		.uleb128 0x1b
+ 1003 04e0 64000000 		.4byte	.LVL15
+ 1004 04e4 ED060000 		.4byte	0x6ed
+ 1005 04e8 F9040000 		.4byte	0x4f9
+ 1006 04ec 1C       		.uleb128 0x1c
+ 1007 04ed 01       		.uleb128 0x1
+ 1008 04ee 50       		.byte	0x50
+ 1009 04ef 02       		.uleb128 0x2
+ 1010 04f0 75       		.byte	0x75
+ 1011 04f1 00       		.sleb128 0
+ 1012 04f2 1C       		.uleb128 0x1c
+ 1013 04f3 01       		.uleb128 0x1
+ 1014 04f4 51       		.byte	0x51
+ 1015 04f5 02       		.uleb128 0x2
+ 1016 04f6 09       		.byte	0x9
+ 1017 04f7 B0       		.byte	0xb0
+ 1018 04f8 00       		.byte	0
+ 1019 04f9 1B       		.uleb128 0x1b
+ 1020 04fa 6C000000 		.4byte	.LVL16
+ 1021 04fe F9060000 		.4byte	0x6f9
+ 1022 0502 0D050000 		.4byte	0x50d
+ 1023 0506 1C       		.uleb128 0x1c
+ 1024 0507 01       		.uleb128 0x1
+ 1025 0508 50       		.byte	0x50
+ 1026 0509 02       		.uleb128 0x2
+ 1027 050a 75       		.byte	0x75
+ 1028 050b 00       		.sleb128 0
+ 1029 050c 00       		.byte	0
+ 1030 050d 1B       		.uleb128 0x1b
+ 1031 050e 7C000000 		.4byte	.LVL17
+ 1032 0512 05070000 		.4byte	0x705
+ 1033 0516 21050000 		.4byte	0x521
+ 1034 051a 1C       		.uleb128 0x1c
+ 1035 051b 01       		.uleb128 0x1
+ 1036 051c 50       		.byte	0x50
+ 1037 051d 02       		.uleb128 0x2
+ 1038 051e 75       		.byte	0x75
+ 1039 051f 00       		.sleb128 0
+ 1040 0520 00       		.byte	0
+ 1041 0521 1B       		.uleb128 0x1b
+ 1042 0522 8A000000 		.4byte	.LVL19
+ 1043 0526 11070000 		.4byte	0x711
+ 1044 052a 35050000 		.4byte	0x535
+ 1045 052e 1C       		.uleb128 0x1c
+ 1046 052f 01       		.uleb128 0x1
+ 1047 0530 50       		.byte	0x50
+ 1048 0531 02       		.uleb128 0x2
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 24
+
+
+ 1049 0532 75       		.byte	0x75
+ 1050 0533 00       		.sleb128 0
+ 1051 0534 00       		.byte	0
+ 1052 0535 1B       		.uleb128 0x1b
+ 1053 0536 96000000 		.4byte	.LVL22
+ 1054 053a 1D070000 		.4byte	0x71d
+ 1055 053e 4C050000 		.4byte	0x54c
+ 1056 0542 1C       		.uleb128 0x1c
+ 1057 0543 01       		.uleb128 0x1
+ 1058 0544 51       		.byte	0x51
+ 1059 0545 05       		.uleb128 0x5
+ 1060 0546 03       		.byte	0x3
+ 1061 0547 10000000 		.4byte	.LANCHOR0+16
+ 1062 054b 00       		.byte	0
+ 1063 054c 1A       		.uleb128 0x1a
+ 1064 054d A6000000 		.4byte	.LVL25
+ 1065 0551 E1060000 		.4byte	0x6e1
+ 1066 0555 1B       		.uleb128 0x1b
+ 1067 0556 AE000000 		.4byte	.LVL26
+ 1068 055a ED060000 		.4byte	0x6ed
+ 1069 055e 6F050000 		.4byte	0x56f
+ 1070 0562 1C       		.uleb128 0x1c
+ 1071 0563 01       		.uleb128 0x1
+ 1072 0564 50       		.byte	0x50
+ 1073 0565 02       		.uleb128 0x2
+ 1074 0566 75       		.byte	0x75
+ 1075 0567 00       		.sleb128 0
+ 1076 0568 1C       		.uleb128 0x1c
+ 1077 0569 01       		.uleb128 0x1
+ 1078 056a 51       		.byte	0x51
+ 1079 056b 02       		.uleb128 0x2
+ 1080 056c 09       		.byte	0x9
+ 1081 056d 81       		.byte	0x81
+ 1082 056e 00       		.byte	0
+ 1083 056f 1B       		.uleb128 0x1b
+ 1084 0570 B6000000 		.4byte	.LVL27
+ 1085 0574 F9060000 		.4byte	0x6f9
+ 1086 0578 89050000 		.4byte	0x589
+ 1087 057c 1C       		.uleb128 0x1c
+ 1088 057d 01       		.uleb128 0x1
+ 1089 057e 50       		.byte	0x50
+ 1090 057f 02       		.uleb128 0x2
+ 1091 0580 75       		.byte	0x75
+ 1092 0581 00       		.sleb128 0
+ 1093 0582 1C       		.uleb128 0x1c
+ 1094 0583 01       		.uleb128 0x1
+ 1095 0584 51       		.byte	0x51
+ 1096 0585 02       		.uleb128 0x2
+ 1097 0586 74       		.byte	0x74
+ 1098 0587 00       		.sleb128 0
+ 1099 0588 00       		.byte	0
+ 1100 0589 1B       		.uleb128 0x1b
+ 1101 058a BC000000 		.4byte	.LVL28
+ 1102 058e 11070000 		.4byte	0x711
+ 1103 0592 9D050000 		.4byte	0x59d
+ 1104 0596 1C       		.uleb128 0x1c
+ 1105 0597 01       		.uleb128 0x1
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 25
+
+
+ 1106 0598 50       		.byte	0x50
+ 1107 0599 02       		.uleb128 0x2
+ 1108 059a 75       		.byte	0x75
+ 1109 059b 00       		.sleb128 0
+ 1110 059c 00       		.byte	0
+ 1111 059d 1B       		.uleb128 0x1b
+ 1112 059e C8000000 		.4byte	.LVL31
+ 1113 05a2 1D070000 		.4byte	0x71d
+ 1114 05a6 B4050000 		.4byte	0x5b4
+ 1115 05aa 1C       		.uleb128 0x1c
+ 1116 05ab 01       		.uleb128 0x1
+ 1117 05ac 51       		.byte	0x51
+ 1118 05ad 05       		.uleb128 0x5
+ 1119 05ae 03       		.byte	0x3
+ 1120 05af 00000000 		.4byte	.LANCHOR0
+ 1121 05b3 00       		.byte	0
+ 1122 05b4 1B       		.uleb128 0x1b
+ 1123 05b5 E2000000 		.4byte	.LVL40
+ 1124 05b9 1D070000 		.4byte	0x71d
+ 1125 05bd CB050000 		.4byte	0x5cb
+ 1126 05c1 1C       		.uleb128 0x1c
+ 1127 05c2 01       		.uleb128 0x1
+ 1128 05c3 51       		.byte	0x51
+ 1129 05c4 05       		.uleb128 0x5
+ 1130 05c5 03       		.byte	0x3
+ 1131 05c6 08000000 		.4byte	.LANCHOR0+8
+ 1132 05ca 00       		.byte	0
+ 1133 05cb 1D       		.uleb128 0x1d
+ 1134 05cc EC000000 		.4byte	.LVL43
+ 1135 05d0 1D070000 		.4byte	0x71d
+ 1136 05d4 1C       		.uleb128 0x1c
+ 1137 05d5 01       		.uleb128 0x1
+ 1138 05d6 51       		.byte	0x51
+ 1139 05d7 05       		.uleb128 0x5
+ 1140 05d8 03       		.byte	0x3
+ 1141 05d9 18000000 		.4byte	.LANCHOR0+24
+ 1142 05dd 00       		.byte	0
+ 1143 05de 00       		.byte	0
+ 1144 05df 00       		.byte	0
+ 1145 05e0 1B       		.uleb128 0x1b
+ 1146 05e1 28000000 		.4byte	.LVL6
+ 1147 05e5 29070000 		.4byte	0x729
+ 1148 05e9 F4050000 		.4byte	0x5f4
+ 1149 05ed 1C       		.uleb128 0x1c
+ 1150 05ee 01       		.uleb128 0x1
+ 1151 05ef 50       		.byte	0x50
+ 1152 05f0 02       		.uleb128 0x2
+ 1153 05f1 75       		.byte	0x75
+ 1154 05f2 00       		.sleb128 0
+ 1155 05f3 00       		.byte	0
+ 1156 05f4 1B       		.uleb128 0x1b
+ 1157 05f5 30000000 		.4byte	.LVL7
+ 1158 05f9 1D070000 		.4byte	0x71d
+ 1159 05fd 11060000 		.4byte	0x611
+ 1160 0601 1C       		.uleb128 0x1c
+ 1161 0602 01       		.uleb128 0x1
+ 1162 0603 50       		.byte	0x50
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 26
+
+
+ 1163 0604 02       		.uleb128 0x2
+ 1164 0605 75       		.byte	0x75
+ 1165 0606 00       		.sleb128 0
+ 1166 0607 1C       		.uleb128 0x1c
+ 1167 0608 01       		.uleb128 0x1
+ 1168 0609 51       		.byte	0x51
+ 1169 060a 05       		.uleb128 0x5
+ 1170 060b 03       		.byte	0x3
+ 1171 060c 20000000 		.4byte	.LANCHOR0+32
+ 1172 0610 00       		.byte	0
+ 1173 0611 1D       		.uleb128 0x1d
+ 1174 0612 D4000000 		.4byte	.LVL35
+ 1175 0616 35070000 		.4byte	0x735
+ 1176 061a 1C       		.uleb128 0x1c
+ 1177 061b 01       		.uleb128 0x1
+ 1178 061c 50       		.byte	0x50
+ 1179 061d 02       		.uleb128 0x2
+ 1180 061e 75       		.byte	0x75
+ 1181 061f 00       		.sleb128 0
+ 1182 0620 1C       		.uleb128 0x1c
+ 1183 0621 01       		.uleb128 0x1
+ 1184 0622 51       		.byte	0x51
+ 1185 0623 05       		.uleb128 0x5
+ 1186 0624 03       		.byte	0x3
+ 1187 0625 50000000 		.4byte	.LANCHOR0+80
+ 1188 0629 00       		.byte	0
+ 1189 062a 00       		.byte	0
+ 1190 062b 1E       		.uleb128 0x1e
+ 1191 062c 91030000 		.4byte	0x391
+ 1192 0630 3B060000 		.4byte	0x63b
+ 1193 0634 1F       		.uleb128 0x1f
+ 1194 0635 3B060000 		.4byte	0x63b
+ 1195 0639 04       		.byte	0x4
+ 1196 063a 00       		.byte	0
+ 1197 063b 02       		.uleb128 0x2
+ 1198 063c 04       		.byte	0x4
+ 1199 063d 07       		.byte	0x7
+ 1200 063e D1000000 		.4byte	.LASF69
+ 1201 0642 20       		.uleb128 0x20
+ 1202 0643 1A050000 		.4byte	.LASF70
+ 1203 0647 01       		.byte	0x1
+ 1204 0648 2E       		.byte	0x2e
+ 1205 0649 53060000 		.4byte	0x653
+ 1206 064d 05       		.uleb128 0x5
+ 1207 064e 03       		.byte	0x3
+ 1208 064f 00000000 		.4byte	u8x8_d_sh1108_noname_powersave0_seq
+ 1209 0653 0E       		.uleb128 0xe
+ 1210 0654 2B060000 		.4byte	0x62b
+ 1211 0658 20       		.uleb128 0x20
+ 1212 0659 AD000000 		.4byte	.LASF71
+ 1213 065d 01       		.byte	0x1
+ 1214 065e 35       		.byte	0x35
+ 1215 065f 69060000 		.4byte	0x669
+ 1216 0663 05       		.uleb128 0x5
+ 1217 0664 03       		.byte	0x3
+ 1218 0665 08000000 		.4byte	u8x8_d_sh1108_noname_powersave1_seq
+ 1219 0669 0E       		.uleb128 0xe
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 27
+
+
+ 1220 066a 2B060000 		.4byte	0x62b
+ 1221 066e 1E       		.uleb128 0x1e
+ 1222 066f 91030000 		.4byte	0x391
+ 1223 0673 7E060000 		.4byte	0x67e
+ 1224 0677 1F       		.uleb128 0x1f
+ 1225 0678 3B060000 		.4byte	0x63b
+ 1226 067c 06       		.byte	0x6
+ 1227 067d 00       		.byte	0
+ 1228 067e 20       		.uleb128 0x20
+ 1229 067f BA010000 		.4byte	.LASF72
+ 1230 0683 01       		.byte	0x1
+ 1231 0684 3C       		.byte	0x3c
+ 1232 0685 8F060000 		.4byte	0x68f
+ 1233 0689 05       		.uleb128 0x5
+ 1234 068a 03       		.byte	0x3
+ 1235 068b 10000000 		.4byte	u8x8_d_sh1108_160x160_noname_powersave0_seq
+ 1236 068f 0E       		.uleb128 0xe
+ 1237 0690 6E060000 		.4byte	0x66e
+ 1238 0694 20       		.uleb128 0x20
+ 1239 0695 00000000 		.4byte	.LASF73
+ 1240 0699 01       		.byte	0x1
+ 1241 069a 44       		.byte	0x44
+ 1242 069b A5060000 		.4byte	0x6a5
+ 1243 069f 05       		.uleb128 0x5
+ 1244 06a0 03       		.byte	0x3
+ 1245 06a1 18000000 		.4byte	u8x8_d_sh1108_160x160_noname_powersave1_seq
+ 1246 06a5 0E       		.uleb128 0xe
+ 1247 06a6 6E060000 		.4byte	0x66e
+ 1248 06aa 1E       		.uleb128 0x1e
+ 1249 06ab 91030000 		.4byte	0x391
+ 1250 06af BA060000 		.4byte	0x6ba
+ 1251 06b3 1F       		.uleb128 0x1f
+ 1252 06b4 3B060000 		.4byte	0x63b
+ 1253 06b8 2C       		.byte	0x2c
+ 1254 06b9 00       		.byte	0
+ 1255 06ba 20       		.uleb128 0x20
+ 1256 06bb 80050000 		.4byte	.LASF74
+ 1257 06bf 01       		.byte	0x1
+ 1258 06c0 9B       		.byte	0x9b
+ 1259 06c1 CB060000 		.4byte	0x6cb
+ 1260 06c5 05       		.uleb128 0x5
+ 1261 06c6 03       		.byte	0x3
+ 1262 06c7 20000000 		.4byte	u8x8_d_sh1108_160x160_noname_init_seq
+ 1263 06cb 0E       		.uleb128 0xe
+ 1264 06cc AA060000 		.4byte	0x6aa
+ 1265 06d0 20       		.uleb128 0x20
+ 1266 06d1 45060000 		.4byte	.LASF75
+ 1267 06d5 01       		.byte	0x1
+ 1268 06d6 B4       		.byte	0xb4
+ 1269 06d7 86030000 		.4byte	0x386
+ 1270 06db 05       		.uleb128 0x5
+ 1271 06dc 03       		.byte	0x3
+ 1272 06dd 50000000 		.4byte	u8x8_sh1108_160x160_noname_display_info
+ 1273 06e1 21       		.uleb128 0x21
+ 1274 06e2 2B040000 		.4byte	.LASF76
+ 1275 06e6 2B040000 		.4byte	.LASF76
+ 1276 06ea 04       		.byte	0x4
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 28
+
+
+ 1277 06eb 5902     		.2byte	0x259
+ 1278 06ed 21       		.uleb128 0x21
+ 1279 06ee 93020000 		.4byte	.LASF77
+ 1280 06f2 93020000 		.4byte	.LASF77
+ 1281 06f6 04       		.byte	0x4
+ 1282 06f7 5502     		.2byte	0x255
+ 1283 06f9 21       		.uleb128 0x21
+ 1284 06fa 0D060000 		.4byte	.LASF78
+ 1285 06fe 0D060000 		.4byte	.LASF78
+ 1286 0702 04       		.byte	0x4
+ 1287 0703 5602     		.2byte	0x256
+ 1288 0705 21       		.uleb128 0x21
+ 1289 0706 F7010000 		.4byte	.LASF79
+ 1290 070a F7010000 		.4byte	.LASF79
+ 1291 070e 04       		.byte	0x4
+ 1292 070f 5802     		.2byte	0x258
+ 1293 0711 21       		.uleb128 0x21
+ 1294 0712 C8020000 		.4byte	.LASF80
+ 1295 0716 C8020000 		.4byte	.LASF80
+ 1296 071a 04       		.byte	0x4
+ 1297 071b 5A02     		.2byte	0x25a
+ 1298 071d 21       		.uleb128 0x21
+ 1299 071e F2040000 		.4byte	.LASF81
+ 1300 0722 F2040000 		.4byte	.LASF81
+ 1301 0726 04       		.byte	0x4
+ 1302 0727 7802     		.2byte	0x278
+ 1303 0729 21       		.uleb128 0x21
+ 1304 072a A4020000 		.4byte	.LASF82
+ 1305 072e A4020000 		.4byte	.LASF82
+ 1306 0732 04       		.byte	0x4
+ 1307 0733 A501     		.2byte	0x1a5
+ 1308 0735 21       		.uleb128 0x21
+ 1309 0736 DB050000 		.4byte	.LASF83
+ 1310 073a DB050000 		.4byte	.LASF83
+ 1311 073e 04       		.byte	0x4
+ 1312 073f A401     		.2byte	0x1a4
+ 1313 0741 00       		.byte	0
+ 1314              		.section	.debug_abbrev,"",%progbits
+ 1315              	.Ldebug_abbrev0:
+ 1316 0000 01       		.uleb128 0x1
+ 1317 0001 11       		.uleb128 0x11
+ 1318 0002 01       		.byte	0x1
+ 1319 0003 25       		.uleb128 0x25
+ 1320 0004 0E       		.uleb128 0xe
+ 1321 0005 13       		.uleb128 0x13
+ 1322 0006 0B       		.uleb128 0xb
+ 1323 0007 03       		.uleb128 0x3
+ 1324 0008 0E       		.uleb128 0xe
+ 1325 0009 1B       		.uleb128 0x1b
+ 1326 000a 0E       		.uleb128 0xe
+ 1327 000b 55       		.uleb128 0x55
+ 1328 000c 17       		.uleb128 0x17
+ 1329 000d 11       		.uleb128 0x11
+ 1330 000e 01       		.uleb128 0x1
+ 1331 000f 10       		.uleb128 0x10
+ 1332 0010 17       		.uleb128 0x17
+ 1333 0011 00       		.byte	0
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 29
+
+
+ 1334 0012 00       		.byte	0
+ 1335 0013 02       		.uleb128 0x2
+ 1336 0014 24       		.uleb128 0x24
+ 1337 0015 00       		.byte	0
+ 1338 0016 0B       		.uleb128 0xb
+ 1339 0017 0B       		.uleb128 0xb
+ 1340 0018 3E       		.uleb128 0x3e
+ 1341 0019 0B       		.uleb128 0xb
+ 1342 001a 03       		.uleb128 0x3
+ 1343 001b 0E       		.uleb128 0xe
+ 1344 001c 00       		.byte	0
+ 1345 001d 00       		.byte	0
+ 1346 001e 03       		.uleb128 0x3
+ 1347 001f 16       		.uleb128 0x16
+ 1348 0020 00       		.byte	0
+ 1349 0021 03       		.uleb128 0x3
+ 1350 0022 0E       		.uleb128 0xe
+ 1351 0023 3A       		.uleb128 0x3a
+ 1352 0024 0B       		.uleb128 0xb
+ 1353 0025 3B       		.uleb128 0x3b
+ 1354 0026 0B       		.uleb128 0xb
+ 1355 0027 49       		.uleb128 0x49
+ 1356 0028 13       		.uleb128 0x13
+ 1357 0029 00       		.byte	0
+ 1358 002a 00       		.byte	0
+ 1359 002b 04       		.uleb128 0x4
+ 1360 002c 24       		.uleb128 0x24
+ 1361 002d 00       		.byte	0
+ 1362 002e 0B       		.uleb128 0xb
+ 1363 002f 0B       		.uleb128 0xb
+ 1364 0030 3E       		.uleb128 0x3e
+ 1365 0031 0B       		.uleb128 0xb
+ 1366 0032 03       		.uleb128 0x3
+ 1367 0033 08       		.uleb128 0x8
+ 1368 0034 00       		.byte	0
+ 1369 0035 00       		.byte	0
+ 1370 0036 05       		.uleb128 0x5
+ 1371 0037 0F       		.uleb128 0xf
+ 1372 0038 00       		.byte	0
+ 1373 0039 0B       		.uleb128 0xb
+ 1374 003a 0B       		.uleb128 0xb
+ 1375 003b 00       		.byte	0
+ 1376 003c 00       		.byte	0
+ 1377 003d 06       		.uleb128 0x6
+ 1378 003e 13       		.uleb128 0x13
+ 1379 003f 01       		.byte	0x1
+ 1380 0040 03       		.uleb128 0x3
+ 1381 0041 0E       		.uleb128 0xe
+ 1382 0042 0B       		.uleb128 0xb
+ 1383 0043 0B       		.uleb128 0xb
+ 1384 0044 3A       		.uleb128 0x3a
+ 1385 0045 0B       		.uleb128 0xb
+ 1386 0046 3B       		.uleb128 0x3b
+ 1387 0047 05       		.uleb128 0x5
+ 1388 0048 01       		.uleb128 0x1
+ 1389 0049 13       		.uleb128 0x13
+ 1390 004a 00       		.byte	0
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 30
+
+
+ 1391 004b 00       		.byte	0
+ 1392 004c 07       		.uleb128 0x7
+ 1393 004d 0D       		.uleb128 0xd
+ 1394 004e 00       		.byte	0
+ 1395 004f 03       		.uleb128 0x3
+ 1396 0050 0E       		.uleb128 0xe
+ 1397 0051 3A       		.uleb128 0x3a
+ 1398 0052 0B       		.uleb128 0xb
+ 1399 0053 3B       		.uleb128 0x3b
+ 1400 0054 05       		.uleb128 0x5
+ 1401 0055 49       		.uleb128 0x49
+ 1402 0056 13       		.uleb128 0x13
+ 1403 0057 38       		.uleb128 0x38
+ 1404 0058 0B       		.uleb128 0xb
+ 1405 0059 00       		.byte	0
+ 1406 005a 00       		.byte	0
+ 1407 005b 08       		.uleb128 0x8
+ 1408 005c 13       		.uleb128 0x13
+ 1409 005d 01       		.byte	0x1
+ 1410 005e 03       		.uleb128 0x3
+ 1411 005f 0E       		.uleb128 0xe
+ 1412 0060 0B       		.uleb128 0xb
+ 1413 0061 0B       		.uleb128 0xb
+ 1414 0062 3A       		.uleb128 0x3a
+ 1415 0063 0B       		.uleb128 0xb
+ 1416 0064 3B       		.uleb128 0x3b
+ 1417 0065 0B       		.uleb128 0xb
+ 1418 0066 01       		.uleb128 0x1
+ 1419 0067 13       		.uleb128 0x13
+ 1420 0068 00       		.byte	0
+ 1421 0069 00       		.byte	0
+ 1422 006a 09       		.uleb128 0x9
+ 1423 006b 0D       		.uleb128 0xd
+ 1424 006c 00       		.byte	0
+ 1425 006d 03       		.uleb128 0x3
+ 1426 006e 0E       		.uleb128 0xe
+ 1427 006f 3A       		.uleb128 0x3a
+ 1428 0070 0B       		.uleb128 0xb
+ 1429 0071 3B       		.uleb128 0x3b
+ 1430 0072 0B       		.uleb128 0xb
+ 1431 0073 49       		.uleb128 0x49
+ 1432 0074 13       		.uleb128 0x13
+ 1433 0075 38       		.uleb128 0x38
+ 1434 0076 0B       		.uleb128 0xb
+ 1435 0077 00       		.byte	0
+ 1436 0078 00       		.byte	0
+ 1437 0079 0A       		.uleb128 0xa
+ 1438 007a 0D       		.uleb128 0xd
+ 1439 007b 00       		.byte	0
+ 1440 007c 03       		.uleb128 0x3
+ 1441 007d 08       		.uleb128 0x8
+ 1442 007e 3A       		.uleb128 0x3a
+ 1443 007f 0B       		.uleb128 0xb
+ 1444 0080 3B       		.uleb128 0x3b
+ 1445 0081 0B       		.uleb128 0xb
+ 1446 0082 49       		.uleb128 0x49
+ 1447 0083 13       		.uleb128 0x13
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 31
+
+
+ 1448 0084 38       		.uleb128 0x38
+ 1449 0085 0B       		.uleb128 0xb
+ 1450 0086 00       		.byte	0
+ 1451 0087 00       		.byte	0
+ 1452 0088 0B       		.uleb128 0xb
+ 1453 0089 0F       		.uleb128 0xf
+ 1454 008a 00       		.byte	0
+ 1455 008b 0B       		.uleb128 0xb
+ 1456 008c 0B       		.uleb128 0xb
+ 1457 008d 49       		.uleb128 0x49
+ 1458 008e 13       		.uleb128 0x13
+ 1459 008f 00       		.byte	0
+ 1460 0090 00       		.byte	0
+ 1461 0091 0C       		.uleb128 0xc
+ 1462 0092 15       		.uleb128 0x15
+ 1463 0093 01       		.byte	0x1
+ 1464 0094 27       		.uleb128 0x27
+ 1465 0095 19       		.uleb128 0x19
+ 1466 0096 49       		.uleb128 0x49
+ 1467 0097 13       		.uleb128 0x13
+ 1468 0098 01       		.uleb128 0x1
+ 1469 0099 13       		.uleb128 0x13
+ 1470 009a 00       		.byte	0
+ 1471 009b 00       		.byte	0
+ 1472 009c 0D       		.uleb128 0xd
+ 1473 009d 05       		.uleb128 0x5
+ 1474 009e 00       		.byte	0
+ 1475 009f 49       		.uleb128 0x49
+ 1476 00a0 13       		.uleb128 0x13
+ 1477 00a1 00       		.byte	0
+ 1478 00a2 00       		.byte	0
+ 1479 00a3 0E       		.uleb128 0xe
+ 1480 00a4 26       		.uleb128 0x26
+ 1481 00a5 00       		.byte	0
+ 1482 00a6 49       		.uleb128 0x49
+ 1483 00a7 13       		.uleb128 0x13
+ 1484 00a8 00       		.byte	0
+ 1485 00a9 00       		.byte	0
+ 1486 00aa 0F       		.uleb128 0xf
+ 1487 00ab 2E       		.uleb128 0x2e
+ 1488 00ac 01       		.byte	0x1
+ 1489 00ad 03       		.uleb128 0x3
+ 1490 00ae 0E       		.uleb128 0xe
+ 1491 00af 3A       		.uleb128 0x3a
+ 1492 00b0 0B       		.uleb128 0xb
+ 1493 00b1 3B       		.uleb128 0x3b
+ 1494 00b2 0B       		.uleb128 0xb
+ 1495 00b3 27       		.uleb128 0x27
+ 1496 00b4 19       		.uleb128 0x19
+ 1497 00b5 49       		.uleb128 0x49
+ 1498 00b6 13       		.uleb128 0x13
+ 1499 00b7 20       		.uleb128 0x20
+ 1500 00b8 0B       		.uleb128 0xb
+ 1501 00b9 01       		.uleb128 0x1
+ 1502 00ba 13       		.uleb128 0x13
+ 1503 00bb 00       		.byte	0
+ 1504 00bc 00       		.byte	0
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 32
+
+
+ 1505 00bd 10       		.uleb128 0x10
+ 1506 00be 05       		.uleb128 0x5
+ 1507 00bf 00       		.byte	0
+ 1508 00c0 03       		.uleb128 0x3
+ 1509 00c1 0E       		.uleb128 0xe
+ 1510 00c2 3A       		.uleb128 0x3a
+ 1511 00c3 0B       		.uleb128 0xb
+ 1512 00c4 3B       		.uleb128 0x3b
+ 1513 00c5 0B       		.uleb128 0xb
+ 1514 00c6 49       		.uleb128 0x49
+ 1515 00c7 13       		.uleb128 0x13
+ 1516 00c8 00       		.byte	0
+ 1517 00c9 00       		.byte	0
+ 1518 00ca 11       		.uleb128 0x11
+ 1519 00cb 05       		.uleb128 0x5
+ 1520 00cc 00       		.byte	0
+ 1521 00cd 03       		.uleb128 0x3
+ 1522 00ce 08       		.uleb128 0x8
+ 1523 00cf 3A       		.uleb128 0x3a
+ 1524 00d0 0B       		.uleb128 0xb
+ 1525 00d1 3B       		.uleb128 0x3b
+ 1526 00d2 0B       		.uleb128 0xb
+ 1527 00d3 49       		.uleb128 0x49
+ 1528 00d4 13       		.uleb128 0x13
+ 1529 00d5 00       		.byte	0
+ 1530 00d6 00       		.byte	0
+ 1531 00d7 12       		.uleb128 0x12
+ 1532 00d8 34       		.uleb128 0x34
+ 1533 00d9 00       		.byte	0
+ 1534 00da 03       		.uleb128 0x3
+ 1535 00db 08       		.uleb128 0x8
+ 1536 00dc 3A       		.uleb128 0x3a
+ 1537 00dd 0B       		.uleb128 0xb
+ 1538 00de 3B       		.uleb128 0x3b
+ 1539 00df 0B       		.uleb128 0xb
+ 1540 00e0 49       		.uleb128 0x49
+ 1541 00e1 13       		.uleb128 0x13
+ 1542 00e2 00       		.byte	0
+ 1543 00e3 00       		.byte	0
+ 1544 00e4 13       		.uleb128 0x13
+ 1545 00e5 2E       		.uleb128 0x2e
+ 1546 00e6 01       		.byte	0x1
+ 1547 00e7 3F       		.uleb128 0x3f
+ 1548 00e8 19       		.uleb128 0x19
+ 1549 00e9 03       		.uleb128 0x3
+ 1550 00ea 0E       		.uleb128 0xe
+ 1551 00eb 3A       		.uleb128 0x3a
+ 1552 00ec 0B       		.uleb128 0xb
+ 1553 00ed 3B       		.uleb128 0x3b
+ 1554 00ee 0B       		.uleb128 0xb
+ 1555 00ef 27       		.uleb128 0x27
+ 1556 00f0 19       		.uleb128 0x19
+ 1557 00f1 49       		.uleb128 0x49
+ 1558 00f2 13       		.uleb128 0x13
+ 1559 00f3 11       		.uleb128 0x11
+ 1560 00f4 01       		.uleb128 0x1
+ 1561 00f5 12       		.uleb128 0x12
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 33
+
+
+ 1562 00f6 06       		.uleb128 0x6
+ 1563 00f7 40       		.uleb128 0x40
+ 1564 00f8 18       		.uleb128 0x18
+ 1565 00f9 9742     		.uleb128 0x2117
+ 1566 00fb 19       		.uleb128 0x19
+ 1567 00fc 01       		.uleb128 0x1
+ 1568 00fd 13       		.uleb128 0x13
+ 1569 00fe 00       		.byte	0
+ 1570 00ff 00       		.byte	0
+ 1571 0100 14       		.uleb128 0x14
+ 1572 0101 05       		.uleb128 0x5
+ 1573 0102 00       		.byte	0
+ 1574 0103 03       		.uleb128 0x3
+ 1575 0104 0E       		.uleb128 0xe
+ 1576 0105 3A       		.uleb128 0x3a
+ 1577 0106 0B       		.uleb128 0xb
+ 1578 0107 3B       		.uleb128 0x3b
+ 1579 0108 0B       		.uleb128 0xb
+ 1580 0109 49       		.uleb128 0x49
+ 1581 010a 13       		.uleb128 0x13
+ 1582 010b 02       		.uleb128 0x2
+ 1583 010c 17       		.uleb128 0x17
+ 1584 010d 00       		.byte	0
+ 1585 010e 00       		.byte	0
+ 1586 010f 15       		.uleb128 0x15
+ 1587 0110 05       		.uleb128 0x5
+ 1588 0111 00       		.byte	0
+ 1589 0112 03       		.uleb128 0x3
+ 1590 0113 08       		.uleb128 0x8
+ 1591 0114 3A       		.uleb128 0x3a
+ 1592 0115 0B       		.uleb128 0xb
+ 1593 0116 3B       		.uleb128 0x3b
+ 1594 0117 0B       		.uleb128 0xb
+ 1595 0118 49       		.uleb128 0x49
+ 1596 0119 13       		.uleb128 0x13
+ 1597 011a 02       		.uleb128 0x2
+ 1598 011b 17       		.uleb128 0x17
+ 1599 011c 00       		.byte	0
+ 1600 011d 00       		.byte	0
+ 1601 011e 16       		.uleb128 0x16
+ 1602 011f 1D       		.uleb128 0x1d
+ 1603 0120 01       		.byte	0x1
+ 1604 0121 31       		.uleb128 0x31
+ 1605 0122 13       		.uleb128 0x13
+ 1606 0123 52       		.uleb128 0x52
+ 1607 0124 01       		.uleb128 0x1
+ 1608 0125 55       		.uleb128 0x55
+ 1609 0126 17       		.uleb128 0x17
+ 1610 0127 58       		.uleb128 0x58
+ 1611 0128 0B       		.uleb128 0xb
+ 1612 0129 59       		.uleb128 0x59
+ 1613 012a 0B       		.uleb128 0xb
+ 1614 012b 01       		.uleb128 0x1
+ 1615 012c 13       		.uleb128 0x13
+ 1616 012d 00       		.byte	0
+ 1617 012e 00       		.byte	0
+ 1618 012f 17       		.uleb128 0x17
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 34
+
+
+ 1619 0130 05       		.uleb128 0x5
+ 1620 0131 00       		.byte	0
+ 1621 0132 31       		.uleb128 0x31
+ 1622 0133 13       		.uleb128 0x13
+ 1623 0134 02       		.uleb128 0x2
+ 1624 0135 17       		.uleb128 0x17
+ 1625 0136 00       		.byte	0
+ 1626 0137 00       		.byte	0
+ 1627 0138 18       		.uleb128 0x18
+ 1628 0139 0B       		.uleb128 0xb
+ 1629 013a 01       		.byte	0x1
+ 1630 013b 55       		.uleb128 0x55
+ 1631 013c 17       		.uleb128 0x17
+ 1632 013d 00       		.byte	0
+ 1633 013e 00       		.byte	0
+ 1634 013f 19       		.uleb128 0x19
+ 1635 0140 34       		.uleb128 0x34
+ 1636 0141 00       		.byte	0
+ 1637 0142 31       		.uleb128 0x31
+ 1638 0143 13       		.uleb128 0x13
+ 1639 0144 02       		.uleb128 0x2
+ 1640 0145 17       		.uleb128 0x17
+ 1641 0146 00       		.byte	0
+ 1642 0147 00       		.byte	0
+ 1643 0148 1A       		.uleb128 0x1a
+ 1644 0149 898201   		.uleb128 0x4109
+ 1645 014c 00       		.byte	0
+ 1646 014d 11       		.uleb128 0x11
+ 1647 014e 01       		.uleb128 0x1
+ 1648 014f 31       		.uleb128 0x31
+ 1649 0150 13       		.uleb128 0x13
+ 1650 0151 00       		.byte	0
+ 1651 0152 00       		.byte	0
+ 1652 0153 1B       		.uleb128 0x1b
+ 1653 0154 898201   		.uleb128 0x4109
+ 1654 0157 01       		.byte	0x1
+ 1655 0158 11       		.uleb128 0x11
+ 1656 0159 01       		.uleb128 0x1
+ 1657 015a 31       		.uleb128 0x31
+ 1658 015b 13       		.uleb128 0x13
+ 1659 015c 01       		.uleb128 0x1
+ 1660 015d 13       		.uleb128 0x13
+ 1661 015e 00       		.byte	0
+ 1662 015f 00       		.byte	0
+ 1663 0160 1C       		.uleb128 0x1c
+ 1664 0161 8A8201   		.uleb128 0x410a
+ 1665 0164 00       		.byte	0
+ 1666 0165 02       		.uleb128 0x2
+ 1667 0166 18       		.uleb128 0x18
+ 1668 0167 9142     		.uleb128 0x2111
+ 1669 0169 18       		.uleb128 0x18
+ 1670 016a 00       		.byte	0
+ 1671 016b 00       		.byte	0
+ 1672 016c 1D       		.uleb128 0x1d
+ 1673 016d 898201   		.uleb128 0x4109
+ 1674 0170 01       		.byte	0x1
+ 1675 0171 11       		.uleb128 0x11
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 35
+
+
+ 1676 0172 01       		.uleb128 0x1
+ 1677 0173 31       		.uleb128 0x31
+ 1678 0174 13       		.uleb128 0x13
+ 1679 0175 00       		.byte	0
+ 1680 0176 00       		.byte	0
+ 1681 0177 1E       		.uleb128 0x1e
+ 1682 0178 01       		.uleb128 0x1
+ 1683 0179 01       		.byte	0x1
+ 1684 017a 49       		.uleb128 0x49
+ 1685 017b 13       		.uleb128 0x13
+ 1686 017c 01       		.uleb128 0x1
+ 1687 017d 13       		.uleb128 0x13
+ 1688 017e 00       		.byte	0
+ 1689 017f 00       		.byte	0
+ 1690 0180 1F       		.uleb128 0x1f
+ 1691 0181 21       		.uleb128 0x21
+ 1692 0182 00       		.byte	0
+ 1693 0183 49       		.uleb128 0x49
+ 1694 0184 13       		.uleb128 0x13
+ 1695 0185 2F       		.uleb128 0x2f
+ 1696 0186 0B       		.uleb128 0xb
+ 1697 0187 00       		.byte	0
+ 1698 0188 00       		.byte	0
+ 1699 0189 20       		.uleb128 0x20
+ 1700 018a 34       		.uleb128 0x34
+ 1701 018b 00       		.byte	0
+ 1702 018c 03       		.uleb128 0x3
+ 1703 018d 0E       		.uleb128 0xe
+ 1704 018e 3A       		.uleb128 0x3a
+ 1705 018f 0B       		.uleb128 0xb
+ 1706 0190 3B       		.uleb128 0x3b
+ 1707 0191 0B       		.uleb128 0xb
+ 1708 0192 49       		.uleb128 0x49
+ 1709 0193 13       		.uleb128 0x13
+ 1710 0194 02       		.uleb128 0x2
+ 1711 0195 18       		.uleb128 0x18
+ 1712 0196 00       		.byte	0
+ 1713 0197 00       		.byte	0
+ 1714 0198 21       		.uleb128 0x21
+ 1715 0199 2E       		.uleb128 0x2e
+ 1716 019a 00       		.byte	0
+ 1717 019b 3F       		.uleb128 0x3f
+ 1718 019c 19       		.uleb128 0x19
+ 1719 019d 3C       		.uleb128 0x3c
+ 1720 019e 19       		.uleb128 0x19
+ 1721 019f 6E       		.uleb128 0x6e
+ 1722 01a0 0E       		.uleb128 0xe
+ 1723 01a1 03       		.uleb128 0x3
+ 1724 01a2 0E       		.uleb128 0xe
+ 1725 01a3 3A       		.uleb128 0x3a
+ 1726 01a4 0B       		.uleb128 0xb
+ 1727 01a5 3B       		.uleb128 0x3b
+ 1728 01a6 05       		.uleb128 0x5
+ 1729 01a7 00       		.byte	0
+ 1730 01a8 00       		.byte	0
+ 1731 01a9 00       		.byte	0
+ 1732              		.section	.debug_loc,"",%progbits
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 36
+
+
+ 1733              	.Ldebug_loc0:
+ 1734              	.LLST0:
+ 1735 0000 00000000 		.4byte	.LVL0
+ 1736 0004 24000000 		.4byte	.LVL5
+ 1737 0008 0100     		.2byte	0x1
+ 1738 000a 50       		.byte	0x50
+ 1739 000b 24000000 		.4byte	.LVL5
+ 1740 000f 34000000 		.4byte	.LVL8
+ 1741 0013 0100     		.2byte	0x1
+ 1742 0015 55       		.byte	0x55
+ 1743 0016 34000000 		.4byte	.LVL8
+ 1744 001a 37000000 		.4byte	.LVL9-1
+ 1745 001e 0100     		.2byte	0x1
+ 1746 0020 50       		.byte	0x50
+ 1747 0021 37000000 		.4byte	.LVL9-1
+ 1748 0025 8E000000 		.4byte	.LVL20
+ 1749 0029 0100     		.2byte	0x1
+ 1750 002b 55       		.byte	0x55
+ 1751 002c 8E000000 		.4byte	.LVL20
+ 1752 0030 95000000 		.4byte	.LVL22-1
+ 1753 0034 0100     		.2byte	0x1
+ 1754 0036 50       		.byte	0x50
+ 1755 0037 95000000 		.4byte	.LVL22-1
+ 1756 003b A2000000 		.4byte	.LVL24
+ 1757 003f 0100     		.2byte	0x1
+ 1758 0041 55       		.byte	0x55
+ 1759 0042 A2000000 		.4byte	.LVL24
+ 1760 0046 A5000000 		.4byte	.LVL25-1
+ 1761 004a 0100     		.2byte	0x1
+ 1762 004c 50       		.byte	0x50
+ 1763 004d A5000000 		.4byte	.LVL25-1
+ 1764 0051 C0000000 		.4byte	.LVL29
+ 1765 0055 0100     		.2byte	0x1
+ 1766 0057 55       		.byte	0x55
+ 1767 0058 C0000000 		.4byte	.LVL29
+ 1768 005c C7000000 		.4byte	.LVL31-1
+ 1769 0060 0100     		.2byte	0x1
+ 1770 0062 50       		.byte	0x50
+ 1771 0063 C7000000 		.4byte	.LVL31-1
+ 1772 0067 CC000000 		.4byte	.LVL32
+ 1773 006b 0100     		.2byte	0x1
+ 1774 006d 55       		.byte	0x55
+ 1775 006e CC000000 		.4byte	.LVL32
+ 1776 0072 CE000000 		.4byte	.LVL33
+ 1777 0076 0100     		.2byte	0x1
+ 1778 0078 50       		.byte	0x50
+ 1779 0079 CE000000 		.4byte	.LVL33
+ 1780 007d D8000000 		.4byte	.LVL36
+ 1781 0081 0100     		.2byte	0x1
+ 1782 0083 55       		.byte	0x55
+ 1783 0084 D8000000 		.4byte	.LVL36
+ 1784 0088 DA000000 		.4byte	.LVL37
+ 1785 008c 0100     		.2byte	0x1
+ 1786 008e 50       		.byte	0x50
+ 1787 008f DA000000 		.4byte	.LVL37
+ 1788 0093 DC000000 		.4byte	.LVL38
+ 1789 0097 0100     		.2byte	0x1
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 37
+
+
+ 1790 0099 55       		.byte	0x55
+ 1791 009a DC000000 		.4byte	.LVL38
+ 1792 009e E1000000 		.4byte	.LVL40-1
+ 1793 00a2 0100     		.2byte	0x1
+ 1794 00a4 50       		.byte	0x50
+ 1795 00a5 E1000000 		.4byte	.LVL40-1
+ 1796 00a9 E6000000 		.4byte	.LVL41
+ 1797 00ad 0100     		.2byte	0x1
+ 1798 00af 55       		.byte	0x55
+ 1799 00b0 E6000000 		.4byte	.LVL41
+ 1800 00b4 EB000000 		.4byte	.LVL43-1
+ 1801 00b8 0100     		.2byte	0x1
+ 1802 00ba 50       		.byte	0x50
+ 1803 00bb EB000000 		.4byte	.LVL43-1
+ 1804 00bf F8000000 		.4byte	.LVL45
+ 1805 00c3 0100     		.2byte	0x1
+ 1806 00c5 55       		.byte	0x55
+ 1807 00c6 F8000000 		.4byte	.LVL45
+ 1808 00ca 10010000 		.4byte	.LFE1
+ 1809 00ce 0400     		.2byte	0x4
+ 1810 00d0 F3       		.byte	0xf3
+ 1811 00d1 01       		.uleb128 0x1
+ 1812 00d2 50       		.byte	0x50
+ 1813 00d3 9F       		.byte	0x9f
+ 1814 00d4 00000000 		.4byte	0
+ 1815 00d8 00000000 		.4byte	0
+ 1816              	.LLST1:
+ 1817 00dc 00000000 		.4byte	.LVL0
+ 1818 00e0 27000000 		.4byte	.LVL6-1
+ 1819 00e4 0100     		.2byte	0x1
+ 1820 00e6 51       		.byte	0x51
+ 1821 00e7 27000000 		.4byte	.LVL6-1
+ 1822 00eb 34000000 		.4byte	.LVL8
+ 1823 00ef 0400     		.2byte	0x4
+ 1824 00f1 F3       		.byte	0xf3
+ 1825 00f2 01       		.uleb128 0x1
+ 1826 00f3 51       		.byte	0x51
+ 1827 00f4 9F       		.byte	0x9f
+ 1828 00f5 34000000 		.4byte	.LVL8
+ 1829 00f9 37000000 		.4byte	.LVL9-1
+ 1830 00fd 0100     		.2byte	0x1
+ 1831 00ff 51       		.byte	0x51
+ 1832 0100 37000000 		.4byte	.LVL9-1
+ 1833 0104 8E000000 		.4byte	.LVL20
+ 1834 0108 0400     		.2byte	0x4
+ 1835 010a F3       		.byte	0xf3
+ 1836 010b 01       		.uleb128 0x1
+ 1837 010c 51       		.byte	0x51
+ 1838 010d 9F       		.byte	0x9f
+ 1839 010e 8E000000 		.4byte	.LVL20
+ 1840 0112 92000000 		.4byte	.LVL21
+ 1841 0116 0100     		.2byte	0x1
+ 1842 0118 51       		.byte	0x51
+ 1843 0119 92000000 		.4byte	.LVL21
+ 1844 011d A2000000 		.4byte	.LVL24
+ 1845 0121 0400     		.2byte	0x4
+ 1846 0123 F3       		.byte	0xf3
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 38
+
+
+ 1847 0124 01       		.uleb128 0x1
+ 1848 0125 51       		.byte	0x51
+ 1849 0126 9F       		.byte	0x9f
+ 1850 0127 A2000000 		.4byte	.LVL24
+ 1851 012b A5000000 		.4byte	.LVL25-1
+ 1852 012f 0100     		.2byte	0x1
+ 1853 0131 51       		.byte	0x51
+ 1854 0132 A5000000 		.4byte	.LVL25-1
+ 1855 0136 C0000000 		.4byte	.LVL29
+ 1856 013a 0400     		.2byte	0x4
+ 1857 013c F3       		.byte	0xf3
+ 1858 013d 01       		.uleb128 0x1
+ 1859 013e 51       		.byte	0x51
+ 1860 013f 9F       		.byte	0x9f
+ 1861 0140 C0000000 		.4byte	.LVL29
+ 1862 0144 C4000000 		.4byte	.LVL30
+ 1863 0148 0100     		.2byte	0x1
+ 1864 014a 51       		.byte	0x51
+ 1865 014b C4000000 		.4byte	.LVL30
+ 1866 014f CC000000 		.4byte	.LVL32
+ 1867 0153 0400     		.2byte	0x4
+ 1868 0155 F3       		.byte	0xf3
+ 1869 0156 01       		.uleb128 0x1
+ 1870 0157 51       		.byte	0x51
+ 1871 0158 9F       		.byte	0x9f
+ 1872 0159 CC000000 		.4byte	.LVL32
+ 1873 015d D0000000 		.4byte	.LVL34
+ 1874 0161 0100     		.2byte	0x1
+ 1875 0163 51       		.byte	0x51
+ 1876 0164 D0000000 		.4byte	.LVL34
+ 1877 0168 D8000000 		.4byte	.LVL36
+ 1878 016c 0400     		.2byte	0x4
+ 1879 016e F3       		.byte	0xf3
+ 1880 016f 01       		.uleb128 0x1
+ 1881 0170 51       		.byte	0x51
+ 1882 0171 9F       		.byte	0x9f
+ 1883 0172 D8000000 		.4byte	.LVL36
+ 1884 0176 DE000000 		.4byte	.LVL39
+ 1885 017a 0100     		.2byte	0x1
+ 1886 017c 51       		.byte	0x51
+ 1887 017d DE000000 		.4byte	.LVL39
+ 1888 0181 E6000000 		.4byte	.LVL41
+ 1889 0185 0400     		.2byte	0x4
+ 1890 0187 F3       		.byte	0xf3
+ 1891 0188 01       		.uleb128 0x1
+ 1892 0189 51       		.byte	0x51
+ 1893 018a 9F       		.byte	0x9f
+ 1894 018b E6000000 		.4byte	.LVL41
+ 1895 018f E8000000 		.4byte	.LVL42
+ 1896 0193 0100     		.2byte	0x1
+ 1897 0195 51       		.byte	0x51
+ 1898 0196 E8000000 		.4byte	.LVL42
+ 1899 019a 10010000 		.4byte	.LFE1
+ 1900 019e 0400     		.2byte	0x4
+ 1901 01a0 F3       		.byte	0xf3
+ 1902 01a1 01       		.uleb128 0x1
+ 1903 01a2 51       		.byte	0x51
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 39
+
+
+ 1904 01a3 9F       		.byte	0x9f
+ 1905 01a4 00000000 		.4byte	0
+ 1906 01a8 00000000 		.4byte	0
+ 1907              	.LLST2:
+ 1908 01ac 00000000 		.4byte	.LVL0
+ 1909 01b0 27000000 		.4byte	.LVL6-1
+ 1910 01b4 0100     		.2byte	0x1
+ 1911 01b6 52       		.byte	0x52
+ 1912 01b7 27000000 		.4byte	.LVL6-1
+ 1913 01bb 34000000 		.4byte	.LVL8
+ 1914 01bf 0400     		.2byte	0x4
+ 1915 01c1 F3       		.byte	0xf3
+ 1916 01c2 01       		.uleb128 0x1
+ 1917 01c3 52       		.byte	0x52
+ 1918 01c4 9F       		.byte	0x9f
+ 1919 01c5 34000000 		.4byte	.LVL8
+ 1920 01c9 37000000 		.4byte	.LVL9-1
+ 1921 01cd 0100     		.2byte	0x1
+ 1922 01cf 52       		.byte	0x52
+ 1923 01d0 37000000 		.4byte	.LVL9-1
+ 1924 01d4 8E000000 		.4byte	.LVL20
+ 1925 01d8 0400     		.2byte	0x4
+ 1926 01da F3       		.byte	0xf3
+ 1927 01db 01       		.uleb128 0x1
+ 1928 01dc 52       		.byte	0x52
+ 1929 01dd 9F       		.byte	0x9f
+ 1930 01de 8E000000 		.4byte	.LVL20
+ 1931 01e2 95000000 		.4byte	.LVL22-1
+ 1932 01e6 0100     		.2byte	0x1
+ 1933 01e8 52       		.byte	0x52
+ 1934 01e9 95000000 		.4byte	.LVL22-1
+ 1935 01ed A2000000 		.4byte	.LVL24
+ 1936 01f1 0400     		.2byte	0x4
+ 1937 01f3 F3       		.byte	0xf3
+ 1938 01f4 01       		.uleb128 0x1
+ 1939 01f5 52       		.byte	0x52
+ 1940 01f6 9F       		.byte	0x9f
+ 1941 01f7 A2000000 		.4byte	.LVL24
+ 1942 01fb A5000000 		.4byte	.LVL25-1
+ 1943 01ff 0100     		.2byte	0x1
+ 1944 0201 52       		.byte	0x52
+ 1945 0202 A5000000 		.4byte	.LVL25-1
+ 1946 0206 C0000000 		.4byte	.LVL29
+ 1947 020a 0400     		.2byte	0x4
+ 1948 020c F3       		.byte	0xf3
+ 1949 020d 01       		.uleb128 0x1
+ 1950 020e 52       		.byte	0x52
+ 1951 020f 9F       		.byte	0x9f
+ 1952 0210 C0000000 		.4byte	.LVL29
+ 1953 0214 C7000000 		.4byte	.LVL31-1
+ 1954 0218 0100     		.2byte	0x1
+ 1955 021a 52       		.byte	0x52
+ 1956 021b C7000000 		.4byte	.LVL31-1
+ 1957 021f CC000000 		.4byte	.LVL32
+ 1958 0223 0400     		.2byte	0x4
+ 1959 0225 F3       		.byte	0xf3
+ 1960 0226 01       		.uleb128 0x1
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 40
+
+
+ 1961 0227 52       		.byte	0x52
+ 1962 0228 9F       		.byte	0x9f
+ 1963 0229 CC000000 		.4byte	.LVL32
+ 1964 022d D3000000 		.4byte	.LVL35-1
+ 1965 0231 0100     		.2byte	0x1
+ 1966 0233 52       		.byte	0x52
+ 1967 0234 D3000000 		.4byte	.LVL35-1
+ 1968 0238 D8000000 		.4byte	.LVL36
+ 1969 023c 0400     		.2byte	0x4
+ 1970 023e F3       		.byte	0xf3
+ 1971 023f 01       		.uleb128 0x1
+ 1972 0240 52       		.byte	0x52
+ 1973 0241 9F       		.byte	0x9f
+ 1974 0242 D8000000 		.4byte	.LVL36
+ 1975 0246 E1000000 		.4byte	.LVL40-1
+ 1976 024a 0100     		.2byte	0x1
+ 1977 024c 52       		.byte	0x52
+ 1978 024d E1000000 		.4byte	.LVL40-1
+ 1979 0251 E6000000 		.4byte	.LVL41
+ 1980 0255 0400     		.2byte	0x4
+ 1981 0257 F3       		.byte	0xf3
+ 1982 0258 01       		.uleb128 0x1
+ 1983 0259 52       		.byte	0x52
+ 1984 025a 9F       		.byte	0x9f
+ 1985 025b E6000000 		.4byte	.LVL41
+ 1986 025f EB000000 		.4byte	.LVL43-1
+ 1987 0263 0100     		.2byte	0x1
+ 1988 0265 52       		.byte	0x52
+ 1989 0266 EB000000 		.4byte	.LVL43-1
+ 1990 026a 10010000 		.4byte	.LFE1
+ 1991 026e 0400     		.2byte	0x4
+ 1992 0270 F3       		.byte	0xf3
+ 1993 0271 01       		.uleb128 0x1
+ 1994 0272 52       		.byte	0x52
+ 1995 0273 9F       		.byte	0x9f
+ 1996 0274 00000000 		.4byte	0
+ 1997 0278 00000000 		.4byte	0
+ 1998              	.LLST3:
+ 1999 027c 00000000 		.4byte	.LVL0
+ 2000 0280 14000000 		.4byte	.LVL4
+ 2001 0284 0100     		.2byte	0x1
+ 2002 0286 53       		.byte	0x53
+ 2003 0287 14000000 		.4byte	.LVL4
+ 2004 028b F8000000 		.4byte	.LVL45
+ 2005 028f 0100     		.2byte	0x1
+ 2006 0291 56       		.byte	0x56
+ 2007 0292 F8000000 		.4byte	.LVL45
+ 2008 0296 10010000 		.4byte	.LFE1
+ 2009 029a 0400     		.2byte	0x4
+ 2010 029c F3       		.byte	0xf3
+ 2011 029d 01       		.uleb128 0x1
+ 2012 029e 53       		.byte	0x53
+ 2013 029f 9F       		.byte	0x9f
+ 2014 02a0 00000000 		.4byte	0
+ 2015 02a4 00000000 		.4byte	0
+ 2016              	.LLST4:
+ 2017 02a8 0C000000 		.4byte	.LVL3
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 41
+
+
+ 2018 02ac 14000000 		.4byte	.LVL4
+ 2019 02b0 0100     		.2byte	0x1
+ 2020 02b2 53       		.byte	0x53
+ 2021 02b3 34000000 		.4byte	.LVL8
+ 2022 02b7 8A000000 		.4byte	.LVL19
+ 2023 02bb 0100     		.2byte	0x1
+ 2024 02bd 56       		.byte	0x56
+ 2025 02be 8E000000 		.4byte	.LVL20
+ 2026 02c2 A0000000 		.4byte	.LVL23
+ 2027 02c6 0100     		.2byte	0x1
+ 2028 02c8 56       		.byte	0x56
+ 2029 02c9 A2000000 		.4byte	.LVL24
+ 2030 02cd BC000000 		.4byte	.LVL28
+ 2031 02d1 0100     		.2byte	0x1
+ 2032 02d3 56       		.byte	0x56
+ 2033 02d4 C0000000 		.4byte	.LVL29
+ 2034 02d8 C8000000 		.4byte	.LVL31
+ 2035 02dc 0100     		.2byte	0x1
+ 2036 02de 56       		.byte	0x56
+ 2037 02df DC000000 		.4byte	.LVL38
+ 2038 02e3 E2000000 		.4byte	.LVL40
+ 2039 02e7 0100     		.2byte	0x1
+ 2040 02e9 56       		.byte	0x56
+ 2041 02ea E6000000 		.4byte	.LVL41
+ 2042 02ee F6000000 		.4byte	.LVL44
+ 2043 02f2 0100     		.2byte	0x1
+ 2044 02f4 56       		.byte	0x56
+ 2045 02f5 00000000 		.4byte	0
+ 2046 02f9 00000000 		.4byte	0
+ 2047              	.LLST5:
+ 2048 02fd 0A000000 		.4byte	.LVL2
+ 2049 0301 14000000 		.4byte	.LVL4
+ 2050 0305 0100     		.2byte	0x1
+ 2051 0307 52       		.byte	0x52
+ 2052 0308 34000000 		.4byte	.LVL8
+ 2053 030c 37000000 		.4byte	.LVL9-1
+ 2054 0310 0100     		.2byte	0x1
+ 2055 0312 52       		.byte	0x52
+ 2056 0313 37000000 		.4byte	.LVL9-1
+ 2057 0317 6C000000 		.4byte	.LVL16
+ 2058 031b 0400     		.2byte	0x4
+ 2059 031d F3       		.byte	0xf3
+ 2060 031e 01       		.uleb128 0x1
+ 2061 031f 52       		.byte	0x52
+ 2062 0320 9F       		.byte	0x9f
+ 2063 0321 6C000000 		.4byte	.LVL16
+ 2064 0325 7E000000 		.4byte	.LVL18
+ 2065 0329 0100     		.2byte	0x1
+ 2066 032b 54       		.byte	0x54
+ 2067 032c 7E000000 		.4byte	.LVL18
+ 2068 0330 89000000 		.4byte	.LVL19-1
+ 2069 0334 0100     		.2byte	0x1
+ 2070 0336 52       		.byte	0x52
+ 2071 0337 8E000000 		.4byte	.LVL20
+ 2072 033b 95000000 		.4byte	.LVL22-1
+ 2073 033f 0100     		.2byte	0x1
+ 2074 0341 52       		.byte	0x52
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 42
+
+
+ 2075 0342 95000000 		.4byte	.LVL22-1
+ 2076 0346 A0000000 		.4byte	.LVL23
+ 2077 034a 0400     		.2byte	0x4
+ 2078 034c F3       		.byte	0xf3
+ 2079 034d 01       		.uleb128 0x1
+ 2080 034e 52       		.byte	0x52
+ 2081 034f 9F       		.byte	0x9f
+ 2082 0350 A2000000 		.4byte	.LVL24
+ 2083 0354 A5000000 		.4byte	.LVL25-1
+ 2084 0358 0100     		.2byte	0x1
+ 2085 035a 52       		.byte	0x52
+ 2086 035b A5000000 		.4byte	.LVL25-1
+ 2087 035f BC000000 		.4byte	.LVL28
+ 2088 0363 0400     		.2byte	0x4
+ 2089 0365 F3       		.byte	0xf3
+ 2090 0366 01       		.uleb128 0x1
+ 2091 0367 52       		.byte	0x52
+ 2092 0368 9F       		.byte	0x9f
+ 2093 0369 C0000000 		.4byte	.LVL29
+ 2094 036d C7000000 		.4byte	.LVL31-1
+ 2095 0371 0100     		.2byte	0x1
+ 2096 0373 52       		.byte	0x52
+ 2097 0374 C7000000 		.4byte	.LVL31-1
+ 2098 0378 C8000000 		.4byte	.LVL31
+ 2099 037c 0400     		.2byte	0x4
+ 2100 037e F3       		.byte	0xf3
+ 2101 037f 01       		.uleb128 0x1
+ 2102 0380 52       		.byte	0x52
+ 2103 0381 9F       		.byte	0x9f
+ 2104 0382 DC000000 		.4byte	.LVL38
+ 2105 0386 E1000000 		.4byte	.LVL40-1
+ 2106 038a 0100     		.2byte	0x1
+ 2107 038c 52       		.byte	0x52
+ 2108 038d E1000000 		.4byte	.LVL40-1
+ 2109 0391 E2000000 		.4byte	.LVL40
+ 2110 0395 0400     		.2byte	0x4
+ 2111 0397 F3       		.byte	0xf3
+ 2112 0398 01       		.uleb128 0x1
+ 2113 0399 52       		.byte	0x52
+ 2114 039a 9F       		.byte	0x9f
+ 2115 039b E6000000 		.4byte	.LVL41
+ 2116 039f EB000000 		.4byte	.LVL43-1
+ 2117 03a3 0100     		.2byte	0x1
+ 2118 03a5 52       		.byte	0x52
+ 2119 03a6 EB000000 		.4byte	.LVL43-1
+ 2120 03aa F6000000 		.4byte	.LVL44
+ 2121 03ae 0400     		.2byte	0x4
+ 2122 03b0 F3       		.byte	0xf3
+ 2123 03b1 01       		.uleb128 0x1
+ 2124 03b2 52       		.byte	0x52
+ 2125 03b3 9F       		.byte	0x9f
+ 2126 03b4 00000000 		.4byte	0
+ 2127 03b8 00000000 		.4byte	0
+ 2128              	.LLST6:
+ 2129 03bc 08000000 		.4byte	.LVL1
+ 2130 03c0 14000000 		.4byte	.LVL4
+ 2131 03c4 0100     		.2byte	0x1
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 43
+
+
+ 2132 03c6 51       		.byte	0x51
+ 2133 03c7 34000000 		.4byte	.LVL8
+ 2134 03cb 37000000 		.4byte	.LVL9-1
+ 2135 03cf 0100     		.2byte	0x1
+ 2136 03d1 51       		.byte	0x51
+ 2137 03d2 37000000 		.4byte	.LVL9-1
+ 2138 03d6 8A000000 		.4byte	.LVL19
+ 2139 03da 0400     		.2byte	0x4
+ 2140 03dc F3       		.byte	0xf3
+ 2141 03dd 01       		.uleb128 0x1
+ 2142 03de 51       		.byte	0x51
+ 2143 03df 9F       		.byte	0x9f
+ 2144 03e0 8E000000 		.4byte	.LVL20
+ 2145 03e4 92000000 		.4byte	.LVL21
+ 2146 03e8 0100     		.2byte	0x1
+ 2147 03ea 51       		.byte	0x51
+ 2148 03eb 92000000 		.4byte	.LVL21
+ 2149 03ef A0000000 		.4byte	.LVL23
+ 2150 03f3 0400     		.2byte	0x4
+ 2151 03f5 F3       		.byte	0xf3
+ 2152 03f6 01       		.uleb128 0x1
+ 2153 03f7 51       		.byte	0x51
+ 2154 03f8 9F       		.byte	0x9f
+ 2155 03f9 A2000000 		.4byte	.LVL24
+ 2156 03fd A5000000 		.4byte	.LVL25-1
+ 2157 0401 0100     		.2byte	0x1
+ 2158 0403 51       		.byte	0x51
+ 2159 0404 A5000000 		.4byte	.LVL25-1
+ 2160 0408 BC000000 		.4byte	.LVL28
+ 2161 040c 0400     		.2byte	0x4
+ 2162 040e F3       		.byte	0xf3
+ 2163 040f 01       		.uleb128 0x1
+ 2164 0410 51       		.byte	0x51
+ 2165 0411 9F       		.byte	0x9f
+ 2166 0412 C0000000 		.4byte	.LVL29
+ 2167 0416 C4000000 		.4byte	.LVL30
+ 2168 041a 0100     		.2byte	0x1
+ 2169 041c 51       		.byte	0x51
+ 2170 041d C4000000 		.4byte	.LVL30
+ 2171 0421 C8000000 		.4byte	.LVL31
+ 2172 0425 0400     		.2byte	0x4
+ 2173 0427 F3       		.byte	0xf3
+ 2174 0428 01       		.uleb128 0x1
+ 2175 0429 51       		.byte	0x51
+ 2176 042a 9F       		.byte	0x9f
+ 2177 042b DC000000 		.4byte	.LVL38
+ 2178 042f DE000000 		.4byte	.LVL39
+ 2179 0433 0100     		.2byte	0x1
+ 2180 0435 51       		.byte	0x51
+ 2181 0436 DE000000 		.4byte	.LVL39
+ 2182 043a E2000000 		.4byte	.LVL40
+ 2183 043e 0400     		.2byte	0x4
+ 2184 0440 F3       		.byte	0xf3
+ 2185 0441 01       		.uleb128 0x1
+ 2186 0442 51       		.byte	0x51
+ 2187 0443 9F       		.byte	0x9f
+ 2188 0444 E6000000 		.4byte	.LVL41
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 44
+
+
+ 2189 0448 E8000000 		.4byte	.LVL42
+ 2190 044c 0100     		.2byte	0x1
+ 2191 044e 51       		.byte	0x51
+ 2192 044f E8000000 		.4byte	.LVL42
+ 2193 0453 F6000000 		.4byte	.LVL44
+ 2194 0457 0400     		.2byte	0x4
+ 2195 0459 F3       		.byte	0xf3
+ 2196 045a 01       		.uleb128 0x1
+ 2197 045b 51       		.byte	0x51
+ 2198 045c 9F       		.byte	0x9f
+ 2199 045d 00000000 		.4byte	0
+ 2200 0461 00000000 		.4byte	0
+ 2201              	.LLST7:
+ 2202 0465 08000000 		.4byte	.LVL1
+ 2203 0469 14000000 		.4byte	.LVL4
+ 2204 046d 0100     		.2byte	0x1
+ 2205 046f 50       		.byte	0x50
+ 2206 0470 34000000 		.4byte	.LVL8
+ 2207 0474 37000000 		.4byte	.LVL9-1
+ 2208 0478 0100     		.2byte	0x1
+ 2209 047a 50       		.byte	0x50
+ 2210 047b 37000000 		.4byte	.LVL9-1
+ 2211 047f 8A000000 		.4byte	.LVL19
+ 2212 0483 0100     		.2byte	0x1
+ 2213 0485 55       		.byte	0x55
+ 2214 0486 8E000000 		.4byte	.LVL20
+ 2215 048a 95000000 		.4byte	.LVL22-1
+ 2216 048e 0100     		.2byte	0x1
+ 2217 0490 50       		.byte	0x50
+ 2218 0491 95000000 		.4byte	.LVL22-1
+ 2219 0495 A0000000 		.4byte	.LVL23
+ 2220 0499 0100     		.2byte	0x1
+ 2221 049b 55       		.byte	0x55
+ 2222 049c A2000000 		.4byte	.LVL24
+ 2223 04a0 A5000000 		.4byte	.LVL25-1
+ 2224 04a4 0100     		.2byte	0x1
+ 2225 04a6 50       		.byte	0x50
+ 2226 04a7 A5000000 		.4byte	.LVL25-1
+ 2227 04ab BC000000 		.4byte	.LVL28
+ 2228 04af 0100     		.2byte	0x1
+ 2229 04b1 55       		.byte	0x55
+ 2230 04b2 C0000000 		.4byte	.LVL29
+ 2231 04b6 C7000000 		.4byte	.LVL31-1
+ 2232 04ba 0100     		.2byte	0x1
+ 2233 04bc 50       		.byte	0x50
+ 2234 04bd C7000000 		.4byte	.LVL31-1
+ 2235 04c1 C8000000 		.4byte	.LVL31
+ 2236 04c5 0100     		.2byte	0x1
+ 2237 04c7 55       		.byte	0x55
+ 2238 04c8 DC000000 		.4byte	.LVL38
+ 2239 04cc E1000000 		.4byte	.LVL40-1
+ 2240 04d0 0100     		.2byte	0x1
+ 2241 04d2 50       		.byte	0x50
+ 2242 04d3 E1000000 		.4byte	.LVL40-1
+ 2243 04d7 E2000000 		.4byte	.LVL40
+ 2244 04db 0100     		.2byte	0x1
+ 2245 04dd 55       		.byte	0x55
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 45
+
+
+ 2246 04de E6000000 		.4byte	.LVL41
+ 2247 04e2 EB000000 		.4byte	.LVL43-1
+ 2248 04e6 0100     		.2byte	0x1
+ 2249 04e8 50       		.byte	0x50
+ 2250 04e9 EB000000 		.4byte	.LVL43-1
+ 2251 04ed F6000000 		.4byte	.LVL44
+ 2252 04f1 0100     		.2byte	0x1
+ 2253 04f3 55       		.byte	0x55
+ 2254 04f4 00000000 		.4byte	0
+ 2255 04f8 00000000 		.4byte	0
+ 2256              	.LLST8:
+ 2257 04fc 3E000000 		.4byte	.LVL10
+ 2258 0500 44000000 		.4byte	.LVL11
+ 2259 0504 0800     		.2byte	0x8
+ 2260 0506 77       		.byte	0x77
+ 2261 0507 00       		.sleb128 0
+ 2262 0508 33       		.byte	0x33
+ 2263 0509 24       		.byte	0x24
+ 2264 050a 08       		.byte	0x8
+ 2265 050b F8       		.byte	0xf8
+ 2266 050c 1A       		.byte	0x1a
+ 2267 050d 9F       		.byte	0x9f
+ 2268 050e 44000000 		.4byte	.LVL11
+ 2269 0512 48000000 		.4byte	.LVL12
+ 2270 0516 0D00     		.2byte	0xd
+ 2271 0518 76       		.byte	0x76
+ 2272 0519 05       		.sleb128 5
+ 2273 051a 94       		.byte	0x94
+ 2274 051b 01       		.byte	0x1
+ 2275 051c 08       		.byte	0x8
+ 2276 051d FF       		.byte	0xff
+ 2277 051e 1A       		.byte	0x1a
+ 2278 051f 33       		.byte	0x33
+ 2279 0520 24       		.byte	0x24
+ 2280 0521 08       		.byte	0x8
+ 2281 0522 F8       		.byte	0xf8
+ 2282 0523 1A       		.byte	0x1a
+ 2283 0524 9F       		.byte	0x9f
+ 2284 0525 48000000 		.4byte	.LVL12
+ 2285 0529 8A000000 		.4byte	.LVL19
+ 2286 052d 0100     		.2byte	0x1
+ 2287 052f 57       		.byte	0x57
+ 2288 0530 00000000 		.4byte	0
+ 2289 0534 00000000 		.4byte	0
+ 2290              	.LLST9:
+ 2291 0538 6C000000 		.4byte	.LVL16
+ 2292 053c 7B000000 		.4byte	.LVL17-1
+ 2293 0540 0200     		.2byte	0x2
+ 2294 0542 76       		.byte	0x76
+ 2295 0543 04       		.sleb128 4
+ 2296 0544 00000000 		.4byte	0
+ 2297 0548 00000000 		.4byte	0
+ 2298              	.LLST10:
+ 2299 054c 6C000000 		.4byte	.LVL16
+ 2300 0550 7B000000 		.4byte	.LVL17-1
+ 2301 0554 0200     		.2byte	0x2
+ 2302 0556 76       		.byte	0x76
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 46
+
+
+ 2303 0557 00       		.sleb128 0
+ 2304 0558 00000000 		.4byte	0
+ 2305 055c 00000000 		.4byte	0
+ 2306              		.section	.debug_aranges,"",%progbits
+ 2307 0000 1C000000 		.4byte	0x1c
+ 2308 0004 0200     		.2byte	0x2
+ 2309 0006 00000000 		.4byte	.Ldebug_info0
+ 2310 000a 04       		.byte	0x4
+ 2311 000b 00       		.byte	0
+ 2312 000c 0000     		.2byte	0
+ 2313 000e 0000     		.2byte	0
+ 2314 0010 00000000 		.4byte	.LFB1
+ 2315 0014 10010000 		.4byte	.LFE1-.LFB1
+ 2316 0018 00000000 		.4byte	0
+ 2317 001c 00000000 		.4byte	0
+ 2318              		.section	.debug_ranges,"",%progbits
+ 2319              	.Ldebug_ranges0:
+ 2320 0000 02000000 		.4byte	.LBB4
+ 2321 0004 06000000 		.4byte	.LBE4
+ 2322 0008 0C000000 		.4byte	.LBB15
+ 2323 000c 1A000000 		.4byte	.LBE15
+ 2324 0010 34000000 		.4byte	.LBB16
+ 2325 0014 8A000000 		.4byte	.LBE16
+ 2326 0018 8E000000 		.4byte	.LBB17
+ 2327 001c 98000000 		.4byte	.LBE17
+ 2328 0020 9A000000 		.4byte	.LBB18
+ 2329 0024 A0000000 		.4byte	.LBE18
+ 2330 0028 A2000000 		.4byte	.LBB19
+ 2331 002c BC000000 		.4byte	.LBE19
+ 2332 0030 C0000000 		.4byte	.LBB20
+ 2333 0034 C8000000 		.4byte	.LBE20
+ 2334 0038 DC000000 		.4byte	.LBB21
+ 2335 003c E2000000 		.4byte	.LBE21
+ 2336 0040 E6000000 		.4byte	.LBB22
+ 2337 0044 EE000000 		.4byte	.LBE22
+ 2338 0048 F0000000 		.4byte	.LBB23
+ 2339 004c F6000000 		.4byte	.LBE23
+ 2340 0050 00000000 		.4byte	0
+ 2341 0054 00000000 		.4byte	0
+ 2342 0058 00000000 		.4byte	.LFB1
+ 2343 005c 10010000 		.4byte	.LFE1
+ 2344 0060 00000000 		.4byte	0
+ 2345 0064 00000000 		.4byte	0
+ 2346              		.section	.debug_line,"",%progbits
+ 2347              	.Ldebug_line0:
+ 2348 0000 D2010000 		.section	.debug_str,"MS",%progbits,1
+ 2348      02004101 
+ 2348      00000201 
+ 2348      FB0E0D00 
+ 2348      01010101 
+ 2349              	.LASF73:
+ 2350 0000 75387838 		.ascii	"u8x8_d_sh1108_160x160_noname_powersave1_seq\000"
+ 2350      5F645F73 
+ 2350      68313130 
+ 2350      385F3136 
+ 2350      30783136 
+ 2351              	.LASF26:
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 47
+
+
+ 2352 002c 785F6F66 		.ascii	"x_offset\000"
+ 2352      66736574 
+ 2352      00
+ 2353              	.LASF27:
+ 2354 0035 69735F66 		.ascii	"is_font_inverse_mode\000"
+ 2354      6F6E745F 
+ 2354      696E7665 
+ 2354      7273655F 
+ 2354      6D6F6465 
+ 2355              	.LASF49:
+ 2356 004a 7370695F 		.ascii	"spi_mode\000"
+ 2356      6D6F6465 
+ 2356      00
+ 2357              	.LASF68:
+ 2358 0053 6172675F 		.ascii	"arg_ptr\000"
+ 2358      70747200 
+ 2359              	.LASF40:
+ 2360 005b 63686970 		.ascii	"chip_enable_level\000"
+ 2360      5F656E61 
+ 2360      626C655F 
+ 2360      6C657665 
+ 2360      6C00
+ 2361              	.LASF24:
+ 2362 006d 666F6E74 		.ascii	"font\000"
+ 2362      00
+ 2363              	.LASF36:
+ 2364 0072 6465626F 		.ascii	"debounce_result_msg\000"
+ 2364      756E6365 
+ 2364      5F726573 
+ 2364      756C745F 
+ 2364      6D736700 
+ 2365              	.LASF2:
+ 2366 0086 73686F72 		.ascii	"short int\000"
+ 2366      7420696E 
+ 2366      7400
+ 2367              	.LASF22:
+ 2368 0090 6770696F 		.ascii	"gpio_and_delay_cb\000"
+ 2368      5F616E64 
+ 2368      5F64656C 
+ 2368      61795F63 
+ 2368      6200
+ 2369              	.LASF53:
+ 2370 00a2 74696C65 		.ascii	"tile_width\000"
+ 2370      5F776964 
+ 2370      746800
+ 2371              	.LASF71:
+ 2372 00ad 75387838 		.ascii	"u8x8_d_sh1108_noname_powersave1_seq\000"
+ 2372      5F645F73 
+ 2372      68313130 
+ 2372      385F6E6F 
+ 2372      6E616D65 
+ 2373              	.LASF69:
+ 2374 00d1 73697A65 		.ascii	"sizetype\000"
+ 2374      74797065 
+ 2374      00
+ 2375              	.LASF46:
+ 2376 00da 7364615F 		.ascii	"sda_setup_time_ns\000"
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 48
+
+
+ 2376      73657475 
+ 2376      705F7469 
+ 2376      6D655F6E 
+ 2376      7300
+ 2377              	.LASF45:
+ 2378 00ec 706F7374 		.ascii	"post_reset_wait_ms\000"
+ 2378      5F726573 
+ 2378      65745F77 
+ 2378      6169745F 
+ 2378      6D7300
+ 2379              	.LASF7:
+ 2380 00ff 5F5F7569 		.ascii	"__uint32_t\000"
+ 2380      6E743332 
+ 2380      5F7400
+ 2381              	.LASF86:
+ 2382 010a 433A5C55 		.ascii	"C:\\Users\\info\\Desktop\\Spring 2019 Classes\\6.11"
+ 2382      73657273 
+ 2382      5C696E66 
+ 2382      6F5C4465 
+ 2382      736B746F 
+ 2383 0138 355C362E 		.ascii	"5\\6.115-final\\PSoCCreator\\Final Project\\FinalEm"
+ 2383      3131352D 
+ 2383      66696E61 
+ 2383      6C5C5053 
+ 2383      6F434372 
+ 2384 0167 756C6174 		.ascii	"ulator.cydsn\000"
+ 2384      6F722E63 
+ 2384      7964736E 
+ 2384      00
+ 2385              	.LASF4:
+ 2386 0174 5F5F7569 		.ascii	"__uint16_t\000"
+ 2386      6E743136 
+ 2386      5F7400
+ 2387              	.LASF52:
+ 2388 017f 77726974 		.ascii	"write_pulse_width_ns\000"
+ 2388      655F7075 
+ 2388      6C73655F 
+ 2388      77696474 
+ 2388      685F6E73 
+ 2389              	.LASF12:
+ 2390 0194 75696E74 		.ascii	"uint8_t\000"
+ 2390      385F7400 
+ 2391              	.LASF42:
+ 2392 019c 706F7374 		.ascii	"post_chip_enable_wait_ns\000"
+ 2392      5F636869 
+ 2392      705F656E 
+ 2392      61626C65 
+ 2392      5F776169 
+ 2393              	.LASF66:
+ 2394 01b5 75387838 		.ascii	"u8x8\000"
+ 2394      00
+ 2395              	.LASF72:
+ 2396 01ba 75387838 		.ascii	"u8x8_d_sh1108_160x160_noname_powersave0_seq\000"
+ 2396      5F645F73 
+ 2396      68313130 
+ 2396      385F3136 
+ 2396      30783136 
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 49
+
+
+ 2397              	.LASF61:
+ 2398 01e6 74696C65 		.ascii	"tile_ptr\000"
+ 2398      5F707472 
+ 2398      00
+ 2399              	.LASF67:
+ 2400 01ef 6172675F 		.ascii	"arg_int\000"
+ 2400      696E7400 
+ 2401              	.LASF79:
+ 2402 01f7 75387838 		.ascii	"u8x8_cad_SendData\000"
+ 2402      5F636164 
+ 2402      5F53656E 
+ 2402      64446174 
+ 2402      6100
+ 2403              	.LASF88:
+ 2404 0209 75387838 		.ascii	"u8x8_d_sh1108_160x160\000"
+ 2404      5F645F73 
+ 2404      68313130 
+ 2404      385F3136 
+ 2404      30783136 
+ 2405              	.LASF23:
+ 2406 021f 6275735F 		.ascii	"bus_clock\000"
+ 2406      636C6F63 
+ 2406      6B00
+ 2407              	.LASF55:
+ 2408 0229 64656661 		.ascii	"default_x_offset\000"
+ 2408      756C745F 
+ 2408      785F6F66 
+ 2408      66736574 
+ 2408      00
+ 2409              	.LASF37:
+ 2410 023a 75387838 		.ascii	"u8x8_display_info_t\000"
+ 2410      5F646973 
+ 2410      706C6179 
+ 2410      5F696E66 
+ 2410      6F5F7400 
+ 2411              	.LASF34:
+ 2412 024e 6465626F 		.ascii	"debounce_last_pin_state\000"
+ 2412      756E6365 
+ 2412      5F6C6173 
+ 2412      745F7069 
+ 2412      6E5F7374 
+ 2413              	.LASF9:
+ 2414 0266 6C6F6E67 		.ascii	"long long int\000"
+ 2414      206C6F6E 
+ 2414      6720696E 
+ 2414      7400
+ 2415              	.LASF32:
+ 2416 0274 6770696F 		.ascii	"gpio_result\000"
+ 2416      5F726573 
+ 2416      756C7400 
+ 2417              	.LASF47:
+ 2418 0280 73636B5F 		.ascii	"sck_pulse_width_ns\000"
+ 2418      70756C73 
+ 2418      655F7769 
+ 2418      6474685F 
+ 2418      6E7300
+ 2419              	.LASF77:
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 50
+
+
+ 2420 0293 75387838 		.ascii	"u8x8_cad_SendCmd\000"
+ 2420      5F636164 
+ 2420      5F53656E 
+ 2420      64436D64 
+ 2420      00
+ 2421              	.LASF82:
+ 2422 02a4 75387838 		.ascii	"u8x8_d_helper_display_init\000"
+ 2422      5F645F68 
+ 2422      656C7065 
+ 2422      725F6469 
+ 2422      73706C61 
+ 2423              	.LASF6:
+ 2424 02bf 6C6F6E67 		.ascii	"long int\000"
+ 2424      20696E74 
+ 2424      00
+ 2425              	.LASF80:
+ 2426 02c8 75387838 		.ascii	"u8x8_cad_EndTransfer\000"
+ 2426      5F636164 
+ 2426      5F456E64 
+ 2426      5472616E 
+ 2426      73666572 
+ 2427              	.LASF62:
+ 2428 02dd 785F706F 		.ascii	"x_pos\000"
+ 2428      7300
+ 2429              	.LASF3:
+ 2430 02e3 5F5F7569 		.ascii	"__uint8_t\000"
+ 2430      6E74385F 
+ 2430      7400
+ 2431              	.LASF19:
+ 2432 02ed 64697370 		.ascii	"display_cb\000"
+ 2432      6C61795F 
+ 2432      636200
+ 2433              	.LASF84:
+ 2434 02f8 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2434      43313120 
+ 2434      352E342E 
+ 2434      31203230 
+ 2434      31363036 
+ 2435 032b 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2435      20726576 
+ 2435      6973696F 
+ 2435      6E203233 
+ 2435      37373135 
+ 2436 035e 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects\000"
+ 2436      66756E63 
+ 2436      74696F6E 
+ 2436      2D736563 
+ 2436      74696F6E 
+ 2437              	.LASF51:
+ 2438 0386 64617461 		.ascii	"data_setup_time_ns\000"
+ 2438      5F736574 
+ 2438      75705F74 
+ 2438      696D655F 
+ 2438      6E7300
+ 2439              	.LASF15:
+ 2440 0399 6C6F6E67 		.ascii	"long double\000"
+ 2440      20646F75 
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 51
+
+
+ 2440      626C6500 
+ 2441              	.LASF54:
+ 2442 03a5 74696C65 		.ascii	"tile_height\000"
+ 2442      5F686569 
+ 2442      67687400 
+ 2443              	.LASF1:
+ 2444 03b1 756E7369 		.ascii	"unsigned char\000"
+ 2444      676E6564 
+ 2444      20636861 
+ 2444      7200
+ 2445              	.LASF0:
+ 2446 03bf 7369676E 		.ascii	"signed char\000"
+ 2446      65642063 
+ 2446      68617200 
+ 2447              	.LASF10:
+ 2448 03cb 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2448      206C6F6E 
+ 2448      6720756E 
+ 2448      7369676E 
+ 2448      65642069 
+ 2449              	.LASF14:
+ 2450 03e2 75696E74 		.ascii	"uint32_t\000"
+ 2450      33325F74 
+ 2450      00
+ 2451              	.LASF60:
+ 2452 03eb 75387838 		.ascii	"u8x8_tile_struct\000"
+ 2452      5F74696C 
+ 2452      655F7374 
+ 2452      72756374 
+ 2452      00
+ 2453              	.LASF11:
+ 2454 03fc 756E7369 		.ascii	"unsigned int\000"
+ 2454      676E6564 
+ 2454      20696E74 
+ 2454      00
+ 2455              	.LASF13:
+ 2456 0409 75696E74 		.ascii	"uint16_t\000"
+ 2456      31365F74 
+ 2456      00
+ 2457              	.LASF39:
+ 2458 0412 75387838 		.ascii	"u8x8_display_info_struct\000"
+ 2458      5F646973 
+ 2458      706C6179 
+ 2458      5F696E66 
+ 2458      6F5F7374 
+ 2459              	.LASF76:
+ 2460 042b 75387838 		.ascii	"u8x8_cad_StartTransfer\000"
+ 2460      5F636164 
+ 2460      5F537461 
+ 2460      72745472 
+ 2460      616E7366 
+ 2461              	.LASF44:
+ 2462 0442 72657365 		.ascii	"reset_pulse_width_ms\000"
+ 2462      745F7075 
+ 2462      6C73655F 
+ 2462      77696474 
+ 2462      685F6D73 
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 52
+
+
+ 2463              	.LASF16:
+ 2464 0457 75387838 		.ascii	"u8x8_t\000"
+ 2464      5F7400
+ 2465              	.LASF50:
+ 2466 045e 6932635F 		.ascii	"i2c_bus_clock_100kHz\000"
+ 2466      6275735F 
+ 2466      636C6F63 
+ 2466      6B5F3130 
+ 2466      306B487A 
+ 2467              	.LASF48:
+ 2468 0473 73636B5F 		.ascii	"sck_clock_hz\000"
+ 2468      636C6F63 
+ 2468      6B5F687A 
+ 2468      00
+ 2469              	.LASF5:
+ 2470 0480 73686F72 		.ascii	"short unsigned int\000"
+ 2470      7420756E 
+ 2470      7369676E 
+ 2470      65642069 
+ 2470      6E7400
+ 2471              	.LASF65:
+ 2472 0493 75387838 		.ascii	"u8x8_char_cb\000"
+ 2472      5F636861 
+ 2472      725F6362 
+ 2472      00
+ 2473              	.LASF35:
+ 2474 04a0 6465626F 		.ascii	"debounce_state\000"
+ 2474      756E6365 
+ 2474      5F737461 
+ 2474      746500
+ 2475              	.LASF17:
+ 2476 04af 64697370 		.ascii	"display_info\000"
+ 2476      6C61795F 
+ 2476      696E666F 
+ 2476      00
+ 2477              	.LASF58:
+ 2478 04bc 70697865 		.ascii	"pixel_height\000"
+ 2478      6C5F6865 
+ 2478      69676874 
+ 2478      00
+ 2479              	.LASF57:
+ 2480 04c9 70697865 		.ascii	"pixel_width\000"
+ 2480      6C5F7769 
+ 2480      64746800 
+ 2481              	.LASF31:
+ 2482 04d5 75746638 		.ascii	"utf8_state\000"
+ 2482      5F737461 
+ 2482      746500
+ 2483              	.LASF38:
+ 2484 04e0 75387838 		.ascii	"u8x8_struct\000"
+ 2484      5F737472 
+ 2484      75637400 
+ 2485              	.LASF63:
+ 2486 04ec 795F706F 		.ascii	"y_pos\000"
+ 2486      7300
+ 2487              	.LASF81:
+ 2488 04f2 75387838 		.ascii	"u8x8_cad_SendSequence\000"
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 53
+
+
+ 2488      5F636164 
+ 2488      5F53656E 
+ 2488      64536571 
+ 2488      75656E63 
+ 2489              	.LASF8:
+ 2490 0508 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2490      20756E73 
+ 2490      69676E65 
+ 2490      6420696E 
+ 2490      7400
+ 2491              	.LASF70:
+ 2492 051a 75387838 		.ascii	"u8x8_d_sh1108_noname_powersave0_seq\000"
+ 2492      5F645F73 
+ 2492      68313130 
+ 2492      385F6E6F 
+ 2492      6E616D65 
+ 2493              	.LASF21:
+ 2494 053e 62797465 		.ascii	"byte_cb\000"
+ 2494      5F636200 
+ 2495              	.LASF41:
+ 2496 0546 63686970 		.ascii	"chip_disable_level\000"
+ 2496      5F646973 
+ 2496      61626C65 
+ 2496      5F6C6576 
+ 2496      656C00
+ 2497              	.LASF28:
+ 2498 0559 6932635F 		.ascii	"i2c_address\000"
+ 2498      61646472 
+ 2498      65737300 
+ 2499              	.LASF56:
+ 2500 0565 666C6970 		.ascii	"flipmode_x_offset\000"
+ 2500      6D6F6465 
+ 2500      5F785F6F 
+ 2500      66667365 
+ 2500      7400
+ 2501              	.LASF25:
+ 2502 0577 656E636F 		.ascii	"encoding\000"
+ 2502      64696E67 
+ 2502      00
+ 2503              	.LASF74:
+ 2504 0580 75387838 		.ascii	"u8x8_d_sh1108_160x160_noname_init_seq\000"
+ 2504      5F645F73 
+ 2504      68313130 
+ 2504      385F3136 
+ 2504      30783136 
+ 2505              	.LASF29:
+ 2506 05a6 6932635F 		.ascii	"i2c_started\000"
+ 2506      73746172 
+ 2506      74656400 
+ 2507              	.LASF87:
+ 2508 05b2 75387838 		.ascii	"u8x8_d_sh1108_generic\000"
+ 2508      5F645F73 
+ 2508      68313130 
+ 2508      385F6765 
+ 2508      6E657269 
+ 2509              	.LASF20:
+ 2510 05c8 6361645F 		.ascii	"cad_cb\000"
+ARM GAS  C:\Users\info\AppData\Local\Temp\ccHawdvR.s 			page 54
+
+
+ 2510      636200
+ 2511              	.LASF59:
+ 2512 05cf 75387838 		.ascii	"u8x8_tile_t\000"
+ 2512      5F74696C 
+ 2512      655F7400 
+ 2513              	.LASF83:
+ 2514 05db 75387838 		.ascii	"u8x8_d_helper_display_setup_memory\000"
+ 2514      5F645F68 
+ 2514      656C7065 
+ 2514      725F6469 
+ 2514      73706C61 
+ 2515              	.LASF30:
+ 2516 05fe 64657669 		.ascii	"device_address\000"
+ 2516      63655F61 
+ 2516      64647265 
+ 2516      737300
+ 2517              	.LASF78:
+ 2518 060d 75387838 		.ascii	"u8x8_cad_SendArg\000"
+ 2518      5F636164 
+ 2518      5F53656E 
+ 2518      64417267 
+ 2518      00
+ 2519              	.LASF33:
+ 2520 061e 6465626F 		.ascii	"debounce_default_pin_state\000"
+ 2520      756E6365 
+ 2520      5F646566 
+ 2520      61756C74 
+ 2520      5F70696E 
+ 2521              	.LASF64:
+ 2522 0639 75387838 		.ascii	"u8x8_msg_cb\000"
+ 2522      5F6D7367 
+ 2522      5F636200 
+ 2523              	.LASF75:
+ 2524 0645 75387838 		.ascii	"u8x8_sh1108_160x160_noname_display_info\000"
+ 2524      5F736831 
+ 2524      3130385F 
+ 2524      31363078 
+ 2524      3136305F 
+ 2525              	.LASF18:
+ 2526 066d 6E657874 		.ascii	"next_cb\000"
+ 2526      5F636200 
+ 2527              	.LASF85:
+ 2528 0675 2E2E5C75 		.ascii	"..\\u8g2-master\\csrc\\u8x8_d_sh1108.c\000"
+ 2528      3867322D 
+ 2528      6D617374 
+ 2528      65725C63 
+ 2528      7372635C 
+ 2529              	.LASF43:
+ 2530 0699 7072655F 		.ascii	"pre_chip_disable_wait_ns\000"
+ 2530      63686970 
+ 2530      5F646973 
+ 2530      61626C65 
+ 2530      5F776169 
+ 2531              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

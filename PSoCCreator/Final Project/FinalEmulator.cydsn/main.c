@@ -12,7 +12,7 @@ TODO Space Invaders debug
 
 TODO sound
 
-TODO Correct one leg of PCB
+TODO Correct video position
 
 Replace SRAM with EEPROM (or other funcitonality to change roms nicely)
 
@@ -24,6 +24,16 @@ Implement 1.3" OLED
 #include "chip8.h"
 
 /* 
+   CHIP8 Timers 
+   Decrement each at 60Hz if not zero
+*/
+uint8_t snd = 0, tmr = 0;
+
+CY_ISR(_isr_tmr_handler){
+    isr_tmr_handler(&snd, &tmr);
+};
+
+/* 
    CHIP8 Video
    Each row is one 64bit number
 */
@@ -33,34 +43,13 @@ uint64_t vram[32];
    The following code snippet (concerning VGA) is courtesy of
    the 6.115 Staff. It has been modified to suit this application.
 
-   Video buffer gets its own SRAM to prevent bus contention.
-   The user-facing buffer is in regular system RAM.
-   This is set in the custom linker script (custom.ld).
-*/
-uint8_t vbuf[96][128] __attribute__ ((section(".vram")));
-
-/* 
-   Now we set up the DMA to copy pixels from vbuf to the screen.
-   For timing, we rely on the fact that it takes the DMA exactly
-   8 clocks to move each byte. After each line the DMA is updated
-   to point to the next line in vbuf.
 */
 uint8_t dma_chan, dma_td;
 volatile uint8_t vga_update_flag = 1;
 
 CY_ISR(_newline_handler){
     newline_handler(&dma_chan, &dma_td,
-      &vga_update_flag, vram, vbuf);
-};
-
-/* 
-   CHIP8 Timers 
-   Decrement each at 60Hz if not zero
-*/
-uint8_t snd = 0, tmr = 0;
-
-CY_ISR(_isr_tmr_handler){
-    isr_tmr_handler(&snd, &tmr);
+      &vga_update_flag, vram);
 };
 
 int main(void){
@@ -88,6 +77,10 @@ int main(void){
     random_Enable();
     random_Init();
     random_Start();
+    
+    /* Start the OLED */
+    //spi_oled_Start();
+    oled_initialize();
     
     /* Enable global interrupts */
     CyGlobalIntEnable;

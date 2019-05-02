@@ -1,0 +1,2957 @@
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"u8g2_kerning.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.u8g2_GetKerning,"ax",%progbits
+  20              		.align	2
+  21              		.global	u8g2_GetKerning
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	u8g2_GetKerning, %function
+  25              	u8g2_GetKerning:
+  26              	.LFB0:
+  27              		.file 1 "..\\u8g2-master\\csrc\\u8g2_kerning.c"
+   1:..\u8g2-master\csrc/u8g2_kerning.c **** /*
+   2:..\u8g2-master\csrc/u8g2_kerning.c **** 
+   3:..\u8g2-master\csrc/u8g2_kerning.c ****   u8g2_kerning.c
+   4:..\u8g2-master\csrc/u8g2_kerning.c **** 
+   5:..\u8g2-master\csrc/u8g2_kerning.c ****   Universal 8bit Graphics Library (https://github.com/olikraus/u8g2/)
+   6:..\u8g2-master\csrc/u8g2_kerning.c **** 
+   7:..\u8g2-master\csrc/u8g2_kerning.c ****   Copyright (c) 2016, olikraus@gmail.com
+   8:..\u8g2-master\csrc/u8g2_kerning.c ****   All rights reserved.
+   9:..\u8g2-master\csrc/u8g2_kerning.c **** 
+  10:..\u8g2-master\csrc/u8g2_kerning.c ****   Redistribution and use in source and binary forms, with or without modification, 
+  11:..\u8g2-master\csrc/u8g2_kerning.c ****   are permitted provided that the following conditions are met:
+  12:..\u8g2-master\csrc/u8g2_kerning.c **** 
+  13:..\u8g2-master\csrc/u8g2_kerning.c ****   * Redistributions of source code must retain the above copyright notice, this list 
+  14:..\u8g2-master\csrc/u8g2_kerning.c ****     of conditions and the following disclaimer.
+  15:..\u8g2-master\csrc/u8g2_kerning.c ****     
+  16:..\u8g2-master\csrc/u8g2_kerning.c ****   * Redistributions in binary form must reproduce the above copyright notice, this 
+  17:..\u8g2-master\csrc/u8g2_kerning.c ****     list of conditions and the following disclaimer in the documentation and/or other 
+  18:..\u8g2-master\csrc/u8g2_kerning.c ****     materials provided with the distribution.
+  19:..\u8g2-master\csrc/u8g2_kerning.c **** 
+  20:..\u8g2-master\csrc/u8g2_kerning.c ****   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+  21:..\u8g2-master\csrc/u8g2_kerning.c ****   CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+  22:..\u8g2-master\csrc/u8g2_kerning.c ****   INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  23:..\u8g2-master\csrc/u8g2_kerning.c ****   MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+  24:..\u8g2-master\csrc/u8g2_kerning.c ****   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+  25:..\u8g2-master\csrc/u8g2_kerning.c ****   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  26:..\u8g2-master\csrc/u8g2_kerning.c ****   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+  27:..\u8g2-master\csrc/u8g2_kerning.c ****   NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+  28:..\u8g2-master\csrc/u8g2_kerning.c ****   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+  29:..\u8g2-master\csrc/u8g2_kerning.c ****   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+  30:..\u8g2-master\csrc/u8g2_kerning.c ****   STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 2
+
+
+  31:..\u8g2-master\csrc/u8g2_kerning.c ****   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+  32:..\u8g2-master\csrc/u8g2_kerning.c ****   ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  
+  33:..\u8g2-master\csrc/u8g2_kerning.c **** 
+  34:..\u8g2-master\csrc/u8g2_kerning.c **** */
+  35:..\u8g2-master\csrc/u8g2_kerning.c **** 
+  36:..\u8g2-master\csrc/u8g2_kerning.c **** #include "u8g2.h"
+  37:..\u8g2-master\csrc/u8g2_kerning.c **** 
+  38:..\u8g2-master\csrc/u8g2_kerning.c **** /* this function is used as "u8g2_get_kerning_cb" */
+  39:..\u8g2-master\csrc/u8g2_kerning.c **** /*
+  40:..\u8g2-master\csrc/u8g2_kerning.c **** uint8_t u8g2_GetNullKerning(u8g2_t *u8g2, uint16_t e1, uint16_t e2)
+  41:..\u8g2-master\csrc/u8g2_kerning.c **** {
+  42:..\u8g2-master\csrc/u8g2_kerning.c ****   return 0;
+  43:..\u8g2-master\csrc/u8g2_kerning.c **** }
+  44:..\u8g2-master\csrc/u8g2_kerning.c **** */
+  45:..\u8g2-master\csrc/u8g2_kerning.c **** 
+  46:..\u8g2-master\csrc/u8g2_kerning.c **** /* this function is used as "u8g2_get_kerning_cb" */
+  47:..\u8g2-master\csrc/u8g2_kerning.c **** uint8_t u8g2_GetKerning(U8X8_UNUSED u8g2_t *u8g2, u8g2_kerning_t *kerning, uint16_t e1, uint16_t e2
+  48:..\u8g2-master\csrc/u8g2_kerning.c **** {
+  28              		.loc 1 48 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  49:..\u8g2-master\csrc/u8g2_kerning.c ****   uint16_t i1, i2, cnt, end;
+  50:..\u8g2-master\csrc/u8g2_kerning.c ****   if ( kerning == NULL )
+  34              		.loc 1 50 0
+  35 0000 0029     		cmp	r1, #0
+  36 0002 32D0     		beq	.L11
+  48:..\u8g2-master\csrc/u8g2_kerning.c ****   uint16_t i1, i2, cnt, end;
+  37              		.loc 1 48 0
+  38 0004 F0B4     		push	{r4, r5, r6, r7}
+  39              		.cfi_def_cfa_offset 16
+  40              		.cfi_offset 4, -16
+  41              		.cfi_offset 5, -12
+  42              		.cfi_offset 6, -8
+  43              		.cfi_offset 7, -4
+  51:..\u8g2-master\csrc/u8g2_kerning.c ****     return 0;
+  52:..\u8g2-master\csrc/u8g2_kerning.c ****   
+  53:..\u8g2-master\csrc/u8g2_kerning.c ****   /* search for the encoding in the first table */
+  54:..\u8g2-master\csrc/u8g2_kerning.c ****   cnt = kerning->first_table_cnt;
+  44              		.loc 1 54 0
+  45 0006 0F88     		ldrh	r7, [r1]
+  46              	.LVL1:
+  55:..\u8g2-master\csrc/u8g2_kerning.c ****   cnt--;	/* ignore the last element of the table, which is 0x0ffff */
+  47              		.loc 1 55 0
+  48 0008 013F     		subs	r7, r7, #1
+  49              	.LVL2:
+  50 000a BFB2     		uxth	r7, r7
+  51              	.LVL3:
+  56:..\u8g2-master\csrc/u8g2_kerning.c ****   for( i1 = 0; i1 < cnt; i1++ )
+  52              		.loc 1 56 0
+  53 000c 8FB1     		cbz	r7, .L15
+  57:..\u8g2-master\csrc/u8g2_kerning.c ****   {
+  58:..\u8g2-master\csrc/u8g2_kerning.c ****     if ( kerning->first_encoding_table[i1] == e1 )
+  54              		.loc 1 58 0
+  55 000e 4D68     		ldr	r5, [r1, #4]
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 3
+
+
+  56 0010 2888     		ldrh	r0, [r5]
+  57              	.LVL4:
+  58 0012 9042     		cmp	r0, r2
+  59 0014 18BF     		it	ne
+  60 0016 0124     		movne	r4, #1
+  61 0018 04D1     		bne	.L5
+  62 001a 28E0     		b	.L23
+  63              	.LVL5:
+  64              	.L6:
+  65 001c 35F8026F 		ldrh	r6, [r5, #2]!
+  66              	.LVL6:
+  67 0020 9642     		cmp	r6, r2
+  68 0022 09D0     		beq	.L24
+  69              	.L5:
+  70              	.LVL7:
+  56:..\u8g2-master\csrc/u8g2_kerning.c ****   for( i1 = 0; i1 < cnt; i1++ )
+  71              		.loc 1 56 0 discriminator 2
+  72 0024 A6B2     		uxth	r6, r4
+  73 0026 B742     		cmp	r7, r6
+  74              		.loc 1 58 0 discriminator 2
+  75 0028 4FEA4400 		lsl	r0, r4, #1
+  76 002c 04F10104 		add	r4, r4, #1
+  77              	.LVL8:
+  56:..\u8g2-master\csrc/u8g2_kerning.c ****   for( i1 = 0; i1 < cnt; i1++ )
+  78              		.loc 1 56 0 discriminator 2
+  79 0030 F4D8     		bhi	.L6
+  80              	.LVL9:
+  81              	.L15:
+  51:..\u8g2-master\csrc/u8g2_kerning.c ****   
+  82              		.loc 1 51 0
+  83 0032 0020     		movs	r0, #0
+  59:..\u8g2-master\csrc/u8g2_kerning.c ****       break;
+  60:..\u8g2-master\csrc/u8g2_kerning.c ****   }
+  61:..\u8g2-master\csrc/u8g2_kerning.c ****   if ( i1 >= cnt )
+  62:..\u8g2-master\csrc/u8g2_kerning.c ****     return 0;	/* e1 not part of the kerning table, return 0 */
+  63:..\u8g2-master\csrc/u8g2_kerning.c **** 
+  64:..\u8g2-master\csrc/u8g2_kerning.c ****   /* get the upper index for i2 */
+  65:..\u8g2-master\csrc/u8g2_kerning.c ****   end = kerning->index_to_second_table[i1+1];
+  66:..\u8g2-master\csrc/u8g2_kerning.c ****   for( i2 = kerning->index_to_second_table[i1]; i2 < end; i2++ )
+  67:..\u8g2-master\csrc/u8g2_kerning.c ****   {
+  68:..\u8g2-master\csrc/u8g2_kerning.c ****     if ( kerning->second_encoding_table[i2] == e2 )
+  69:..\u8g2-master\csrc/u8g2_kerning.c ****       break;
+  70:..\u8g2-master\csrc/u8g2_kerning.c ****   }
+  71:..\u8g2-master\csrc/u8g2_kerning.c ****   
+  72:..\u8g2-master\csrc/u8g2_kerning.c ****   if ( i2 >= end )
+  73:..\u8g2-master\csrc/u8g2_kerning.c ****     return 0;	/* e2 not part of any pair with e1, return 0 */
+  74:..\u8g2-master\csrc/u8g2_kerning.c ****   
+  75:..\u8g2-master\csrc/u8g2_kerning.c ****   return kerning->kerning_values[i2];
+  76:..\u8g2-master\csrc/u8g2_kerning.c **** }
+  84              		.loc 1 76 0
+  85 0034 F0BC     		pop	{r4, r5, r6, r7}
+  86              		.cfi_remember_state
+  87              		.cfi_restore 7
+  88              		.cfi_restore 6
+  89              		.cfi_restore 5
+  90              		.cfi_restore 4
+  91              		.cfi_def_cfa_offset 0
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 4
+
+
+  92              	.LVL10:
+  93 0036 7047     		bx	lr
+  94              	.LVL11:
+  95              	.L24:
+  96              		.cfi_restore_state
+  97 0038 6400     		lsls	r4, r4, #1
+  98              	.L3:
+  65:..\u8g2-master\csrc/u8g2_kerning.c ****   for( i2 = kerning->index_to_second_table[i1]; i2 < end; i2++ )
+  99              		.loc 1 65 0
+ 100 003a 8A68     		ldr	r2, [r1, #8]
+ 101              	.LVL12:
+ 102 003c 145B     		ldrh	r4, [r2, r4]
+ 103              	.LVL13:
+  66:..\u8g2-master\csrc/u8g2_kerning.c ****   {
+ 104              		.loc 1 66 0
+ 105 003e 125A     		ldrh	r2, [r2, r0]
+ 106              	.LVL14:
+ 107 0040 9442     		cmp	r4, r2
+ 108 0042 F6D9     		bls	.L15
+  68:..\u8g2-master\csrc/u8g2_kerning.c ****       break;
+ 109              		.loc 1 68 0
+ 110 0044 CD68     		ldr	r5, [r1, #12]
+ 111 0046 35F81200 		ldrh	r0, [r5, r2, lsl #1]
+ 112 004a 9842     		cmp	r0, r3
+ 113 004c 04D1     		bne	.L9
+ 114 004e 08E0     		b	.L7
+ 115              	.L10:
+ 116 0050 35F81200 		ldrh	r0, [r5, r2, lsl #1]
+ 117 0054 9842     		cmp	r0, r3
+ 118 0056 04D0     		beq	.L7
+ 119              	.L9:
+  66:..\u8g2-master\csrc/u8g2_kerning.c ****   {
+ 120              		.loc 1 66 0 discriminator 2
+ 121 0058 0132     		adds	r2, r2, #1
+ 122              	.LVL15:
+ 123 005a 92B2     		uxth	r2, r2
+ 124              	.LVL16:
+ 125 005c 9442     		cmp	r4, r2
+ 126 005e F7D8     		bhi	.L10
+ 127 0060 E7E7     		b	.L15
+ 128              	.L7:
+  75:..\u8g2-master\csrc/u8g2_kerning.c **** }
+ 129              		.loc 1 75 0
+ 130 0062 0B69     		ldr	r3, [r1, #16]
+ 131              	.LVL17:
+ 132              		.loc 1 76 0
+ 133 0064 F0BC     		pop	{r4, r5, r6, r7}
+ 134              		.cfi_restore 4
+ 135              		.cfi_restore 5
+ 136              		.cfi_restore 6
+ 137              		.cfi_restore 7
+ 138              		.cfi_def_cfa_offset 0
+ 139              	.LVL18:
+  75:..\u8g2-master\csrc/u8g2_kerning.c **** }
+ 140              		.loc 1 75 0
+ 141 0066 985C     		ldrb	r0, [r3, r2]	@ zero_extendqisi2
+ 142              		.loc 1 76 0
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 5
+
+
+ 143 0068 7047     		bx	lr
+ 144              	.LVL19:
+ 145              	.L11:
+  51:..\u8g2-master\csrc/u8g2_kerning.c ****   
+ 146              		.loc 1 51 0
+ 147 006a 0846     		mov	r0, r1
+ 148              	.LVL20:
+ 149              		.loc 1 76 0
+ 150 006c 7047     		bx	lr
+ 151              	.LVL21:
+ 152              	.L23:
+ 153              		.cfi_def_cfa_offset 16
+ 154              		.cfi_offset 4, -16
+ 155              		.cfi_offset 5, -12
+ 156              		.cfi_offset 6, -8
+ 157              		.cfi_offset 7, -4
+  58:..\u8g2-master\csrc/u8g2_kerning.c ****       break;
+ 158              		.loc 1 58 0
+ 159 006e 0020     		movs	r0, #0
+ 160 0070 0224     		movs	r4, #2
+ 161 0072 E2E7     		b	.L3
+ 162              		.cfi_endproc
+ 163              	.LFE0:
+ 164              		.size	u8g2_GetKerning, .-u8g2_GetKerning
+ 165              		.section	.text.u8g2_GetKerningByTable,"ax",%progbits
+ 166              		.align	2
+ 167              		.global	u8g2_GetKerningByTable
+ 168              		.thumb
+ 169              		.thumb_func
+ 170              		.type	u8g2_GetKerningByTable, %function
+ 171              	u8g2_GetKerningByTable:
+ 172              	.LFB1:
+  77:..\u8g2-master\csrc/u8g2_kerning.c **** 
+  78:..\u8g2-master\csrc/u8g2_kerning.c **** uint8_t u8g2_GetKerningByTable(U8X8_UNUSED u8g2_t *u8g2, const uint16_t *kt, uint16_t e1, uint16_t 
+  79:..\u8g2-master\csrc/u8g2_kerning.c **** {
+ 173              		.loc 1 79 0
+ 174              		.cfi_startproc
+ 175              		@ args = 0, pretend = 0, frame = 0
+ 176              		@ frame_needed = 0, uses_anonymous_args = 0
+ 177              		@ link register save eliminated.
+ 178              	.LVL22:
+  80:..\u8g2-master\csrc/u8g2_kerning.c ****   uint16_t i;
+  81:..\u8g2-master\csrc/u8g2_kerning.c ****   i = 0;
+  82:..\u8g2-master\csrc/u8g2_kerning.c ****   if ( kt == NULL )
+ 179              		.loc 1 82 0
+ 180 0000 F1B1     		cbz	r1, .L29
+  79:..\u8g2-master\csrc/u8g2_kerning.c ****   uint16_t i;
+ 181              		.loc 1 79 0
+ 182 0002 70B4     		push	{r4, r5, r6}
+ 183              		.cfi_def_cfa_offset 12
+ 184              		.cfi_offset 4, -12
+ 185              		.cfi_offset 5, -8
+ 186              		.cfi_offset 6, -4
+  83:..\u8g2-master\csrc/u8g2_kerning.c ****     return 0;
+  84:..\u8g2-master\csrc/u8g2_kerning.c ****   for(;;)
+  85:..\u8g2-master\csrc/u8g2_kerning.c ****   {
+  86:..\u8g2-master\csrc/u8g2_kerning.c ****     if ( kt[i] == 0x0ffff )
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 6
+
+
+ 187              		.loc 1 86 0
+ 188 0004 4FF6FF76 		movw	r6, #65535
+ 189 0008 0D88     		ldrh	r5, [r1]
+  83:..\u8g2-master\csrc/u8g2_kerning.c ****     return 0;
+ 190              		.loc 1 83 0
+ 191 000a 0020     		movs	r0, #0
+ 192              	.LVL23:
+ 193              		.loc 1 86 0
+ 194 000c B542     		cmp	r5, r6
+ 195 000e 12D0     		beq	.L26
+ 196 0010 0446     		mov	r4, r0
+ 197 0012 04E0     		b	.L28
+ 198              	.LVL24:
+ 199              	.L27:
+ 200 0014 31F81450 		ldrh	r5, [r1, r4, lsl #1]
+ 201 0018 2046     		mov	r0, r4
+ 202 001a B542     		cmp	r5, r6
+ 203 001c 0DD0     		beq	.L33
+ 204              	.LVL25:
+ 205              	.L28:
+  87:..\u8g2-master\csrc/u8g2_kerning.c ****       break;
+  88:..\u8g2-master\csrc/u8g2_kerning.c ****     if ( kt[i] == e1 && kt[i+1] == e2 )
+  89:..\u8g2-master\csrc/u8g2_kerning.c ****       return kt[i+2];
+  90:..\u8g2-master\csrc/u8g2_kerning.c ****     i+=3;
+ 206              		.loc 1 90 0
+ 207 001e 0334     		adds	r4, r4, #3
+ 208              	.LVL26:
+  88:..\u8g2-master\csrc/u8g2_kerning.c ****       return kt[i+2];
+ 209              		.loc 1 88 0
+ 210 0020 AA42     		cmp	r2, r5
+ 211              		.loc 1 90 0
+ 212 0022 A4B2     		uxth	r4, r4
+ 213              	.LVL27:
+  88:..\u8g2-master\csrc/u8g2_kerning.c ****       return kt[i+2];
+ 214              		.loc 1 88 0
+ 215 0024 F6D1     		bne	.L27
+  88:..\u8g2-master\csrc/u8g2_kerning.c ****       return kt[i+2];
+ 216              		.loc 1 88 0 is_stmt 0 discriminator 1
+ 217 0026 451C     		adds	r5, r0, #1
+ 218 0028 31F81550 		ldrh	r5, [r1, r5, lsl #1]
+ 219 002c 9D42     		cmp	r5, r3
+ 220 002e F1D1     		bne	.L27
+  89:..\u8g2-master\csrc/u8g2_kerning.c ****     i+=3;
+ 221              		.loc 1 89 0 is_stmt 1
+ 222 0030 0230     		adds	r0, r0, #2
+ 223 0032 11F81000 		ldrb	r0, [r1, r0, lsl #1]	@ zero_extendqisi2
+ 224              	.LVL28:
+ 225              	.L26:
+  91:..\u8g2-master\csrc/u8g2_kerning.c ****   }
+  92:..\u8g2-master\csrc/u8g2_kerning.c ****   return 0;
+  93:..\u8g2-master\csrc/u8g2_kerning.c **** }
+ 226              		.loc 1 93 0
+ 227 0036 70BC     		pop	{r4, r5, r6}
+ 228              		.cfi_remember_state
+ 229              		.cfi_restore 6
+ 230              		.cfi_restore 5
+ 231              		.cfi_restore 4
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 7
+
+
+ 232              		.cfi_def_cfa_offset 0
+ 233 0038 7047     		bx	lr
+ 234              	.LVL29:
+ 235              	.L33:
+ 236              		.cfi_restore_state
+  83:..\u8g2-master\csrc/u8g2_kerning.c ****   for(;;)
+ 237              		.loc 1 83 0
+ 238 003a 0020     		movs	r0, #0
+ 239              		.loc 1 93 0
+ 240 003c 70BC     		pop	{r4, r5, r6}
+ 241              		.cfi_restore 4
+ 242              		.cfi_restore 5
+ 243              		.cfi_restore 6
+ 244              		.cfi_def_cfa_offset 0
+ 245              	.LVL30:
+ 246 003e 7047     		bx	lr
+ 247              	.LVL31:
+ 248              	.L29:
+  83:..\u8g2-master\csrc/u8g2_kerning.c ****   for(;;)
+ 249              		.loc 1 83 0
+ 250 0040 0846     		mov	r0, r1
+ 251              	.LVL32:
+ 252              		.loc 1 93 0
+ 253 0042 7047     		bx	lr
+ 254              		.cfi_endproc
+ 255              	.LFE1:
+ 256              		.size	u8g2_GetKerningByTable, .-u8g2_GetKerningByTable
+ 257              		.text
+ 258              	.Letext0:
+ 259              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 260              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 261              		.file 4 "..\\u8g2-master\\csrc\\u8x8.h"
+ 262              		.file 5 "..\\u8g2-master\\csrc\\u8g2.h"
+ 263              		.section	.debug_info,"",%progbits
+ 264              	.Ldebug_info0:
+ 265 0000 08090000 		.4byte	0x908
+ 266 0004 0400     		.2byte	0x4
+ 267 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 268 000a 04       		.byte	0x4
+ 269 000b 01       		.uleb128 0x1
+ 270 000c FD060000 		.4byte	.LASF149
+ 271 0010 0C       		.byte	0xc
+ 272 0011 1A090000 		.4byte	.LASF150
+ 273 0015 1F060000 		.4byte	.LASF151
+ 274 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 275 001d 00000000 		.4byte	0
+ 276 0021 00000000 		.4byte	.Ldebug_line0
+ 277 0025 02       		.uleb128 0x2
+ 278 0026 B3000000 		.4byte	.LASF0
+ 279 002a 02       		.byte	0x2
+ 280 002b 1B       		.byte	0x1b
+ 281 002c 30000000 		.4byte	0x30
+ 282 0030 03       		.uleb128 0x3
+ 283 0031 01       		.byte	0x1
+ 284 0032 06       		.byte	0x6
+ 285 0033 26010000 		.4byte	.LASF2
+ 286 0037 02       		.uleb128 0x2
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 8
+
+
+ 287 0038 5C000000 		.4byte	.LASF1
+ 288 003c 02       		.byte	0x2
+ 289 003d 1D       		.byte	0x1d
+ 290 003e 42000000 		.4byte	0x42
+ 291 0042 03       		.uleb128 0x3
+ 292 0043 01       		.byte	0x1
+ 293 0044 08       		.byte	0x8
+ 294 0045 B3050000 		.4byte	.LASF3
+ 295 0049 03       		.uleb128 0x3
+ 296 004a 02       		.byte	0x2
+ 297 004b 05       		.byte	0x5
+ 298 004c ED050000 		.4byte	.LASF4
+ 299 0050 02       		.uleb128 0x2
+ 300 0051 AC070000 		.4byte	.LASF5
+ 301 0055 02       		.byte	0x2
+ 302 0056 2B       		.byte	0x2b
+ 303 0057 5B000000 		.4byte	0x5b
+ 304 005b 03       		.uleb128 0x3
+ 305 005c 02       		.byte	0x2
+ 306 005d 07       		.byte	0x7
+ 307 005e 45030000 		.4byte	.LASF6
+ 308 0062 03       		.uleb128 0x3
+ 309 0063 04       		.byte	0x4
+ 310 0064 05       		.byte	0x5
+ 311 0065 92010000 		.4byte	.LASF7
+ 312 0069 02       		.uleb128 0x2
+ 313 006a 36020000 		.4byte	.LASF8
+ 314 006e 02       		.byte	0x2
+ 315 006f 41       		.byte	0x41
+ 316 0070 74000000 		.4byte	0x74
+ 317 0074 03       		.uleb128 0x3
+ 318 0075 04       		.byte	0x4
+ 319 0076 07       		.byte	0x7
+ 320 0077 FF020000 		.4byte	.LASF9
+ 321 007b 03       		.uleb128 0x3
+ 322 007c 08       		.byte	0x8
+ 323 007d 05       		.byte	0x5
+ 324 007e 18010000 		.4byte	.LASF10
+ 325 0082 03       		.uleb128 0x3
+ 326 0083 08       		.byte	0x8
+ 327 0084 07       		.byte	0x7
+ 328 0085 9C000000 		.4byte	.LASF11
+ 329 0089 04       		.uleb128 0x4
+ 330 008a 04       		.byte	0x4
+ 331 008b 05       		.byte	0x5
+ 332 008c 696E7400 		.ascii	"int\000"
+ 333 0090 03       		.uleb128 0x3
+ 334 0091 04       		.byte	0x4
+ 335 0092 07       		.byte	0x7
+ 336 0093 C6020000 		.4byte	.LASF12
+ 337 0097 02       		.uleb128 0x2
+ 338 0098 5A080000 		.4byte	.LASF13
+ 339 009c 03       		.byte	0x3
+ 340 009d 14       		.byte	0x14
+ 341 009e 25000000 		.4byte	0x25
+ 342 00a2 02       		.uleb128 0x2
+ 343 00a3 A9080000 		.4byte	.LASF14
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 9
+
+
+ 344 00a7 03       		.byte	0x3
+ 345 00a8 18       		.byte	0x18
+ 346 00a9 37000000 		.4byte	0x37
+ 347 00ad 02       		.uleb128 0x2
+ 348 00ae D0010000 		.4byte	.LASF15
+ 349 00b2 03       		.byte	0x3
+ 350 00b3 24       		.byte	0x24
+ 351 00b4 50000000 		.4byte	0x50
+ 352 00b8 02       		.uleb128 0x2
+ 353 00b9 AF060000 		.4byte	.LASF16
+ 354 00bd 03       		.byte	0x3
+ 355 00be 30       		.byte	0x30
+ 356 00bf 69000000 		.4byte	0x69
+ 357 00c3 05       		.uleb128 0x5
+ 358 00c4 04       		.byte	0x4
+ 359 00c5 03       		.uleb128 0x3
+ 360 00c6 08       		.byte	0x8
+ 361 00c7 04       		.byte	0x4
+ 362 00c8 AE040000 		.4byte	.LASF17
+ 363 00cc 02       		.uleb128 0x2
+ 364 00cd 2D080000 		.4byte	.LASF18
+ 365 00d1 04       		.byte	0x4
+ 366 00d2 C3       		.byte	0xc3
+ 367 00d3 D7000000 		.4byte	0xd7
+ 368 00d7 06       		.uleb128 0x6
+ 369 00d8 FA030000 		.4byte	.LASF40
+ 370 00dc 30       		.byte	0x30
+ 371 00dd 04       		.byte	0x4
+ 372 00de 4601     		.2byte	0x146
+ 373 00e0 E9010000 		.4byte	0x1e9
+ 374 00e4 07       		.uleb128 0x7
+ 375 00e5 D0030000 		.4byte	.LASF19
+ 376 00e9 04       		.byte	0x4
+ 377 00ea 4801     		.2byte	0x148
+ 378 00ec 4E030000 		.4byte	0x34e
+ 379 00f0 00       		.byte	0
+ 380 00f1 07       		.uleb128 0x7
+ 381 00f2 D9010000 		.4byte	.LASF20
+ 382 00f6 04       		.byte	0x4
+ 383 00f7 4901     		.2byte	0x149
+ 384 00f9 23030000 		.4byte	0x323
+ 385 00fd 04       		.byte	0x4
+ 386 00fe 07       		.uleb128 0x7
+ 387 00ff 53010000 		.4byte	.LASF21
+ 388 0103 04       		.byte	0x4
+ 389 0104 4A01     		.2byte	0x14a
+ 390 0106 EE020000 		.4byte	0x2ee
+ 391 010a 08       		.byte	0x8
+ 392 010b 07       		.uleb128 0x7
+ 393 010c DF040000 		.4byte	.LASF22
+ 394 0110 04       		.byte	0x4
+ 395 0111 4B01     		.2byte	0x14b
+ 396 0113 EE020000 		.4byte	0x2ee
+ 397 0117 0C       		.byte	0xc
+ 398 0118 07       		.uleb128 0x7
+ 399 0119 66000000 		.4byte	.LASF23
+ 400 011d 04       		.byte	0x4
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 10
+
+
+ 401 011e 4C01     		.2byte	0x14c
+ 402 0120 EE020000 		.4byte	0x2ee
+ 403 0124 10       		.byte	0x10
+ 404 0125 07       		.uleb128 0x7
+ 405 0126 EE010000 		.4byte	.LASF24
+ 406 012a 04       		.byte	0x4
+ 407 012b 4D01     		.2byte	0x14d
+ 408 012d EE020000 		.4byte	0x2ee
+ 409 0131 14       		.byte	0x14
+ 410 0132 07       		.uleb128 0x7
+ 411 0133 34080000 		.4byte	.LASF25
+ 412 0137 04       		.byte	0x4
+ 413 0138 4E01     		.2byte	0x14e
+ 414 013a B8000000 		.4byte	0xb8
+ 415 013e 18       		.byte	0x18
+ 416 013f 07       		.uleb128 0x7
+ 417 0140 92080000 		.4byte	.LASF26
+ 418 0144 04       		.byte	0x4
+ 419 0145 4F01     		.2byte	0x14f
+ 420 0147 59030000 		.4byte	0x359
+ 421 014b 1C       		.byte	0x1c
+ 422 014c 07       		.uleb128 0x7
+ 423 014d 28040000 		.4byte	.LASF27
+ 424 0151 04       		.byte	0x4
+ 425 0152 5001     		.2byte	0x150
+ 426 0154 AD000000 		.4byte	0xad
+ 427 0158 20       		.byte	0x20
+ 428 0159 07       		.uleb128 0x7
+ 429 015a 4E050000 		.4byte	.LASF28
+ 430 015e 04       		.byte	0x4
+ 431 015f 5101     		.2byte	0x151
+ 432 0161 A2000000 		.4byte	0xa2
+ 433 0165 22       		.byte	0x22
+ 434 0166 07       		.uleb128 0x7
+ 435 0167 3E010000 		.4byte	.LASF29
+ 436 016b 04       		.byte	0x4
+ 437 016c 5201     		.2byte	0x152
+ 438 016e A2000000 		.4byte	0xa2
+ 439 0172 23       		.byte	0x23
+ 440 0173 07       		.uleb128 0x7
+ 441 0174 F3020000 		.4byte	.LASF30
+ 442 0178 04       		.byte	0x4
+ 443 0179 5301     		.2byte	0x153
+ 444 017b A2000000 		.4byte	0xa2
+ 445 017f 24       		.byte	0x24
+ 446 0180 07       		.uleb128 0x7
+ 447 0181 CB080000 		.4byte	.LASF31
+ 448 0185 04       		.byte	0x4
+ 449 0186 5601     		.2byte	0x156
+ 450 0188 A2000000 		.4byte	0xa2
+ 451 018c 25       		.byte	0x25
+ 452 018d 07       		.uleb128 0x7
+ 453 018e 3F050000 		.4byte	.LASF32
+ 454 0192 04       		.byte	0x4
+ 455 0193 5701     		.2byte	0x157
+ 456 0195 A2000000 		.4byte	0xa2
+ 457 0199 26       		.byte	0x26
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 11
+
+
+ 458 019a 07       		.uleb128 0x7
+ 459 019b D8000000 		.4byte	.LASF33
+ 460 019f 04       		.byte	0x4
+ 461 01a0 5801     		.2byte	0x158
+ 462 01a2 A2000000 		.4byte	0xa2
+ 463 01a6 27       		.byte	0x27
+ 464 01a7 07       		.uleb128 0x7
+ 465 01a8 EC000000 		.4byte	.LASF34
+ 466 01ac 04       		.byte	0x4
+ 467 01ad 5901     		.2byte	0x159
+ 468 01af A2000000 		.4byte	0xa2
+ 469 01b3 28       		.byte	0x28
+ 470 01b4 07       		.uleb128 0x7
+ 471 01b5 F7080000 		.4byte	.LASF35
+ 472 01b9 04       		.byte	0x4
+ 473 01ba 5A01     		.2byte	0x15a
+ 474 01bc A2000000 		.4byte	0xa2
+ 475 01c0 29       		.byte	0x29
+ 476 01c1 07       		.uleb128 0x7
+ 477 01c2 A6030000 		.4byte	.LASF36
+ 478 01c6 04       		.byte	0x4
+ 479 01c7 5B01     		.2byte	0x15b
+ 480 01c9 A2000000 		.4byte	0xa2
+ 481 01cd 2A       		.byte	0x2a
+ 482 01ce 07       		.uleb128 0x7
+ 483 01cf 61080000 		.4byte	.LASF37
+ 484 01d3 04       		.byte	0x4
+ 485 01d4 5C01     		.2byte	0x15c
+ 486 01d6 A2000000 		.4byte	0xa2
+ 487 01da 2B       		.byte	0x2b
+ 488 01db 07       		.uleb128 0x7
+ 489 01dc B2020000 		.4byte	.LASF38
+ 490 01e0 04       		.byte	0x4
+ 491 01e1 5D01     		.2byte	0x15d
+ 492 01e3 A2000000 		.4byte	0xa2
+ 493 01e7 2C       		.byte	0x2c
+ 494 01e8 00       		.byte	0
+ 495 01e9 02       		.uleb128 0x2
+ 496 01ea 22020000 		.4byte	.LASF39
+ 497 01ee 04       		.byte	0x4
+ 498 01ef C4       		.byte	0xc4
+ 499 01f0 F4010000 		.4byte	0x1f4
+ 500 01f4 08       		.uleb128 0x8
+ 501 01f5 3D090000 		.4byte	.LASF41
+ 502 01f9 18       		.byte	0x18
+ 503 01fa 04       		.byte	0x4
+ 504 01fb DD       		.byte	0xdd
+ 505 01fc EE020000 		.4byte	0x2ee
+ 506 0200 09       		.uleb128 0x9
+ 507 0201 EB060000 		.4byte	.LASF42
+ 508 0205 04       		.byte	0x4
+ 509 0206 E1       		.byte	0xe1
+ 510 0207 A2000000 		.4byte	0xa2
+ 511 020b 00       		.byte	0
+ 512 020c 09       		.uleb128 0x9
+ 513 020d 7F080000 		.4byte	.LASF43
+ 514 0211 04       		.byte	0x4
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 12
+
+
+ 515 0212 E2       		.byte	0xe2
+ 516 0213 A2000000 		.4byte	0xa2
+ 517 0217 01       		.byte	0x1
+ 518 0218 09       		.uleb128 0x9
+ 519 0219 D9070000 		.4byte	.LASF44
+ 520 021d 04       		.byte	0x4
+ 521 021e E4       		.byte	0xe4
+ 522 021f A2000000 		.4byte	0xa2
+ 523 0223 02       		.byte	0x2
+ 524 0224 09       		.uleb128 0x9
+ 525 0225 79010000 		.4byte	.LASF45
+ 526 0229 04       		.byte	0x4
+ 527 022a E5       		.byte	0xe5
+ 528 022b A2000000 		.4byte	0xa2
+ 529 022f 03       		.byte	0x3
+ 530 0230 09       		.uleb128 0x9
+ 531 0231 12000000 		.4byte	.LASF46
+ 532 0235 04       		.byte	0x4
+ 533 0236 E6       		.byte	0xe6
+ 534 0237 A2000000 		.4byte	0xa2
+ 535 023b 04       		.byte	0x4
+ 536 023c 09       		.uleb128 0x9
+ 537 023d BC000000 		.4byte	.LASF47
+ 538 0241 04       		.byte	0x4
+ 539 0242 E7       		.byte	0xe7
+ 540 0243 A2000000 		.4byte	0xa2
+ 541 0247 05       		.byte	0x5
+ 542 0248 09       		.uleb128 0x9
+ 543 0249 6B020000 		.4byte	.LASF48
+ 544 024d 04       		.byte	0x4
+ 545 024e EE       		.byte	0xee
+ 546 024f A2000000 		.4byte	0xa2
+ 547 0253 06       		.byte	0x6
+ 548 0254 09       		.uleb128 0x9
+ 549 0255 E7030000 		.4byte	.LASF49
+ 550 0259 04       		.byte	0x4
+ 551 025a F2       		.byte	0xf2
+ 552 025b A2000000 		.4byte	0xa2
+ 553 025f 07       		.byte	0x7
+ 554 0260 09       		.uleb128 0x9
+ 555 0261 6A090000 		.4byte	.LASF50
+ 556 0265 04       		.byte	0x4
+ 557 0266 F5       		.byte	0xf5
+ 558 0267 B8000000 		.4byte	0xb8
+ 559 026b 08       		.byte	0x8
+ 560 026c 09       		.uleb128 0x9
+ 561 026d E2060000 		.4byte	.LASF51
+ 562 0271 04       		.byte	0x4
+ 563 0272 FF       		.byte	0xff
+ 564 0273 A2000000 		.4byte	0xa2
+ 565 0277 0C       		.byte	0xc
+ 566 0278 07       		.uleb128 0x7
+ 567 0279 9A060000 		.4byte	.LASF52
+ 568 027d 04       		.byte	0x4
+ 569 027e 0201     		.2byte	0x102
+ 570 0280 A2000000 		.4byte	0xa2
+ 571 0284 0D       		.byte	0xd
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 13
+
+
+ 572 0285 07       		.uleb128 0x7
+ 573 0286 0C060000 		.4byte	.LASF53
+ 574 028a 04       		.byte	0x4
+ 575 028b 0801     		.2byte	0x108
+ 576 028d A2000000 		.4byte	0xa2
+ 577 0291 0E       		.byte	0xe
+ 578 0292 07       		.uleb128 0x7
+ 579 0293 1C050000 		.4byte	.LASF54
+ 580 0297 04       		.byte	0x4
+ 581 0298 0A01     		.2byte	0x10a
+ 582 029a A2000000 		.4byte	0xa2
+ 583 029e 0F       		.byte	0xf
+ 584 029f 07       		.uleb128 0x7
+ 585 02a0 EC080000 		.4byte	.LASF55
+ 586 02a4 04       		.byte	0x4
+ 587 02a5 0D01     		.2byte	0x10d
+ 588 02a7 A2000000 		.4byte	0xa2
+ 589 02ab 10       		.byte	0x10
+ 590 02ac 07       		.uleb128 0x7
+ 591 02ad 57050000 		.4byte	.LASF56
+ 592 02b1 04       		.byte	0x4
+ 593 02b2 0E01     		.2byte	0x10e
+ 594 02b4 A2000000 		.4byte	0xa2
+ 595 02b8 11       		.byte	0x11
+ 596 02b9 07       		.uleb128 0x7
+ 597 02ba 17040000 		.4byte	.LASF57
+ 598 02be 04       		.byte	0x4
+ 599 02bf 1001     		.2byte	0x110
+ 600 02c1 A2000000 		.4byte	0xa2
+ 601 02c5 12       		.byte	0x12
+ 602 02c6 07       		.uleb128 0x7
+ 603 02c7 54040000 		.4byte	.LASF58
+ 604 02cb 04       		.byte	0x4
+ 605 02cc 1101     		.2byte	0x111
+ 606 02ce A2000000 		.4byte	0xa2
+ 607 02d2 13       		.byte	0x13
+ 608 02d3 07       		.uleb128 0x7
+ 609 02d4 D7080000 		.4byte	.LASF59
+ 610 02d8 04       		.byte	0x4
+ 611 02d9 1901     		.2byte	0x119
+ 612 02db AD000000 		.4byte	0xad
+ 613 02df 14       		.byte	0x14
+ 614 02e0 07       		.uleb128 0x7
+ 615 02e1 5D090000 		.4byte	.LASF60
+ 616 02e5 04       		.byte	0x4
+ 617 02e6 1A01     		.2byte	0x11a
+ 618 02e8 AD000000 		.4byte	0xad
+ 619 02ec 16       		.byte	0x16
+ 620 02ed 00       		.byte	0
+ 621 02ee 02       		.uleb128 0x2
+ 622 02ef 8C050000 		.4byte	.LASF61
+ 623 02f3 04       		.byte	0x4
+ 624 02f4 C7       		.byte	0xc7
+ 625 02f5 F9020000 		.4byte	0x2f9
+ 626 02f9 0A       		.uleb128 0xa
+ 627 02fa 04       		.byte	0x4
+ 628 02fb FF020000 		.4byte	0x2ff
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 14
+
+
+ 629 02ff 0B       		.uleb128 0xb
+ 630 0300 A2000000 		.4byte	0xa2
+ 631 0304 1D030000 		.4byte	0x31d
+ 632 0308 0C       		.uleb128 0xc
+ 633 0309 1D030000 		.4byte	0x31d
+ 634 030d 0C       		.uleb128 0xc
+ 635 030e A2000000 		.4byte	0xa2
+ 636 0312 0C       		.uleb128 0xc
+ 637 0313 A2000000 		.4byte	0xa2
+ 638 0317 0C       		.uleb128 0xc
+ 639 0318 C3000000 		.4byte	0xc3
+ 640 031c 00       		.byte	0
+ 641 031d 0A       		.uleb128 0xa
+ 642 031e 04       		.byte	0x4
+ 643 031f CC000000 		.4byte	0xcc
+ 644 0323 02       		.uleb128 0x2
+ 645 0324 E1010000 		.4byte	.LASF62
+ 646 0328 04       		.byte	0x4
+ 647 0329 C8       		.byte	0xc8
+ 648 032a 2E030000 		.4byte	0x32e
+ 649 032e 0A       		.uleb128 0xa
+ 650 032f 04       		.byte	0x4
+ 651 0330 34030000 		.4byte	0x334
+ 652 0334 0B       		.uleb128 0xb
+ 653 0335 AD000000 		.4byte	0xad
+ 654 0339 48030000 		.4byte	0x348
+ 655 033d 0C       		.uleb128 0xc
+ 656 033e 1D030000 		.4byte	0x31d
+ 657 0342 0C       		.uleb128 0xc
+ 658 0343 A2000000 		.4byte	0xa2
+ 659 0347 00       		.byte	0
+ 660 0348 0A       		.uleb128 0xa
+ 661 0349 04       		.byte	0x4
+ 662 034a A2000000 		.4byte	0xa2
+ 663 034e 0A       		.uleb128 0xa
+ 664 034f 04       		.byte	0x4
+ 665 0350 54030000 		.4byte	0x354
+ 666 0354 0D       		.uleb128 0xd
+ 667 0355 E9010000 		.4byte	0x1e9
+ 668 0359 0A       		.uleb128 0xa
+ 669 035a 04       		.byte	0x4
+ 670 035b 5F030000 		.4byte	0x35f
+ 671 035f 0D       		.uleb128 0xd
+ 672 0360 A2000000 		.4byte	0xa2
+ 673 0364 02       		.uleb128 0x2
+ 674 0365 32010000 		.4byte	.LASF63
+ 675 0369 05       		.byte	0x5
+ 676 036a AC       		.byte	0xac
+ 677 036b A2000000 		.4byte	0xa2
+ 678 036f 02       		.uleb128 0x2
+ 679 0370 11030000 		.4byte	.LASF64
+ 680 0374 05       		.byte	0x5
+ 681 0375 B2       		.byte	0xb2
+ 682 0376 7A030000 		.4byte	0x37a
+ 683 037a 06       		.uleb128 0x6
+ 684 037b 29030000 		.4byte	.LASF65
+ 685 037f 88       		.byte	0x88
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 15
+
+
+ 686 0380 05       		.byte	0x5
+ 687 0381 1101     		.2byte	0x111
+ 688 0383 34050000 		.4byte	0x534
+ 689 0387 07       		.uleb128 0x7
+ 690 0388 F7050000 		.4byte	.LASF66
+ 691 038c 05       		.byte	0x5
+ 692 038d 1301     		.2byte	0x113
+ 693 038f CC000000 		.4byte	0xcc
+ 694 0393 00       		.byte	0
+ 695 0394 07       		.uleb128 0x7
+ 696 0395 63050000 		.4byte	.LASF67
+ 697 0399 05       		.byte	0x5
+ 698 039a 1401     		.2byte	0x114
+ 699 039c D1050000 		.4byte	0x5d1
+ 700 03a0 30       		.byte	0x30
+ 701 03a1 0E       		.uleb128 0xe
+ 702 03a2 636200   		.ascii	"cb\000"
+ 703 03a5 05       		.byte	0x5
+ 704 03a6 1501     		.2byte	0x115
+ 705 03a8 18080000 		.4byte	0x818
+ 706 03ac 34       		.byte	0x34
+ 707 03ad 07       		.uleb128 0x7
+ 708 03ae 4F000000 		.4byte	.LASF68
+ 709 03b2 05       		.byte	0x5
+ 710 03b3 1801     		.2byte	0x118
+ 711 03b5 48030000 		.4byte	0x348
+ 712 03b9 38       		.byte	0x38
+ 713 03ba 07       		.uleb128 0x7
+ 714 03bb 35030000 		.4byte	.LASF69
+ 715 03bf 05       		.byte	0x5
+ 716 03c0 1901     		.2byte	0x119
+ 717 03c2 A2000000 		.4byte	0xa2
+ 718 03c6 3C       		.byte	0x3c
+ 719 03c7 07       		.uleb128 0x7
+ 720 03c8 CA060000 		.4byte	.LASF70
+ 721 03cc 05       		.byte	0x5
+ 722 03cd 1A01     		.2byte	0x11a
+ 723 03cf A2000000 		.4byte	0xa2
+ 724 03d3 3D       		.byte	0x3d
+ 725 03d4 07       		.uleb128 0x7
+ 726 03d5 DD050000 		.4byte	.LASF71
+ 727 03d9 05       		.byte	0x5
+ 728 03da 1D01     		.2byte	0x11d
+ 729 03dc 64030000 		.4byte	0x364
+ 730 03e0 3E       		.byte	0x3e
+ 731 03e1 07       		.uleb128 0x7
+ 732 03e2 D3020000 		.4byte	.LASF72
+ 733 03e6 05       		.byte	0x5
+ 734 03e7 1E01     		.2byte	0x11e
+ 735 03e9 64030000 		.4byte	0x364
+ 736 03ed 3F       		.byte	0x3f
+ 737 03ee 07       		.uleb128 0x7
+ 738 03ef D0040000 		.4byte	.LASF73
+ 739 03f3 05       		.byte	0x5
+ 740 03f4 1F01     		.2byte	0x11f
+ 741 03f6 64030000 		.4byte	0x364
+ 742 03fa 40       		.byte	0x40
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 16
+
+
+ 743 03fb 07       		.uleb128 0x7
+ 744 03fc 31050000 		.4byte	.LASF74
+ 745 0400 05       		.byte	0x5
+ 746 0401 2501     		.2byte	0x125
+ 747 0403 64030000 		.4byte	0x364
+ 748 0407 41       		.byte	0x41
+ 749 0408 07       		.uleb128 0x7
+ 750 0409 38050000 		.4byte	.LASF75
+ 751 040d 05       		.byte	0x5
+ 752 040e 2601     		.2byte	0x126
+ 753 0410 64030000 		.4byte	0x364
+ 754 0414 42       		.byte	0x42
+ 755 0415 07       		.uleb128 0x7
+ 756 0416 23030000 		.4byte	.LASF76
+ 757 041a 05       		.byte	0x5
+ 758 041b 2901     		.2byte	0x129
+ 759 041d 64030000 		.4byte	0x364
+ 760 0421 43       		.byte	0x43
+ 761 0422 07       		.uleb128 0x7
+ 762 0423 56090000 		.4byte	.LASF77
+ 763 0427 05       		.byte	0x5
+ 764 0428 2A01     		.2byte	0x12a
+ 765 042a 64030000 		.4byte	0x364
+ 766 042e 44       		.byte	0x44
+ 767 042f 07       		.uleb128 0x7
+ 768 0430 FC050000 		.4byte	.LASF78
+ 769 0434 05       		.byte	0x5
+ 770 0435 2F01     		.2byte	0x12f
+ 771 0437 64030000 		.4byte	0x364
+ 772 043b 45       		.byte	0x45
+ 773 043c 07       		.uleb128 0x7
+ 774 043d 04060000 		.4byte	.LASF79
+ 775 0441 05       		.byte	0x5
+ 776 0442 3001     		.2byte	0x130
+ 777 0444 64030000 		.4byte	0x364
+ 778 0448 46       		.byte	0x46
+ 779 0449 07       		.uleb128 0x7
+ 780 044a 14050000 		.4byte	.LASF80
+ 781 044e 05       		.byte	0x5
+ 782 044f 3101     		.2byte	0x131
+ 783 0451 64030000 		.4byte	0x364
+ 784 0455 47       		.byte	0x47
+ 785 0456 07       		.uleb128 0x7
+ 786 0457 3E080000 		.4byte	.LASF81
+ 787 045b 05       		.byte	0x5
+ 788 045c 3201     		.2byte	0x132
+ 789 045e 64030000 		.4byte	0x364
+ 790 0462 48       		.byte	0x48
+ 791 0463 07       		.uleb128 0x7
+ 792 0464 8D030000 		.4byte	.LASF82
+ 793 0468 05       		.byte	0x5
+ 794 0469 3601     		.2byte	0x136
+ 795 046b 64030000 		.4byte	0x364
+ 796 046f 49       		.byte	0x49
+ 797 0470 07       		.uleb128 0x7
+ 798 0471 95030000 		.4byte	.LASF83
+ 799 0475 05       		.byte	0x5
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 17
+
+
+ 800 0476 3701     		.2byte	0x137
+ 801 0478 64030000 		.4byte	0x364
+ 802 047c 4A       		.byte	0x4a
+ 803 047d 07       		.uleb128 0x7
+ 804 047e E6040000 		.4byte	.LASF84
+ 805 0482 05       		.byte	0x5
+ 806 0483 3801     		.2byte	0x138
+ 807 0485 64030000 		.4byte	0x364
+ 808 0489 4B       		.byte	0x4b
+ 809 048a 07       		.uleb128 0x7
+ 810 048b EE040000 		.4byte	.LASF85
+ 811 048f 05       		.byte	0x5
+ 812 0490 3901     		.2byte	0x139
+ 813 0492 64030000 		.4byte	0x364
+ 814 0496 4C       		.byte	0x4c
+ 815 0497 07       		.uleb128 0x7
+ 816 0498 92080000 		.4byte	.LASF26
+ 817 049c 05       		.byte	0x5
+ 818 049d 3E01     		.2byte	0x13e
+ 819 049f 59030000 		.4byte	0x359
+ 820 04a3 50       		.byte	0x50
+ 821 04a4 07       		.uleb128 0x7
+ 822 04a5 4C020000 		.4byte	.LASF86
+ 823 04a9 05       		.byte	0x5
+ 824 04aa 4201     		.2byte	0x142
+ 825 04ac F7070000 		.4byte	0x7f7
+ 826 04b0 54       		.byte	0x54
+ 827 04b1 07       		.uleb128 0x7
+ 828 04b2 8B070000 		.4byte	.LASF87
+ 829 04b6 05       		.byte	0x5
+ 830 04b7 4301     		.2byte	0x143
+ 831 04b9 7D070000 		.4byte	0x77d
+ 832 04bd 58       		.byte	0x58
+ 833 04be 07       		.uleb128 0x7
+ 834 04bf DD030000 		.4byte	.LASF88
+ 835 04c3 05       		.byte	0x5
+ 836 04c4 4401     		.2byte	0x144
+ 837 04c6 D9060000 		.4byte	0x6d9
+ 838 04ca 68       		.byte	0x68
+ 839 04cb 07       		.uleb128 0x7
+ 840 04cc 58030000 		.4byte	.LASF89
+ 841 04d0 05       		.byte	0x5
+ 842 04d1 4801     		.2byte	0x148
+ 843 04d3 A2000000 		.4byte	0xa2
+ 844 04d7 80       		.byte	0x80
+ 845 04d8 07       		.uleb128 0x7
+ 846 04d9 31040000 		.4byte	.LASF90
+ 847 04dd 05       		.byte	0x5
+ 848 04de 4B01     		.2byte	0x14b
+ 849 04e0 A2000000 		.4byte	0xa2
+ 850 04e4 81       		.byte	0x81
+ 851 04e5 07       		.uleb128 0x7
+ 852 04e6 5B020000 		.4byte	.LASF91
+ 853 04ea 05       		.byte	0x5
+ 854 04eb 4C01     		.2byte	0x14c
+ 855 04ed 97000000 		.4byte	0x97
+ 856 04f1 82       		.byte	0x82
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 18
+
+
+ 857 04f2 07       		.uleb128 0x7
+ 858 04f3 11020000 		.4byte	.LASF92
+ 859 04f7 05       		.byte	0x5
+ 860 04f8 4D01     		.2byte	0x14d
+ 861 04fa 97000000 		.4byte	0x97
+ 862 04fe 83       		.byte	0x83
+ 863 04ff 07       		.uleb128 0x7
+ 864 0500 6A010000 		.4byte	.LASF93
+ 865 0504 05       		.byte	0x5
+ 866 0505 4F01     		.2byte	0x14f
+ 867 0507 97000000 		.4byte	0x97
+ 868 050b 84       		.byte	0x84
+ 869 050c 07       		.uleb128 0x7
+ 870 050d 79030000 		.4byte	.LASF94
+ 871 0511 05       		.byte	0x5
+ 872 0512 5101     		.2byte	0x151
+ 873 0514 A2000000 		.4byte	0xa2
+ 874 0518 85       		.byte	0x85
+ 875 0519 07       		.uleb128 0x7
+ 876 051a B7070000 		.4byte	.LASF95
+ 877 051e 05       		.byte	0x5
+ 878 051f 5301     		.2byte	0x153
+ 879 0521 A2000000 		.4byte	0xa2
+ 880 0525 86       		.byte	0x86
+ 881 0526 07       		.uleb128 0x7
+ 882 0527 CA050000 		.4byte	.LASF96
+ 883 052b 05       		.byte	0x5
+ 884 052c 5701     		.2byte	0x157
+ 885 052e A2000000 		.4byte	0xa2
+ 886 0532 87       		.byte	0x87
+ 887 0533 00       		.byte	0
+ 888 0534 02       		.uleb128 0x2
+ 889 0535 D8060000 		.4byte	.LASF97
+ 890 0539 05       		.byte	0x5
+ 891 053a B3       		.byte	0xb3
+ 892 053b 3F050000 		.4byte	0x53f
+ 893 053f 06       		.uleb128 0x6
+ 894 0540 98050000 		.4byte	.LASF98
+ 895 0544 0C       		.byte	0xc
+ 896 0545 05       		.byte	0x5
+ 897 0546 0701     		.2byte	0x107
+ 898 0548 74050000 		.4byte	0x574
+ 899 054c 07       		.uleb128 0x7
+ 900 054d 8B000000 		.4byte	.LASF99
+ 901 0551 05       		.byte	0x5
+ 902 0552 0901     		.2byte	0x109
+ 903 0554 74050000 		.4byte	0x574
+ 904 0558 00       		.byte	0
+ 905 0559 07       		.uleb128 0x7
+ 906 055a B0010000 		.4byte	.LASF100
+ 907 055e 05       		.byte	0x5
+ 908 055f 0A01     		.2byte	0x10a
+ 909 0561 96050000 		.4byte	0x596
+ 910 0565 04       		.byte	0x4
+ 911 0566 07       		.uleb128 0x7
+ 912 0567 9D030000 		.4byte	.LASF101
+ 913 056b 05       		.byte	0x5
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 19
+
+
+ 914 056c 0B01     		.2byte	0x10b
+ 915 056e A1050000 		.4byte	0x5a1
+ 916 0572 08       		.byte	0x8
+ 917 0573 00       		.byte	0
+ 918 0574 02       		.uleb128 0x2
+ 919 0575 02080000 		.4byte	.LASF102
+ 920 0579 05       		.byte	0x5
+ 921 057a B5       		.byte	0xb5
+ 922 057b 7F050000 		.4byte	0x57f
+ 923 057f 0A       		.uleb128 0xa
+ 924 0580 04       		.byte	0x4
+ 925 0581 85050000 		.4byte	0x585
+ 926 0585 0F       		.uleb128 0xf
+ 927 0586 90050000 		.4byte	0x590
+ 928 058a 0C       		.uleb128 0xc
+ 929 058b 90050000 		.4byte	0x590
+ 930 058f 00       		.byte	0
+ 931 0590 0A       		.uleb128 0xa
+ 932 0591 04       		.byte	0x4
+ 933 0592 6F030000 		.4byte	0x36f
+ 934 0596 02       		.uleb128 0x2
+ 935 0597 37000000 		.4byte	.LASF103
+ 936 059b 05       		.byte	0x5
+ 937 059c B6       		.byte	0xb6
+ 938 059d 7F050000 		.4byte	0x57f
+ 939 05a1 02       		.uleb128 0x2
+ 940 05a2 89060000 		.4byte	.LASF104
+ 941 05a6 05       		.byte	0x5
+ 942 05a7 B7       		.byte	0xb7
+ 943 05a8 AC050000 		.4byte	0x5ac
+ 944 05ac 0A       		.uleb128 0xa
+ 945 05ad 04       		.byte	0x4
+ 946 05ae B2050000 		.4byte	0x5b2
+ 947 05b2 0F       		.uleb128 0xf
+ 948 05b3 D1050000 		.4byte	0x5d1
+ 949 05b7 0C       		.uleb128 0xc
+ 950 05b8 90050000 		.4byte	0x590
+ 951 05bc 0C       		.uleb128 0xc
+ 952 05bd 64030000 		.4byte	0x364
+ 953 05c1 0C       		.uleb128 0xc
+ 954 05c2 64030000 		.4byte	0x364
+ 955 05c6 0C       		.uleb128 0xc
+ 956 05c7 64030000 		.4byte	0x364
+ 957 05cb 0C       		.uleb128 0xc
+ 958 05cc A2000000 		.4byte	0xa2
+ 959 05d0 00       		.byte	0
+ 960 05d1 02       		.uleb128 0x2
+ 961 05d2 7D020000 		.4byte	.LASF105
+ 962 05d6 05       		.byte	0x5
+ 963 05d7 B8       		.byte	0xb8
+ 964 05d8 AC050000 		.4byte	0x5ac
+ 965 05dc 08       		.uleb128 0x8
+ 966 05dd B8060000 		.4byte	.LASF106
+ 967 05e1 18       		.byte	0x18
+ 968 05e2 05       		.byte	0x5
+ 969 05e3 BE       		.byte	0xbe
+ 970 05e4 D9060000 		.4byte	0x6d9
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 20
+
+
+ 971 05e8 09       		.uleb128 0x9
+ 972 05e9 81000000 		.4byte	.LASF107
+ 973 05ed 05       		.byte	0x5
+ 974 05ee C1       		.byte	0xc1
+ 975 05ef A2000000 		.4byte	0xa2
+ 976 05f3 00       		.byte	0
+ 977 05f4 09       		.uleb128 0x9
+ 978 05f5 CF000000 		.4byte	.LASF108
+ 979 05f9 05       		.byte	0x5
+ 980 05fa C2       		.byte	0xc2
+ 981 05fb A2000000 		.4byte	0xa2
+ 982 05ff 01       		.byte	0x1
+ 983 0600 09       		.uleb128 0x9
+ 984 0601 41020000 		.4byte	.LASF109
+ 985 0605 05       		.byte	0x5
+ 986 0606 C3       		.byte	0xc3
+ 987 0607 A2000000 		.4byte	0xa2
+ 988 060b 02       		.byte	0x2
+ 989 060c 09       		.uleb128 0x9
+ 990 060d 66040000 		.4byte	.LASF110
+ 991 0611 05       		.byte	0x5
+ 992 0612 C4       		.byte	0xc4
+ 993 0613 A2000000 		.4byte	0xa2
+ 994 0617 03       		.byte	0x3
+ 995 0618 09       		.uleb128 0x9
+ 996 0619 9E020000 		.4byte	.LASF111
+ 997 061d 05       		.byte	0x5
+ 998 061e C7       		.byte	0xc7
+ 999 061f A2000000 		.4byte	0xa2
+ 1000 0623 04       		.byte	0x4
+ 1001 0624 09       		.uleb128 0x9
+ 1002 0625 97070000 		.4byte	.LASF112
+ 1003 0629 05       		.byte	0x5
+ 1004 062a C8       		.byte	0xc8
+ 1005 062b A2000000 		.4byte	0xa2
+ 1006 062f 05       		.byte	0x5
+ 1007 0630 09       		.uleb128 0x9
+ 1008 0631 F8000000 		.4byte	.LASF113
+ 1009 0635 05       		.byte	0x5
+ 1010 0636 C9       		.byte	0xc9
+ 1011 0637 A2000000 		.4byte	0xa2
+ 1012 063b 06       		.byte	0x6
+ 1013 063c 09       		.uleb128 0x9
+ 1014 063d 08010000 		.4byte	.LASF114
+ 1015 0641 05       		.byte	0x5
+ 1016 0642 CA       		.byte	0xca
+ 1017 0643 A2000000 		.4byte	0xa2
+ 1018 0647 07       		.byte	0x7
+ 1019 0648 09       		.uleb128 0x9
+ 1020 0649 71040000 		.4byte	.LASF115
+ 1021 064d 05       		.byte	0x5
+ 1022 064e CB       		.byte	0xcb
+ 1023 064f A2000000 		.4byte	0xa2
+ 1024 0653 08       		.byte	0x8
+ 1025 0654 09       		.uleb128 0x9
+ 1026 0655 05050000 		.4byte	.LASF116
+ 1027 0659 05       		.byte	0x5
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 21
+
+
+ 1028 065a CE       		.byte	0xce
+ 1029 065b 97000000 		.4byte	0x97
+ 1030 065f 09       		.byte	0x9
+ 1031 0660 09       		.uleb128 0x9
+ 1032 0661 C0010000 		.4byte	.LASF117
+ 1033 0665 05       		.byte	0x5
+ 1034 0666 CF       		.byte	0xcf
+ 1035 0667 97000000 		.4byte	0x97
+ 1036 066b 0A       		.byte	0xa
+ 1037 066c 09       		.uleb128 0x9
+ 1038 066d 4E050000 		.4byte	.LASF28
+ 1039 0671 05       		.byte	0x5
+ 1040 0672 D0       		.byte	0xd0
+ 1041 0673 97000000 		.4byte	0x97
+ 1042 0677 0B       		.byte	0xb
+ 1043 0678 09       		.uleb128 0x9
+ 1044 0679 E3000000 		.4byte	.LASF118
+ 1045 067d 05       		.byte	0x5
+ 1046 067e D1       		.byte	0xd1
+ 1047 067f 97000000 		.4byte	0x97
+ 1048 0683 0C       		.byte	0xc
+ 1049 0684 09       		.uleb128 0x9
+ 1050 0685 C1050000 		.4byte	.LASF119
+ 1051 0689 05       		.byte	0x5
+ 1052 068a D4       		.byte	0xd4
+ 1053 068b 97000000 		.4byte	0x97
+ 1054 068f 0D       		.byte	0xd
+ 1055 0690 09       		.uleb128 0x9
+ 1056 0691 94020000 		.4byte	.LASF120
+ 1057 0695 05       		.byte	0x5
+ 1058 0696 D5       		.byte	0xd5
+ 1059 0697 97000000 		.4byte	0x97
+ 1060 069b 0E       		.byte	0xe
+ 1061 069c 09       		.uleb128 0x9
+ 1062 069d 5E010000 		.4byte	.LASF121
+ 1063 06a1 05       		.byte	0x5
+ 1064 06a2 D6       		.byte	0xd6
+ 1065 06a3 97000000 		.4byte	0x97
+ 1066 06a7 0F       		.byte	0xf
+ 1067 06a8 09       		.uleb128 0x9
+ 1068 06a9 C3030000 		.4byte	.LASF122
+ 1069 06ad 05       		.byte	0x5
+ 1070 06ae D7       		.byte	0xd7
+ 1071 06af 97000000 		.4byte	0x97
+ 1072 06b3 10       		.byte	0x10
+ 1073 06b4 09       		.uleb128 0x9
+ 1074 06b5 42040000 		.4byte	.LASF123
+ 1075 06b9 05       		.byte	0x5
+ 1076 06ba DA       		.byte	0xda
+ 1077 06bb AD000000 		.4byte	0xad
+ 1078 06bf 12       		.byte	0x12
+ 1079 06c0 09       		.uleb128 0x9
+ 1080 06c1 97080000 		.4byte	.LASF124
+ 1081 06c5 05       		.byte	0x5
+ 1082 06c6 DB       		.byte	0xdb
+ 1083 06c7 AD000000 		.4byte	0xad
+ 1084 06cb 14       		.byte	0x14
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 22
+
+
+ 1085 06cc 09       		.uleb128 0x9
+ 1086 06cd 00000000 		.4byte	.LASF125
+ 1087 06d1 05       		.byte	0x5
+ 1088 06d2 DF       		.byte	0xdf
+ 1089 06d3 AD000000 		.4byte	0xad
+ 1090 06d7 16       		.byte	0x16
+ 1091 06d8 00       		.byte	0
+ 1092 06d9 02       		.uleb128 0x2
+ 1093 06da 00020000 		.4byte	.LASF126
+ 1094 06de 05       		.byte	0x5
+ 1095 06df E2       		.byte	0xe2
+ 1096 06e0 DC050000 		.4byte	0x5dc
+ 1097 06e4 08       		.uleb128 0x8
+ 1098 06e5 46080000 		.4byte	.LASF127
+ 1099 06e9 10       		.byte	0x10
+ 1100 06ea 05       		.byte	0x5
+ 1101 06eb E5       		.byte	0xe5
+ 1102 06ec 7D070000 		.4byte	0x77d
+ 1103 06f0 09       		.uleb128 0x9
+ 1104 06f1 18030000 		.4byte	.LASF128
+ 1105 06f5 05       		.byte	0x5
+ 1106 06f6 E7       		.byte	0xe7
+ 1107 06f7 59030000 		.4byte	0x359
+ 1108 06fb 00       		.byte	0
+ 1109 06fc 09       		.uleb128 0x9
+ 1110 06fd 1B080000 		.4byte	.LASF129
+ 1111 0701 05       		.byte	0x5
+ 1112 0702 E9       		.byte	0xe9
+ 1113 0703 64030000 		.4byte	0x364
+ 1114 0707 04       		.byte	0x4
+ 1115 0708 09       		.uleb128 0x9
+ 1116 0709 24080000 		.4byte	.LASF130
+ 1117 070d 05       		.byte	0x5
+ 1118 070e EA       		.byte	0xea
+ 1119 070f 64030000 		.4byte	0x364
+ 1120 0713 05       		.byte	0x5
+ 1121 0714 10       		.uleb128 0x10
+ 1122 0715 7800     		.ascii	"x\000"
+ 1123 0717 05       		.byte	0x5
+ 1124 0718 EC       		.byte	0xec
+ 1125 0719 97000000 		.4byte	0x97
+ 1126 071d 06       		.byte	0x6
+ 1127 071e 10       		.uleb128 0x10
+ 1128 071f 7900     		.ascii	"y\000"
+ 1129 0721 05       		.byte	0x5
+ 1130 0722 ED       		.byte	0xed
+ 1131 0723 97000000 		.4byte	0x97
+ 1132 0727 07       		.byte	0x7
+ 1133 0728 09       		.uleb128 0x9
+ 1134 0729 A7050000 		.4byte	.LASF131
+ 1135 072d 05       		.byte	0x5
+ 1136 072e EE       		.byte	0xee
+ 1137 072f 97000000 		.4byte	0x97
+ 1138 0733 08       		.byte	0x8
+ 1139 0734 09       		.uleb128 0x9
+ 1140 0735 91040000 		.4byte	.LASF132
+ 1141 0739 05       		.byte	0x5
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 23
+
+
+ 1142 073a EF       		.byte	0xef
+ 1143 073b 97000000 		.4byte	0x97
+ 1144 073f 09       		.byte	0x9
+ 1145 0740 09       		.uleb128 0x9
+ 1146 0741 82040000 		.4byte	.LASF133
+ 1147 0745 05       		.byte	0x5
+ 1148 0746 F1       		.byte	0xf1
+ 1149 0747 A2000000 		.4byte	0xa2
+ 1150 074b 0A       		.byte	0xa
+ 1151 074c 09       		.uleb128 0x9
+ 1152 074d E4020000 		.4byte	.LASF134
+ 1153 0751 05       		.byte	0x5
+ 1154 0752 F2       		.byte	0xf2
+ 1155 0753 A2000000 		.4byte	0xa2
+ 1156 0757 0B       		.byte	0xb
+ 1157 0758 09       		.uleb128 0x9
+ 1158 0759 6D050000 		.4byte	.LASF135
+ 1159 075d 05       		.byte	0x5
+ 1160 075e F3       		.byte	0xf3
+ 1161 075f A2000000 		.4byte	0xa2
+ 1162 0763 0C       		.byte	0xc
+ 1163 0764 09       		.uleb128 0x9
+ 1164 0765 E3080000 		.4byte	.LASF136
+ 1165 0769 05       		.byte	0x5
+ 1166 076a F4       		.byte	0xf4
+ 1167 076b A2000000 		.4byte	0xa2
+ 1168 076f 0D       		.byte	0xd
+ 1169 0770 10       		.uleb128 0x10
+ 1170 0771 64697200 		.ascii	"dir\000"
+ 1171 0775 05       		.byte	0x5
+ 1172 0776 F6       		.byte	0xf6
+ 1173 0777 A2000000 		.4byte	0xa2
+ 1174 077b 0E       		.byte	0xe
+ 1175 077c 00       		.byte	0
+ 1176 077d 02       		.uleb128 0x2
+ 1177 077e 6E000000 		.4byte	.LASF137
+ 1178 0782 05       		.byte	0x5
+ 1179 0783 F9       		.byte	0xf9
+ 1180 0784 E4060000 		.4byte	0x6e4
+ 1181 0788 08       		.uleb128 0x8
+ 1182 0789 F2070000 		.4byte	.LASF138
+ 1183 078d 14       		.byte	0x14
+ 1184 078e 05       		.byte	0x5
+ 1185 078f FB       		.byte	0xfb
+ 1186 0790 E0070000 		.4byte	0x7e0
+ 1187 0794 09       		.uleb128 0x9
+ 1188 0795 27000000 		.4byte	.LASF139
+ 1189 0799 05       		.byte	0x5
+ 1190 079a FD       		.byte	0xfd
+ 1191 079b AD000000 		.4byte	0xad
+ 1192 079f 00       		.byte	0
+ 1193 07a0 09       		.uleb128 0x9
+ 1194 07a1 06040000 		.4byte	.LASF140
+ 1195 07a5 05       		.byte	0x5
+ 1196 07a6 FE       		.byte	0xfe
+ 1197 07a7 AD000000 		.4byte	0xad
+ 1198 07ab 02       		.byte	0x2
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 24
+
+
+ 1199 07ac 09       		.uleb128 0x9
+ 1200 07ad 9B010000 		.4byte	.LASF141
+ 1201 07b1 05       		.byte	0x5
+ 1202 07b2 FF       		.byte	0xff
+ 1203 07b3 E0070000 		.4byte	0x7e0
+ 1204 07b7 04       		.byte	0x4
+ 1205 07b8 07       		.uleb128 0x7
+ 1206 07b9 BA040000 		.4byte	.LASF142
+ 1207 07bd 05       		.byte	0x5
+ 1208 07be 0001     		.2byte	0x100
+ 1209 07c0 E0070000 		.4byte	0x7e0
+ 1210 07c4 08       		.byte	0x8
+ 1211 07c5 07       		.uleb128 0x7
+ 1212 07c6 76050000 		.4byte	.LASF143
+ 1213 07ca 05       		.byte	0x5
+ 1214 07cb 0101     		.2byte	0x101
+ 1215 07cd E0070000 		.4byte	0x7e0
+ 1216 07d1 0C       		.byte	0xc
+ 1217 07d2 07       		.uleb128 0x7
+ 1218 07d3 F6040000 		.4byte	.LASF144
+ 1219 07d7 05       		.byte	0x5
+ 1220 07d8 0201     		.2byte	0x102
+ 1221 07da 59030000 		.4byte	0x359
+ 1222 07de 10       		.byte	0x10
+ 1223 07df 00       		.byte	0
+ 1224 07e0 0A       		.uleb128 0xa
+ 1225 07e1 04       		.byte	0x4
+ 1226 07e2 E6070000 		.4byte	0x7e6
+ 1227 07e6 0D       		.uleb128 0xd
+ 1228 07e7 AD000000 		.4byte	0xad
+ 1229 07eb 11       		.uleb128 0x11
+ 1230 07ec 70080000 		.4byte	.LASF145
+ 1231 07f0 05       		.byte	0x5
+ 1232 07f1 0401     		.2byte	0x104
+ 1233 07f3 88070000 		.4byte	0x788
+ 1234 07f7 11       		.uleb128 0x11
+ 1235 07f8 B1080000 		.4byte	.LASF146
+ 1236 07fc 05       		.byte	0x5
+ 1237 07fd 0E01     		.2byte	0x10e
+ 1238 07ff 03080000 		.4byte	0x803
+ 1239 0803 0A       		.uleb128 0xa
+ 1240 0804 04       		.byte	0x4
+ 1241 0805 09080000 		.4byte	0x809
+ 1242 0809 0B       		.uleb128 0xb
+ 1243 080a 64030000 		.4byte	0x364
+ 1244 080e 18080000 		.4byte	0x818
+ 1245 0812 0C       		.uleb128 0xc
+ 1246 0813 90050000 		.4byte	0x590
+ 1247 0817 00       		.byte	0
+ 1248 0818 0A       		.uleb128 0xa
+ 1249 0819 04       		.byte	0x4
+ 1250 081a 1E080000 		.4byte	0x81e
+ 1251 081e 0D       		.uleb128 0xd
+ 1252 081f 34050000 		.4byte	0x534
+ 1253 0823 12       		.uleb128 0x12
+ 1254 0824 9E040000 		.4byte	.LASF152
+ 1255 0828 01       		.byte	0x1
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 25
+
+
+ 1256 0829 2F       		.byte	0x2f
+ 1257 082a A2000000 		.4byte	0xa2
+ 1258 082e 00000000 		.4byte	.LFB0
+ 1259 0832 74000000 		.4byte	.LFE0-.LFB0
+ 1260 0836 01       		.uleb128 0x1
+ 1261 0837 9C       		.byte	0x9c
+ 1262 0838 AF080000 		.4byte	0x8af
+ 1263 083c 13       		.uleb128 0x13
+ 1264 083d BE030000 		.4byte	.LASF147
+ 1265 0841 01       		.byte	0x1
+ 1266 0842 2F       		.byte	0x2f
+ 1267 0843 90050000 		.4byte	0x590
+ 1268 0847 00000000 		.4byte	.LLST0
+ 1269 084b 14       		.uleb128 0x14
+ 1270 084c 12090000 		.4byte	.LASF148
+ 1271 0850 01       		.byte	0x1
+ 1272 0851 2F       		.byte	0x2f
+ 1273 0852 AF080000 		.4byte	0x8af
+ 1274 0856 01       		.uleb128 0x1
+ 1275 0857 51       		.byte	0x51
+ 1276 0858 15       		.uleb128 0x15
+ 1277 0859 653100   		.ascii	"e1\000"
+ 1278 085c 01       		.byte	0x1
+ 1279 085d 2F       		.byte	0x2f
+ 1280 085e AD000000 		.4byte	0xad
+ 1281 0862 3A000000 		.4byte	.LLST1
+ 1282 0866 15       		.uleb128 0x15
+ 1283 0867 653200   		.ascii	"e2\000"
+ 1284 086a 01       		.byte	0x1
+ 1285 086b 2F       		.byte	0x2f
+ 1286 086c AD000000 		.4byte	0xad
+ 1287 0870 7F000000 		.4byte	.LLST2
+ 1288 0874 16       		.uleb128 0x16
+ 1289 0875 693100   		.ascii	"i1\000"
+ 1290 0878 01       		.byte	0x1
+ 1291 0879 31       		.byte	0x31
+ 1292 087a AD000000 		.4byte	0xad
+ 1293 087e AB000000 		.4byte	.LLST3
+ 1294 0882 16       		.uleb128 0x16
+ 1295 0883 693200   		.ascii	"i2\000"
+ 1296 0886 01       		.byte	0x1
+ 1297 0887 31       		.byte	0x31
+ 1298 0888 AD000000 		.4byte	0xad
+ 1299 088c EC000000 		.4byte	.LLST4
+ 1300 0890 16       		.uleb128 0x16
+ 1301 0891 636E7400 		.ascii	"cnt\000"
+ 1302 0895 01       		.byte	0x1
+ 1303 0896 31       		.byte	0x31
+ 1304 0897 AD000000 		.4byte	0xad
+ 1305 089b 0A010000 		.4byte	.LLST5
+ 1306 089f 16       		.uleb128 0x16
+ 1307 08a0 656E6400 		.ascii	"end\000"
+ 1308 08a4 01       		.byte	0x1
+ 1309 08a5 31       		.byte	0x31
+ 1310 08a6 AD000000 		.4byte	0xad
+ 1311 08aa 75010000 		.4byte	.LLST6
+ 1312 08ae 00       		.byte	0
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 26
+
+
+ 1313 08af 0A       		.uleb128 0xa
+ 1314 08b0 04       		.byte	0x4
+ 1315 08b1 EB070000 		.4byte	0x7eb
+ 1316 08b5 17       		.uleb128 0x17
+ 1317 08b6 C2070000 		.4byte	.LASF153
+ 1318 08ba 01       		.byte	0x1
+ 1319 08bb 4E       		.byte	0x4e
+ 1320 08bc A2000000 		.4byte	0xa2
+ 1321 08c0 00000000 		.4byte	.LFB1
+ 1322 08c4 44000000 		.4byte	.LFE1-.LFB1
+ 1323 08c8 01       		.uleb128 0x1
+ 1324 08c9 9C       		.byte	0x9c
+ 1325 08ca 13       		.uleb128 0x13
+ 1326 08cb BE030000 		.4byte	.LASF147
+ 1327 08cf 01       		.byte	0x1
+ 1328 08d0 4E       		.byte	0x4e
+ 1329 08d1 90050000 		.4byte	0x590
+ 1330 08d5 88010000 		.4byte	.LLST7
+ 1331 08d9 18       		.uleb128 0x18
+ 1332 08da 6B7400   		.ascii	"kt\000"
+ 1333 08dd 01       		.byte	0x1
+ 1334 08de 4E       		.byte	0x4e
+ 1335 08df E0070000 		.4byte	0x7e0
+ 1336 08e3 01       		.uleb128 0x1
+ 1337 08e4 51       		.byte	0x51
+ 1338 08e5 18       		.uleb128 0x18
+ 1339 08e6 653100   		.ascii	"e1\000"
+ 1340 08e9 01       		.byte	0x1
+ 1341 08ea 4E       		.byte	0x4e
+ 1342 08eb AD000000 		.4byte	0xad
+ 1343 08ef 01       		.uleb128 0x1
+ 1344 08f0 52       		.byte	0x52
+ 1345 08f1 18       		.uleb128 0x18
+ 1346 08f2 653200   		.ascii	"e2\000"
+ 1347 08f5 01       		.byte	0x1
+ 1348 08f6 4E       		.byte	0x4e
+ 1349 08f7 AD000000 		.4byte	0xad
+ 1350 08fb 01       		.uleb128 0x1
+ 1351 08fc 53       		.byte	0x53
+ 1352 08fd 16       		.uleb128 0x16
+ 1353 08fe 6900     		.ascii	"i\000"
+ 1354 0900 01       		.byte	0x1
+ 1355 0901 50       		.byte	0x50
+ 1356 0902 AD000000 		.4byte	0xad
+ 1357 0906 C2010000 		.4byte	.LLST8
+ 1358 090a 00       		.byte	0
+ 1359 090b 00       		.byte	0
+ 1360              		.section	.debug_abbrev,"",%progbits
+ 1361              	.Ldebug_abbrev0:
+ 1362 0000 01       		.uleb128 0x1
+ 1363 0001 11       		.uleb128 0x11
+ 1364 0002 01       		.byte	0x1
+ 1365 0003 25       		.uleb128 0x25
+ 1366 0004 0E       		.uleb128 0xe
+ 1367 0005 13       		.uleb128 0x13
+ 1368 0006 0B       		.uleb128 0xb
+ 1369 0007 03       		.uleb128 0x3
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 27
+
+
+ 1370 0008 0E       		.uleb128 0xe
+ 1371 0009 1B       		.uleb128 0x1b
+ 1372 000a 0E       		.uleb128 0xe
+ 1373 000b 55       		.uleb128 0x55
+ 1374 000c 17       		.uleb128 0x17
+ 1375 000d 11       		.uleb128 0x11
+ 1376 000e 01       		.uleb128 0x1
+ 1377 000f 10       		.uleb128 0x10
+ 1378 0010 17       		.uleb128 0x17
+ 1379 0011 00       		.byte	0
+ 1380 0012 00       		.byte	0
+ 1381 0013 02       		.uleb128 0x2
+ 1382 0014 16       		.uleb128 0x16
+ 1383 0015 00       		.byte	0
+ 1384 0016 03       		.uleb128 0x3
+ 1385 0017 0E       		.uleb128 0xe
+ 1386 0018 3A       		.uleb128 0x3a
+ 1387 0019 0B       		.uleb128 0xb
+ 1388 001a 3B       		.uleb128 0x3b
+ 1389 001b 0B       		.uleb128 0xb
+ 1390 001c 49       		.uleb128 0x49
+ 1391 001d 13       		.uleb128 0x13
+ 1392 001e 00       		.byte	0
+ 1393 001f 00       		.byte	0
+ 1394 0020 03       		.uleb128 0x3
+ 1395 0021 24       		.uleb128 0x24
+ 1396 0022 00       		.byte	0
+ 1397 0023 0B       		.uleb128 0xb
+ 1398 0024 0B       		.uleb128 0xb
+ 1399 0025 3E       		.uleb128 0x3e
+ 1400 0026 0B       		.uleb128 0xb
+ 1401 0027 03       		.uleb128 0x3
+ 1402 0028 0E       		.uleb128 0xe
+ 1403 0029 00       		.byte	0
+ 1404 002a 00       		.byte	0
+ 1405 002b 04       		.uleb128 0x4
+ 1406 002c 24       		.uleb128 0x24
+ 1407 002d 00       		.byte	0
+ 1408 002e 0B       		.uleb128 0xb
+ 1409 002f 0B       		.uleb128 0xb
+ 1410 0030 3E       		.uleb128 0x3e
+ 1411 0031 0B       		.uleb128 0xb
+ 1412 0032 03       		.uleb128 0x3
+ 1413 0033 08       		.uleb128 0x8
+ 1414 0034 00       		.byte	0
+ 1415 0035 00       		.byte	0
+ 1416 0036 05       		.uleb128 0x5
+ 1417 0037 0F       		.uleb128 0xf
+ 1418 0038 00       		.byte	0
+ 1419 0039 0B       		.uleb128 0xb
+ 1420 003a 0B       		.uleb128 0xb
+ 1421 003b 00       		.byte	0
+ 1422 003c 00       		.byte	0
+ 1423 003d 06       		.uleb128 0x6
+ 1424 003e 13       		.uleb128 0x13
+ 1425 003f 01       		.byte	0x1
+ 1426 0040 03       		.uleb128 0x3
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 28
+
+
+ 1427 0041 0E       		.uleb128 0xe
+ 1428 0042 0B       		.uleb128 0xb
+ 1429 0043 0B       		.uleb128 0xb
+ 1430 0044 3A       		.uleb128 0x3a
+ 1431 0045 0B       		.uleb128 0xb
+ 1432 0046 3B       		.uleb128 0x3b
+ 1433 0047 05       		.uleb128 0x5
+ 1434 0048 01       		.uleb128 0x1
+ 1435 0049 13       		.uleb128 0x13
+ 1436 004a 00       		.byte	0
+ 1437 004b 00       		.byte	0
+ 1438 004c 07       		.uleb128 0x7
+ 1439 004d 0D       		.uleb128 0xd
+ 1440 004e 00       		.byte	0
+ 1441 004f 03       		.uleb128 0x3
+ 1442 0050 0E       		.uleb128 0xe
+ 1443 0051 3A       		.uleb128 0x3a
+ 1444 0052 0B       		.uleb128 0xb
+ 1445 0053 3B       		.uleb128 0x3b
+ 1446 0054 05       		.uleb128 0x5
+ 1447 0055 49       		.uleb128 0x49
+ 1448 0056 13       		.uleb128 0x13
+ 1449 0057 38       		.uleb128 0x38
+ 1450 0058 0B       		.uleb128 0xb
+ 1451 0059 00       		.byte	0
+ 1452 005a 00       		.byte	0
+ 1453 005b 08       		.uleb128 0x8
+ 1454 005c 13       		.uleb128 0x13
+ 1455 005d 01       		.byte	0x1
+ 1456 005e 03       		.uleb128 0x3
+ 1457 005f 0E       		.uleb128 0xe
+ 1458 0060 0B       		.uleb128 0xb
+ 1459 0061 0B       		.uleb128 0xb
+ 1460 0062 3A       		.uleb128 0x3a
+ 1461 0063 0B       		.uleb128 0xb
+ 1462 0064 3B       		.uleb128 0x3b
+ 1463 0065 0B       		.uleb128 0xb
+ 1464 0066 01       		.uleb128 0x1
+ 1465 0067 13       		.uleb128 0x13
+ 1466 0068 00       		.byte	0
+ 1467 0069 00       		.byte	0
+ 1468 006a 09       		.uleb128 0x9
+ 1469 006b 0D       		.uleb128 0xd
+ 1470 006c 00       		.byte	0
+ 1471 006d 03       		.uleb128 0x3
+ 1472 006e 0E       		.uleb128 0xe
+ 1473 006f 3A       		.uleb128 0x3a
+ 1474 0070 0B       		.uleb128 0xb
+ 1475 0071 3B       		.uleb128 0x3b
+ 1476 0072 0B       		.uleb128 0xb
+ 1477 0073 49       		.uleb128 0x49
+ 1478 0074 13       		.uleb128 0x13
+ 1479 0075 38       		.uleb128 0x38
+ 1480 0076 0B       		.uleb128 0xb
+ 1481 0077 00       		.byte	0
+ 1482 0078 00       		.byte	0
+ 1483 0079 0A       		.uleb128 0xa
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 29
+
+
+ 1484 007a 0F       		.uleb128 0xf
+ 1485 007b 00       		.byte	0
+ 1486 007c 0B       		.uleb128 0xb
+ 1487 007d 0B       		.uleb128 0xb
+ 1488 007e 49       		.uleb128 0x49
+ 1489 007f 13       		.uleb128 0x13
+ 1490 0080 00       		.byte	0
+ 1491 0081 00       		.byte	0
+ 1492 0082 0B       		.uleb128 0xb
+ 1493 0083 15       		.uleb128 0x15
+ 1494 0084 01       		.byte	0x1
+ 1495 0085 27       		.uleb128 0x27
+ 1496 0086 19       		.uleb128 0x19
+ 1497 0087 49       		.uleb128 0x49
+ 1498 0088 13       		.uleb128 0x13
+ 1499 0089 01       		.uleb128 0x1
+ 1500 008a 13       		.uleb128 0x13
+ 1501 008b 00       		.byte	0
+ 1502 008c 00       		.byte	0
+ 1503 008d 0C       		.uleb128 0xc
+ 1504 008e 05       		.uleb128 0x5
+ 1505 008f 00       		.byte	0
+ 1506 0090 49       		.uleb128 0x49
+ 1507 0091 13       		.uleb128 0x13
+ 1508 0092 00       		.byte	0
+ 1509 0093 00       		.byte	0
+ 1510 0094 0D       		.uleb128 0xd
+ 1511 0095 26       		.uleb128 0x26
+ 1512 0096 00       		.byte	0
+ 1513 0097 49       		.uleb128 0x49
+ 1514 0098 13       		.uleb128 0x13
+ 1515 0099 00       		.byte	0
+ 1516 009a 00       		.byte	0
+ 1517 009b 0E       		.uleb128 0xe
+ 1518 009c 0D       		.uleb128 0xd
+ 1519 009d 00       		.byte	0
+ 1520 009e 03       		.uleb128 0x3
+ 1521 009f 08       		.uleb128 0x8
+ 1522 00a0 3A       		.uleb128 0x3a
+ 1523 00a1 0B       		.uleb128 0xb
+ 1524 00a2 3B       		.uleb128 0x3b
+ 1525 00a3 05       		.uleb128 0x5
+ 1526 00a4 49       		.uleb128 0x49
+ 1527 00a5 13       		.uleb128 0x13
+ 1528 00a6 38       		.uleb128 0x38
+ 1529 00a7 0B       		.uleb128 0xb
+ 1530 00a8 00       		.byte	0
+ 1531 00a9 00       		.byte	0
+ 1532 00aa 0F       		.uleb128 0xf
+ 1533 00ab 15       		.uleb128 0x15
+ 1534 00ac 01       		.byte	0x1
+ 1535 00ad 27       		.uleb128 0x27
+ 1536 00ae 19       		.uleb128 0x19
+ 1537 00af 01       		.uleb128 0x1
+ 1538 00b0 13       		.uleb128 0x13
+ 1539 00b1 00       		.byte	0
+ 1540 00b2 00       		.byte	0
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 30
+
+
+ 1541 00b3 10       		.uleb128 0x10
+ 1542 00b4 0D       		.uleb128 0xd
+ 1543 00b5 00       		.byte	0
+ 1544 00b6 03       		.uleb128 0x3
+ 1545 00b7 08       		.uleb128 0x8
+ 1546 00b8 3A       		.uleb128 0x3a
+ 1547 00b9 0B       		.uleb128 0xb
+ 1548 00ba 3B       		.uleb128 0x3b
+ 1549 00bb 0B       		.uleb128 0xb
+ 1550 00bc 49       		.uleb128 0x49
+ 1551 00bd 13       		.uleb128 0x13
+ 1552 00be 38       		.uleb128 0x38
+ 1553 00bf 0B       		.uleb128 0xb
+ 1554 00c0 00       		.byte	0
+ 1555 00c1 00       		.byte	0
+ 1556 00c2 11       		.uleb128 0x11
+ 1557 00c3 16       		.uleb128 0x16
+ 1558 00c4 00       		.byte	0
+ 1559 00c5 03       		.uleb128 0x3
+ 1560 00c6 0E       		.uleb128 0xe
+ 1561 00c7 3A       		.uleb128 0x3a
+ 1562 00c8 0B       		.uleb128 0xb
+ 1563 00c9 3B       		.uleb128 0x3b
+ 1564 00ca 05       		.uleb128 0x5
+ 1565 00cb 49       		.uleb128 0x49
+ 1566 00cc 13       		.uleb128 0x13
+ 1567 00cd 00       		.byte	0
+ 1568 00ce 00       		.byte	0
+ 1569 00cf 12       		.uleb128 0x12
+ 1570 00d0 2E       		.uleb128 0x2e
+ 1571 00d1 01       		.byte	0x1
+ 1572 00d2 3F       		.uleb128 0x3f
+ 1573 00d3 19       		.uleb128 0x19
+ 1574 00d4 03       		.uleb128 0x3
+ 1575 00d5 0E       		.uleb128 0xe
+ 1576 00d6 3A       		.uleb128 0x3a
+ 1577 00d7 0B       		.uleb128 0xb
+ 1578 00d8 3B       		.uleb128 0x3b
+ 1579 00d9 0B       		.uleb128 0xb
+ 1580 00da 27       		.uleb128 0x27
+ 1581 00db 19       		.uleb128 0x19
+ 1582 00dc 49       		.uleb128 0x49
+ 1583 00dd 13       		.uleb128 0x13
+ 1584 00de 11       		.uleb128 0x11
+ 1585 00df 01       		.uleb128 0x1
+ 1586 00e0 12       		.uleb128 0x12
+ 1587 00e1 06       		.uleb128 0x6
+ 1588 00e2 40       		.uleb128 0x40
+ 1589 00e3 18       		.uleb128 0x18
+ 1590 00e4 9742     		.uleb128 0x2117
+ 1591 00e6 19       		.uleb128 0x19
+ 1592 00e7 01       		.uleb128 0x1
+ 1593 00e8 13       		.uleb128 0x13
+ 1594 00e9 00       		.byte	0
+ 1595 00ea 00       		.byte	0
+ 1596 00eb 13       		.uleb128 0x13
+ 1597 00ec 05       		.uleb128 0x5
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 31
+
+
+ 1598 00ed 00       		.byte	0
+ 1599 00ee 03       		.uleb128 0x3
+ 1600 00ef 0E       		.uleb128 0xe
+ 1601 00f0 3A       		.uleb128 0x3a
+ 1602 00f1 0B       		.uleb128 0xb
+ 1603 00f2 3B       		.uleb128 0x3b
+ 1604 00f3 0B       		.uleb128 0xb
+ 1605 00f4 49       		.uleb128 0x49
+ 1606 00f5 13       		.uleb128 0x13
+ 1607 00f6 02       		.uleb128 0x2
+ 1608 00f7 17       		.uleb128 0x17
+ 1609 00f8 00       		.byte	0
+ 1610 00f9 00       		.byte	0
+ 1611 00fa 14       		.uleb128 0x14
+ 1612 00fb 05       		.uleb128 0x5
+ 1613 00fc 00       		.byte	0
+ 1614 00fd 03       		.uleb128 0x3
+ 1615 00fe 0E       		.uleb128 0xe
+ 1616 00ff 3A       		.uleb128 0x3a
+ 1617 0100 0B       		.uleb128 0xb
+ 1618 0101 3B       		.uleb128 0x3b
+ 1619 0102 0B       		.uleb128 0xb
+ 1620 0103 49       		.uleb128 0x49
+ 1621 0104 13       		.uleb128 0x13
+ 1622 0105 02       		.uleb128 0x2
+ 1623 0106 18       		.uleb128 0x18
+ 1624 0107 00       		.byte	0
+ 1625 0108 00       		.byte	0
+ 1626 0109 15       		.uleb128 0x15
+ 1627 010a 05       		.uleb128 0x5
+ 1628 010b 00       		.byte	0
+ 1629 010c 03       		.uleb128 0x3
+ 1630 010d 08       		.uleb128 0x8
+ 1631 010e 3A       		.uleb128 0x3a
+ 1632 010f 0B       		.uleb128 0xb
+ 1633 0110 3B       		.uleb128 0x3b
+ 1634 0111 0B       		.uleb128 0xb
+ 1635 0112 49       		.uleb128 0x49
+ 1636 0113 13       		.uleb128 0x13
+ 1637 0114 02       		.uleb128 0x2
+ 1638 0115 17       		.uleb128 0x17
+ 1639 0116 00       		.byte	0
+ 1640 0117 00       		.byte	0
+ 1641 0118 16       		.uleb128 0x16
+ 1642 0119 34       		.uleb128 0x34
+ 1643 011a 00       		.byte	0
+ 1644 011b 03       		.uleb128 0x3
+ 1645 011c 08       		.uleb128 0x8
+ 1646 011d 3A       		.uleb128 0x3a
+ 1647 011e 0B       		.uleb128 0xb
+ 1648 011f 3B       		.uleb128 0x3b
+ 1649 0120 0B       		.uleb128 0xb
+ 1650 0121 49       		.uleb128 0x49
+ 1651 0122 13       		.uleb128 0x13
+ 1652 0123 02       		.uleb128 0x2
+ 1653 0124 17       		.uleb128 0x17
+ 1654 0125 00       		.byte	0
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 32
+
+
+ 1655 0126 00       		.byte	0
+ 1656 0127 17       		.uleb128 0x17
+ 1657 0128 2E       		.uleb128 0x2e
+ 1658 0129 01       		.byte	0x1
+ 1659 012a 3F       		.uleb128 0x3f
+ 1660 012b 19       		.uleb128 0x19
+ 1661 012c 03       		.uleb128 0x3
+ 1662 012d 0E       		.uleb128 0xe
+ 1663 012e 3A       		.uleb128 0x3a
+ 1664 012f 0B       		.uleb128 0xb
+ 1665 0130 3B       		.uleb128 0x3b
+ 1666 0131 0B       		.uleb128 0xb
+ 1667 0132 27       		.uleb128 0x27
+ 1668 0133 19       		.uleb128 0x19
+ 1669 0134 49       		.uleb128 0x49
+ 1670 0135 13       		.uleb128 0x13
+ 1671 0136 11       		.uleb128 0x11
+ 1672 0137 01       		.uleb128 0x1
+ 1673 0138 12       		.uleb128 0x12
+ 1674 0139 06       		.uleb128 0x6
+ 1675 013a 40       		.uleb128 0x40
+ 1676 013b 18       		.uleb128 0x18
+ 1677 013c 9742     		.uleb128 0x2117
+ 1678 013e 19       		.uleb128 0x19
+ 1679 013f 00       		.byte	0
+ 1680 0140 00       		.byte	0
+ 1681 0141 18       		.uleb128 0x18
+ 1682 0142 05       		.uleb128 0x5
+ 1683 0143 00       		.byte	0
+ 1684 0144 03       		.uleb128 0x3
+ 1685 0145 08       		.uleb128 0x8
+ 1686 0146 3A       		.uleb128 0x3a
+ 1687 0147 0B       		.uleb128 0xb
+ 1688 0148 3B       		.uleb128 0x3b
+ 1689 0149 0B       		.uleb128 0xb
+ 1690 014a 49       		.uleb128 0x49
+ 1691 014b 13       		.uleb128 0x13
+ 1692 014c 02       		.uleb128 0x2
+ 1693 014d 18       		.uleb128 0x18
+ 1694 014e 00       		.byte	0
+ 1695 014f 00       		.byte	0
+ 1696 0150 00       		.byte	0
+ 1697              		.section	.debug_loc,"",%progbits
+ 1698              	.Ldebug_loc0:
+ 1699              	.LLST0:
+ 1700 0000 00000000 		.4byte	.LVL0
+ 1701 0004 12000000 		.4byte	.LVL4
+ 1702 0008 0100     		.2byte	0x1
+ 1703 000a 50       		.byte	0x50
+ 1704 000b 12000000 		.4byte	.LVL4
+ 1705 000f 6A000000 		.4byte	.LVL19
+ 1706 0013 0400     		.2byte	0x4
+ 1707 0015 F3       		.byte	0xf3
+ 1708 0016 01       		.uleb128 0x1
+ 1709 0017 50       		.byte	0x50
+ 1710 0018 9F       		.byte	0x9f
+ 1711 0019 6A000000 		.4byte	.LVL19
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 33
+
+
+ 1712 001d 6C000000 		.4byte	.LVL20
+ 1713 0021 0100     		.2byte	0x1
+ 1714 0023 50       		.byte	0x50
+ 1715 0024 6C000000 		.4byte	.LVL20
+ 1716 0028 74000000 		.4byte	.LFE0
+ 1717 002c 0400     		.2byte	0x4
+ 1718 002e F3       		.byte	0xf3
+ 1719 002f 01       		.uleb128 0x1
+ 1720 0030 50       		.byte	0x50
+ 1721 0031 9F       		.byte	0x9f
+ 1722 0032 00000000 		.4byte	0
+ 1723 0036 00000000 		.4byte	0
+ 1724              	.LLST1:
+ 1725 003a 00000000 		.4byte	.LVL0
+ 1726 003e 32000000 		.4byte	.LVL9
+ 1727 0042 0100     		.2byte	0x1
+ 1728 0044 52       		.byte	0x52
+ 1729 0045 32000000 		.4byte	.LVL9
+ 1730 0049 38000000 		.4byte	.LVL11
+ 1731 004d 0400     		.2byte	0x4
+ 1732 004f F3       		.byte	0xf3
+ 1733 0050 01       		.uleb128 0x1
+ 1734 0051 52       		.byte	0x52
+ 1735 0052 9F       		.byte	0x9f
+ 1736 0053 38000000 		.4byte	.LVL11
+ 1737 0057 3C000000 		.4byte	.LVL12
+ 1738 005b 0100     		.2byte	0x1
+ 1739 005d 52       		.byte	0x52
+ 1740 005e 3C000000 		.4byte	.LVL12
+ 1741 0062 6A000000 		.4byte	.LVL19
+ 1742 0066 0400     		.2byte	0x4
+ 1743 0068 F3       		.byte	0xf3
+ 1744 0069 01       		.uleb128 0x1
+ 1745 006a 52       		.byte	0x52
+ 1746 006b 9F       		.byte	0x9f
+ 1747 006c 6A000000 		.4byte	.LVL19
+ 1748 0070 74000000 		.4byte	.LFE0
+ 1749 0074 0100     		.2byte	0x1
+ 1750 0076 52       		.byte	0x52
+ 1751 0077 00000000 		.4byte	0
+ 1752 007b 00000000 		.4byte	0
+ 1753              	.LLST2:
+ 1754 007f 00000000 		.4byte	.LVL0
+ 1755 0083 64000000 		.4byte	.LVL17
+ 1756 0087 0100     		.2byte	0x1
+ 1757 0089 53       		.byte	0x53
+ 1758 008a 64000000 		.4byte	.LVL17
+ 1759 008e 6A000000 		.4byte	.LVL19
+ 1760 0092 0400     		.2byte	0x4
+ 1761 0094 F3       		.byte	0xf3
+ 1762 0095 01       		.uleb128 0x1
+ 1763 0096 53       		.byte	0x53
+ 1764 0097 9F       		.byte	0x9f
+ 1765 0098 6A000000 		.4byte	.LVL19
+ 1766 009c 74000000 		.4byte	.LFE0
+ 1767 00a0 0100     		.2byte	0x1
+ 1768 00a2 53       		.byte	0x53
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 34
+
+
+ 1769 00a3 00000000 		.4byte	0
+ 1770 00a7 00000000 		.4byte	0
+ 1771              	.LLST3:
+ 1772 00ab 0C000000 		.4byte	.LVL3
+ 1773 00af 1C000000 		.4byte	.LVL5
+ 1774 00b3 0200     		.2byte	0x2
+ 1775 00b5 30       		.byte	0x30
+ 1776 00b6 9F       		.byte	0x9f
+ 1777 00b7 1C000000 		.4byte	.LVL5
+ 1778 00bb 20000000 		.4byte	.LVL6
+ 1779 00bf 0100     		.2byte	0x1
+ 1780 00c1 56       		.byte	0x56
+ 1781 00c2 24000000 		.4byte	.LVL7
+ 1782 00c6 30000000 		.4byte	.LVL8
+ 1783 00ca 0100     		.2byte	0x1
+ 1784 00cc 54       		.byte	0x54
+ 1785 00cd 30000000 		.4byte	.LVL8
+ 1786 00d1 32000000 		.4byte	.LVL9
+ 1787 00d5 0100     		.2byte	0x1
+ 1788 00d7 56       		.byte	0x56
+ 1789 00d8 6E000000 		.4byte	.LVL21
+ 1790 00dc 74000000 		.4byte	.LFE0
+ 1791 00e0 0200     		.2byte	0x2
+ 1792 00e2 30       		.byte	0x30
+ 1793 00e3 9F       		.byte	0x9f
+ 1794 00e4 00000000 		.4byte	0
+ 1795 00e8 00000000 		.4byte	0
+ 1796              	.LLST4:
+ 1797 00ec 40000000 		.4byte	.LVL14
+ 1798 00f0 5A000000 		.4byte	.LVL15
+ 1799 00f4 0100     		.2byte	0x1
+ 1800 00f6 52       		.byte	0x52
+ 1801 00f7 5C000000 		.4byte	.LVL16
+ 1802 00fb 6A000000 		.4byte	.LVL19
+ 1803 00ff 0100     		.2byte	0x1
+ 1804 0101 52       		.byte	0x52
+ 1805 0102 00000000 		.4byte	0
+ 1806 0106 00000000 		.4byte	0
+ 1807              	.LLST5:
+ 1808 010a 08000000 		.4byte	.LVL1
+ 1809 010e 0A000000 		.4byte	.LVL2
+ 1810 0112 0100     		.2byte	0x1
+ 1811 0114 57       		.byte	0x57
+ 1812 0115 0A000000 		.4byte	.LVL2
+ 1813 0119 0C000000 		.4byte	.LVL3
+ 1814 011d 0300     		.2byte	0x3
+ 1815 011f 77       		.byte	0x77
+ 1816 0120 01       		.sleb128 1
+ 1817 0121 9F       		.byte	0x9f
+ 1818 0122 0C000000 		.4byte	.LVL3
+ 1819 0126 36000000 		.4byte	.LVL10
+ 1820 012a 0100     		.2byte	0x1
+ 1821 012c 57       		.byte	0x57
+ 1822 012d 36000000 		.4byte	.LVL10
+ 1823 0131 38000000 		.4byte	.LVL11
+ 1824 0135 0B00     		.2byte	0xb
+ 1825 0137 71       		.byte	0x71
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 35
+
+
+ 1826 0138 00       		.sleb128 0
+ 1827 0139 94       		.byte	0x94
+ 1828 013a 02       		.byte	0x2
+ 1829 013b 0A       		.byte	0xa
+ 1830 013c FFFF     		.2byte	0xffff
+ 1831 013e 1A       		.byte	0x1a
+ 1832 013f 31       		.byte	0x31
+ 1833 0140 1C       		.byte	0x1c
+ 1834 0141 9F       		.byte	0x9f
+ 1835 0142 38000000 		.4byte	.LVL11
+ 1836 0146 66000000 		.4byte	.LVL18
+ 1837 014a 0100     		.2byte	0x1
+ 1838 014c 57       		.byte	0x57
+ 1839 014d 66000000 		.4byte	.LVL18
+ 1840 0151 6A000000 		.4byte	.LVL19
+ 1841 0155 0B00     		.2byte	0xb
+ 1842 0157 71       		.byte	0x71
+ 1843 0158 00       		.sleb128 0
+ 1844 0159 94       		.byte	0x94
+ 1845 015a 02       		.byte	0x2
+ 1846 015b 0A       		.byte	0xa
+ 1847 015c FFFF     		.2byte	0xffff
+ 1848 015e 1A       		.byte	0x1a
+ 1849 015f 31       		.byte	0x31
+ 1850 0160 1C       		.byte	0x1c
+ 1851 0161 9F       		.byte	0x9f
+ 1852 0162 6E000000 		.4byte	.LVL21
+ 1853 0166 74000000 		.4byte	.LFE0
+ 1854 016a 0100     		.2byte	0x1
+ 1855 016c 57       		.byte	0x57
+ 1856 016d 00000000 		.4byte	0
+ 1857 0171 00000000 		.4byte	0
+ 1858              	.LLST6:
+ 1859 0175 3E000000 		.4byte	.LVL13
+ 1860 0179 66000000 		.4byte	.LVL18
+ 1861 017d 0100     		.2byte	0x1
+ 1862 017f 54       		.byte	0x54
+ 1863 0180 00000000 		.4byte	0
+ 1864 0184 00000000 		.4byte	0
+ 1865              	.LLST7:
+ 1866 0188 00000000 		.4byte	.LVL22
+ 1867 018c 0C000000 		.4byte	.LVL23
+ 1868 0190 0100     		.2byte	0x1
+ 1869 0192 50       		.byte	0x50
+ 1870 0193 0C000000 		.4byte	.LVL23
+ 1871 0197 40000000 		.4byte	.LVL31
+ 1872 019b 0400     		.2byte	0x4
+ 1873 019d F3       		.byte	0xf3
+ 1874 019e 01       		.uleb128 0x1
+ 1875 019f 50       		.byte	0x50
+ 1876 01a0 9F       		.byte	0x9f
+ 1877 01a1 40000000 		.4byte	.LVL31
+ 1878 01a5 42000000 		.4byte	.LVL32
+ 1879 01a9 0100     		.2byte	0x1
+ 1880 01ab 50       		.byte	0x50
+ 1881 01ac 42000000 		.4byte	.LVL32
+ 1882 01b0 44000000 		.4byte	.LFE1
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 36
+
+
+ 1883 01b4 0400     		.2byte	0x4
+ 1884 01b6 F3       		.byte	0xf3
+ 1885 01b7 01       		.uleb128 0x1
+ 1886 01b8 50       		.byte	0x50
+ 1887 01b9 9F       		.byte	0x9f
+ 1888 01ba 00000000 		.4byte	0
+ 1889 01be 00000000 		.4byte	0
+ 1890              	.LLST8:
+ 1891 01c2 00000000 		.4byte	.LVL22
+ 1892 01c6 14000000 		.4byte	.LVL24
+ 1893 01ca 0200     		.2byte	0x2
+ 1894 01cc 30       		.byte	0x30
+ 1895 01cd 9F       		.byte	0x9f
+ 1896 01ce 14000000 		.4byte	.LVL24
+ 1897 01d2 20000000 		.4byte	.LVL26
+ 1898 01d6 0100     		.2byte	0x1
+ 1899 01d8 54       		.byte	0x54
+ 1900 01d9 24000000 		.4byte	.LVL27
+ 1901 01dd 36000000 		.4byte	.LVL28
+ 1902 01e1 0100     		.2byte	0x1
+ 1903 01e3 54       		.byte	0x54
+ 1904 01e4 3A000000 		.4byte	.LVL29
+ 1905 01e8 3E000000 		.4byte	.LVL30
+ 1906 01ec 0100     		.2byte	0x1
+ 1907 01ee 54       		.byte	0x54
+ 1908 01ef 40000000 		.4byte	.LVL31
+ 1909 01f3 44000000 		.4byte	.LFE1
+ 1910 01f7 0200     		.2byte	0x2
+ 1911 01f9 30       		.byte	0x30
+ 1912 01fa 9F       		.byte	0x9f
+ 1913 01fb 00000000 		.4byte	0
+ 1914 01ff 00000000 		.4byte	0
+ 1915              		.section	.debug_aranges,"",%progbits
+ 1916 0000 24000000 		.4byte	0x24
+ 1917 0004 0200     		.2byte	0x2
+ 1918 0006 00000000 		.4byte	.Ldebug_info0
+ 1919 000a 04       		.byte	0x4
+ 1920 000b 00       		.byte	0
+ 1921 000c 0000     		.2byte	0
+ 1922 000e 0000     		.2byte	0
+ 1923 0010 00000000 		.4byte	.LFB0
+ 1924 0014 74000000 		.4byte	.LFE0-.LFB0
+ 1925 0018 00000000 		.4byte	.LFB1
+ 1926 001c 44000000 		.4byte	.LFE1-.LFB1
+ 1927 0020 00000000 		.4byte	0
+ 1928 0024 00000000 		.4byte	0
+ 1929              		.section	.debug_ranges,"",%progbits
+ 1930              	.Ldebug_ranges0:
+ 1931 0000 00000000 		.4byte	.LFB0
+ 1932 0004 74000000 		.4byte	.LFE0
+ 1933 0008 00000000 		.4byte	.LFB1
+ 1934 000c 44000000 		.4byte	.LFE1
+ 1935 0010 00000000 		.4byte	0
+ 1936 0014 00000000 		.4byte	0
+ 1937              		.section	.debug_line,"",%progbits
+ 1938              	.Ldebug_line0:
+ 1939 0000 BF010000 		.section	.debug_str,"MS",%progbits,1
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 37
+
+
+ 1939      02004A01 
+ 1939      00000201 
+ 1939      FB0E0D00 
+ 1939      01010101 
+ 1940              	.LASF125:
+ 1941 0000 73746172 		.ascii	"start_pos_unicode\000"
+ 1941      745F706F 
+ 1941      735F756E 
+ 1941      69636F64 
+ 1941      6500
+ 1942              	.LASF46:
+ 1943 0012 72657365 		.ascii	"reset_pulse_width_ms\000"
+ 1943      745F7075 
+ 1943      6C73655F 
+ 1943      77696474 
+ 1943      685F6D73 
+ 1944              	.LASF139:
+ 1945 0027 66697273 		.ascii	"first_table_cnt\000"
+ 1945      745F7461 
+ 1945      626C655F 
+ 1945      636E7400 
+ 1946              	.LASF103:
+ 1947 0037 75386732 		.ascii	"u8g2_update_page_win_cb\000"
+ 1947      5F757064 
+ 1947      6174655F 
+ 1947      70616765 
+ 1947      5F77696E 
+ 1948              	.LASF68:
+ 1949 004f 74696C65 		.ascii	"tile_buf_ptr\000"
+ 1949      5F627566 
+ 1949      5F707472 
+ 1949      00
+ 1950              	.LASF1:
+ 1951 005c 5F5F7569 		.ascii	"__uint8_t\000"
+ 1951      6E74385F 
+ 1951      7400
+ 1952              	.LASF23:
+ 1953 0066 62797465 		.ascii	"byte_cb\000"
+ 1953      5F636200 
+ 1954              	.LASF137:
+ 1955 006e 75386732 		.ascii	"u8g2_font_decode_t\000"
+ 1955      5F666F6E 
+ 1955      745F6465 
+ 1955      636F6465 
+ 1955      5F7400
+ 1956              	.LASF107:
+ 1957 0081 676C7970 		.ascii	"glyph_cnt\000"
+ 1957      685F636E 
+ 1957      7400
+ 1958              	.LASF99:
+ 1959 008b 75706461 		.ascii	"update_dimension\000"
+ 1959      74655F64 
+ 1959      696D656E 
+ 1959      73696F6E 
+ 1959      00
+ 1960              	.LASF11:
+ 1961 009c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 38
+
+
+ 1961      206C6F6E 
+ 1961      6720756E 
+ 1961      7369676E 
+ 1961      65642069 
+ 1962              	.LASF0:
+ 1963 00b3 5F5F696E 		.ascii	"__int8_t\000"
+ 1963      74385F74 
+ 1963      00
+ 1964              	.LASF47:
+ 1965 00bc 706F7374 		.ascii	"post_reset_wait_ms\000"
+ 1965      5F726573 
+ 1965      65745F77 
+ 1965      6169745F 
+ 1965      6D7300
+ 1966              	.LASF108:
+ 1967 00cf 6262785F 		.ascii	"bbx_mode\000"
+ 1967      6D6F6465 
+ 1967      00
+ 1968              	.LASF33:
+ 1969 00d8 75746638 		.ascii	"utf8_state\000"
+ 1969      5F737461 
+ 1969      746500
+ 1970              	.LASF118:
+ 1971 00e3 795F6F66 		.ascii	"y_offset\000"
+ 1971      66736574 
+ 1971      00
+ 1972              	.LASF34:
+ 1973 00ec 6770696F 		.ascii	"gpio_result\000"
+ 1973      5F726573 
+ 1973      756C7400 
+ 1974              	.LASF113:
+ 1975 00f8 62697473 		.ascii	"bits_per_char_x\000"
+ 1975      5F706572 
+ 1975      5F636861 
+ 1975      725F7800 
+ 1976              	.LASF114:
+ 1977 0108 62697473 		.ascii	"bits_per_char_y\000"
+ 1977      5F706572 
+ 1977      5F636861 
+ 1977      725F7900 
+ 1978              	.LASF10:
+ 1979 0118 6C6F6E67 		.ascii	"long long int\000"
+ 1979      206C6F6E 
+ 1979      6720696E 
+ 1979      7400
+ 1980              	.LASF2:
+ 1981 0126 7369676E 		.ascii	"signed char\000"
+ 1981      65642063 
+ 1981      68617200 
+ 1982              	.LASF63:
+ 1983 0132 75386732 		.ascii	"u8g2_uint_t\000"
+ 1983      5F75696E 
+ 1983      745F7400 
+ 1984              	.LASF29:
+ 1985 013e 69735F66 		.ascii	"is_font_inverse_mode\000"
+ 1985      6F6E745F 
+ 1985      696E7665 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 39
+
+
+ 1985      7273655F 
+ 1985      6D6F6465 
+ 1986              	.LASF21:
+ 1987 0153 64697370 		.ascii	"display_cb\000"
+ 1987      6C61795F 
+ 1987      636200
+ 1988              	.LASF121:
+ 1989 015e 61736365 		.ascii	"ascent_para\000"
+ 1989      6E745F70 
+ 1989      61726100 
+ 1990              	.LASF93:
+ 1991 016a 676C7970 		.ascii	"glyph_x_offset\000"
+ 1991      685F785F 
+ 1991      6F666673 
+ 1991      657400
+ 1992              	.LASF45:
+ 1993 0179 7072655F 		.ascii	"pre_chip_disable_wait_ns\000"
+ 1993      63686970 
+ 1993      5F646973 
+ 1993      61626C65 
+ 1993      5F776169 
+ 1994              	.LASF7:
+ 1995 0192 6C6F6E67 		.ascii	"long int\000"
+ 1995      20696E74 
+ 1995      00
+ 1996              	.LASF141:
+ 1997 019b 66697273 		.ascii	"first_encoding_table\000"
+ 1997      745F656E 
+ 1997      636F6469 
+ 1997      6E675F74 
+ 1997      61626C65 
+ 1998              	.LASF100:
+ 1999 01b0 75706461 		.ascii	"update_page_win\000"
+ 1999      74655F70 
+ 1999      6167655F 
+ 1999      77696E00 
+ 2000              	.LASF117:
+ 2001 01c0 6D61785F 		.ascii	"max_char_height\000"
+ 2001      63686172 
+ 2001      5F686569 
+ 2001      67687400 
+ 2002              	.LASF15:
+ 2003 01d0 75696E74 		.ascii	"uint16_t\000"
+ 2003      31365F74 
+ 2003      00
+ 2004              	.LASF20:
+ 2005 01d9 6E657874 		.ascii	"next_cb\000"
+ 2005      5F636200 
+ 2006              	.LASF62:
+ 2007 01e1 75387838 		.ascii	"u8x8_char_cb\000"
+ 2007      5F636861 
+ 2007      725F6362 
+ 2007      00
+ 2008              	.LASF24:
+ 2009 01ee 6770696F 		.ascii	"gpio_and_delay_cb\000"
+ 2009      5F616E64 
+ 2009      5F64656C 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 40
+
+
+ 2009      61795F63 
+ 2009      6200
+ 2010              	.LASF126:
+ 2011 0200 75386732 		.ascii	"u8g2_font_info_t\000"
+ 2011      5F666F6E 
+ 2011      745F696E 
+ 2011      666F5F74 
+ 2011      00
+ 2012              	.LASF92:
+ 2013 0211 666F6E74 		.ascii	"font_ref_descent\000"
+ 2013      5F726566 
+ 2013      5F646573 
+ 2013      63656E74 
+ 2013      00
+ 2014              	.LASF39:
+ 2015 0222 75387838 		.ascii	"u8x8_display_info_t\000"
+ 2015      5F646973 
+ 2015      706C6179 
+ 2015      5F696E66 
+ 2015      6F5F7400 
+ 2016              	.LASF8:
+ 2017 0236 5F5F7569 		.ascii	"__uint32_t\000"
+ 2017      6E743332 
+ 2017      5F7400
+ 2018              	.LASF109:
+ 2019 0241 62697473 		.ascii	"bits_per_0\000"
+ 2019      5F706572 
+ 2019      5F3000
+ 2020              	.LASF86:
+ 2021 024c 666F6E74 		.ascii	"font_calc_vref\000"
+ 2021      5F63616C 
+ 2021      635F7672 
+ 2021      656600
+ 2022              	.LASF91:
+ 2023 025b 666F6E74 		.ascii	"font_ref_ascent\000"
+ 2023      5F726566 
+ 2023      5F617363 
+ 2023      656E7400 
+ 2024              	.LASF48:
+ 2025 026b 7364615F 		.ascii	"sda_setup_time_ns\000"
+ 2025      73657475 
+ 2025      705F7469 
+ 2025      6D655F6E 
+ 2025      7300
+ 2026              	.LASF105:
+ 2027 027d 75386732 		.ascii	"u8g2_draw_ll_hvline_cb\000"
+ 2027      5F647261 
+ 2027      775F6C6C 
+ 2027      5F68766C 
+ 2027      696E655F 
+ 2028              	.LASF120:
+ 2029 0294 64657363 		.ascii	"descent_g\000"
+ 2029      656E745F 
+ 2029      6700
+ 2030              	.LASF111:
+ 2031 029e 62697473 		.ascii	"bits_per_char_width\000"
+ 2031      5F706572 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 41
+
+
+ 2031      5F636861 
+ 2031      725F7769 
+ 2031      64746800 
+ 2032              	.LASF38:
+ 2033 02b2 6465626F 		.ascii	"debounce_result_msg\000"
+ 2033      756E6365 
+ 2033      5F726573 
+ 2033      756C745F 
+ 2033      6D736700 
+ 2034              	.LASF12:
+ 2035 02c6 756E7369 		.ascii	"unsigned int\000"
+ 2035      676E6564 
+ 2035      20696E74 
+ 2035      00
+ 2036              	.LASF72:
+ 2037 02d3 70697865 		.ascii	"pixel_buf_height\000"
+ 2037      6C5F6275 
+ 2037      665F6865 
+ 2037      69676874 
+ 2037      00
+ 2038              	.LASF134:
+ 2039 02e4 69735F74 		.ascii	"is_transparent\000"
+ 2039      72616E73 
+ 2039      70617265 
+ 2039      6E7400
+ 2040              	.LASF30:
+ 2041 02f3 6932635F 		.ascii	"i2c_address\000"
+ 2041      61646472 
+ 2041      65737300 
+ 2042              	.LASF9:
+ 2043 02ff 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2043      20756E73 
+ 2043      69676E65 
+ 2043      6420696E 
+ 2043      7400
+ 2044              	.LASF64:
+ 2045 0311 75386732 		.ascii	"u8g2_t\000"
+ 2045      5F7400
+ 2046              	.LASF128:
+ 2047 0318 6465636F 		.ascii	"decode_ptr\000"
+ 2047      64655F70 
+ 2047      747200
+ 2048              	.LASF76:
+ 2049 0323 77696474 		.ascii	"width\000"
+ 2049      6800
+ 2050              	.LASF65:
+ 2051 0329 75386732 		.ascii	"u8g2_struct\000"
+ 2051      5F737472 
+ 2051      75637400 
+ 2052              	.LASF69:
+ 2053 0335 74696C65 		.ascii	"tile_buf_height\000"
+ 2053      5F627566 
+ 2053      5F686569 
+ 2053      67687400 
+ 2054              	.LASF6:
+ 2055 0345 73686F72 		.ascii	"short unsigned int\000"
+ 2055      7420756E 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 42
+
+
+ 2055      7369676E 
+ 2055      65642069 
+ 2055      6E7400
+ 2056              	.LASF89:
+ 2057 0358 69735F70 		.ascii	"is_page_clip_window_intersection\000"
+ 2057      6167655F 
+ 2057      636C6970 
+ 2057      5F77696E 
+ 2057      646F775F 
+ 2058              	.LASF94:
+ 2059 0379 6269746D 		.ascii	"bitmap_transparency\000"
+ 2059      61705F74 
+ 2059      72616E73 
+ 2059      70617265 
+ 2059      6E637900 
+ 2060              	.LASF82:
+ 2061 038d 636C6970 		.ascii	"clip_x0\000"
+ 2061      5F783000 
+ 2062              	.LASF83:
+ 2063 0395 636C6970 		.ascii	"clip_x1\000"
+ 2063      5F783100 
+ 2064              	.LASF101:
+ 2065 039d 64726177 		.ascii	"draw_l90\000"
+ 2065      5F6C3930 
+ 2065      00
+ 2066              	.LASF36:
+ 2067 03a6 6465626F 		.ascii	"debounce_last_pin_state\000"
+ 2067      756E6365 
+ 2067      5F6C6173 
+ 2067      745F7069 
+ 2067      6E5F7374 
+ 2068              	.LASF147:
+ 2069 03be 75386732 		.ascii	"u8g2\000"
+ 2069      00
+ 2070              	.LASF122:
+ 2071 03c3 64657363 		.ascii	"descent_para\000"
+ 2071      656E745F 
+ 2071      70617261 
+ 2071      00
+ 2072              	.LASF19:
+ 2073 03d0 64697370 		.ascii	"display_info\000"
+ 2073      6C61795F 
+ 2073      696E666F 
+ 2073      00
+ 2074              	.LASF88:
+ 2075 03dd 666F6E74 		.ascii	"font_info\000"
+ 2075      5F696E66 
+ 2075      6F00
+ 2076              	.LASF49:
+ 2077 03e7 73636B5F 		.ascii	"sck_pulse_width_ns\000"
+ 2077      70756C73 
+ 2077      655F7769 
+ 2077      6474685F 
+ 2077      6E7300
+ 2078              	.LASF40:
+ 2079 03fa 75387838 		.ascii	"u8x8_struct\000"
+ 2079      5F737472 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 43
+
+
+ 2079      75637400 
+ 2080              	.LASF140:
+ 2081 0406 7365636F 		.ascii	"second_table_cnt\000"
+ 2081      6E645F74 
+ 2081      61626C65 
+ 2081      5F636E74 
+ 2081      00
+ 2082              	.LASF57:
+ 2083 0417 64656661 		.ascii	"default_x_offset\000"
+ 2083      756C745F 
+ 2083      785F6F66 
+ 2083      66736574 
+ 2083      00
+ 2084              	.LASF27:
+ 2085 0428 656E636F 		.ascii	"encoding\000"
+ 2085      64696E67 
+ 2085      00
+ 2086              	.LASF90:
+ 2087 0431 666F6E74 		.ascii	"font_height_mode\000"
+ 2087      5F686569 
+ 2087      6768745F 
+ 2087      6D6F6465 
+ 2087      00
+ 2088              	.LASF123:
+ 2089 0442 73746172 		.ascii	"start_pos_upper_A\000"
+ 2089      745F706F 
+ 2089      735F7570 
+ 2089      7065725F 
+ 2089      4100
+ 2090              	.LASF58:
+ 2091 0454 666C6970 		.ascii	"flipmode_x_offset\000"
+ 2091      6D6F6465 
+ 2091      5F785F6F 
+ 2091      66667365 
+ 2091      7400
+ 2092              	.LASF110:
+ 2093 0466 62697473 		.ascii	"bits_per_1\000"
+ 2093      5F706572 
+ 2093      5F3100
+ 2094              	.LASF115:
+ 2095 0471 62697473 		.ascii	"bits_per_delta_x\000"
+ 2095      5F706572 
+ 2095      5F64656C 
+ 2095      74615F78 
+ 2095      00
+ 2096              	.LASF133:
+ 2097 0482 6465636F 		.ascii	"decode_bit_pos\000"
+ 2097      64655F62 
+ 2097      69745F70 
+ 2097      6F7300
+ 2098              	.LASF132:
+ 2099 0491 676C7970 		.ascii	"glyph_height\000"
+ 2099      685F6865 
+ 2099      69676874 
+ 2099      00
+ 2100              	.LASF152:
+ 2101 049e 75386732 		.ascii	"u8g2_GetKerning\000"
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 44
+
+
+ 2101      5F476574 
+ 2101      4B65726E 
+ 2101      696E6700 
+ 2102              	.LASF17:
+ 2103 04ae 6C6F6E67 		.ascii	"long double\000"
+ 2103      20646F75 
+ 2103      626C6500 
+ 2104              	.LASF142:
+ 2105 04ba 696E6465 		.ascii	"index_to_second_table\000"
+ 2105      785F746F 
+ 2105      5F736563 
+ 2105      6F6E645F 
+ 2105      7461626C 
+ 2106              	.LASF73:
+ 2107 04d0 70697865 		.ascii	"pixel_curr_row\000"
+ 2107      6C5F6375 
+ 2107      72725F72 
+ 2107      6F7700
+ 2108              	.LASF22:
+ 2109 04df 6361645F 		.ascii	"cad_cb\000"
+ 2109      636200
+ 2110              	.LASF84:
+ 2111 04e6 636C6970 		.ascii	"clip_y0\000"
+ 2111      5F793000 
+ 2112              	.LASF85:
+ 2113 04ee 636C6970 		.ascii	"clip_y1\000"
+ 2113      5F793100 
+ 2114              	.LASF144:
+ 2115 04f6 6B65726E 		.ascii	"kerning_values\000"
+ 2115      696E675F 
+ 2115      76616C75 
+ 2115      657300
+ 2116              	.LASF116:
+ 2117 0505 6D61785F 		.ascii	"max_char_width\000"
+ 2117      63686172 
+ 2117      5F776964 
+ 2117      746800
+ 2118              	.LASF80:
+ 2119 0514 75736572 		.ascii	"user_y0\000"
+ 2119      5F793000 
+ 2120              	.LASF54:
+ 2121 051c 77726974 		.ascii	"write_pulse_width_ns\000"
+ 2121      655F7075 
+ 2121      6C73655F 
+ 2121      77696474 
+ 2121      685F6E73 
+ 2122              	.LASF74:
+ 2123 0531 6275665F 		.ascii	"buf_y0\000"
+ 2123      793000
+ 2124              	.LASF75:
+ 2125 0538 6275665F 		.ascii	"buf_y1\000"
+ 2125      793100
+ 2126              	.LASF32:
+ 2127 053f 64657669 		.ascii	"device_address\000"
+ 2127      63655F61 
+ 2127      64647265 
+ 2127      737300
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 45
+
+
+ 2128              	.LASF28:
+ 2129 054e 785F6F66 		.ascii	"x_offset\000"
+ 2129      66736574 
+ 2129      00
+ 2130              	.LASF56:
+ 2131 0557 74696C65 		.ascii	"tile_height\000"
+ 2131      5F686569 
+ 2131      67687400 
+ 2132              	.LASF67:
+ 2133 0563 6C6C5F68 		.ascii	"ll_hvline\000"
+ 2133      766C696E 
+ 2133      6500
+ 2134              	.LASF135:
+ 2135 056d 66675F63 		.ascii	"fg_color\000"
+ 2135      6F6C6F72 
+ 2135      00
+ 2136              	.LASF143:
+ 2137 0576 7365636F 		.ascii	"second_encoding_table\000"
+ 2137      6E645F65 
+ 2137      6E636F64 
+ 2137      696E675F 
+ 2137      7461626C 
+ 2138              	.LASF61:
+ 2139 058c 75387838 		.ascii	"u8x8_msg_cb\000"
+ 2139      5F6D7367 
+ 2139      5F636200 
+ 2140              	.LASF98:
+ 2141 0598 75386732 		.ascii	"u8g2_cb_struct\000"
+ 2141      5F63625F 
+ 2141      73747275 
+ 2141      637400
+ 2142              	.LASF131:
+ 2143 05a7 676C7970 		.ascii	"glyph_width\000"
+ 2143      685F7769 
+ 2143      64746800 
+ 2144              	.LASF3:
+ 2145 05b3 756E7369 		.ascii	"unsigned char\000"
+ 2145      676E6564 
+ 2145      20636861 
+ 2145      7200
+ 2146              	.LASF119:
+ 2147 05c1 61736365 		.ascii	"ascent_A\000"
+ 2147      6E745F41 
+ 2147      00
+ 2148              	.LASF96:
+ 2149 05ca 69735F61 		.ascii	"is_auto_page_clear\000"
+ 2149      75746F5F 
+ 2149      70616765 
+ 2149      5F636C65 
+ 2149      617200
+ 2150              	.LASF71:
+ 2151 05dd 70697865 		.ascii	"pixel_buf_width\000"
+ 2151      6C5F6275 
+ 2151      665F7769 
+ 2151      64746800 
+ 2152              	.LASF4:
+ 2153 05ed 73686F72 		.ascii	"short int\000"
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 46
+
+
+ 2153      7420696E 
+ 2153      7400
+ 2154              	.LASF66:
+ 2155 05f7 75387838 		.ascii	"u8x8\000"
+ 2155      00
+ 2156              	.LASF78:
+ 2157 05fc 75736572 		.ascii	"user_x0\000"
+ 2157      5F783000 
+ 2158              	.LASF79:
+ 2159 0604 75736572 		.ascii	"user_x1\000"
+ 2159      5F783100 
+ 2160              	.LASF53:
+ 2161 060c 64617461 		.ascii	"data_setup_time_ns\000"
+ 2161      5F736574 
+ 2161      75705F74 
+ 2161      696D655F 
+ 2161      6E7300
+ 2162              	.LASF151:
+ 2163 061f 433A5C55 		.ascii	"C:\\Users\\info\\Desktop\\Spring 2019 Classes\\6.11"
+ 2163      73657273 
+ 2163      5C696E66 
+ 2163      6F5C4465 
+ 2163      736B746F 
+ 2164 064d 355C362E 		.ascii	"5\\6.115-final\\PSoCCreator\\Final Project\\FinalEm"
+ 2164      3131352D 
+ 2164      66696E61 
+ 2164      6C5C5053 
+ 2164      6F434372 
+ 2165 067c 756C6174 		.ascii	"ulator.cydsn\000"
+ 2165      6F722E63 
+ 2165      7964736E 
+ 2165      00
+ 2166              	.LASF104:
+ 2167 0689 75386732 		.ascii	"u8g2_draw_l90_cb\000"
+ 2167      5F647261 
+ 2167      775F6C39 
+ 2167      305F6362 
+ 2167      00
+ 2168              	.LASF52:
+ 2169 069a 6932635F 		.ascii	"i2c_bus_clock_100kHz\000"
+ 2169      6275735F 
+ 2169      636C6F63 
+ 2169      6B5F3130 
+ 2169      306B487A 
+ 2170              	.LASF16:
+ 2171 06af 75696E74 		.ascii	"uint32_t\000"
+ 2171      33325F74 
+ 2171      00
+ 2172              	.LASF106:
+ 2173 06b8 5F753867 		.ascii	"_u8g2_font_info_t\000"
+ 2173      325F666F 
+ 2173      6E745F69 
+ 2173      6E666F5F 
+ 2173      7400
+ 2174              	.LASF70:
+ 2175 06ca 74696C65 		.ascii	"tile_curr_row\000"
+ 2175      5F637572 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 47
+
+
+ 2175      725F726F 
+ 2175      7700
+ 2176              	.LASF97:
+ 2177 06d8 75386732 		.ascii	"u8g2_cb_t\000"
+ 2177      5F63625F 
+ 2177      7400
+ 2178              	.LASF51:
+ 2179 06e2 7370695F 		.ascii	"spi_mode\000"
+ 2179      6D6F6465 
+ 2179      00
+ 2180              	.LASF42:
+ 2181 06eb 63686970 		.ascii	"chip_enable_level\000"
+ 2181      5F656E61 
+ 2181      626C655F 
+ 2181      6C657665 
+ 2181      6C00
+ 2182              	.LASF149:
+ 2183 06fd 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2183      43313120 
+ 2183      352E342E 
+ 2183      31203230 
+ 2183      31363036 
+ 2184 0730 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2184      20726576 
+ 2184      6973696F 
+ 2184      6E203233 
+ 2184      37373135 
+ 2185 0763 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects\000"
+ 2185      66756E63 
+ 2185      74696F6E 
+ 2185      2D736563 
+ 2185      74696F6E 
+ 2186              	.LASF87:
+ 2187 078b 666F6E74 		.ascii	"font_decode\000"
+ 2187      5F646563 
+ 2187      6F646500 
+ 2188              	.LASF112:
+ 2189 0797 62697473 		.ascii	"bits_per_char_height\000"
+ 2189      5F706572 
+ 2189      5F636861 
+ 2189      725F6865 
+ 2189      69676874 
+ 2190              	.LASF5:
+ 2191 07ac 5F5F7569 		.ascii	"__uint16_t\000"
+ 2191      6E743136 
+ 2191      5F7400
+ 2192              	.LASF95:
+ 2193 07b7 64726177 		.ascii	"draw_color\000"
+ 2193      5F636F6C 
+ 2193      6F7200
+ 2194              	.LASF153:
+ 2195 07c2 75386732 		.ascii	"u8g2_GetKerningByTable\000"
+ 2195      5F476574 
+ 2195      4B65726E 
+ 2195      696E6742 
+ 2195      79546162 
+ 2196              	.LASF44:
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 48
+
+
+ 2197 07d9 706F7374 		.ascii	"post_chip_enable_wait_ns\000"
+ 2197      5F636869 
+ 2197      705F656E 
+ 2197      61626C65 
+ 2197      5F776169 
+ 2198              	.LASF138:
+ 2199 07f2 5F753867 		.ascii	"_u8g2_kerning_t\000"
+ 2199      325F6B65 
+ 2199      726E696E 
+ 2199      675F7400 
+ 2200              	.LASF102:
+ 2201 0802 75386732 		.ascii	"u8g2_update_dimension_cb\000"
+ 2201      5F757064 
+ 2201      6174655F 
+ 2201      64696D65 
+ 2201      6E73696F 
+ 2202              	.LASF129:
+ 2203 081b 74617267 		.ascii	"target_x\000"
+ 2203      65745F78 
+ 2203      00
+ 2204              	.LASF130:
+ 2205 0824 74617267 		.ascii	"target_y\000"
+ 2205      65745F79 
+ 2205      00
+ 2206              	.LASF18:
+ 2207 082d 75387838 		.ascii	"u8x8_t\000"
+ 2207      5F7400
+ 2208              	.LASF25:
+ 2209 0834 6275735F 		.ascii	"bus_clock\000"
+ 2209      636C6F63 
+ 2209      6B00
+ 2210              	.LASF81:
+ 2211 083e 75736572 		.ascii	"user_y1\000"
+ 2211      5F793100 
+ 2212              	.LASF127:
+ 2213 0846 5F753867 		.ascii	"_u8g2_font_decode_t\000"
+ 2213      325F666F 
+ 2213      6E745F64 
+ 2213      65636F64 
+ 2213      655F7400 
+ 2214              	.LASF13:
+ 2215 085a 696E7438 		.ascii	"int8_t\000"
+ 2215      5F7400
+ 2216              	.LASF37:
+ 2217 0861 6465626F 		.ascii	"debounce_state\000"
+ 2217      756E6365 
+ 2217      5F737461 
+ 2217      746500
+ 2218              	.LASF145:
+ 2219 0870 75386732 		.ascii	"u8g2_kerning_t\000"
+ 2219      5F6B6572 
+ 2219      6E696E67 
+ 2219      5F7400
+ 2220              	.LASF43:
+ 2221 087f 63686970 		.ascii	"chip_disable_level\000"
+ 2221      5F646973 
+ 2221      61626C65 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 49
+
+
+ 2221      5F6C6576 
+ 2221      656C00
+ 2222              	.LASF26:
+ 2223 0892 666F6E74 		.ascii	"font\000"
+ 2223      00
+ 2224              	.LASF124:
+ 2225 0897 73746172 		.ascii	"start_pos_lower_a\000"
+ 2225      745F706F 
+ 2225      735F6C6F 
+ 2225      7765725F 
+ 2225      6100
+ 2226              	.LASF14:
+ 2227 08a9 75696E74 		.ascii	"uint8_t\000"
+ 2227      385F7400 
+ 2228              	.LASF146:
+ 2229 08b1 75386732 		.ascii	"u8g2_font_calc_vref_fnptr\000"
+ 2229      5F666F6E 
+ 2229      745F6361 
+ 2229      6C635F76 
+ 2229      7265665F 
+ 2230              	.LASF31:
+ 2231 08cb 6932635F 		.ascii	"i2c_started\000"
+ 2231      73746172 
+ 2231      74656400 
+ 2232              	.LASF59:
+ 2233 08d7 70697865 		.ascii	"pixel_width\000"
+ 2233      6C5F7769 
+ 2233      64746800 
+ 2234              	.LASF136:
+ 2235 08e3 62675F63 		.ascii	"bg_color\000"
+ 2235      6F6C6F72 
+ 2235      00
+ 2236              	.LASF55:
+ 2237 08ec 74696C65 		.ascii	"tile_width\000"
+ 2237      5F776964 
+ 2237      746800
+ 2238              	.LASF35:
+ 2239 08f7 6465626F 		.ascii	"debounce_default_pin_state\000"
+ 2239      756E6365 
+ 2239      5F646566 
+ 2239      61756C74 
+ 2239      5F70696E 
+ 2240              	.LASF148:
+ 2241 0912 6B65726E 		.ascii	"kerning\000"
+ 2241      696E6700 
+ 2242              	.LASF150:
+ 2243 091a 2E2E5C75 		.ascii	"..\\u8g2-master\\csrc\\u8g2_kerning.c\000"
+ 2243      3867322D 
+ 2243      6D617374 
+ 2243      65725C63 
+ 2243      7372635C 
+ 2244              	.LASF41:
+ 2245 093d 75387838 		.ascii	"u8x8_display_info_struct\000"
+ 2245      5F646973 
+ 2245      706C6179 
+ 2245      5F696E66 
+ 2245      6F5F7374 
+ARM GAS  C:\Users\info\AppData\Local\Temp\cceazTri.s 			page 50
+
+
+ 2246              	.LASF77:
+ 2247 0956 68656967 		.ascii	"height\000"
+ 2247      687400
+ 2248              	.LASF60:
+ 2249 095d 70697865 		.ascii	"pixel_height\000"
+ 2249      6C5F6865 
+ 2249      69676874 
+ 2249      00
+ 2250              	.LASF50:
+ 2251 096a 73636B5F 		.ascii	"sck_clock_hz\000"
+ 2251      636C6F63 
+ 2251      6B5F687A 
+ 2251      00
+ 2252              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,8 +1,22 @@
 #include "project.h"
 #include "chip8.h"
 
+/*
+   Video buffer gets its own SRAM to prevent bus contention.
+   The user-facing buffer is in regular system RAM.
+   This is set in the custom linker script (custom.ld).
+*/
+uint8_t vbuf[96][128] __attribute__ ((section(".vram")));
+
+/* 
+   Now we set up the DMA to copy pixels from vbuf to the screen.
+   For timing, we rely on the fact that it takes the DMA exactly
+   8 clocks to move each byte. After each line the DMA is updated
+   to point to the next line in vbuf.
+*/
+
 void newline_handler(uint8_t* dma_chan, uint8_t* dma_td, 
-    volatile uint8_t* vga_update_flag, uint64_t vram[], uint8_t vbuf[][128]) {
+    volatile uint8_t* vga_update_flag, uint64_t vram[]) {
     uint16 line = 805 - VERT_ReadCounter();
     if (line % 8 == 0) {
         if (line < 768) {
