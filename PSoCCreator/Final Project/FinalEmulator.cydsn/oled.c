@@ -5,12 +5,21 @@
 uint8_t gp_dl_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr);
 uint8_t hw_spi_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr);
 
+#define HW_SPI
+
 void oled_initialize(){
     /* The structure that will hold the OLED info */
     u8g2_t u8g2;
     
     /* Initialize the struct */
-    u8g2_Setup_sh1106_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_4wire_sw_spi, gp_dl_cb);
+    u8g2_cb_t comm_cb;
+    #ifdef SW_SPI
+        comm_cb = u8x8_byte_4wire_sw_spi;
+    #endif
+    #ifdef HW_SPI
+        comm_cb = hw_spi_cb;
+    #endif
+    u8g2_Setup_sh1106_128x64_noname_f(&u8g2, U8G2_R0, comm_cb, gp_dl_cb);
     
     /* Send init sequence to the display */
     u8g2_InitDisplay(&u8g2);
@@ -18,7 +27,7 @@ void oled_initialize(){
     /* Wake up display */
     u8g2_SetPowerSave(&u8g2, 0);
     
-    u8g2_UpdateDisplay(&u8g2);
+    // TODO
     uint8_t k =0 ;
     while(1){
         for (uint8_t i = 0; i < 128; i++){
@@ -32,59 +41,80 @@ void oled_initialize(){
     }
 }
 
+#ifdef HW_SPI
 uint8_t hw_spi_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr) {
     switch(msg) {
     case U8X8_MSG_BYTE_SEND:{
+        /* Send a sequence of bytes to the OLED */
         uint8_t *data = (uint8_t*) arg_ptr;
         while(arg_int > 0) {
-            //spi_oled_WriteByte(*data);
+            spi_oled_WriteByte(*data);
             data++;
             arg_int--;
         }  
         break;
     }
     case U8X8_MSG_BYTE_INIT:
+        /* Initialize the SPI for the OLED */
+        /* Nothing required here because the SPI for the OLED is 
+           started and initialized in the main body itself. */
         break;
     case U8X8_MSG_BYTE_SET_DC:
+        /* Set the Data/Command bit */
         u8x8_gpio_SetDC(u8x8, arg_int);
         break;
     case U8X8_MSG_BYTE_START_TRANSFER:
+        /* Prepare for byte sequence transfer */
+        // TODO check if something needs to be done here
         break;
     case U8X8_MSG_BYTE_END_TRANSFER:
+        /* Conclude byte sequence transfer */
         break;
     default:
         return 0;
     }  
     return 1;
 }
+#endif
 
 uint8_t gp_dl_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr){
     switch(msg){
-    case U8X8_MSG_DELAY_NANO:			// delay arg_int * 1 nano second
+    case U8X8_MSG_DELAY_NANO:			
+        /* Delay arg_int * 1 nano second */
         CyDelayCycles((uint32_t)((BCLK__BUS_CLK__HZ * (double)arg_int)/1e9));
         break;    
-    case U8X8_MSG_DELAY_100NANO:		// delay arg_int * 100 nano seconds
+    case U8X8_MSG_DELAY_100NANO:
+        /* Delay arg_int * 1 nano second */
         CyDelayCycles((uint32_t)((BCLK__BUS_CLK__HZ * (double)arg_int)/1e7));
         break;
-    case U8X8_MSG_DELAY_10MICRO:		// delay arg_int * 10 micro seconds
+    case U8X8_MSG_DELAY_10MICRO:
+        /* Delay arg_int * 10 micro seconds */
         CyDelayUs(10*arg_int);
         break;
-    case U8X8_MSG_DELAY_MILLI:			// delay arg_int * 1 milli second
+    case U8X8_MSG_DELAY_MILLI:
+        /* Delay arg_int * 1 milli seconds */
         CyDelay(arg_int);
-        break;    
-    case U8X8_MSG_GPIO_SPI_CLOCK:// D0 or SPI clock pin: Output level in arg_int
+        break; 
+    #ifdef SW_SPI
+    case U8X8_MSG_GPIO_SPI_CLOCK:
+        /* Set the CLK bit */
         pin_oled_clk_Write(arg_int ? 1 : 0);
         break;	
-    case U8X8_MSG_GPIO_SPI_DATA:// D1 or SPI data pin: Output level in arg_int
+    case U8X8_MSG_GPIO_SPI_DATA:
+        /* Set the MOSI bit */
         pin_oled_mosi_Write(arg_int ? 1 : 0);
         break;
-    case U8X8_MSG_GPIO_CS:				// CS (chip select) pin: Output level in arg_int
+    case U8X8_MSG_GPIO_CS:
+        /* Set the Chip Select bit */
         pin_oled_cs_Write(arg_int ? 1 : 0);
         break;
-    case U8X8_MSG_GPIO_DC:				// DC (data/cmd, A0, register select) pin: Output level in arg_int
+    #endif SW_SPI
+    case U8X8_MSG_GPIO_DC:
+        /* Set the Data/Command bit */
         pin_oled_dc_Write(arg_int ? 1 : 0);
         break;
-    case U8X8_MSG_GPIO_RESET:			// Reset pin: Output level in arg_int
+    case U8X8_MSG_GPIO_RESET:
+        /* Set the value for the Reset pin */
         pin_oled_rst_Write(arg_int ? 1 : 0);
         break;
     default:
