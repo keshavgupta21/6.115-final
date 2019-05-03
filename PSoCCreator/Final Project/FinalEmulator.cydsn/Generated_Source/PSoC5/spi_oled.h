@@ -34,9 +34,9 @@
     #include "spi_oled_IntClock.h"
 #endif /* (0u != spi_oled_INTERNAL_CLOCK) */
 
-#define spi_oled_MODE                       (4u)
+#define spi_oled_MODE                       (1u)
 #define spi_oled_DATA_WIDTH                 (8u)
-#define spi_oled_MODE_USE_ZERO              (0u)
+#define spi_oled_MODE_USE_ZERO              (1u)
 #define spi_oled_BIDIRECTIONAL_MODE         (0u)
 
 /* Internal interrupt handling */

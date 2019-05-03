@@ -6,6 +6,8 @@
 */
 
 /*
+TODO implement OLED display update
+
 TODO Check last column on vga is always black
 
 TODO Space Invaders debug
@@ -15,8 +17,6 @@ TODO sound
 TODO Correct video position
 
 Replace SRAM with EEPROM (or other funcitonality to change roms nicely)
-
-TODO fix OLED DC timing issue in HW
 */
 
 #include "project.h"

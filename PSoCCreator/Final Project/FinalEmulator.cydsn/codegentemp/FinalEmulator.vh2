@@ -2,7 +2,7 @@
 --	Conversion of FinalEmulator.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Thu May 02 21:40:20 2019
+--	Fri May 03 13:27:33 2019
 --
 
 USE cypress.cypress.all;
@@ -1654,13 +1654,13 @@ SIGNAL \spi_oled:BSPIM:so_send\ : bit;
 SIGNAL \spi_oled:BSPIM:so_send_reg\ : bit;
 SIGNAL \spi_oled:BSPIM:mosi_reg\ : bit;
 SIGNAL \spi_oled:BSPIM:mosi_fin\ : bit;
-SIGNAL \spi_oled:BSPIM:mosi_cpha_1\ : bit;
+SIGNAL \spi_oled:BSPIM:mosi_cpha_0\ : bit;
 SIGNAL \spi_oled:BSPIM:state_2\ : bit;
 SIGNAL \spi_oled:BSPIM:state_1\ : bit;
 SIGNAL \spi_oled:BSPIM:state_0\ : bit;
 SIGNAL \spi_oled:BSPIM:mosi_from_dp\ : bit;
-SIGNAL \spi_oled:BSPIM:mosi_cpha_0\ : bit;
 SIGNAL \spi_oled:BSPIM:mosi_hs_reg\ : bit;
+SIGNAL \spi_oled:BSPIM:mosi_cpha_1\ : bit;
 SIGNAL \spi_oled:BSPIM:pre_mosi\ : bit;
 SIGNAL \spi_oled:BSPIM:count_4\ : bit;
 SIGNAL \spi_oled:BSPIM:count_3\ : bit;
@@ -1699,8 +1699,8 @@ SIGNAL \spi_oled:BSPIM:control_2\ : bit;
 SIGNAL \spi_oled:BSPIM:control_1\ : bit;
 SIGNAL \spi_oled:BSPIM:control_0\ : bit;
 SIGNAL \spi_oled:Net_294\ : bit;
-SIGNAL \spi_oled:BSPIM:ld_ident\ : bit;
 SIGNAL \spi_oled:Net_273\ : bit;
+SIGNAL \spi_oled:BSPIM:ld_ident\ : bit;
 SIGNAL \spi_oled:BSPIM:cnt_enable\ : bit;
 SIGNAL \spi_oled:BSPIM:count_6\ : bit;
 SIGNAL \spi_oled:BSPIM:count_5\ : bit;
@@ -1764,6 +1764,11 @@ ATTRIBUTE port_state_att of \spi_oled:BSPIM:sR8:Dp:f1_blk_stat_reg\:SIGNAL IS 2;
 SIGNAL Net_16004 : bit;
 SIGNAL \spi_oled:Net_289\ : bit;
 SIGNAL Net_16006 : bit;
+SIGNAL tmpOE__pin_test_net_0 : bit;
+SIGNAL tmpFB_0__pin_test_net_0 : bit;
+SIGNAL tmpIO_0__pin_test_net_0 : bit;
+TERMINAL tmpSIOVREF__pin_test_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__pin_test_net_0 : bit;
 SIGNAL \HORIZ:PWMUDB:min_kill_reg\\D\ : bit;
 SIGNAL \HORIZ:PWMUDB:prevCapture\\D\ : bit;
 SIGNAL \HORIZ:PWMUDB:trig_last\\D\ : bit;
@@ -1910,49 +1915,61 @@ Net_5860 <= ((not Net_584 and not Net_923 and cydff_1));
 
 \spi_oled:BSPIM:rx_status_6\ <= ((not \spi_oled:BSPIM:count_4\ and not \spi_oled:BSPIM:count_3\ and not \spi_oled:BSPIM:count_2\ and not \spi_oled:BSPIM:count_1\ and \spi_oled:BSPIM:count_0\ and \spi_oled:BSPIM:rx_status_4\));
 
-\spi_oled:BSPIM:state_2\\D\ <= ((not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and not \spi_oled:BSPIM:count_4\ and not \spi_oled:BSPIM:count_3\ and not \spi_oled:BSPIM:count_2\ and not \spi_oled:BSPIM:count_0\ and not \spi_oled:BSPIM:tx_status_1\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:count_1\)
-	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:count_4\ and not \spi_oled:BSPIM:count_3\ and not \spi_oled:BSPIM:count_2\ and not \spi_oled:BSPIM:count_1\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:count_0\));
+\spi_oled:BSPIM:state_2\\D\ <= ((not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and not \spi_oled:BSPIM:count_4\ and not \spi_oled:BSPIM:count_3\ and not \spi_oled:BSPIM:count_2\ and not \spi_oled:BSPIM:count_0\ and not \spi_oled:BSPIM:ld_ident\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:count_1\)
+	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:count_4\ and not \spi_oled:BSPIM:count_3\ and not \spi_oled:BSPIM:count_1\ and not \spi_oled:BSPIM:tx_status_1\ and \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:count_2\ and \spi_oled:BSPIM:count_0\)
+	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\));
 
-\spi_oled:BSPIM:state_1\\D\ <= ((not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:count_0\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:tx_status_1\)
+\spi_oled:BSPIM:state_1\\D\ <= ((not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:count_0\)
+	OR (not \spi_oled:BSPIM:count_2\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\)
 	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:count_1\ and not \spi_oled:BSPIM:count_0\ and \spi_oled:BSPIM:state_1\)
-	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:count_0\)
-	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:count_1\)
+	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:count_2\ and \spi_oled:BSPIM:count_1\)
+	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:ld_ident\)
+	OR (\spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:tx_status_1\)
 	OR (not \spi_oled:BSPIM:state_1\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_2\)
 	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\)
-	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:count_2\)
+	OR (\spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\)
 	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:count_3\)
 	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:count_4\));
 
-\spi_oled:BSPIM:state_0\\D\ <= ((not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and not \spi_oled:BSPIM:tx_status_1\ and \spi_oled:BSPIM:count_4\)
-	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and not \spi_oled:BSPIM:tx_status_1\ and \spi_oled:BSPIM:count_3\)
-	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and not \spi_oled:BSPIM:tx_status_1\ and \spi_oled:BSPIM:count_2\)
-	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and not \spi_oled:BSPIM:count_1\ and not \spi_oled:BSPIM:tx_status_1\)
-	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and not \spi_oled:BSPIM:tx_status_1\ and \spi_oled:BSPIM:count_0\)
-	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:count_4\ and not \spi_oled:BSPIM:count_3\ and not \spi_oled:BSPIM:count_2\ and not \spi_oled:BSPIM:count_1\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:count_0\)
-	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:tx_status_1\)
-	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_1\ and not \spi_oled:BSPIM:state_0\ and not \spi_oled:BSPIM:tx_status_1\));
+\spi_oled:BSPIM:state_0\\D\ <= ((not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and not \spi_oled:BSPIM:tx_status_1\)
+	OR (\spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\)
+	OR (not \spi_oled:BSPIM:state_1\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_2\)
+	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\)
+	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_1\));
 
-Net_16003D <= ((not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_1\ and not \spi_oled:BSPIM:state_0\)
-	OR (\spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_1\)
-	OR (Net_16003 and \spi_oled:BSPIM:state_1\)
-	OR (Net_16003 and \spi_oled:BSPIM:state_2\));
+Net_16003D <= ((not \spi_oled:BSPIM:state_0\ and Net_16003)
+	OR (not \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_0\)
+	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_1\ and not \spi_oled:BSPIM:state_0\)
+	OR (not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_1\)
+	OR (Net_16003 and \spi_oled:BSPIM:state_1\));
 
-\spi_oled:BSPIM:cnt_enable\\D\ <= ((not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:count_4\ and \spi_oled:BSPIM:cnt_enable\)
-	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:count_3\ and \spi_oled:BSPIM:cnt_enable\)
-	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:count_2\ and \spi_oled:BSPIM:cnt_enable\)
-	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:count_1\ and \spi_oled:BSPIM:cnt_enable\)
-	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:count_0\ and \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:cnt_enable\)
-	OR (not \spi_oled:BSPIM:state_1\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:cnt_enable\)
-	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:cnt_enable\)
-	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\));
+\spi_oled:BSPIM:cnt_enable\\D\ <= ((not \spi_oled:BSPIM:state_1\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:cnt_enable\)
+	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\)
+	OR (\spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:cnt_enable\)
+	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:cnt_enable\)
+	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:cnt_enable\));
 
-\spi_oled:BSPIM:mosi_reg\\D\ <= ((not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:mosi_from_dp\)
-	OR (not \spi_oled:BSPIM:state_1\ and not \spi_oled:BSPIM:state_0\ and Net_16001 and \spi_oled:BSPIM:state_2\)
-	OR (not \spi_oled:BSPIM:state_2\ and Net_16001 and \spi_oled:BSPIM:state_0\));
+\spi_oled:BSPIM:mosi_reg\\D\ <= ((not \spi_oled:BSPIM:state_1\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:mosi_from_dp\)
+	OR (\spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:mosi_from_dp\)
+	OR (not \spi_oled:BSPIM:state_2\ and Net_16001 and \spi_oled:BSPIM:state_0\)
+	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:mosi_from_dp\ and \spi_oled:BSPIM:ld_ident\)
+	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:mosi_from_dp\ and \spi_oled:BSPIM:count_0\)
+	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and not \spi_oled:BSPIM:count_1\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:mosi_from_dp\)
+	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:mosi_from_dp\ and \spi_oled:BSPIM:count_2\)
+	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:mosi_from_dp\ and \spi_oled:BSPIM:count_3\)
+	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:mosi_from_dp\ and \spi_oled:BSPIM:count_4\));
 
-Net_16002D <= (\spi_oled:BSPIM:state_0\
-	OR not \spi_oled:BSPIM:state_1\
-	OR \spi_oled:BSPIM:state_2\);
+Net_16002D <= ((not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\)
+	OR (Net_16002 and \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:state_0\));
+
+\spi_oled:BSPIM:ld_ident\\D\ <= ((not \spi_oled:BSPIM:state_1\ and not \spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:state_2\)
+	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:count_0\ and \spi_oled:BSPIM:ld_ident\)
+	OR (not \spi_oled:BSPIM:state_2\ and not \spi_oled:BSPIM:count_1\ and \spi_oled:BSPIM:ld_ident\)
+	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:count_2\ and \spi_oled:BSPIM:ld_ident\)
+	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:count_3\ and \spi_oled:BSPIM:ld_ident\)
+	OR (not \spi_oled:BSPIM:state_2\ and \spi_oled:BSPIM:count_4\ and \spi_oled:BSPIM:ld_ident\)
+	OR (\spi_oled:BSPIM:state_0\ and \spi_oled:BSPIM:ld_ident\)
+	OR (not \spi_oled:BSPIM:state_1\ and \spi_oled:BSPIM:ld_ident\));
 
 pin_led:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"e851a3b9-efb8-48be-bbb8-b303b216c393",
@@ -3905,7 +3922,7 @@ pin_oled_rst:cy_psoc3_pins_v1_10
 		id=>"3f2c6964-26da-4920-a63b-bb0969aa7785/426fcbe0-714d-4404-8fa8-581ff40c30f1",
 		source_clock_id=>"",
 		divisor=>0,
-		period=>"2500000000",
+		period=>"33333333.3333333",
 		is_direct=>'0',
 		is_digital=>'1')
 	PORT MAP(clock_out=>\spi_oled:Net_276\,
@@ -3947,7 +3964,7 @@ pin_oled_rst:cy_psoc3_pins_v1_10
 			zero, zero, zero),
 		interrupt=>Net_16007);
 \spi_oled:BSPIM:sR8:Dp:u0\:cy_psoc3_dp
-	GENERIC MAP(cy_dpconfig=>"0000000000000000000000001100000000000001010000000001000100010000000000011100000000010001000000000000000101000000000000010100000011111111000000001111111111111111000000000010001000001100111100000000000000000100",
+	GENERIC MAP(cy_dpconfig=>"0000000000000000000000001100000000000001010000000001000100010000000000011100000000010001000000000000000101000000000000010100000011111111000000001111111111111111000000000010001000001000111100000000000000000100",
 		d0_init=>"00000000",
 		d1_init=>"00000000",
 		a0_init=>"00000000",
@@ -4032,6 +4049,76 @@ pin_oled_rst:cy_psoc3_pins_v1_10
 		pi=>(zero, zero, zero, zero,
 			zero, zero, zero, zero),
 		po=>open);
+pin_test:cy_psoc3_pins_v1_10
+	GENERIC MAP(id=>"9a8ba9bb-875e-42a6-86df-251cc4986593",
+		drive_mode=>"110",
+		ibuf_enabled=>"1",
+		init_dr_st=>"0",
+		input_sync=>"1",
+		input_clk_en=>'0',
+		input_sync_mode=>"0",
+		intr_mode=>"00",
+		invert_in_clock=>'0',
+		invert_in_clock_en=>'0',
+		invert_in_reset=>'0',
+		invert_out_clock=>'0',
+		invert_out_clock_en=>'0',
+		invert_out_reset=>'0',
+		io_voltage=>"",
+		layout_mode=>"CONTIGUOUS",
+		output_conn=>"0",
+		output_sync=>"0",
+		output_clk_en=>'0',
+		output_mode=>"0",
+		output_reset=>'0',
+		output_clock_mode=>"0",
+		oe_sync=>"0",
+		oe_conn=>"0",
+		oe_reset=>'0',
+		pin_aliases=>"",
+		pin_mode=>"O",
+		por_state=>4,
+		sio_group_cnt=>0,
+		sio_hifreq=>"00000000",
+		sio_hyst=>"1",
+		sio_ibuf=>"00000000",
+		sio_info=>"00",
+		sio_obuf=>"00000000",
+		sio_refsel=>"00000000",
+		sio_vtrip=>"00000000",
+		sio_vohsel=>"00000000",
+		slew_rate=>"0",
+		spanning=>'0',
+		sw_only=>'0',
+		vtrip=>"10",
+		width=>1,
+		port_alias_required=>'0',
+		port_alias_group=>"",
+		use_annotation=>"0",
+		pa_in_clock=>-1,
+		pa_in_clock_en=>-1,
+		pa_in_reset=>-1,
+		pa_out_clock=>-1,
+		pa_out_clock_en=>-1,
+		pa_out_reset=>-1,
+		ovt_needed=>"0",
+		ovt_slew_control=>"00",
+		ovt_hyst_trim=>"0",
+		input_buffer_sel=>"00")
+	PORT MAP(oe=>(tmpOE__pin_led_net_0),
+		y=>(zero),
+		fb=>(tmpFB_0__pin_test_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__pin_test_net_0),
+		siovref=>(tmpSIOVREF__pin_test_net_0),
+		annotation=>(open),
+		in_clock=>zero,
+		in_clock_en=>tmpOE__pin_led_net_0,
+		in_reset=>zero,
+		out_clock=>zero,
+		out_clock_en=>tmpOE__pin_led_net_0,
+		out_reset=>zero,
+		interrupt=>tmpINTERRUPT_0__pin_test_net_0);
 \HORIZ:PWMUDB:min_kill_reg\:cy_dsrff
 	PORT MAP(d=>tmpOE__pin_led_net_0,
 		s=>zero,
@@ -4313,7 +4400,7 @@ Net_16003:cy_dff
 		clk=>\spi_oled:BSPIM:clk_fin\,
 		q=>\spi_oled:BSPIM:mosi_from_dp_reg\);
 \spi_oled:BSPIM:ld_ident\:cy_dff
-	PORT MAP(d=>zero,
+	PORT MAP(d=>\spi_oled:BSPIM:ld_ident\\D\,
 		clk=>\spi_oled:BSPIM:clk_fin\,
 		q=>\spi_oled:BSPIM:ld_ident\);
 \spi_oled:BSPIM:cnt_enable\:cy_dff

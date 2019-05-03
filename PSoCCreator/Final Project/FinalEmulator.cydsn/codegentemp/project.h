@@ -68,6 +68,8 @@
 #include "pin_oled_rst.h"
 #include "spi_oled.h"
 #include "spi_oled_PVT.h"
+#include "pin_test_aliases.h"
+#include "pin_test.h"
 #include "spi_oled_IntClock.h"
 #include "cy_em_eeprom.h"
 #include "core_cm3_psoc5.h"

@@ -27,13 +27,14 @@ void oled_initialize(){
     /* Wake up display */
     u8g2_SetPowerSave(&u8g2, 0);
     
-    // TODO
-    uint8_t k = 0;
+    // TODO remove this
+    uint8_t pos = 0;
     while(1){
-        u8g2_DrawBox(&u8g2, 0, 0, 127, 63);
+        u8g2_ClearDisplay(&u8g2);
+        u8g2_DrawLine(&u8g2, pos, 0, pos, 64);
         u8g2_UpdateDisplay(&u8g2);
-        CyDelay(1000);
-        k++;
+        pos = (pos + 1) & 0x7f;
+        CyDelay(16);
     }
 }
 
@@ -46,8 +47,8 @@ uint8_t hw_spi_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr) {
         while(arg_int > 0) {
             spi_oled_WriteByte(*data);
             data++;
-            arg_int--;
-        }  
+            arg_int--; 
+        }
         break;
     }
     case U8X8_MSG_BYTE_INIT:
@@ -60,7 +61,6 @@ uint8_t hw_spi_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr) {
         break;
     case U8X8_MSG_BYTE_START_TRANSFER:
         /* Prepare for byte sequence transfer */
-        // TODO Check if something needs to be done here
         break;
     case U8X8_MSG_BYTE_END_TRANSFER:
         /* Conclude byte sequence transfer */
@@ -104,10 +104,11 @@ uint8_t gp_dl_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr){
         pin_oled_cs_Write(arg_int ? 1 : 0);
         break;
     #endif
-    case U8X8_MSG_GPIO_DC:
+    case U8X8_MSG_GPIO_DC:{
         /* Set the Data/Command bit */
         pin_oled_dc_Write(arg_int ? 1 : 0);
         break;
+    }
     case U8X8_MSG_GPIO_RESET:
         /* Set the value for the Reset pin */
         pin_oled_rst_Write(arg_int ? 1 : 0);
