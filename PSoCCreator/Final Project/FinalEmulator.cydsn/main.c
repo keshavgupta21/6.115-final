@@ -16,7 +16,7 @@ TODO Correct video position
 
 Replace SRAM with EEPROM (or other funcitonality to change roms nicely)
 
-Implement 1.3" OLED
+TODO fix OLED DC timing issue in HW
 */
 
 #include "project.h"
@@ -79,7 +79,6 @@ int main(void){
     random_Start();
     
     /* Start the OLED */
-    //spi_oled_Start();
     oled_initialize();
     
     /* Enable global interrupts */

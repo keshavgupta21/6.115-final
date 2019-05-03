@@ -12,7 +12,7 @@ void oled_initialize(){
     u8g2_t u8g2;
     
     /* Initialize the struct */
-    u8g2_cb_t comm_cb;
+    u8x8_msg_cb comm_cb;
     #ifdef SW_SPI
         comm_cb = u8x8_byte_4wire_sw_spi;
     #endif
@@ -28,15 +28,11 @@ void oled_initialize(){
     u8g2_SetPowerSave(&u8g2, 0);
     
     // TODO
-    uint8_t k =0 ;
+    uint8_t k = 0;
     while(1){
-        for (uint8_t i = 0; i < 128; i++){
-            for (uint8_t j = 0; j < 8; j++){
-                u8g2.tile_buf_ptr[j*128 + i] = k;
-            }
-        }
+        u8g2_DrawBox(&u8g2, 0, 0, 127, 63);
         u8g2_UpdateDisplay(&u8g2);
-        CyDelay(10);
+        CyDelay(1000);
         k++;
     }
 }
@@ -56,8 +52,7 @@ uint8_t hw_spi_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr) {
     }
     case U8X8_MSG_BYTE_INIT:
         /* Initialize the SPI for the OLED */
-        /* Nothing required here because the SPI for the OLED is 
-           started and initialized in the main body itself. */
+        spi_oled_Start();
         break;
     case U8X8_MSG_BYTE_SET_DC:
         /* Set the Data/Command bit */
@@ -65,7 +60,7 @@ uint8_t hw_spi_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr) {
         break;
     case U8X8_MSG_BYTE_START_TRANSFER:
         /* Prepare for byte sequence transfer */
-        // TODO check if something needs to be done here
+        // TODO Check if something needs to be done here
         break;
     case U8X8_MSG_BYTE_END_TRANSFER:
         /* Conclude byte sequence transfer */
@@ -108,7 +103,7 @@ uint8_t gp_dl_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr){
         /* Set the Chip Select bit */
         pin_oled_cs_Write(arg_int ? 1 : 0);
         break;
-    #endif SW_SPI
+    #endif
     case U8X8_MSG_GPIO_DC:
         /* Set the Data/Command bit */
         pin_oled_dc_Write(arg_int ? 1 : 0);
