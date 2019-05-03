@@ -1,5 +1,5 @@
 -- Project:   FinalEmulator
--- Generated: 05/03/2019 13:27:34
+-- Generated: 05/03/2019 17:00:23
 -- PSoC Creator  4.2
 
 ENTITY FinalEmulator IS
@@ -2904,6 +2904,14 @@ BEGIN
             f1_bus_stat_comb => \spi_oled:BSPIM:rx_status_5\,
             f1_blk_stat_comb => \spi_oled:BSPIM:rx_status_4\,
             busclk => ClockBlock_BUS_CLK);
+
+    isr_oled:interrupt
+        GENERIC MAP(
+            int_type => "10",
+            is_nmi => 0)
+        PORT MAP(
+            interrupt => Net_10_local,
+            clock => ClockBlock_BUS_CLK);
 
     \HORIZ:PWMUDB:runmode_enable\:macrocell
         GENERIC MAP(

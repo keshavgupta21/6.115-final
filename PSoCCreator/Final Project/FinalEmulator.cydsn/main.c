@@ -6,8 +6,6 @@
 */
 
 /*
-TODO implement OLED display update
-
 TODO Check last column on vga is always black
 
 TODO Space Invaders debug
@@ -24,6 +22,20 @@ Replace SRAM with EEPROM (or other funcitonality to change roms nicely)
 #include "chip8.h"
 
 /* 
+   CHIP8 Video
+   Each row is one 64bit number
+*/
+uint64_t vram[32];
+
+/* The struct that holds info for the OLED */
+u8g2_t u8g2;
+
+/* OLED Refresh Interrupt Handler */
+CY_ISR(_isr_oled_handler){
+    isr_oled_handler(&u8g2, vram);
+}
+
+/* 
    CHIP8 Timers 
    Decrement each at 60Hz if not zero
 */
@@ -34,12 +46,6 @@ CY_ISR(_isr_tmr_handler){
 };
 
 /* 
-   CHIP8 Video
-   Each row is one 64bit number
-*/
-uint64_t vram[32];
-
-/* 
    The following code snippet (concerning VGA) is courtesy of
    the 6.115 Staff. It has been modified to suit this application.
 
@@ -48,15 +54,13 @@ uint8_t dma_chan, dma_td;
 volatile uint8_t vga_update_flag = 1;
 
 CY_ISR(_newline_handler){
+    
     newline_handler(&dma_chan, &dma_td,
       &vga_update_flag, vram);
+
 };
 
 int main(void){
-    /* Start the interrupts */
-    isr_timer_StartEx(_isr_tmr_handler);
-    NEWLINE_StartEx(_newline_handler);
-    
     /* Initialize the DMA */
     dma_td = CyDmaTdAllocate();
     dma_chan = DMA_DmaInitialize(1, 0, HI16(CYDEV_SRAM_BASE),
@@ -67,22 +71,28 @@ int main(void){
     CyDmaChSetInitialTd(dma_chan, dma_td);
     CyDmaChEnable(dma_chan, 1);
     
+    /* Start the VGA interrupt */
+    NEWLINE_StartEx(_newline_handler);
+    
     /* Start all of the timing counters */
     HORIZ_Start();
     VERT_Start();
     HSYNC_Start();
     VSYNC_Start();
     
-    /* Initialize Random Generator */
-    random_Enable();
-    random_Init();
-    random_Start();
+    /* Start the OLED and its refresh interrupt */
+    oled_initialize(&u8g2);
+    isr_oled_StartEx(_isr_oled_handler);
     
-    /* Start the OLED */
-    oled_initialize();
+    /* Start the Timer interrupt */
+    isr_timer_StartEx(_isr_tmr_handler);
     
     /* Enable global interrupts */
     CyGlobalIntEnable;
+    
+    /* Initialize Random Generator */
+    // TODO make sure random still works
+    random_Start();
     
     /* CHIP8 RAM */
     uint8_t ram[4096] = RAM_INITIAL_DATA;

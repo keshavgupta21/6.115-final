@@ -1,16 +1,12 @@
 #include "project.h"
 #include "chip8.h"
-#include "u8g2.h"
 
 uint8_t gp_dl_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr);
 uint8_t hw_spi_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr);
 
 #define HW_SPI
 
-void oled_initialize(){
-    /* The structure that will hold the OLED info */
-    u8g2_t u8g2;
-    
+void oled_initialize(u8g2_t *u8g2){
     /* Initialize the struct */
     u8x8_msg_cb comm_cb;
     #ifdef SW_SPI
@@ -19,22 +15,35 @@ void oled_initialize(){
     #ifdef HW_SPI
         comm_cb = hw_spi_cb;
     #endif
-    u8g2_Setup_sh1106_128x64_noname_f(&u8g2, U8G2_R0, comm_cb, gp_dl_cb);
+    u8g2_Setup_sh1106_128x64_noname_f(u8g2, U8G2_R0, comm_cb, gp_dl_cb);
     
     /* Send init sequence to the display */
-    u8g2_InitDisplay(&u8g2);
+    u8g2_InitDisplay(u8g2);
     
     /* Wake up display */
-    u8g2_SetPowerSave(&u8g2, 0);
-    
-    // TODO remove this
-    uint8_t pos = 0;
-    while(1){
-        u8g2_ClearDisplay(&u8g2);
-        u8g2_DrawLine(&u8g2, pos, 0, pos, 64);
-        u8g2_UpdateDisplay(&u8g2);
-        pos = (pos + 1) & 0x7f;
-        CyDelay(16);
+    u8g2_SetPowerSave(u8g2, 0);
+}
+
+void oled_update_frame(u8g2_t *u8g2, uint64_t *vram){
+    for(uint8_t page = 0; page < 8; page++){
+        for (uint8_t col = 0; col < 128; col ++){
+            uint8_t pcol = 0x00;
+            for (uint8_t row = 0; row < 8; row++){
+                uint8_t pix = vram[page*4 + row/2] & (((uint64_t)1) << (63 - col/2)) ? 1 : 0;
+                pcol |= (pix << row);
+            }
+            u8g2->tile_buf_ptr[page*128 + col] = pcol;
+        }
+    }
+    u8g2_UpdateDisplay(u8g2);
+}
+
+uint8_t oled_divide_count = 0;
+
+void isr_oled_handler(u8g2_t *u8g2, uint64_t *vram){
+    oled_divide_count = (oled_divide_count == 0) ? 100 : (oled_divide_count - 1);
+    if (oled_divide_count == 0){
+        oled_update_frame(u8g2, vram);
     }
 }
 
