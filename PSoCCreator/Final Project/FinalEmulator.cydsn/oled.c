@@ -5,7 +5,7 @@ uint8_t gp_dl_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr);
 uint8_t hw_spi_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr);
 
 extern u8g2_t u8g2;
-extern uint64_t vram[32];
+extern uint64_t vram_oled[32];
 extern uint8_t oled_update_flag;
 
 #define HW_SPI
@@ -28,19 +28,19 @@ void oled_initialize(u8g2_t *u8g2){
     u8g2_SetPowerSave(u8g2, 0);
 }
 
-void oled_update_frame(u8g2_t *u8g2, uint64_t *vram){
+void oled_update_frame(){
     for(uint8_t page = 0; page < 8; page++){
         for (uint8_t col = 0; col < 128; col += 2){
             uint8_t pcol = 0x00;
             for (uint8_t row = 0; row < 8; row += 2){
-                uint8_t pix = vram[page*4 + row/2] & (((uint64_t)1) << (63 - col/2)) ? 3 : 0;
+                uint8_t pix = vram_oled[page*4 + row/2] & (((uint64_t)1) << (63 - col/2)) ? 3 : 0;
                 pcol |= (pix << row);
             }
-            u8g2->tile_buf_ptr[page*128 + col] = pcol;
-            u8g2->tile_buf_ptr[page*128 + col + 1] = pcol;
+            u8g2.tile_buf_ptr[page*128 + col] = pcol;
+            u8g2.tile_buf_ptr[page*128 + col + 1] = pcol;
         }
     }
-    u8g2_UpdateDisplay(u8g2);
+    u8g2_UpdateDisplay(&u8g2);
 }
 
 uint8_t oled_divide_count = 0;
@@ -48,7 +48,7 @@ uint8_t oled_divide_count = 0;
 CY_ISR(isr_oled_handler){
     oled_divide_count = (oled_divide_count == 0) ? 100 : (oled_divide_count - 1);
     if (oled_divide_count == 0 && oled_update_flag){
-        oled_update_frame(&u8g2, vram);
+        oled_update_frame();
         oled_update_flag = 0;
     }
 }

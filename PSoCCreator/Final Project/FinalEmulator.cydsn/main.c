@@ -6,15 +6,9 @@
 */
 
 /*
-TODO Check last column on vga is always black
+TODO sound, keyboard debounce, UART ROM transfer
 
-TODO Space Invaders debug
-
-TODO sound
-
-TODO Correct video position
-
-Replace SRAM with EEPROM (or other funcitonality to change roms nicely)
+TODO debug vga, space invaders
 */
 
 #include "project.h"
@@ -31,7 +25,8 @@ uint8_t snd = 0, tmr = 0;
    CHIP8 Video
    Each row is one 64bit number
 */
-uint64_t vram[32];
+uint64_t vram_vga[32];
+uint64_t vram_oled[32];
 
 /* The struct that holds info for the OLED */
 u8g2_t u8g2;

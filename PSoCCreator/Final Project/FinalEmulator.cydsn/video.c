@@ -18,7 +18,7 @@ uint8_t vbuf[96][128] __attribute__ ((section(".vram")));
 extern uint8_t dma_chan;
 extern uint8_t dma_td;
 extern volatile uint8_t vga_update_flag;
-extern uint64_t vram[32];
+extern uint64_t vram_vga[32];
 
 CY_ISR(newline_handler) {
     uint16 line = 805 - VERT_ReadCounter();
@@ -30,31 +30,20 @@ CY_ISR(newline_handler) {
             /* Refresh buffer during vsync */
             CyDmaChDisable(dma_chan);
             if (vga_update_flag) {
-                for (uint8_t y = 0; y < 16; y += 2){
+                for (uint8_t y = 0; y < 96; y += 2){
                     for (uint8_t x = 0; x < 128; x += 2){
-                        vbuf[y][x] = 0;
-                        vbuf[y+1][x] = 0;
-                        vbuf[y][x+1] = 0;
-                        vbuf[y+1][x+1] = 0;
-                    }
-                }
-                for (uint8_t y = 16; y < 80; y += 2){
-                    for (uint8_t x = 0; x < 128; x += 2){
-                        uint64_t temprow = vram[y-16];
-                        temprow &= (uint64_t)1 << (63-x);
-                        uint8_t pix = temprow ? 1 : 0;
+                        uint8_t pix;
+                        if (y < 16 || y >= 80){
+                            pix = 0;
+                        } else {
+                            uint64_t temprow = vram_vga[(y-16)/2];
+                            temprow &= (uint64_t)1 << (63-x/2);
+                            pix = temprow ? 1 : 0;
+                        }
                         vbuf[y][x] = pix;
                         vbuf[y+1][x] = pix;
                         vbuf[y][x+1] = pix;
                         vbuf[y+1][x+1] = pix;
-                    }
-                }
-                for (uint8_t y = 80; y < 96; y += 2){
-                    for (uint8_t x = 0; x < 128; x += 2){
-                        vbuf[y][x] = 0;
-                        vbuf[y+1][x] = 0;
-                        vbuf[y][x+1] = 0;
-                        vbuf[y+1][x+1] = 0;
                     }
                 }
                 vga_update_flag = 0;

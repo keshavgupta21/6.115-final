@@ -42,7 +42,9 @@ uint8_t wait_key(){
             for (uint8_t col = 0; col < 4; col++){
                 uint8_t key = p2v[row*4 + col];
                 if (key_pressed(key)){
-                   return key;
+                    uint8_t i;
+                    for (i=0; i<10; i++);
+                    return key;
                 }
             }
         }
