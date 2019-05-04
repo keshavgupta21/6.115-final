@@ -6,13 +6,13 @@
 */
 
 /*
-TODO sound, keyboard debounce, UART ROM transfer
+TODO sound, UART ROM transfer
 
 TODO debug vga, space invaders
 */
 
 #include "project.h"
-#include "ram_init_data.h"
+#include "font.h"
 #include "chip8.h"
 
 /* 
@@ -40,7 +40,13 @@ volatile uint8_t oled_update_flag = 1;
 uint8_t dma_chan, dma_td;
 volatile uint8_t vga_update_flag = 1;
 
+/* CHIP8 RAM */
+uint8_t ram[4096] = CH8_FONT_DATA;
+
+void load_ram_eeprom();
+
 int main(void){
+    // TODO move this to video.c file
     /* Initialize the DMA */
     dma_td = CyDmaTdAllocate();
     dma_chan = DMA_DmaInitialize(1, 0, HI16(CYDEV_SRAM_BASE),
@@ -62,6 +68,7 @@ int main(void){
     
     /* Start the OLED and its refresh interrupt */
     oled_initialize(&u8g2);
+    // TODO move following line to oled_initilize
     isr_oled_StartEx(isr_oled_handler);
     
     /* Start the Timer interrupt */
@@ -73,18 +80,29 @@ int main(void){
     /* Initialize Random Generator */
     // TODO make sure random still works
     random_Start();
-    
-    /* CHIP8 RAM */
-    uint8_t ram[4096] = RAM_INITIAL_DATA;
         
     /* Turn on LED to indicate execution */
+   
+    // TODO
+    eeprom_Start();
+    //usb_uart_echo();
+    load_ram_eeprom();
     pin_led_Write(1);
 
     /* Start execution */
-    execute(ram);
+    execute();
     
     /* Normally we would never get here */
     /* Turn off LED if invalid instruction received */
     pin_led_Write(0);
     return 0;
+}
+
+void load_ram_eeprom(){
+    uint16_t len = eeprom_ReadByte(0);
+    len <<= 8;
+    len |= eeprom_ReadByte(1);
+    for (uint16_t i = 0; i < len; i++){
+        ram[0x200 + i] = eeprom_ReadByte(i + 2);
+    }
 }

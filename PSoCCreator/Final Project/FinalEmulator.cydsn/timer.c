@@ -12,9 +12,9 @@ CY_ISR(isr_tmr_handler){
         snd = ((snd) == 0) ? 0 : ((snd) - 1);
         tmr = ((tmr) == 0) ? 0 : ((tmr) - 1);
         if (snd) {
-            pin_led_Write(1);
+            pin_snd_Write(1);
         } else {
-            pin_led_Write(0);
+            pin_snd_Write(0);
         }
     }
 }

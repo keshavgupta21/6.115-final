@@ -2,6 +2,7 @@
 #include "opcodes.h"
 #include "chip8.h"
 
+extern uint8_t ram[4096];
 extern uint64_t vram_vga[32];
 extern uint64_t vram_oled[32];
 extern uint8_t snd;
@@ -9,7 +10,7 @@ extern uint8_t tmr;
 extern volatile uint8_t vga_update_flag;
 extern volatile uint8_t oled_update_flag;
 
-void execute(uint8_t ram[]){
+void execute(){
     /* CHIP8 Register File*/
     uint8_t v[16];
     uint16_t i = 0;
@@ -269,14 +270,14 @@ void execute(uint8_t ram[]){
                 break;
             case OP10_SPECIAL_LOAD_BCD:
                 /* BCD hundreds to units of Vx in I to I+2 */
-                ram[i] = (uint8_t)(v[x] / 100) % 10;
-                ram[i+1] = (uint8_t)(v[x] / 10) % 10;
-                ram[i+2] = (uint8_t)(v[x]) % 10;
+                ram[i] = ((uint8_t)(v[x] / 100) % 10);
+                ram[i+1] = ((uint8_t)(v[x] / 10) % 10);
+                ram[i+2] = ((uint8_t)(v[x]) % 10);
                 break;
             case OP10_SPECIAL_LOAD_AT_I:
                 /* Store V0 to Vx in I to I+x */
                 for (uint8_t j = 0; j <= x; j++){
-                    ram[i + j] = v[j];
+                    ram[i+j] = v[j];
                 }
                 break;
             case OP10_SPECIAL_SET_AT_I:
