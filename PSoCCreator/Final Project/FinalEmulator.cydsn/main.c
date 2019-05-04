@@ -22,6 +22,12 @@ Replace SRAM with EEPROM (or other funcitonality to change roms nicely)
 #include "chip8.h"
 
 /* 
+   CHIP8 Timers 
+   Decrement each at 60Hz if not zero
+*/
+uint8_t snd = 0, tmr = 0;
+
+/* 
    CHIP8 Video
    Each row is one 64bit number
 */
@@ -29,21 +35,7 @@ uint64_t vram[32];
 
 /* The struct that holds info for the OLED */
 u8g2_t u8g2;
-
-/* OLED Refresh Interrupt Handler */
-CY_ISR(_isr_oled_handler){
-    isr_oled_handler(&u8g2, vram);
-}
-
-/* 
-   CHIP8 Timers 
-   Decrement each at 60Hz if not zero
-*/
-uint8_t snd = 0, tmr = 0;
-
-CY_ISR(_isr_tmr_handler){
-    isr_tmr_handler(&snd, &tmr);
-};
+volatile uint8_t oled_update_flag = 1;
 
 /* 
    The following code snippet (concerning VGA) is courtesy of
@@ -52,13 +44,6 @@ CY_ISR(_isr_tmr_handler){
 */
 uint8_t dma_chan, dma_td;
 volatile uint8_t vga_update_flag = 1;
-
-CY_ISR(_newline_handler){
-    
-    newline_handler(&dma_chan, &dma_td,
-      &vga_update_flag, vram);
-
-};
 
 int main(void){
     /* Initialize the DMA */
@@ -72,7 +57,7 @@ int main(void){
     CyDmaChEnable(dma_chan, 1);
     
     /* Start the VGA interrupt */
-    NEWLINE_StartEx(_newline_handler);
+    NEWLINE_StartEx(newline_handler);
     
     /* Start all of the timing counters */
     HORIZ_Start();
@@ -82,10 +67,10 @@ int main(void){
     
     /* Start the OLED and its refresh interrupt */
     oled_initialize(&u8g2);
-    isr_oled_StartEx(_isr_oled_handler);
+    isr_oled_StartEx(isr_oled_handler);
     
     /* Start the Timer interrupt */
-    isr_timer_StartEx(_isr_tmr_handler);
+    isr_timer_StartEx(isr_tmr_handler);
     
     /* Enable global interrupts */
     CyGlobalIntEnable;
@@ -101,7 +86,7 @@ int main(void){
     pin_led_Write(1);
 
     /* Start execution */
-    execute(ram, vram, &snd, &tmr, &vga_update_flag);
+    execute(ram);
     
     /* Normally we would never get here */
     /* Turn off LED if invalid instruction received */

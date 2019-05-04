@@ -2,8 +2,13 @@
 #include "opcodes.h"
 #include "chip8.h"
 
-void execute(uint8_t ram[], uint64_t vram[32], uint8_t* snd, 
-                        uint8_t* tmr, volatile uint8_t* vga_update_flag){
+extern uint64_t vram[32];
+extern uint8_t snd;
+extern uint8_t tmr;
+extern volatile uint8_t vga_update_flag;
+extern volatile uint8_t oled_update_flag;
+
+void execute(uint8_t ram[]){
     /* CHIP8 Register File*/
     uint8_t v[16];
     uint16_t i = 0;
@@ -203,7 +208,8 @@ void execute(uint8_t ram[], uint64_t vram[32], uint8_t* snd,
                 vram[(v[y] + j) % 32] ^= row;
             }
             v[0xf] = collision ? 1 : 0;
-            *vga_update_flag = 1;
+            vga_update_flag = 1;
+            oled_update_flag = 1;
             break;
         }
         case OP3_KEYBOARD:
@@ -231,7 +237,7 @@ void execute(uint8_t ram[], uint64_t vram[32], uint8_t* snd,
             switch(op10){
             case OP10_SPECIAL_LOAD_DELAY:
                 /* Vx = delay timer */
-                v[x] = *tmr;
+                v[x] = tmr;
                 break;
             case OP10_SPECIAL_LOAD_KEYBOARD:
                 /* Vx = keypress, blocks till something pressed */
@@ -239,11 +245,11 @@ void execute(uint8_t ram[], uint64_t vram[32], uint8_t* snd,
                 break;
             case OP10_SPECIAL_SET_DELAY:
                 /* delay timer = Vx */
-                *tmr = v[x];
+                tmr = v[x];
                 break;
             case OP10_SPECIAL_SET_SOUND:
                 /* sound timer = Vx */
-                *snd = v[x];
+                snd = v[x];
                 break;
             case OP10_SPECIAL_ADD_TO_I:
                 /* I += Vx */

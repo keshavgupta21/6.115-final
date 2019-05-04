@@ -1,5 +1,5 @@
 -- Project:   FinalEmulator
--- Generated: 05/03/2019 17:00:23
+-- Generated: 05/03/2019 21:31:50
 -- PSoC Creator  4.2
 
 ENTITY FinalEmulator IS
@@ -52,9 +52,6 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     SIGNAL Col_3(0)__PA : bit;
     SIGNAL Col_4(0)__PA : bit;
     SIGNAL HSYNC_OUT(0)__PA : bit;
-    SIGNAL Net_10 : bit;
-    ATTRIBUTE global_signal OF Net_10 : SIGNAL IS true;
-    SIGNAL Net_10_local : bit;
     SIGNAL Net_1241 : bit;
     ATTRIBUTE udbclken_assigned OF Net_1241 : SIGNAL IS "True";
     ATTRIBUTE global_signal OF Net_1241 : SIGNAL IS true;
@@ -63,6 +60,9 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     SIGNAL Net_16001 : bit;
     SIGNAL Net_16002 : bit;
     SIGNAL Net_16003 : bit;
+    SIGNAL Net_16044 : bit;
+    ATTRIBUTE global_signal OF Net_16044 : SIGNAL IS true;
+    SIGNAL Net_16044_local : bit;
     SIGNAL Net_1700 : bit;
     SIGNAL Net_1730 : bit;
     SIGNAL Net_1731 : bit;
@@ -223,15 +223,15 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     ATTRIBUTE lib_model OF Col_4(0) : LABEL IS "iocell13";
     ATTRIBUTE Location OF Col_4(0) : LABEL IS "P3[6]";
     ATTRIBUTE lib_model OF pin_oled_mosi(0) : LABEL IS "iocell14";
-    ATTRIBUTE Location OF pin_oled_mosi(0) : LABEL IS "P12[3]";
+    ATTRIBUTE Location OF pin_oled_mosi(0) : LABEL IS "P12[1]";
     ATTRIBUTE lib_model OF pin_oled_clk(0) : LABEL IS "iocell15";
     ATTRIBUTE Location OF pin_oled_clk(0) : LABEL IS "P12[0]";
     ATTRIBUTE lib_model OF pin_oled_cs(0) : LABEL IS "iocell16";
-    ATTRIBUTE Location OF pin_oled_cs(0) : LABEL IS "P12[1]";
+    ATTRIBUTE Location OF pin_oled_cs(0) : LABEL IS "P12[4]";
     ATTRIBUTE lib_model OF pin_oled_dc(0) : LABEL IS "iocell17";
-    ATTRIBUTE Location OF pin_oled_dc(0) : LABEL IS "P12[2]";
+    ATTRIBUTE Location OF pin_oled_dc(0) : LABEL IS "P12[3]";
     ATTRIBUTE lib_model OF pin_oled_rst(0) : LABEL IS "iocell18";
-    ATTRIBUTE Location OF pin_oled_rst(0) : LABEL IS "P12[4]";
+    ATTRIBUTE Location OF pin_oled_rst(0) : LABEL IS "P12[2]";
     ATTRIBUTE lib_model OF pin_test(0) : LABEL IS "iocell19";
     ATTRIBUTE Location OF pin_test(0) : LABEL IS "P1[7]";
     ATTRIBUTE lib_model OF Net_5860 : LABEL IS "macrocell1";
@@ -629,8 +629,8 @@ BEGIN
             dclk_0 => Net_1241_local,
             dclk_glb_1 => \spi_oled:Net_276\,
             dclk_1 => \spi_oled:Net_276_local\,
-            dclk_glb_2 => Net_10,
-            dclk_2 => Net_10_local);
+            dclk_glb_2 => Net_16044,
+            dclk_2 => Net_16044_local);
 
     pin_led:logicalport
         GENERIC MAP(
@@ -2474,7 +2474,7 @@ BEGIN
             int_type => "10",
             is_nmi => 0)
         PORT MAP(
-            interrupt => Net_10_local,
+            interrupt => Net_16044_local,
             clock => ClockBlock_BUS_CLK);
 
     \HORIZ:PWMUDB:genblk1:ctrlreg\:controlcell
@@ -2910,7 +2910,7 @@ BEGIN
             int_type => "10",
             is_nmi => 0)
         PORT MAP(
-            interrupt => Net_10_local,
+            interrupt => Net_16044_local,
             clock => ClockBlock_BUS_CLK);
 
     \HORIZ:PWMUDB:runmode_enable\:macrocell
