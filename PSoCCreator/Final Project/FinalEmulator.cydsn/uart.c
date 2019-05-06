@@ -12,14 +12,7 @@ void usb_uart_echo()
     /* 
         Receiver FSM.
         States:
-            0: Expecting a 0x00 bytes (initial state)
-            1: Expecting a 0x01 byte
-               acknowledge transfer by sending 0x02 and 0x03
-            2: Epecting the length of bytes to receive (high 8 bits)
-            3: Epecting the length of bytes to receive (low 8 bits)
-               acknowledge transfer by sending the high and low 8 bits of size
-            4: Set counter = 0 and receive the bytes
-            5: acknowledge transfer by sending 0x04 and 0x05
+            
     */
     uint8_t state = 0;
     uint16_t counter = 0, length = 0;    
@@ -41,59 +34,57 @@ void usb_uart_echo()
                 /* Read received data and re-enable OUT endpoint. */
                 count = usb_uart_GetAll(buffer);
                 if (count != 0){
-                    /* Receive and save. */
                     for (uint8_t i = 0; i < count; i++){
-                        switch (state){
-                            case 0:
-                                if (buffer[i] == 0x00){
-                                    state = 1;
-                                }
-                                break;
-                            case 1:
-                                if (buffer[i] == 0x01){
-                                    /* Wait until component is ready to send data to host. */
-                                    while (usb_uart_CDCIsReady() == 0){};
-                                    uint8_t tbuf[] = {0x02, 0x03};
-                                    usb_uart_PutData(tbuf, 2);
-                                    state = 2;
-                                }
-                                break;
-                            case 2:
-                                length |= ((uint16_t)(buffer[i])) << 8;
-                                state = 3;
-                                break;
-                            case 3:{
-                                length |= buffer[i];
-                                counter = 0;
-                                /* Wait until component is ready to send data to host. */
-                                while (0u == usb_uart_CDCIsReady()){};
-                                uint8_t tbuf[] = {(length & 0xff00) >> 8, length & 0xff};
-                                usb_uart_PutData(tbuf, 2);
-                                state = 4;
-                                break;
+                        switch(state){
+                        case 0:
+                            if (buffer[i] == 0x00){
+                                state = 1;
                             }
-                            case 4:
+                            break;
+                        case 1:
+                            if (buffer[i] == 0x01){
+                                state = 2;
+                            }
+                            break;
+                        case 2:
+                            length = (uint16_t)buffer[i] << 8;
+                            state = 3;
+                            break;
+                        case 3:
+                            length |= (uint16_t)buffer[i];
+                            state = 4;
+                            break;
+                        case 4:
+                            if (counter < length){
                                 eeprom_WriteByte(buffer[i], counter++);
-                                if (counter == length) {
-                                    state = 5;
-                                }
-                                break;
-                            case 5:{
-                                /* Wait until component is ready to send data to host. */
-                                while (usb_uart_CDCIsReady() == 0){};
-                                uint8_t tbuf[] = {0x04, 0x05};
-                                usb_uart_PutData(tbuf, 2);
-                                /* Wait until component is ready to send data to host. */
-                                while (usb_uart_CDCIsReady() == 0){};
-                                pin_led_Write(1);
-                                state = 0;
-                                while(1){
+                            } else {
+                                state = 5;
+                            }
+                            break;
+                        case 5:
+                            while (usb_uart_CDCIsReady() == 0){}
+                            uint8_t tbuf[] = {((uint16_t)(counter&0xff00) >> 8), counter & 0xff};
+                            usb_uart_PutData(tbuf, 2);
+                            state = 6;
+                            break;
+                        case 6:
+                            if (buffer[i] == 0x04){
+                                /* All good, go ahead */
+                                while (1){
                                     pin_led_Write(1);
                                 }
+                            } else {
+                                while (1){
+                                    pin_led_Write(1);
+                                    CyDelay(100);
+                                    pin_led_Write(0);
+                                    CyDelay(100);
+                                }
                             }
-                            default:
-                                state = 0;
-                                break;
+                            break;
+                        default:
+                            state = 0;
+                            break;
                         }
                     }
                 }

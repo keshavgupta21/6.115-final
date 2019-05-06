@@ -2,7 +2,7 @@
 --	Conversion of FinalEmulator.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Sun May 05 23:42:17 2019
+--	Mon May 06 00:30:31 2019
 --
 
 USE cypress.cypress.all;
@@ -1764,11 +1764,11 @@ ATTRIBUTE port_state_att of \spi_oled:BSPIM:sR8:Dp:f1_blk_stat_reg\:SIGNAL IS 2;
 SIGNAL Net_16004 : bit;
 SIGNAL \spi_oled:Net_289\ : bit;
 SIGNAL Net_16006 : bit;
-SIGNAL tmpOE__pin_test_net_0 : bit;
-SIGNAL tmpFB_0__pin_test_net_0 : bit;
-SIGNAL tmpIO_0__pin_test_net_0 : bit;
-TERMINAL tmpSIOVREF__pin_test_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__pin_test_net_0 : bit;
+SIGNAL tmpOE__pin_prog_net_0 : bit;
+SIGNAL tmpFB_0__pin_prog_net_0 : bit;
+SIGNAL tmpIO_0__pin_prog_net_0 : bit;
+TERMINAL tmpSIOVREF__pin_prog_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__pin_prog_net_0 : bit;
 SIGNAL \usb_uart:Net_1010\ : bit;
 SIGNAL \usb_uart:tmpOE__Dm_net_0\ : bit;
 SIGNAL \usb_uart:tmpFB_0__Dm_net_0\ : bit;
@@ -4099,12 +4099,12 @@ pin_oled_rst:cy_psoc3_pins_v1_10
 		pi=>(zero, zero, zero, zero,
 			zero, zero, zero, zero),
 		po=>open);
-pin_test:cy_psoc3_pins_v1_10
+pin_prog:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"9a8ba9bb-875e-42a6-86df-251cc4986593",
-		drive_mode=>"110",
+		drive_mode=>"001",
 		ibuf_enabled=>"1",
 		init_dr_st=>"0",
-		input_sync=>"1",
+		input_sync=>"0",
 		input_clk_en=>'0',
 		input_sync_mode=>"0",
 		intr_mode=>"00",
@@ -4126,7 +4126,7 @@ pin_test:cy_psoc3_pins_v1_10
 		oe_conn=>"0",
 		oe_reset=>'0',
 		pin_aliases=>"",
-		pin_mode=>"O",
+		pin_mode=>"I",
 		por_state=>4,
 		sio_group_cnt=>0,
 		sio_hifreq=>"00000000",
@@ -4140,7 +4140,7 @@ pin_test:cy_psoc3_pins_v1_10
 		slew_rate=>"0",
 		spanning=>'0',
 		sw_only=>'0',
-		vtrip=>"10",
+		vtrip=>"00",
 		width=>1,
 		port_alias_required=>'0',
 		port_alias_group=>"",
@@ -4157,10 +4157,10 @@ pin_test:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(tmpOE__pin_led_net_0),
 		y=>(zero),
-		fb=>(tmpFB_0__pin_test_net_0),
+		fb=>(tmpFB_0__pin_prog_net_0),
 		analog=>(open),
-		io=>(tmpIO_0__pin_test_net_0),
-		siovref=>(tmpSIOVREF__pin_test_net_0),
+		io=>(tmpIO_0__pin_prog_net_0),
+		siovref=>(tmpSIOVREF__pin_prog_net_0),
 		annotation=>(open),
 		in_clock=>zero,
 		in_clock_en=>tmpOE__pin_led_net_0,
@@ -4168,7 +4168,7 @@ pin_test:cy_psoc3_pins_v1_10
 		out_clock=>zero,
 		out_clock_en=>tmpOE__pin_led_net_0,
 		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__pin_test_net_0);
+		interrupt=>tmpINTERRUPT_0__pin_prog_net_0);
 \usb_uart:dp_int\:cy_isr_v1_0
 	GENERIC MAP(int_type=>"10",
 		is_nmi=>'0')

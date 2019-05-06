@@ -5,8 +5,6 @@ uint8_t gp_dl_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr);
 uint8_t hw_spi_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr);
 
 extern u8g2_t u8g2;
-extern uint64_t vram_oled[32];
-extern uint8_t oled_update_flag;
 
 #define HW_SPI
 

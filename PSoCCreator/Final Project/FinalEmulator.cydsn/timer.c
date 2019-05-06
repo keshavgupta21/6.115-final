@@ -7,6 +7,7 @@ extern uint8_t tmr;
 uint8_t timer_divide_count = 0;
 
 CY_ISR(isr_tmr_handler){
+    /* Divide the 6 kHz interrupt into 100 in software */
     timer_divide_count = (timer_divide_count == 0) ? 100 : (timer_divide_count - 1);
     if (timer_divide_count == 0){
         snd = ((snd) == 0) ? 0 : ((snd) - 1);

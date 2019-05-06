@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: pin_test.h  
+* File Name: pin_prog.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_pin_test_ALIASES_H) /* Pins pin_test_ALIASES_H */
-#define CY_PINS_pin_test_ALIASES_H
+#if !defined(CY_PINS_pin_prog_ALIASES_H) /* Pins pin_prog_ALIASES_H */
+#define CY_PINS_pin_prog_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -25,12 +25,12 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define pin_test_0			(pin_test__0__PC)
-#define pin_test_0_INTR	((uint16)((uint16)0x0001u << pin_test__0__SHIFT))
+#define pin_prog_0			(pin_prog__0__PC)
+#define pin_prog_0_INTR	((uint16)((uint16)0x0001u << pin_prog__0__SHIFT))
 
-#define pin_test_INTR_ALL	 ((uint16)(pin_test_0_INTR))
+#define pin_prog_INTR_ALL	 ((uint16)(pin_prog_0_INTR))
 
-#endif /* End Pins pin_test_ALIASES_H */
+#endif /* End Pins pin_prog_ALIASES_H */
 
 
 /* [] END OF FILE */

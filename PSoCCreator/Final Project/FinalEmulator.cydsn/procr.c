@@ -6,7 +6,7 @@ extern uint8_t ram[4096];
 extern uint64_t vram[32];
 extern uint8_t snd;
 extern uint8_t tmr;
-extern volatile uint8_t vga_update_flag;
+extern volatile uint8_t frame_update;
 
 void execute(){
     /* CHIP8 Register File*/
@@ -20,7 +20,7 @@ void execute(){
     for (uint8_t j = 0; j < 32; j++){
         vram[j] = 0;
     }
-    vga_update_flag = 1;
+    frame_update = 1;
     
     /* Emulate away.. */
     while(1){
@@ -60,7 +60,7 @@ void execute(){
                     for (int j = 0; j < 32; j++){
                         vram[j] = 0;
                     }
-                    vga_update_flag = 1;
+                    frame_update = 1;
                     break;
                 case OP10_SYSTEM_RETURN:
                     /* Return from instruction */
@@ -210,7 +210,7 @@ void execute(){
                 vram[(v[y] + j) % 32] ^= row;
             }
             v[0xf] = collision ? 1 : 0;
-            vga_update_flag = 1;
+            frame_update = 1;
             break;
         }
         case OP3_KEYBOARD:

@@ -1,6 +1,6 @@
 // ======================================================================
 // FinalEmulator.v generated from TopDesign.cysch
-// 05/05/2019 at 23:42
+// 05/06/2019 at 00:30
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -72,62 +72,56 @@
 `define CYDEV_CHIP_MEMBER_4E 6
 `define CYDEV_CHIP_REVISION_4E_PRODUCTION 0
 `define CYDEV_CHIP_REVISION_4E_CCG2_NO_USBPD 0
-`define CYDEV_CHIP_MEMBER_4X 7
-`define CYDEV_CHIP_REVISION_4X_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4O 8
+`define CYDEV_CHIP_MEMBER_4O 7
 `define CYDEV_CHIP_REVISION_4O_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4R 9
+`define CYDEV_CHIP_MEMBER_4R 8
 `define CYDEV_CHIP_REVISION_4R_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4T 10
+`define CYDEV_CHIP_MEMBER_4T 9
 `define CYDEV_CHIP_REVISION_4T_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4N 11
+`define CYDEV_CHIP_MEMBER_4N 10
 `define CYDEV_CHIP_REVISION_4N_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4S 12
+`define CYDEV_CHIP_MEMBER_4S 11
 `define CYDEV_CHIP_REVISION_4S_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4W 13
-`define CYDEV_CHIP_REVISION_4W_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4Q 14
+`define CYDEV_CHIP_MEMBER_4Q 12
 `define CYDEV_CHIP_REVISION_4Q_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4Y 15
-`define CYDEV_CHIP_REVISION_4Y_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4D 16
+`define CYDEV_CHIP_MEMBER_4D 13
 `define CYDEV_CHIP_REVISION_4D_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4J 17
+`define CYDEV_CHIP_MEMBER_4J 14
 `define CYDEV_CHIP_REVISION_4J_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4K 18
+`define CYDEV_CHIP_MEMBER_4K 15
 `define CYDEV_CHIP_REVISION_4K_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4V 19
+`define CYDEV_CHIP_MEMBER_4V 16
 `define CYDEV_CHIP_REVISION_4V_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4H 20
+`define CYDEV_CHIP_MEMBER_4H 17
 `define CYDEV_CHIP_REVISION_4H_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4A 21
+`define CYDEV_CHIP_MEMBER_4A 18
 `define CYDEV_CHIP_REVISION_4A_PRODUCTION 17
 `define CYDEV_CHIP_REVISION_4A_ES0 17
-`define CYDEV_CHIP_MEMBER_4F 22
+`define CYDEV_CHIP_MEMBER_4F 19
 `define CYDEV_CHIP_REVISION_4F_PRODUCTION 0
 `define CYDEV_CHIP_REVISION_4F_PRODUCTION_256K 0
 `define CYDEV_CHIP_REVISION_4F_PRODUCTION_256DMA 0
-`define CYDEV_CHIP_MEMBER_4P 23
+`define CYDEV_CHIP_MEMBER_4P 20
 `define CYDEV_CHIP_REVISION_4P_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4M 24
+`define CYDEV_CHIP_MEMBER_4M 21
 `define CYDEV_CHIP_REVISION_4M_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4L 25
+`define CYDEV_CHIP_MEMBER_4L 22
 `define CYDEV_CHIP_REVISION_4L_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_4I 26
+`define CYDEV_CHIP_MEMBER_4I 23
 `define CYDEV_CHIP_REVISION_4I_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_6A 27
+`define CYDEV_CHIP_MEMBER_6A 24
 `define CYDEV_CHIP_REVISION_6A_ES 17
 `define CYDEV_CHIP_REVISION_6A_PRODUCTION 33
 `define CYDEV_CHIP_REVISION_6A_NO_UDB 33
-`define CYDEV_CHIP_MEMBER_PDL_FM0P_TYPE1 28
+`define CYDEV_CHIP_MEMBER_PDL_FM0P_TYPE1 25
 `define CYDEV_CHIP_REVISION_PDL_FM0P_TYPE1_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_PDL_FM0P_TYPE2 29
+`define CYDEV_CHIP_MEMBER_PDL_FM0P_TYPE2 26
 `define CYDEV_CHIP_REVISION_PDL_FM0P_TYPE2_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_PDL_FM0P_TYPE3 30
+`define CYDEV_CHIP_MEMBER_PDL_FM0P_TYPE3 27
 `define CYDEV_CHIP_REVISION_PDL_FM0P_TYPE3_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_FM3 31
+`define CYDEV_CHIP_MEMBER_FM3 28
 `define CYDEV_CHIP_REVISION_FM3_PRODUCTION 0
-`define CYDEV_CHIP_MEMBER_FM4 32
+`define CYDEV_CHIP_MEMBER_FM4 29
 `define CYDEV_CHIP_REVISION_FM4_PRODUCTION 0
 `define CYDEV_CHIP_FAMILY_USED 3
 `define CYDEV_CHIP_MEMBER_USED 2
@@ -2721,19 +2715,19 @@ module top ;
 
     assign Net_16006 = 1'h0;
 
-	wire [0:0] tmpOE__pin_test_net;
-	wire [0:0] tmpFB_0__pin_test_net;
-	wire [0:0] tmpIO_0__pin_test_net;
-	wire [0:0] tmpINTERRUPT_0__pin_test_net;
-	electrical [0:0] tmpSIOVREF__pin_test_net;
+	wire [0:0] tmpOE__pin_prog_net;
+	wire [0:0] tmpFB_0__pin_prog_net;
+	wire [0:0] tmpIO_0__pin_prog_net;
+	wire [0:0] tmpINTERRUPT_0__pin_prog_net;
+	electrical [0:0] tmpSIOVREF__pin_prog_net;
 
 	cy_psoc3_pins_v1_10
 		#(.id("9a8ba9bb-875e-42a6-86df-251cc4986593"),
-		  .drive_mode(3'b110),
+		  .drive_mode(3'b001),
 		  .ibuf_enabled(1'b1),
 		  .init_dr_st(1'b0),
 		  .input_clk_en(0),
-		  .input_sync(1'b1),
+		  .input_sync(1'b0),
 		  .input_sync_mode(1'b0),
 		  .intr_mode(2'b00),
 		  .invert_in_clock(0),
@@ -2760,7 +2754,7 @@ module top ;
 		  .pa_out_clock_en(-1),
 		  .pa_out_reset(-1),
 		  .pin_aliases(""),
-		  .pin_mode("O"),
+		  .pin_mode("I"),
 		  .por_state(4),
 		  .sio_group_cnt(0),
 		  .sio_hyst(1'b1),
@@ -2774,19 +2768,19 @@ module top ;
 		  .slew_rate(1'b0),
 		  .spanning(0),
 		  .use_annotation(1'b0),
-		  .vtrip(2'b10),
+		  .vtrip(2'b00),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
 		  .ovt_needed(1'b0),
 		  .ovt_slew_control(2'b00),
 		  .input_buffer_sel(2'b00))
-		pin_test
-		 (.oe(tmpOE__pin_test_net),
+		pin_prog
+		 (.oe(tmpOE__pin_prog_net),
 		  .y({1'b0}),
-		  .fb({tmpFB_0__pin_test_net[0:0]}),
-		  .io({tmpIO_0__pin_test_net[0:0]}),
-		  .siovref(tmpSIOVREF__pin_test_net),
-		  .interrupt({tmpINTERRUPT_0__pin_test_net[0:0]}),
+		  .fb({tmpFB_0__pin_prog_net[0:0]}),
+		  .io({tmpIO_0__pin_prog_net[0:0]}),
+		  .siovref(tmpSIOVREF__pin_prog_net),
+		  .interrupt({tmpINTERRUPT_0__pin_prog_net[0:0]}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -2794,7 +2788,7 @@ module top ;
 		  .out_clock_en({1'b1}),
 		  .out_reset({1'b0}));
 
-	assign tmpOE__pin_test_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
+	assign tmpOE__pin_prog_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
 
     USBFS_v3_20_5 usb_uart (
         .sof(Net_16065),

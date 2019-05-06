@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: pin_test.c  
+* File Name: pin_prog.c  
 * Version 2.20
 *
 * Description:
@@ -15,15 +15,15 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "pin_test.h"
+#include "pin_prog.h"
 
 /* APIs are not generated for P15[7:6] on PSoC 5 */
 #if !(CY_PSOC5A &&\
-	 pin_test__PORT == 15 && ((pin_test__MASK & 0xC0) != 0))
+	 pin_prog__PORT == 15 && ((pin_prog__MASK & 0xC0) != 0))
 
 
 /*******************************************************************************
-* Function Name: pin_test_Write
+* Function Name: pin_prog_Write
 ****************************************************************************//**
 *
 * \brief Writes the value to the physical port (data output register), masking
@@ -52,17 +52,17 @@
 *  this function.
 *
 * \funcusage
-*  \snippet pin_test_SUT.c usage_pin_test_Write
+*  \snippet pin_prog_SUT.c usage_pin_prog_Write
 *******************************************************************************/
-void pin_test_Write(uint8 value)
+void pin_prog_Write(uint8 value)
 {
-    uint8 staticBits = (pin_test_DR & (uint8)(~pin_test_MASK));
-    pin_test_DR = staticBits | ((uint8)(value << pin_test_SHIFT) & pin_test_MASK);
+    uint8 staticBits = (pin_prog_DR & (uint8)(~pin_prog_MASK));
+    pin_prog_DR = staticBits | ((uint8)(value << pin_prog_SHIFT) & pin_prog_MASK);
 }
 
 
 /*******************************************************************************
-* Function Name: pin_test_SetDriveMode
+* Function Name: pin_prog_SetDriveMode
 ****************************************************************************//**
 *
 * \brief Sets the drive mode for each of the Pins component's pins.
@@ -85,16 +85,16 @@ void pin_test_Write(uint8 value)
 *  APIs (primary method) or disable interrupts around this function.
 *
 * \funcusage
-*  \snippet pin_test_SUT.c usage_pin_test_SetDriveMode
+*  \snippet pin_prog_SUT.c usage_pin_prog_SetDriveMode
 *******************************************************************************/
-void pin_test_SetDriveMode(uint8 mode)
+void pin_prog_SetDriveMode(uint8 mode)
 {
-	CyPins_SetPinDriveMode(pin_test_0, mode);
+	CyPins_SetPinDriveMode(pin_prog_0, mode);
 }
 
 
 /*******************************************************************************
-* Function Name: pin_test_Read
+* Function Name: pin_prog_Read
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port (pin status register) and masks 
@@ -108,16 +108,16 @@ void pin_test_SetDriveMode(uint8 mode)
 *  The current value for the pins in the component as a right justified number.
 *
 * \funcusage
-*  \snippet pin_test_SUT.c usage_pin_test_Read  
+*  \snippet pin_prog_SUT.c usage_pin_prog_Read  
 *******************************************************************************/
-uint8 pin_test_Read(void)
+uint8 pin_prog_Read(void)
 {
-    return (pin_test_PS & pin_test_MASK) >> pin_test_SHIFT;
+    return (pin_prog_PS & pin_prog_MASK) >> pin_prog_SHIFT;
 }
 
 
 /*******************************************************************************
-* Function Name: pin_test_ReadDataReg
+* Function Name: pin_prog_ReadDataReg
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port's data output register and masks 
@@ -126,8 +126,8 @@ uint8 pin_test_Read(void)
 *
 * The data output register controls the signal applied to the physical pin in 
 * conjunction with the drive mode parameter. This is not the same as the 
-* preferred pin_test_Read() API because the 
-* pin_test_ReadDataReg() reads the data register instead of the status 
+* preferred pin_prog_Read() API because the 
+* pin_prog_ReadDataReg() reads the data register instead of the status 
 * register. For output pins this is a useful function to determine the value 
 * just written to the pin.
 *
@@ -136,19 +136,19 @@ uint8 pin_test_Read(void)
 *  justified number for the component instance.
 *
 * \funcusage
-*  \snippet pin_test_SUT.c usage_pin_test_ReadDataReg 
+*  \snippet pin_prog_SUT.c usage_pin_prog_ReadDataReg 
 *******************************************************************************/
-uint8 pin_test_ReadDataReg(void)
+uint8 pin_prog_ReadDataReg(void)
 {
-    return (pin_test_DR & pin_test_MASK) >> pin_test_SHIFT;
+    return (pin_prog_DR & pin_prog_MASK) >> pin_prog_SHIFT;
 }
 
 
 /* If interrupt is connected for this Pins component */ 
-#if defined(pin_test_INTSTAT) 
+#if defined(pin_prog_INTSTAT) 
 
     /*******************************************************************************
-    * Function Name: pin_test_SetInterruptMode
+    * Function Name: pin_prog_SetInterruptMode
     ****************************************************************************//**
     *
     * \brief Configures the interrupt mode for each of the Pins component's
@@ -161,12 +161,12 @@ uint8 pin_test_ReadDataReg(void)
     * \param position
     *  The pin position as listed in the Pins component. You may OR these to be 
     *  able to configure the interrupt mode of multiple pins within a Pins 
-    *  component. Or you may use pin_test_INTR_ALL to configure the
+    *  component. Or you may use pin_prog_INTR_ALL to configure the
     *  interrupt mode of all the pins in the Pins component.       
-    *  - pin_test_0_INTR       (First pin in the list)
-    *  - pin_test_1_INTR       (Second pin in the list)
+    *  - pin_prog_0_INTR       (First pin in the list)
+    *  - pin_prog_1_INTR       (Second pin in the list)
     *  - ...
-    *  - pin_test_INTR_ALL     (All pins in Pins component)
+    *  - pin_prog_INTR_ALL     (All pins in Pins component)
     *
     * \param mode
     *  Interrupt mode for the selected pins. Valid options are documented in
@@ -182,19 +182,19 @@ uint8 pin_test_ReadDataReg(void)
     *  port.
     *
     * \funcusage
-    *  \snippet pin_test_SUT.c usage_pin_test_SetInterruptMode
+    *  \snippet pin_prog_SUT.c usage_pin_prog_SetInterruptMode
     *******************************************************************************/
-    void pin_test_SetInterruptMode(uint16 position, uint16 mode)
+    void pin_prog_SetInterruptMode(uint16 position, uint16 mode)
     {
-		if((position & pin_test_0_INTR) != 0u) 
+		if((position & pin_prog_0_INTR) != 0u) 
 		{ 
-			 pin_test_0_INTTYPE_REG = (uint8)mode; 
+			 pin_prog_0_INTTYPE_REG = (uint8)mode; 
 		}
     }
     
     
     /*******************************************************************************
-    * Function Name: pin_test_ClearInterrupt
+    * Function Name: pin_prog_ClearInterrupt
     ****************************************************************************//**
     *
     * \brief Clears any active interrupts attached with the component and returns 
@@ -211,11 +211,11 @@ uint8 pin_test_ReadDataReg(void)
     *  those associated with the Pins component.
     *
     * \funcusage
-    *  \snippet pin_test_SUT.c usage_pin_test_ClearInterrupt
+    *  \snippet pin_prog_SUT.c usage_pin_prog_ClearInterrupt
     *******************************************************************************/
-    uint8 pin_test_ClearInterrupt(void)
+    uint8 pin_prog_ClearInterrupt(void)
     {
-        return (pin_test_INTSTAT & pin_test_MASK) >> pin_test_SHIFT;
+        return (pin_prog_INTSTAT & pin_prog_MASK) >> pin_prog_SHIFT;
     }
 
 #endif /* If Interrupts Are Enabled for this Pins component */ 
