@@ -3,12 +3,10 @@
 #include "chip8.h"
 
 extern uint8_t ram[4096];
-extern uint64_t vram_vga[32];
-extern uint64_t vram_oled[32];
+extern uint64_t vram[32];
 extern uint8_t snd;
 extern uint8_t tmr;
 extern volatile uint8_t vga_update_flag;
-extern volatile uint8_t oled_update_flag;
 
 void execute(){
     /* CHIP8 Register File*/
@@ -20,11 +18,9 @@ void execute(){
     
     /* Clear screen */
     for (uint8_t j = 0; j < 32; j++){
-        vram_vga[j] = 0;
-        vram_oled[j] = 0;
+        vram[j] = 0;
     }
     vga_update_flag = 1;
-    oled_update_flag = 1;
     
     /* Emulate away.. */
     while(1){
@@ -62,11 +58,9 @@ void execute(){
                 case OP10_SYSTEM_CLEAR:
                     /* Clear screen */
                     for (int j = 0; j < 32; j++){
-                        vram_vga[j] = 0;
-                        vram_vga[j] = 0;
+                        vram[j] = 0;
                     }
                     vga_update_flag = 1;
-                    oled_update_flag = 1;
                     break;
                 case OP10_SYSTEM_RETURN:
                     /* Return from instruction */
@@ -212,13 +206,11 @@ void execute(){
                     row = ((uint64_t)ram[i + j]) >> (v[x] - 56)
                         | ((uint64_t)ram[i + j]) << (120 - v[x]);
                 }
-                collision |= vram_vga[(v[y] + j) % 32] & row;
-                vram_vga[(v[y] + j) % 32] ^= row;
-                vram_oled[(v[y] + j) % 32] ^= row;
+                collision |= vram[(v[y] + j) % 32] & row;
+                vram[(v[y] + j) % 32] ^= row;
             }
             v[0xf] = collision ? 1 : 0;
             vga_update_flag = 1;
-            oled_update_flag = 1;
             break;
         }
         case OP3_KEYBOARD:

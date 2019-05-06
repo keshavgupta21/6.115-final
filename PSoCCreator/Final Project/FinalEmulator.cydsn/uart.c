@@ -69,13 +69,11 @@ void usb_uart_echo()
                                 while (0u == usb_uart_CDCIsReady()){};
                                 uint8_t tbuf[] = {(length & 0xff00) >> 8, length & 0xff};
                                 usb_uart_PutData(tbuf, 2);
-                                eeprom_WriteByte(tbuf[0], 0);
-                                eeprom_WriteByte(tbuf[1], 1);
                                 state = 4;
                                 break;
                             }
                             case 4:
-                                eeprom_WriteByte(buffer[i], 2 + counter++);
+                                eeprom_WriteByte(buffer[i], counter++);
                                 if (counter == length) {
                                     state = 5;
                                 }
@@ -89,7 +87,9 @@ void usb_uart_echo()
                                 while (usb_uart_CDCIsReady() == 0){};
                                 pin_led_Write(1);
                                 state = 0;
-                                //return;
+                                while(1){
+                                    pin_led_Write(1);
+                                }
                             }
                             default:
                                 state = 0;

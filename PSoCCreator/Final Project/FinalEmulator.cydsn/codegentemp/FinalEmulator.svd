@@ -1875,9 +1875,27 @@
       </addressBlock>
       <registers>
         <register>
+          <name>HORIZ__COMPARE1</name>
+          <description>UDB.D0 - Assigned Compare1 Value</description>
+          <addressOffset>0x40006424</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>HORIZ__COMPARE2</name>
+          <description>UDB.D1 - Assigned Compare2 Value</description>
+          <addressOffset>0x40006434</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
           <name>HORIZ_Control_Reg</name>
           <description>UDB Control Register - Assigned Control Register Value</description>
-          <addressOffset>0x40006477</addressOffset>
+          <addressOffset>0x40006474</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1907,27 +1925,9 @@
           </fields>
         </register>
         <register>
-          <name>HORIZ__COMPARE1</name>
-          <description>UDB.D0 - Assigned Compare1 Value</description>
-          <addressOffset>0x40006527</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>HORIZ__COMPARE2</name>
-          <description>UDB.D1 - Assigned Compare2 Value</description>
-          <addressOffset>0x40006537</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
           <name>HORIZ_STATUS_AUX_CTRL</name>
           <description>UDB Auxilliary Control Register</description>
-          <addressOffset>0x40006597</addressOffset>
+          <addressOffset>0x40006494</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -2062,9 +2062,41 @@
       </addressBlock>
       <registers>
         <register>
+          <name>VERT_Control_Reg</name>
+          <description>UDB Control Register - Assigned Control Register Value</description>
+          <addressOffset>0x40006477</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>CTRL_ENABLE</name>
+              <description>Enable the PWM</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>CTRL_CMPMODE2</name>
+              <description>Compare mode 2</description>
+              <lsb>3</lsb>
+              <msb>5</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>CTRL_CMPMODE1</name>
+              <description>Compare mode 1</description>
+              <lsb>0</lsb>
+              <msb>2</msb>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>VERT_COMPARE_Reg</name>
           <description>UDB.D0 - Assigned Compare Value</description>
-          <addressOffset>0x40006426</addressOffset>
+          <addressOffset>0x40006526</addressOffset>
           <size>16</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -2073,7 +2105,7 @@
         <register>
           <name>VERT_STATUS_AUX_CTRLDP0</name>
           <description>UDB Auxilliary Control Register</description>
-          <addressOffset>0x40006496</addressOffset>
+          <addressOffset>0x40006596</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -2198,7 +2230,7 @@
         <register>
           <name>VERT_STATUS_AUX_CTRLDP1</name>
           <description>UDB Auxilliary Control Register</description>
-          <addressOffset>0x40006497</addressOffset>
+          <addressOffset>0x40006597</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -2320,38 +2352,6 @@
             </field>
           </fields>
         </register>
-        <register>
-          <name>VERT_Control_Reg</name>
-          <description>UDB Control Register - Assigned Control Register Value</description>
-          <addressOffset>0x40006575</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-          <fields>
-            <field>
-              <name>CTRL_ENABLE</name>
-              <description>Enable the PWM</description>
-              <lsb>7</lsb>
-              <msb>7</msb>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>CTRL_CMPMODE2</name>
-              <description>Compare mode 2</description>
-              <lsb>3</lsb>
-              <msb>5</msb>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>CTRL_CMPMODE1</name>
-              <description>Compare mode 1</description>
-              <lsb>0</lsb>
-              <msb>2</msb>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
       </registers>
     </peripheral>
     <peripheral>
@@ -2367,7 +2367,7 @@
         <register>
           <name>SINGLE_CYCLE_SEED</name>
           <description>Current seed value</description>
-          <addressOffset>0x40006404</addressOffset>
+          <addressOffset>0x40006407</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -2376,7 +2376,7 @@
         <register>
           <name>SINGLE_CYCLE_POLYNOMIAL</name>
           <description>Current polynomial value</description>
-          <addressOffset>0x40006424</addressOffset>
+          <addressOffset>0x40006427</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -2385,7 +2385,7 @@
         <register>
           <name>SINGLE_CYCLE_COPY</name>
           <description>Copy seed value</description>
-          <addressOffset>0x40006444</addressOffset>
+          <addressOffset>0x40006447</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -2406,7 +2406,7 @@
         <register>
           <name>HSYNC_COMPARE_Reg_</name>
           <description>UDB.D0 - Assigned Compare Value</description>
-          <addressOffset>0x40006525</addressOffset>
+          <addressOffset>0x40006524</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -2415,7 +2415,7 @@
         <register>
           <name>HSYNC_Control_Reg</name>
           <description>UDB Control Register - Assigned Control Register Value</description>
-          <addressOffset>0x40006576</addressOffset>
+          <addressOffset>0x40006577</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -2447,7 +2447,7 @@
         <register>
           <name>HSYNC_STATUS_AUX_CTRL</name>
           <description>UDB Auxilliary Control Register</description>
-          <addressOffset>0x40006595</addressOffset>
+          <addressOffset>0x40006594</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -2584,7 +2584,7 @@
         <register>
           <name>VSYNC_COMPARE_Reg_</name>
           <description>UDB.D0 - Assigned Compare Value</description>
-          <addressOffset>0x40006524</addressOffset>
+          <addressOffset>0x40006525</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -2625,7 +2625,7 @@
         <register>
           <name>VSYNC_STATUS_AUX_CTRL</name>
           <description>UDB Auxilliary Control Register</description>
-          <addressOffset>0x40006594</addressOffset>
+          <addressOffset>0x40006595</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -2762,7 +2762,7 @@
         <register>
           <name>PIXEL_CONTROL_REG</name>
           <description>No description available</description>
-          <addressOffset>0x40006577</addressOffset>
+          <addressOffset>0x40006575</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>

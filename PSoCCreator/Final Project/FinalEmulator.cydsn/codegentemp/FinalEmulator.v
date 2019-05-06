@@ -1,6 +1,6 @@
 // ======================================================================
 // FinalEmulator.v generated from TopDesign.cysch
-// 05/04/2019 at 03:07
+// 05/05/2019 at 23:42
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -1141,12 +1141,12 @@ module top ;
           wire  Net_15922;
           wire  Net_15921;
           wire  Net_12;
+          wire  Net_16044;
           wire  Net_8;
           wire  Net_6;
           wire  Net_9;
           wire  Net_4;
           wire  Net_3;
-          wire  Net_16044;
           wire  Net_5860;
           wire  Net_1730;
           wire  Net_923;
@@ -2795,13 +2795,6 @@ module top ;
 		  .out_reset({1'b0}));
 
 	assign tmpOE__pin_test_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
-
-
-	cy_isr_v1_0
-		#(.int_type(2'b10))
-		isr_oled
-		 (.int_signal(Net_16044));
-
 
     USBFS_v3_20_5 usb_uart (
         .sof(Net_16065),

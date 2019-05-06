@@ -1,9 +1,9 @@
 #include "project.h"
 #include "u8g2.h"
 
+void vga_initialize();
+    
 CY_ISR_PROTO(newline_handler);
-
-CY_ISR_PROTO(isr_oled_handler);
 
 CY_ISR_PROTO(isr_tmr_handler);
 

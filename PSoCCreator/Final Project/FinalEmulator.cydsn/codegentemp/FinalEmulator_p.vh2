@@ -1,5 +1,5 @@
 -- Project:   FinalEmulator
--- Generated: 05/04/2019 03:07:40
+-- Generated: 05/05/2019 23:42:17
 -- PSoC Creator  4.2
 
 ENTITY FinalEmulator IS
@@ -3139,14 +3139,6 @@ BEGIN
             f1_bus_stat_comb => \spi_oled:BSPIM:rx_status_5\,
             f1_blk_stat_comb => \spi_oled:BSPIM:rx_status_4\,
             busclk => ClockBlock_BUS_CLK);
-
-    isr_oled:interrupt
-        GENERIC MAP(
-            int_type => "10",
-            is_nmi => 0)
-        PORT MAP(
-            interrupt => Net_16044_local,
-            clock => ClockBlock_BUS_CLK);
 
     \usb_uart:dp_int\:interrupt
         GENERIC MAP(
