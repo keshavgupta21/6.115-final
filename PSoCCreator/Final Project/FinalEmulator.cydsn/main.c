@@ -14,7 +14,8 @@ TODO on your own:
     1. Implement Sound
     2. Debug Space Invaders, try other roms
     3. Test maze i.e. random number generator
-    4. Start writing report
+    4. Start writing report (make case for general handheld device framework)
+    5. 3D print case!!!! (if feeling adventurous)
 */
 
 #include "project.h"
