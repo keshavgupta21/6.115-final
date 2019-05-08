@@ -55,41 +55,13 @@
 #define OP0_ARITH_SUBN 0x7
 #define OP0_ARITH_SHL 0xe
 
-/* CHIP8 VRAM 
-    Each row is one 64bit number
-*/
+uint8_t ram[4096];
 uint64_t vram[32];
+uint8_t snd;
+uint8_t tmr;
+volatile uint8_t frame_update;
 
-/* CHIP8 Timers 
-    Decrement each at 60Hz if not zero
-*/
-uint8_t snd = 0, tmr = 0;
-
-/* CHIP8 Keyboard 
-    keys stores the current state of each key
-        (1 = down, 0 = up)
-    lastkey stores the last key that was pressed
-    leyflag = 1 if new data available in lastkey
-        must be reset to 0 when data used
-*/
-uint8_t keys[16] = {0};
-uint8_t lastkey = 0, keyflag = 0;
-
-uint8_t RANDOM_BYTE;
-
-int main(void){
-    /* Enable global interrupts. */
-    /* TODO CyGlobalIntEnable; */
-    
-    /* CHIP8 RAM*/
-    uint8_t ram[4096] = FONT_DATA;
-    uint8_t rom[4096] = INITIAL_MEMORY;
-    
-    for (int j = 0; j < (0xfff - 0x200); j++){
-        ram[0x200 + j] = rom[j];
-    }
-    // TODO fonts
-    
+int main(){
     /* CHIP8 Register File*/
     uint8_t v[16];
     uint16_t i = 0;
@@ -101,9 +73,14 @@ int main(void){
     for (uint8_t j = 0; j < 32; j++){
         vram[j] = 0;
     }
+    frame_update = 1;
+    
+    prepare_ram(ram);
+    int frames_to_emulate = 500;
     
     /* Emulate away.. */
     while(1){
+        pc &= 0x0fff;
         /* Get the instruction at the current address */
         uint16_t instr = (ram[pc] << 8) | ram[pc+1];
         
@@ -126,11 +103,6 @@ int main(void){
         /* This flag is set if a new PC was set and must not be incremented */
         uint8_t freeze_pc = 0;
         
-        /* Randomize */
-        RANDOM_BYTE = rand() % 0xff;
-        
-        dump_core(v, i, snd, tmr, pc, instr, sp, stack, nnn, x, y, kk, n);
-        
         /* Branch on opcodes and execute */
         switch(op3){
         case OP3_SYSTEM:
@@ -144,6 +116,7 @@ int main(void){
                     for (int j = 0; j < 32; j++){
                         vram[j] = 0;
                     }
+                    frame_update = 1;
                     break;
                 case OP10_SYSTEM_RETURN:
                     /* Return from instruction */
@@ -169,7 +142,7 @@ int main(void){
             break;
         case OP3_CALL_SUBROUTINE:
             /* Call subroutine at nnn */
-            stack[sp] = pc;
+            stack[sp] = (pc + 2) & 0xfff;
             sp = (sp == 0xf) ? 0xf : sp + 1;
             pc = nnn;
             freeze_pc = 1;
@@ -275,8 +248,8 @@ int main(void){
             i = nnn;
             break;
         case OP3_RANDOM:
-            /* Vx = (random byte) & kk */
-            v[x] = RANDOM_BYTE & kk;
+            /* Vx = (random byte) & kk */            
+            v[x] = random_Read() & kk;
             break;
         case OP3_DRAW:{
             uint64_t collision = 0;
@@ -293,6 +266,7 @@ int main(void){
                 vram[(v[y] + j) % 32] ^= row;
             }
             v[0xf] = collision ? 1 : 0;
+            frame_update = 1;
             break;
         }
         case OP3_KEYBOARD:
@@ -300,13 +274,13 @@ int main(void){
             switch(op10){
             case OP10_KEYBOARD_EQ:
                 /* Skip next instruction if Vx pressed */
-                if (keys[v[x] & 0xf] == 1){
+                if (key_pressed(v[x])){
                     pc += 2;
                 }
                 break;
             case OP10_KEYBOARD_NEQ: 
                 /* Skip next instruction if Vx not pressed */
-                if (keys[v[x] & 0xf] == 0){
+                if (!key_pressed(v[x])){
                     pc += 2;
                 }
                 break;
@@ -324,9 +298,7 @@ int main(void){
                 break;
             case OP10_SPECIAL_LOAD_KEYBOARD:
                 /* Vx = keypress, blocks till something pressed */
-                while (!keyflag);
-                v[x] = lastkey;
-                keyflag = 0;
+                v[x] = wait_key();
                 break;
             case OP10_SPECIAL_SET_DELAY:
                 /* delay timer = Vx */
@@ -346,14 +318,14 @@ int main(void){
                 break;
             case OP10_SPECIAL_LOAD_BCD:
                 /* BCD hundreds to units of Vx in I to I+2 */
-                ram[i] = (uint8_t)(v[x] / 100) % 10;
-                ram[i+1] = (uint8_t)(v[x] / 10) % 10;
-                ram[i+2] = (uint8_t)(v[x]) % 10;
+                ram[i] = ((uint8_t)(v[x] / 100) % 10);
+                ram[i+1] = ((uint8_t)(v[x] / 10) % 10);
+                ram[i+2] = ((uint8_t)(v[x]) % 10);
                 break;
             case OP10_SPECIAL_LOAD_AT_I:
                 /* Store V0 to Vx in I to I+x */
                 for (uint8_t j = 0; j <= x; j++){
-                    ram[i + j] = v[j];
+                    ram[i+j] = v[j];
                 }
                 break;
             case OP10_SPECIAL_SET_AT_I:
@@ -372,15 +344,23 @@ int main(void){
             break;
         }
         if (invalid_op) {
-            /* Halt and dump core if invalid instruction received */
-            printf("Invalid OPCODE at PC = %#06x. OPCODE = %#06x", pc, instr);
+            /* Return to indicate error */
+            return 0;
         }
         if (!freeze_pc){
             /* Increment PC */
-            // TODO replace with continue
             pc += 2;
         }
-        print_scr(vram);
+        dump_core(v, i, snd, tmr, pc, instr, sp, stack, nnn, x, y, kk, n);
+        if(frame_update){
+            print_scr(vram);
+            frame_update = 0;
+            frames_to_emulate--;
+            printf("%d",frames_to_emulate);
+            if (frames_to_emulate == 0){
+                return 0;
+            }
+        }
     }
     return 0;
 }

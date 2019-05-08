@@ -86,7 +86,7 @@ void execute(){
             break;
         case OP3_CALL_SUBROUTINE:
             /* Call subroutine at nnn */
-            stack[sp] = pc;
+            stack[sp] = (pc + 2) & 0xfff;
             sp = (sp == 0xf) ? 0xf : sp + 1;
             pc = nnn;
             freeze_pc = 1;
