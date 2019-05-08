@@ -1,11 +1,11 @@
 -- Project:   FinalEmulator
--- Generated: 05/07/2019 19:22:54
+-- Generated: 05/07/2019 23:46:50
 -- PSoC Creator  4.2
 
 ENTITY FinalEmulator IS
     PORT(
         pin_led(0)_PAD : OUT std_ulogic;
-        pin_snd(0)_PAD : OUT std_ulogic;
+        pin_snd_ext(0)_PAD : OUT std_ulogic;
         VGA(0)_PAD : OUT std_ulogic;
         HSYNC_OUT(0)_PAD : OUT std_ulogic;
         VSYNC_OUT(0)_PAD : OUT std_ulogic;
@@ -58,28 +58,37 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     SIGNAL Net_1241_local : bit;
     SIGNAL Net_1534 : bit;
     SIGNAL Net_16001 : bit;
-    ATTRIBUTE placement_force OF Net_16001 : SIGNAL IS "U(3,2,A)0";
+    ATTRIBUTE placement_force OF Net_16001 : SIGNAL IS "U(2,2,A)0";
     SIGNAL Net_16002 : bit;
-    ATTRIBUTE placement_force OF Net_16002 : SIGNAL IS "U(3,1,B)3";
+    ATTRIBUTE placement_force OF Net_16002 : SIGNAL IS "U(3,4,B)1";
     SIGNAL Net_16003 : bit;
-    ATTRIBUTE placement_force OF Net_16003 : SIGNAL IS "U(2,2,A)0";
+    ATTRIBUTE placement_force OF Net_16003 : SIGNAL IS "U(2,4,B)3";
     SIGNAL Net_16044 : bit;
     ATTRIBUTE global_signal OF Net_16044 : SIGNAL IS true;
     SIGNAL Net_16044_local : bit;
     SIGNAL Net_16065 : bit;
+    SIGNAL Net_16083 : bit;
+    ATTRIBUTE udbclken_assigned OF Net_16083 : SIGNAL IS "True";
+    ATTRIBUTE global_signal OF Net_16083 : SIGNAL IS true;
+    SIGNAL Net_16083_local : bit;
+    SIGNAL Net_16102 : bit;
+    ATTRIBUTE placement_force OF Net_16102 : SIGNAL IS "U(2,0,B)3";
+    SIGNAL Net_16120 : bit;
+    ATTRIBUTE placement_force OF Net_16120 : SIGNAL IS "U(2,1,B)3";
+    SIGNAL Net_16126 : bit;
     SIGNAL Net_1700 : bit;
-    ATTRIBUTE placement_force OF Net_1700 : SIGNAL IS "U(2,3,B)0";
+    ATTRIBUTE placement_force OF Net_1700 : SIGNAL IS "U(3,4,A)0";
     SIGNAL Net_1730 : bit;
-    ATTRIBUTE placement_force OF Net_1730 : SIGNAL IS "U(3,0,A)2";
+    ATTRIBUTE placement_force OF Net_1730 : SIGNAL IS "U(3,0,A)0";
     SIGNAL Net_1731 : bit;
-    ATTRIBUTE placement_force OF Net_1731 : SIGNAL IS "U(2,0,B)2";
+    ATTRIBUTE placement_force OF Net_1731 : SIGNAL IS "U(3,1,A)0";
     SIGNAL Net_584 : bit;
-    ATTRIBUTE placement_force OF Net_584 : SIGNAL IS "U(2,3,A)3";
+    ATTRIBUTE placement_force OF Net_584 : SIGNAL IS "U(3,4,A)2";
     SIGNAL Net_5860 : bit;
-    ATTRIBUTE placement_force OF Net_5860 : SIGNAL IS "U(2,0,A)1";
+    ATTRIBUTE placement_force OF Net_5860 : SIGNAL IS "U(3,1,B)0";
     SIGNAL Net_69 : bit;
     SIGNAL Net_923 : bit;
-    ATTRIBUTE placement_force OF Net_923 : SIGNAL IS "U(3,0,B)0";
+    ATTRIBUTE placement_force OF Net_923 : SIGNAL IS "U(3,3,B)2";
     SIGNAL Row_1(0)__PA : bit;
     SIGNAL Row_2(0)__PA : bit;
     SIGNAL Row_3(0)__PA : bit;
@@ -98,7 +107,7 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     SIGNAL \HORIZ:PWMUDB:control_6\ : bit;
     SIGNAL \HORIZ:PWMUDB:control_7\ : bit;
     SIGNAL \HORIZ:PWMUDB:runmode_enable\ : bit;
-    ATTRIBUTE placement_force OF \HORIZ:PWMUDB:runmode_enable\ : SIGNAL IS "U(2,3,A)0";
+    ATTRIBUTE placement_force OF \HORIZ:PWMUDB:runmode_enable\ : SIGNAL IS "U(3,4,A)1";
     SIGNAL \HORIZ:PWMUDB:tc_i\ : bit;
     SIGNAL \HSYNC:PWMUDB:cmp1_eq\ : bit;
     SIGNAL \HSYNC:PWMUDB:control_0\ : bit;
@@ -110,10 +119,10 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     SIGNAL \HSYNC:PWMUDB:control_6\ : bit;
     SIGNAL \HSYNC:PWMUDB:control_7\ : bit;
     SIGNAL \HSYNC:PWMUDB:runmode_enable\ : bit;
-    ATTRIBUTE placement_force OF \HSYNC:PWMUDB:runmode_enable\ : SIGNAL IS "U(2,0,B)3";
+    ATTRIBUTE placement_force OF \HSYNC:PWMUDB:runmode_enable\ : SIGNAL IS "U(3,1,B)3";
     SIGNAL \HSYNC:PWMUDB:tc_i\ : bit;
     SIGNAL \HSYNC:PWMUDB:trig_last\ : bit;
-    ATTRIBUTE placement_force OF \HSYNC:PWMUDB:trig_last\ : SIGNAL IS "U(2,0,B)0";
+    ATTRIBUTE placement_force OF \HSYNC:PWMUDB:trig_last\ : SIGNAL IS "U(3,1,B)2";
     SIGNAL \PIXEL:control_1\ : bit;
     SIGNAL \PIXEL:control_2\ : bit;
     SIGNAL \PIXEL:control_3\ : bit;
@@ -131,7 +140,7 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     SIGNAL \VERT:PWMUDB:control_6\ : bit;
     SIGNAL \VERT:PWMUDB:control_7\ : bit;
     SIGNAL \VERT:PWMUDB:runmode_enable\ : bit;
-    ATTRIBUTE placement_force OF \VERT:PWMUDB:runmode_enable\ : SIGNAL IS "U(2,1,B)3";
+    ATTRIBUTE placement_force OF \VERT:PWMUDB:runmode_enable\ : SIGNAL IS "U(3,3,A)3";
     SIGNAL \VERT:PWMUDB:tc_i\ : bit;
     SIGNAL \VSYNC:PWMUDB:cmp1_eq\ : bit;
     SIGNAL \VSYNC:PWMUDB:control_0\ : bit;
@@ -143,10 +152,37 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     SIGNAL \VSYNC:PWMUDB:control_6\ : bit;
     SIGNAL \VSYNC:PWMUDB:control_7\ : bit;
     SIGNAL \VSYNC:PWMUDB:runmode_enable\ : bit;
-    ATTRIBUTE placement_force OF \VSYNC:PWMUDB:runmode_enable\ : SIGNAL IS "U(3,0,A)3";
+    ATTRIBUTE placement_force OF \VSYNC:PWMUDB:runmode_enable\ : SIGNAL IS "U(3,0,A)1";
     SIGNAL \VSYNC:PWMUDB:tc_i\ : bit;
     SIGNAL \VSYNC:PWMUDB:trig_last\ : bit;
-    ATTRIBUTE placement_force OF \VSYNC:PWMUDB:trig_last\ : SIGNAL IS "U(3,0,B)3";
+    ATTRIBUTE placement_force OF \VSYNC:PWMUDB:trig_last\ : SIGNAL IS "U(3,0,B)0";
+    SIGNAL \ctrl_snd:control_1\ : bit;
+    SIGNAL \ctrl_snd:control_2\ : bit;
+    SIGNAL \ctrl_snd:control_3\ : bit;
+    SIGNAL \ctrl_snd:control_4\ : bit;
+    SIGNAL \ctrl_snd:control_5\ : bit;
+    SIGNAL \ctrl_snd:control_6\ : bit;
+    SIGNAL \ctrl_snd:control_7\ : bit;
+    SIGNAL \pwm_snd:PWMUDB:cmp1_eq\ : bit;
+    SIGNAL \pwm_snd:PWMUDB:cmp1_less\ : bit;
+    SIGNAL \pwm_snd:PWMUDB:control_0\ : bit;
+    SIGNAL \pwm_snd:PWMUDB:control_1\ : bit;
+    SIGNAL \pwm_snd:PWMUDB:control_2\ : bit;
+    SIGNAL \pwm_snd:PWMUDB:control_3\ : bit;
+    SIGNAL \pwm_snd:PWMUDB:control_4\ : bit;
+    SIGNAL \pwm_snd:PWMUDB:control_5\ : bit;
+    SIGNAL \pwm_snd:PWMUDB:control_6\ : bit;
+    SIGNAL \pwm_snd:PWMUDB:control_7\ : bit;
+    SIGNAL \pwm_snd:PWMUDB:prevCompare1\ : bit;
+    ATTRIBUTE placement_force OF \pwm_snd:PWMUDB:prevCompare1\ : SIGNAL IS "U(2,0,B)2";
+    SIGNAL \pwm_snd:PWMUDB:runmode_enable\ : bit;
+    ATTRIBUTE placement_force OF \pwm_snd:PWMUDB:runmode_enable\ : SIGNAL IS "U(2,0,B)1";
+    SIGNAL \pwm_snd:PWMUDB:status_0\ : bit;
+    ATTRIBUTE placement_force OF \pwm_snd:PWMUDB:status_0\ : SIGNAL IS "U(2,0,B)0";
+    SIGNAL \pwm_snd:PWMUDB:status_2\ : bit;
+    ATTRIBUTE placement_force OF \pwm_snd:PWMUDB:status_2\ : SIGNAL IS "U(2,0,A)2";
+    SIGNAL \pwm_snd:PWMUDB:status_3\ : bit;
+    SIGNAL \pwm_snd:PWMUDB:tc_i\ : bit;
     SIGNAL \random:control_1\ : bit;
     SIGNAL \random:control_2\ : bit;
     SIGNAL \random:control_3\ : bit;
@@ -156,7 +192,7 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     SIGNAL \random:control_7\ : bit;
     SIGNAL \random:enable_final\ : bit;
     SIGNAL \spi_oled:BSPIM:cnt_enable\ : bit;
-    ATTRIBUTE placement_force OF \spi_oled:BSPIM:cnt_enable\ : SIGNAL IS "U(2,1,A)0";
+    ATTRIBUTE placement_force OF \spi_oled:BSPIM:cnt_enable\ : SIGNAL IS "U(2,3,A)0";
     SIGNAL \spi_oled:BSPIM:cnt_tc\ : bit;
     SIGNAL \spi_oled:BSPIM:count_0\ : bit;
     SIGNAL \spi_oled:BSPIM:count_1\ : bit;
@@ -166,28 +202,28 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     SIGNAL \spi_oled:BSPIM:count_5\ : bit;
     SIGNAL \spi_oled:BSPIM:count_6\ : bit;
     SIGNAL \spi_oled:BSPIM:ld_ident\ : bit;
-    ATTRIBUTE placement_force OF \spi_oled:BSPIM:ld_ident\ : SIGNAL IS "U(3,3,B)1";
+    ATTRIBUTE placement_force OF \spi_oled:BSPIM:ld_ident\ : SIGNAL IS "U(2,4,A)3";
     SIGNAL \spi_oled:BSPIM:load_cond\ : bit;
-    ATTRIBUTE placement_force OF \spi_oled:BSPIM:load_cond\ : SIGNAL IS "U(3,1,A)0";
+    ATTRIBUTE placement_force OF \spi_oled:BSPIM:load_cond\ : SIGNAL IS "U(2,4,B)2";
     SIGNAL \spi_oled:BSPIM:load_rx_data\ : bit;
-    ATTRIBUTE placement_force OF \spi_oled:BSPIM:load_rx_data\ : SIGNAL IS "U(3,1,B)1";
+    ATTRIBUTE placement_force OF \spi_oled:BSPIM:load_rx_data\ : SIGNAL IS "U(2,3,A)1";
     SIGNAL \spi_oled:BSPIM:mosi_from_dp\ : bit;
     SIGNAL \spi_oled:BSPIM:rx_status_4\ : bit;
     SIGNAL \spi_oled:BSPIM:rx_status_5\ : bit;
     SIGNAL \spi_oled:BSPIM:rx_status_6\ : bit;
-    ATTRIBUTE placement_force OF \spi_oled:BSPIM:rx_status_6\ : SIGNAL IS "U(3,1,A)3";
+    ATTRIBUTE placement_force OF \spi_oled:BSPIM:rx_status_6\ : SIGNAL IS "U(2,2,B)0";
     SIGNAL \spi_oled:BSPIM:state_0\ : bit;
-    ATTRIBUTE placement_force OF \spi_oled:BSPIM:state_0\ : SIGNAL IS "U(3,3,B)0";
+    ATTRIBUTE placement_force OF \spi_oled:BSPIM:state_0\ : SIGNAL IS "U(3,2,B)3";
     SIGNAL \spi_oled:BSPIM:state_1\ : bit;
-    ATTRIBUTE placement_force OF \spi_oled:BSPIM:state_1\ : SIGNAL IS "U(3,3,A)2";
+    ATTRIBUTE placement_force OF \spi_oled:BSPIM:state_1\ : SIGNAL IS "U(2,2,B)3";
     SIGNAL \spi_oled:BSPIM:state_2\ : bit;
-    ATTRIBUTE placement_force OF \spi_oled:BSPIM:state_2\ : SIGNAL IS "U(3,2,B)1";
+    ATTRIBUTE placement_force OF \spi_oled:BSPIM:state_2\ : SIGNAL IS "U(2,3,B)2";
     SIGNAL \spi_oled:BSPIM:tx_status_0\ : bit;
-    ATTRIBUTE placement_force OF \spi_oled:BSPIM:tx_status_0\ : SIGNAL IS "U(3,3,B)3";
+    ATTRIBUTE placement_force OF \spi_oled:BSPIM:tx_status_0\ : SIGNAL IS "U(2,1,B)0";
     SIGNAL \spi_oled:BSPIM:tx_status_1\ : bit;
     SIGNAL \spi_oled:BSPIM:tx_status_2\ : bit;
     SIGNAL \spi_oled:BSPIM:tx_status_4\ : bit;
-    ATTRIBUTE placement_force OF \spi_oled:BSPIM:tx_status_4\ : SIGNAL IS "U(2,2,B)3";
+    ATTRIBUTE placement_force OF \spi_oled:BSPIM:tx_status_4\ : SIGNAL IS "U(2,1,A)0";
     SIGNAL \spi_oled:Net_276\ : bit;
     ATTRIBUTE udbclken_assigned OF \spi_oled:Net_276\ : SIGNAL IS "True";
     ATTRIBUTE global_signal OF \spi_oled:Net_276\ : SIGNAL IS true;
@@ -221,7 +257,7 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     SIGNAL __ZERO__ : bit;
     ATTRIBUTE GROUND OF __ZERO__ : SIGNAL IS true;
     SIGNAL cydff_1 : bit;
-    ATTRIBUTE placement_force OF cydff_1 : SIGNAL IS "U(2,0,A)0";
+    ATTRIBUTE placement_force OF cydff_1 : SIGNAL IS "U(3,1,B)1";
     SIGNAL pin_led(0)__PA : bit;
     SIGNAL pin_oled_clk(0)__PA : bit;
     SIGNAL pin_oled_cs(0)__PA : bit;
@@ -229,7 +265,7 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     SIGNAL pin_oled_mosi(0)__PA : bit;
     SIGNAL pin_oled_rst(0)__PA : bit;
     SIGNAL pin_prog(0)__PA : bit;
-    SIGNAL pin_snd(0)__PA : bit;
+    SIGNAL pin_snd_ext(0)__PA : bit;
     SIGNAL tmpOE__pin_led_net_0 : bit;
     ATTRIBUTE POWER OF tmpOE__pin_led_net_0 : SIGNAL IS true;
     SIGNAL zero : bit;
@@ -250,8 +286,8 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     ATTRIBUTE Location OF ClockBlock : LABEL IS "F(Clock,0)";
     ATTRIBUTE lib_model OF pin_led(0) : LABEL IS "iocell1";
     ATTRIBUTE Location OF pin_led(0) : LABEL IS "P2[1]";
-    ATTRIBUTE lib_model OF pin_snd(0) : LABEL IS "iocell2";
-    ATTRIBUTE Location OF pin_snd(0) : LABEL IS "P2[0]";
+    ATTRIBUTE lib_model OF pin_snd_ext(0) : LABEL IS "iocell2";
+    ATTRIBUTE Location OF pin_snd_ext(0) : LABEL IS "P2[0]";
     ATTRIBUTE lib_model OF VGA(0) : LABEL IS "iocell3";
     ATTRIBUTE Location OF VGA(0) : LABEL IS "P2[2]";
     ATTRIBUTE lib_model OF HSYNC_OUT(0) : LABEL IS "iocell4";
@@ -292,50 +328,54 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     ATTRIBUTE lib_model OF \usb_uart:Dp(0)\ : LABEL IS "iocell21";
     ATTRIBUTE Location OF \usb_uart:Dp(0)\ : LABEL IS "P15[6]";
     ATTRIBUTE lib_model OF Net_5860 : LABEL IS "macrocell1";
-    ATTRIBUTE Location OF Net_5860 : LABEL IS "U(2,0)";
+    ATTRIBUTE Location OF Net_5860 : LABEL IS "U(3,1)";
     ATTRIBUTE lib_model OF \spi_oled:BSPIM:load_rx_data\ : LABEL IS "macrocell2";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:load_rx_data\ : LABEL IS "U(3,1)";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:load_rx_data\ : LABEL IS "U(2,3)";
     ATTRIBUTE lib_model OF \spi_oled:BSPIM:tx_status_0\ : LABEL IS "macrocell3";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:tx_status_0\ : LABEL IS "U(3,3)";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:tx_status_0\ : LABEL IS "U(2,1)";
     ATTRIBUTE lib_model OF \spi_oled:BSPIM:tx_status_4\ : LABEL IS "macrocell4";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:tx_status_4\ : LABEL IS "U(2,2)";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:tx_status_4\ : LABEL IS "U(2,1)";
     ATTRIBUTE lib_model OF \spi_oled:BSPIM:rx_status_6\ : LABEL IS "macrocell5";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:rx_status_6\ : LABEL IS "U(3,1)";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:rx_status_6\ : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \pwm_snd:PWMUDB:status_2\ : LABEL IS "macrocell6";
+    ATTRIBUTE Location OF \pwm_snd:PWMUDB:status_2\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF Net_16120 : LABEL IS "macrocell7";
+    ATTRIBUTE Location OF Net_16120 : LABEL IS "U(2,1)";
     ATTRIBUTE lib_model OF \random:ClkSp:CtrlReg\ : LABEL IS "controlcell1";
-    ATTRIBUTE Location OF \random:ClkSp:CtrlReg\ : LABEL IS "U(3,2)";
+    ATTRIBUTE Location OF \random:ClkSp:CtrlReg\ : LABEL IS "U(2,4)";
     ATTRIBUTE lib_model OF \random:sC8:PRSdp:u0\ : LABEL IS "datapathcell1";
-    ATTRIBUTE Location OF \random:sC8:PRSdp:u0\ : LABEL IS "U(2,2)";
+    ATTRIBUTE Location OF \random:sC8:PRSdp:u0\ : LABEL IS "U(2,4)";
     ATTRIBUTE Location OF isr_timer : LABEL IS "[IntrContainer=(0)][IntrId=(4)]";
     ATTRIBUTE lib_model OF \HORIZ:PWMUDB:genblk1:ctrlreg\ : LABEL IS "controlcell2";
-    ATTRIBUTE Location OF \HORIZ:PWMUDB:genblk1:ctrlreg\ : LABEL IS "U(2,3)";
+    ATTRIBUTE Location OF \HORIZ:PWMUDB:genblk1:ctrlreg\ : LABEL IS "U(3,4)";
     ATTRIBUTE lib_model OF \HORIZ:PWMUDB:sP8:pwmdp:u0\ : LABEL IS "datapathcell2";
-    ATTRIBUTE Location OF \HORIZ:PWMUDB:sP8:pwmdp:u0\ : LABEL IS "U(2,3)";
+    ATTRIBUTE Location OF \HORIZ:PWMUDB:sP8:pwmdp:u0\ : LABEL IS "U(3,4)";
     ATTRIBUTE lib_model OF \VERT:PWMUDB:genblk1:ctrlreg\ : LABEL IS "controlcell3";
-    ATTRIBUTE Location OF \VERT:PWMUDB:genblk1:ctrlreg\ : LABEL IS "U(2,2)";
+    ATTRIBUTE Location OF \VERT:PWMUDB:genblk1:ctrlreg\ : LABEL IS "U(3,3)";
     ATTRIBUTE lib_model OF \VERT:PWMUDB:sP16:pwmdp:u0\ : LABEL IS "datapathcell3";
-    ATTRIBUTE Location OF \VERT:PWMUDB:sP16:pwmdp:u0\ : LABEL IS "U(3,1)";
+    ATTRIBUTE Location OF \VERT:PWMUDB:sP16:pwmdp:u0\ : LABEL IS "U(2,3)";
     ATTRIBUTE lib_model OF \VERT:PWMUDB:sP16:pwmdp:u1\ : LABEL IS "datapathcell4";
-    ATTRIBUTE Location OF \VERT:PWMUDB:sP16:pwmdp:u1\ : LABEL IS "U(2,1)";
+    ATTRIBUTE Location OF \VERT:PWMUDB:sP16:pwmdp:u1\ : LABEL IS "U(3,3)";
     ATTRIBUTE lib_model OF \VSYNC:PWMUDB:genblk1:ctrlreg\ : LABEL IS "controlcell4";
-    ATTRIBUTE Location OF \VSYNC:PWMUDB:genblk1:ctrlreg\ : LABEL IS "U(2,0)";
+    ATTRIBUTE Location OF \VSYNC:PWMUDB:genblk1:ctrlreg\ : LABEL IS "U(3,0)";
     ATTRIBUTE lib_model OF \VSYNC:PWMUDB:sP8:pwmdp:u0\ : LABEL IS "datapathcell5";
     ATTRIBUTE Location OF \VSYNC:PWMUDB:sP8:pwmdp:u0\ : LABEL IS "U(3,0)";
     ATTRIBUTE lib_model OF \HSYNC:PWMUDB:genblk1:ctrlreg\ : LABEL IS "controlcell5";
-    ATTRIBUTE Location OF \HSYNC:PWMUDB:genblk1:ctrlreg\ : LABEL IS "U(2,1)";
+    ATTRIBUTE Location OF \HSYNC:PWMUDB:genblk1:ctrlreg\ : LABEL IS "U(3,2)";
     ATTRIBUTE lib_model OF \HSYNC:PWMUDB:sP8:pwmdp:u0\ : LABEL IS "datapathcell6";
-    ATTRIBUTE Location OF \HSYNC:PWMUDB:sP8:pwmdp:u0\ : LABEL IS "U(2,0)";
+    ATTRIBUTE Location OF \HSYNC:PWMUDB:sP8:pwmdp:u0\ : LABEL IS "U(3,1)";
     ATTRIBUTE lib_model OF DMA : LABEL IS "drqcell1";
     ATTRIBUTE Location OF DMA : LABEL IS "[DrqContainer=(0)][DrqId=(0)]";
     ATTRIBUTE lib_model OF \PIXEL:Sync:ctrl_reg\ : LABEL IS "controlcell6";
-    ATTRIBUTE Location OF \PIXEL:Sync:ctrl_reg\ : LABEL IS "U(3,0)";
+    ATTRIBUTE Location OF \PIXEL:Sync:ctrl_reg\ : LABEL IS "U(3,1)";
     ATTRIBUTE Location OF NEWLINE : LABEL IS "[IntrContainer=(0)][IntrId=(0)]";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:BitCounter\ : LABEL IS "U(3,1)";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:BitCounter\ : LABEL IS "U(2,3)";
     ATTRIBUTE lib_model OF \spi_oled:BSPIM:TxStsReg\ : LABEL IS "statusicell1";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:TxStsReg\ : LABEL IS "U(3,3)";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:TxStsReg\ : LABEL IS "U(2,1)";
     ATTRIBUTE lib_model OF \spi_oled:BSPIM:RxStsReg\ : LABEL IS "statusicell2";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:RxStsReg\ : LABEL IS "U(3,0)";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:RxStsReg\ : LABEL IS "U(2,2)";
     ATTRIBUTE lib_model OF \spi_oled:BSPIM:sR8:Dp:u0\ : LABEL IS "datapathcell7";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:sR8:Dp:u0\ : LABEL IS "U(3,2)";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:sR8:Dp:u0\ : LABEL IS "U(2,2)";
     ATTRIBUTE Location OF \usb_uart:dp_int\ : LABEL IS "[IntrContainer=(0)][IntrId=(12)]";
     ATTRIBUTE Location OF \usb_uart:USB\ : LABEL IS "F(USB,0)";
     ATTRIBUTE Location OF \usb_uart:ep_3\ : LABEL IS "[IntrContainer=(0)][IntrId=(3)]";
@@ -345,48 +385,64 @@ ARCHITECTURE __DEFAULT__ OF FinalEmulator IS
     ATTRIBUTE Location OF \usb_uart:bus_reset\ : LABEL IS "[IntrContainer=(0)][IntrId=(23)]";
     ATTRIBUTE Location OF \usb_uart:arb_int\ : LABEL IS "[IntrContainer=(0)][IntrId=(22)]";
     ATTRIBUTE Location OF \usb_uart:sof_int\ : LABEL IS "[IntrContainer=(0)][IntrId=(21)]";
-    ATTRIBUTE lib_model OF \HORIZ:PWMUDB:runmode_enable\ : LABEL IS "macrocell6";
-    ATTRIBUTE Location OF \HORIZ:PWMUDB:runmode_enable\ : LABEL IS "U(2,3)";
-    ATTRIBUTE lib_model OF Net_1700 : LABEL IS "macrocell7";
-    ATTRIBUTE Location OF Net_1700 : LABEL IS "U(2,3)";
-    ATTRIBUTE lib_model OF Net_584 : LABEL IS "macrocell8";
-    ATTRIBUTE Location OF Net_584 : LABEL IS "U(2,3)";
-    ATTRIBUTE lib_model OF \VERT:PWMUDB:runmode_enable\ : LABEL IS "macrocell9";
-    ATTRIBUTE Location OF \VERT:PWMUDB:runmode_enable\ : LABEL IS "U(2,1)";
-    ATTRIBUTE lib_model OF Net_923 : LABEL IS "macrocell10";
-    ATTRIBUTE Location OF Net_923 : LABEL IS "U(3,0)";
-    ATTRIBUTE lib_model OF \VSYNC:PWMUDB:trig_last\ : LABEL IS "macrocell11";
+    ATTRIBUTE lib_model OF \pwm_snd:PWMUDB:genblk1:ctrlreg\ : LABEL IS "controlcell7";
+    ATTRIBUTE Location OF \pwm_snd:PWMUDB:genblk1:ctrlreg\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF \pwm_snd:PWMUDB:genblk8:stsreg\ : LABEL IS "statusicell3";
+    ATTRIBUTE Location OF \pwm_snd:PWMUDB:genblk8:stsreg\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF \pwm_snd:PWMUDB:sP8:pwmdp:u0\ : LABEL IS "datapathcell8";
+    ATTRIBUTE Location OF \pwm_snd:PWMUDB:sP8:pwmdp:u0\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF \ctrl_snd:Sync:ctrl_reg\ : LABEL IS "controlcell8";
+    ATTRIBUTE Location OF \ctrl_snd:Sync:ctrl_reg\ : LABEL IS "U(2,1)";
+    ATTRIBUTE lib_model OF \HORIZ:PWMUDB:runmode_enable\ : LABEL IS "macrocell8";
+    ATTRIBUTE Location OF \HORIZ:PWMUDB:runmode_enable\ : LABEL IS "U(3,4)";
+    ATTRIBUTE lib_model OF Net_1700 : LABEL IS "macrocell9";
+    ATTRIBUTE Location OF Net_1700 : LABEL IS "U(3,4)";
+    ATTRIBUTE lib_model OF Net_584 : LABEL IS "macrocell10";
+    ATTRIBUTE Location OF Net_584 : LABEL IS "U(3,4)";
+    ATTRIBUTE lib_model OF \VERT:PWMUDB:runmode_enable\ : LABEL IS "macrocell11";
+    ATTRIBUTE Location OF \VERT:PWMUDB:runmode_enable\ : LABEL IS "U(3,3)";
+    ATTRIBUTE lib_model OF Net_923 : LABEL IS "macrocell12";
+    ATTRIBUTE Location OF Net_923 : LABEL IS "U(3,3)";
+    ATTRIBUTE lib_model OF \VSYNC:PWMUDB:trig_last\ : LABEL IS "macrocell13";
     ATTRIBUTE Location OF \VSYNC:PWMUDB:trig_last\ : LABEL IS "U(3,0)";
-    ATTRIBUTE lib_model OF \VSYNC:PWMUDB:runmode_enable\ : LABEL IS "macrocell12";
+    ATTRIBUTE lib_model OF \VSYNC:PWMUDB:runmode_enable\ : LABEL IS "macrocell14";
     ATTRIBUTE Location OF \VSYNC:PWMUDB:runmode_enable\ : LABEL IS "U(3,0)";
-    ATTRIBUTE lib_model OF Net_1730 : LABEL IS "macrocell13";
+    ATTRIBUTE lib_model OF Net_1730 : LABEL IS "macrocell15";
     ATTRIBUTE Location OF Net_1730 : LABEL IS "U(3,0)";
-    ATTRIBUTE lib_model OF \HSYNC:PWMUDB:trig_last\ : LABEL IS "macrocell14";
-    ATTRIBUTE Location OF \HSYNC:PWMUDB:trig_last\ : LABEL IS "U(2,0)";
-    ATTRIBUTE lib_model OF \HSYNC:PWMUDB:runmode_enable\ : LABEL IS "macrocell15";
-    ATTRIBUTE Location OF \HSYNC:PWMUDB:runmode_enable\ : LABEL IS "U(2,0)";
-    ATTRIBUTE lib_model OF Net_1731 : LABEL IS "macrocell16";
-    ATTRIBUTE Location OF Net_1731 : LABEL IS "U(2,0)";
-    ATTRIBUTE lib_model OF cydff_1 : LABEL IS "macrocell17";
-    ATTRIBUTE Location OF cydff_1 : LABEL IS "U(2,0)";
-    ATTRIBUTE lib_model OF Net_16002 : LABEL IS "macrocell18";
-    ATTRIBUTE Location OF Net_16002 : LABEL IS "U(3,1)";
-    ATTRIBUTE lib_model OF Net_16003 : LABEL IS "macrocell19";
-    ATTRIBUTE Location OF Net_16003 : LABEL IS "U(2,2)";
-    ATTRIBUTE lib_model OF Net_16001 : LABEL IS "macrocell20";
-    ATTRIBUTE Location OF Net_16001 : LABEL IS "U(3,2)";
-    ATTRIBUTE lib_model OF \spi_oled:BSPIM:state_2\ : LABEL IS "macrocell21";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:state_2\ : LABEL IS "U(3,2)";
-    ATTRIBUTE lib_model OF \spi_oled:BSPIM:state_1\ : LABEL IS "macrocell22";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:state_1\ : LABEL IS "U(3,3)";
-    ATTRIBUTE lib_model OF \spi_oled:BSPIM:state_0\ : LABEL IS "macrocell23";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:state_0\ : LABEL IS "U(3,3)";
-    ATTRIBUTE lib_model OF \spi_oled:BSPIM:load_cond\ : LABEL IS "macrocell24";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:load_cond\ : LABEL IS "U(3,1)";
-    ATTRIBUTE lib_model OF \spi_oled:BSPIM:ld_ident\ : LABEL IS "macrocell25";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:ld_ident\ : LABEL IS "U(3,3)";
-    ATTRIBUTE lib_model OF \spi_oled:BSPIM:cnt_enable\ : LABEL IS "macrocell26";
-    ATTRIBUTE Location OF \spi_oled:BSPIM:cnt_enable\ : LABEL IS "U(2,1)";
+    ATTRIBUTE lib_model OF \HSYNC:PWMUDB:trig_last\ : LABEL IS "macrocell16";
+    ATTRIBUTE Location OF \HSYNC:PWMUDB:trig_last\ : LABEL IS "U(3,1)";
+    ATTRIBUTE lib_model OF \HSYNC:PWMUDB:runmode_enable\ : LABEL IS "macrocell17";
+    ATTRIBUTE Location OF \HSYNC:PWMUDB:runmode_enable\ : LABEL IS "U(3,1)";
+    ATTRIBUTE lib_model OF Net_1731 : LABEL IS "macrocell18";
+    ATTRIBUTE Location OF Net_1731 : LABEL IS "U(3,1)";
+    ATTRIBUTE lib_model OF cydff_1 : LABEL IS "macrocell19";
+    ATTRIBUTE Location OF cydff_1 : LABEL IS "U(3,1)";
+    ATTRIBUTE lib_model OF Net_16002 : LABEL IS "macrocell20";
+    ATTRIBUTE Location OF Net_16002 : LABEL IS "U(3,4)";
+    ATTRIBUTE lib_model OF Net_16003 : LABEL IS "macrocell21";
+    ATTRIBUTE Location OF Net_16003 : LABEL IS "U(2,4)";
+    ATTRIBUTE lib_model OF Net_16001 : LABEL IS "macrocell22";
+    ATTRIBUTE Location OF Net_16001 : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \spi_oled:BSPIM:state_2\ : LABEL IS "macrocell23";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:state_2\ : LABEL IS "U(2,3)";
+    ATTRIBUTE lib_model OF \spi_oled:BSPIM:state_1\ : LABEL IS "macrocell24";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:state_1\ : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \spi_oled:BSPIM:state_0\ : LABEL IS "macrocell25";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:state_0\ : LABEL IS "U(3,2)";
+    ATTRIBUTE lib_model OF \spi_oled:BSPIM:load_cond\ : LABEL IS "macrocell26";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:load_cond\ : LABEL IS "U(2,4)";
+    ATTRIBUTE lib_model OF \spi_oled:BSPIM:ld_ident\ : LABEL IS "macrocell27";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:ld_ident\ : LABEL IS "U(2,4)";
+    ATTRIBUTE lib_model OF \spi_oled:BSPIM:cnt_enable\ : LABEL IS "macrocell28";
+    ATTRIBUTE Location OF \spi_oled:BSPIM:cnt_enable\ : LABEL IS "U(2,3)";
+    ATTRIBUTE lib_model OF \pwm_snd:PWMUDB:runmode_enable\ : LABEL IS "macrocell29";
+    ATTRIBUTE Location OF \pwm_snd:PWMUDB:runmode_enable\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF \pwm_snd:PWMUDB:prevCompare1\ : LABEL IS "macrocell30";
+    ATTRIBUTE Location OF \pwm_snd:PWMUDB:prevCompare1\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF \pwm_snd:PWMUDB:status_0\ : LABEL IS "macrocell31";
+    ATTRIBUTE Location OF \pwm_snd:PWMUDB:status_0\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF Net_16102 : LABEL IS "macrocell32";
+    ATTRIBUTE Location OF Net_16102 : LABEL IS "U(2,0)";
     COMPONENT clockblockcell
         PORT (
             dclk_0 : OUT std_ulogic;
@@ -744,7 +800,9 @@ BEGIN
             dclk_glb_1 => \spi_oled:Net_276\,
             dclk_1 => \spi_oled:Net_276_local\,
             dclk_glb_2 => Net_16044,
-            dclk_2 => Net_16044_local);
+            dclk_2 => Net_16044_local,
+            dclk_glb_3 => Net_16083,
+            dclk_3 => Net_16083_local);
 
     pin_led:logicalport
         GENERIC MAP(
@@ -836,7 +894,7 @@ BEGIN
             out_clock_en => '1',
             out_reset => '0');
 
-    pin_snd:logicalport
+    pin_snd_ext:logicalport
         GENERIC MAP(
             drive_mode => "110",
             ibuf_enabled => "1",
@@ -860,7 +918,7 @@ BEGIN
             oe_sync => "0",
             output_clk_en => 0,
             output_clock_mode => "0",
-            output_conn => "0",
+            output_conn => "1",
             output_mode => "0",
             output_reset => 0,
             output_sync => "0",
@@ -907,18 +965,20 @@ BEGIN
             out_clock_en => open,
             out_reset => open);
 
-    pin_snd(0):iocell
+    pin_snd_ext(0):iocell
         GENERIC MAP(
             in_sync_mode => 0,
             out_sync_mode => 0,
             oe_sync_mode => 0,
-            logicalport => "pin_snd",
+            logicalport => "pin_snd_ext",
             logicalport_pin_id => 0,
-            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000101")
         PORT MAP(
-            pa_out => pin_snd(0)__PA,
+            pa_out => pin_snd_ext(0)__PA,
             oe => open,
-            pad_in => pin_snd(0)_PAD,
+            pin_input => Net_16120,
+            pad_out => pin_snd_ext(0)_PAD,
+            pad_in => pin_snd_ext(0)_PAD,
             in_clock => open,
             in_clock_en => '1',
             in_reset => '0',
@@ -2708,6 +2768,26 @@ BEGIN
             main_4 => \spi_oled:BSPIM:count_0\,
             main_5 => \spi_oled:BSPIM:rx_status_4\);
 
+    \pwm_snd:PWMUDB:status_2\:macrocell
+        GENERIC MAP(
+            eqn_main => "(main_0 * main_1)",
+            regmode => 0,
+            clken_mode => 1)
+        PORT MAP(
+            q => \pwm_snd:PWMUDB:status_2\,
+            main_0 => \pwm_snd:PWMUDB:runmode_enable\,
+            main_1 => \pwm_snd:PWMUDB:tc_i\);
+
+    Net_16120:macrocell
+        GENERIC MAP(
+            eqn_main => "(main_0 * main_1)",
+            regmode => 0,
+            clken_mode => 1)
+        PORT MAP(
+            q => Net_16120,
+            main_0 => Net_16102,
+            main_1 => Net_16126);
+
     \random:ClkSp:CtrlReg\:controlcell
         GENERIC MAP(
             cy_ctrl_mode_0 => "11111111",
@@ -3290,6 +3370,100 @@ BEGIN
             interrupt => Net_16065,
             clock => ClockBlock_BUS_CLK);
 
+    \pwm_snd:PWMUDB:genblk1:ctrlreg\:controlcell
+        GENERIC MAP(
+            cy_ctrl_mode_0 => "11111111",
+            cy_ctrl_mode_1 => "00000000",
+            cy_ext_reset => 0,
+            cy_force_order => 1,
+            cy_init_value => "00000000",
+            clk_inv => '0',
+            clken_mode => 1)
+        PORT MAP(
+            clock => Net_16083,
+            control_7 => \pwm_snd:PWMUDB:control_7\,
+            control_6 => \pwm_snd:PWMUDB:control_6\,
+            control_5 => \pwm_snd:PWMUDB:control_5\,
+            control_4 => \pwm_snd:PWMUDB:control_4\,
+            control_3 => \pwm_snd:PWMUDB:control_3\,
+            control_2 => \pwm_snd:PWMUDB:control_2\,
+            control_1 => \pwm_snd:PWMUDB:control_1\,
+            control_0 => \pwm_snd:PWMUDB:control_0\,
+            busclk => ClockBlock_BUS_CLK);
+
+    \pwm_snd:PWMUDB:genblk8:stsreg\:statusicell
+        GENERIC MAP(
+            cy_force_order => 1,
+            cy_int_mask => "1111111",
+            cy_md_select => "0100111",
+            clk_inv => '0',
+            clken_mode => 1)
+        PORT MAP(
+            clock => Net_16083,
+            status_6 => open,
+            status_5 => open,
+            status_4 => open,
+            status_3 => \pwm_snd:PWMUDB:status_3\,
+            status_2 => \pwm_snd:PWMUDB:status_2\,
+            status_1 => open,
+            status_0 => \pwm_snd:PWMUDB:status_0\);
+
+    \pwm_snd:PWMUDB:sP8:pwmdp:u0\:datapathcell
+        GENERIC MAP(
+            a0_init => "00000000",
+            a1_init => "00000000",
+            ce0_sync => 1,
+            ce1_sync => 1,
+            cl0_sync => 1,
+            cl1_sync => 1,
+            cmsb_sync => 1,
+            co_msb_sync => 1,
+            cy_dpconfig => "0000000001000000000000001100000001000000010000000000000011000000000000001100000000000000110000000000000011000000000000001100000011111111000000001111111111111111101000000000000000000100000000000000000000011000",
+            d0_init => "00000000",
+            d1_init => "00000000",
+            f0_blk_sync => 1,
+            f0_bus_sync => 1,
+            f1_blk_sync => 1,
+            f1_bus_sync => 1,
+            ff0_sync => 1,
+            ff1_sync => 1,
+            ov_msb_sync => 1,
+            so_sync => 1,
+            z0_sync => 1,
+            z1_sync => 1,
+            uses_p_in => '0',
+            uses_p_out => '0',
+            clk_inv => '0',
+            clken_mode => 1)
+        PORT MAP(
+            clock => Net_16083,
+            cs_addr_2 => \pwm_snd:PWMUDB:tc_i\,
+            cs_addr_1 => \pwm_snd:PWMUDB:runmode_enable\,
+            ce0_comb => \pwm_snd:PWMUDB:cmp1_eq\,
+            cl0_comb => \pwm_snd:PWMUDB:cmp1_less\,
+            z0_comb => \pwm_snd:PWMUDB:tc_i\,
+            f1_blk_stat_comb => \pwm_snd:PWMUDB:status_3\,
+            busclk => ClockBlock_BUS_CLK);
+
+    \ctrl_snd:Sync:ctrl_reg\:controlcell
+        GENERIC MAP(
+            cy_ctrl_mode_0 => "00000000",
+            cy_ctrl_mode_1 => "00000000",
+            cy_ext_reset => 0,
+            cy_force_order => 1,
+            cy_init_value => "00000000",
+            clken_mode => 1)
+        PORT MAP(
+            control_7 => \ctrl_snd:control_7\,
+            control_6 => \ctrl_snd:control_6\,
+            control_5 => \ctrl_snd:control_5\,
+            control_4 => \ctrl_snd:control_4\,
+            control_3 => \ctrl_snd:control_3\,
+            control_2 => \ctrl_snd:control_2\,
+            control_1 => \ctrl_snd:control_1\,
+            control_0 => Net_16126,
+            busclk => ClockBlock_BUS_CLK);
+
     \HORIZ:PWMUDB:runmode_enable\:macrocell
         GENERIC MAP(
             eqn_main => "(main_0)",
@@ -3600,5 +3774,54 @@ BEGIN
             main_1 => \spi_oled:BSPIM:state_1\,
             main_2 => \spi_oled:BSPIM:state_0\,
             main_3 => \spi_oled:BSPIM:cnt_enable\);
+
+    \pwm_snd:PWMUDB:runmode_enable\:macrocell
+        GENERIC MAP(
+            eqn_main => "(main_0)",
+            regmode => 1,
+            clk_inv => '0',
+            clken_mode => 1)
+        PORT MAP(
+            q => \pwm_snd:PWMUDB:runmode_enable\,
+            clock_0 => Net_16083,
+            main_0 => \pwm_snd:PWMUDB:control_7\);
+
+    \pwm_snd:PWMUDB:prevCompare1\:macrocell
+        GENERIC MAP(
+            eqn_main => "(!main_0 * !main_1)",
+            regmode => 1,
+            clk_inv => '0',
+            clken_mode => 1)
+        PORT MAP(
+            q => \pwm_snd:PWMUDB:prevCompare1\,
+            clock_0 => Net_16083,
+            main_0 => \pwm_snd:PWMUDB:cmp1_eq\,
+            main_1 => \pwm_snd:PWMUDB:cmp1_less\);
+
+    \pwm_snd:PWMUDB:status_0\:macrocell
+        GENERIC MAP(
+            eqn_main => "(!main_0 * main_1) + (!main_0 * main_2)",
+            regmode => 1,
+            clk_inv => '0',
+            clken_mode => 1)
+        PORT MAP(
+            q => \pwm_snd:PWMUDB:status_0\,
+            clock_0 => Net_16083,
+            main_0 => \pwm_snd:PWMUDB:prevCompare1\,
+            main_1 => \pwm_snd:PWMUDB:cmp1_eq\,
+            main_2 => \pwm_snd:PWMUDB:cmp1_less\);
+
+    Net_16102:macrocell
+        GENERIC MAP(
+            eqn_main => "(main_0 * main_1) + (main_0 * main_2)",
+            regmode => 1,
+            clk_inv => '0',
+            clken_mode => 1)
+        PORT MAP(
+            q => Net_16102,
+            clock_0 => Net_16083,
+            main_0 => \pwm_snd:PWMUDB:runmode_enable\,
+            main_1 => \pwm_snd:PWMUDB:cmp1_eq\,
+            main_2 => \pwm_snd:PWMUDB:cmp1_less\);
 
 END __DEFAULT__;

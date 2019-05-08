@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: pin_snd.h  
+* File Name: pin_snd_ext.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_pin_snd_ALIASES_H) /* Pins pin_snd_ALIASES_H */
-#define CY_PINS_pin_snd_ALIASES_H
+#if !defined(CY_PINS_pin_snd_ext_ALIASES_H) /* Pins pin_snd_ext_ALIASES_H */
+#define CY_PINS_pin_snd_ext_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -25,12 +25,12 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define pin_snd_0			(pin_snd__0__PC)
-#define pin_snd_0_INTR	((uint16)((uint16)0x0001u << pin_snd__0__SHIFT))
+#define pin_snd_ext_0			(pin_snd_ext__0__PC)
+#define pin_snd_ext_0_INTR	((uint16)((uint16)0x0001u << pin_snd_ext__0__SHIFT))
 
-#define pin_snd_INTR_ALL	 ((uint16)(pin_snd_0_INTR))
+#define pin_snd_ext_INTR_ALL	 ((uint16)(pin_snd_ext_0_INTR))
 
-#endif /* End Pins pin_snd_ALIASES_H */
+#endif /* End Pins pin_snd_ext_ALIASES_H */
 
 
 /* [] END OF FILE */

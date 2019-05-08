@@ -11,8 +11,7 @@ Get help from Staff on:
     2. UART ROM debug
     
 TODO on your own:
-    1. Implement Sound
-    2. Debug Space Invaders, try other roms
+    2. Try other roms
     3. Test maze i.e. random number generator
     4. Start writing report (make case for general handheld device framework)
     5. 3D print case!!!! (if feeling adventurous)
@@ -65,11 +64,11 @@ int main(void){
     HSYNC_Start();
     VSYNC_Start();
         
-    /* Start the Timer interrupt */
+    /* Start Sound and Timer */
+    pwm_snd_Start();
     isr_timer_StartEx(isr_tmr_handler);
     
     /* Initialize Random Generator */
-    // TODO make sure random still works
     random_Start();
     
     /* Enable global interrupts */
@@ -87,6 +86,7 @@ int main(void){
         }
         
         /* Turn on LED to indicate execution */
+        // TODO
         pin_led_Write(1);
 
         /* Start execution */

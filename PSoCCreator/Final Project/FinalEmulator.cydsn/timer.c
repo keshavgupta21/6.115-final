@@ -13,9 +13,9 @@ CY_ISR(isr_tmr_handler){
         snd = ((snd) == 0) ? 0 : ((snd) - 1);
         tmr = ((tmr) == 0) ? 0 : ((tmr) - 1);
         if (snd) {
-            pin_snd_Write(1);
+            ctrl_snd_Write(1);
         } else {
-            pin_snd_Write(0);
+            ctrl_snd_Write(0);
         }
     }
 }

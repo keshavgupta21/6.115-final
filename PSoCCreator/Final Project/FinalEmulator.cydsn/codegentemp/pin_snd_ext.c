@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: pin_snd.c  
+* File Name: pin_snd_ext.c  
 * Version 2.20
 *
 * Description:
@@ -15,15 +15,15 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "pin_snd.h"
+#include "pin_snd_ext.h"
 
 /* APIs are not generated for P15[7:6] on PSoC 5 */
 #if !(CY_PSOC5A &&\
-	 pin_snd__PORT == 15 && ((pin_snd__MASK & 0xC0) != 0))
+	 pin_snd_ext__PORT == 15 && ((pin_snd_ext__MASK & 0xC0) != 0))
 
 
 /*******************************************************************************
-* Function Name: pin_snd_Write
+* Function Name: pin_snd_ext_Write
 ****************************************************************************//**
 *
 * \brief Writes the value to the physical port (data output register), masking
@@ -52,17 +52,17 @@
 *  this function.
 *
 * \funcusage
-*  \snippet pin_snd_SUT.c usage_pin_snd_Write
+*  \snippet pin_snd_ext_SUT.c usage_pin_snd_ext_Write
 *******************************************************************************/
-void pin_snd_Write(uint8 value)
+void pin_snd_ext_Write(uint8 value)
 {
-    uint8 staticBits = (pin_snd_DR & (uint8)(~pin_snd_MASK));
-    pin_snd_DR = staticBits | ((uint8)(value << pin_snd_SHIFT) & pin_snd_MASK);
+    uint8 staticBits = (pin_snd_ext_DR & (uint8)(~pin_snd_ext_MASK));
+    pin_snd_ext_DR = staticBits | ((uint8)(value << pin_snd_ext_SHIFT) & pin_snd_ext_MASK);
 }
 
 
 /*******************************************************************************
-* Function Name: pin_snd_SetDriveMode
+* Function Name: pin_snd_ext_SetDriveMode
 ****************************************************************************//**
 *
 * \brief Sets the drive mode for each of the Pins component's pins.
@@ -85,16 +85,16 @@ void pin_snd_Write(uint8 value)
 *  APIs (primary method) or disable interrupts around this function.
 *
 * \funcusage
-*  \snippet pin_snd_SUT.c usage_pin_snd_SetDriveMode
+*  \snippet pin_snd_ext_SUT.c usage_pin_snd_ext_SetDriveMode
 *******************************************************************************/
-void pin_snd_SetDriveMode(uint8 mode)
+void pin_snd_ext_SetDriveMode(uint8 mode)
 {
-	CyPins_SetPinDriveMode(pin_snd_0, mode);
+	CyPins_SetPinDriveMode(pin_snd_ext_0, mode);
 }
 
 
 /*******************************************************************************
-* Function Name: pin_snd_Read
+* Function Name: pin_snd_ext_Read
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port (pin status register) and masks 
@@ -108,16 +108,16 @@ void pin_snd_SetDriveMode(uint8 mode)
 *  The current value for the pins in the component as a right justified number.
 *
 * \funcusage
-*  \snippet pin_snd_SUT.c usage_pin_snd_Read  
+*  \snippet pin_snd_ext_SUT.c usage_pin_snd_ext_Read  
 *******************************************************************************/
-uint8 pin_snd_Read(void)
+uint8 pin_snd_ext_Read(void)
 {
-    return (pin_snd_PS & pin_snd_MASK) >> pin_snd_SHIFT;
+    return (pin_snd_ext_PS & pin_snd_ext_MASK) >> pin_snd_ext_SHIFT;
 }
 
 
 /*******************************************************************************
-* Function Name: pin_snd_ReadDataReg
+* Function Name: pin_snd_ext_ReadDataReg
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port's data output register and masks 
@@ -126,8 +126,8 @@ uint8 pin_snd_Read(void)
 *
 * The data output register controls the signal applied to the physical pin in 
 * conjunction with the drive mode parameter. This is not the same as the 
-* preferred pin_snd_Read() API because the 
-* pin_snd_ReadDataReg() reads the data register instead of the status 
+* preferred pin_snd_ext_Read() API because the 
+* pin_snd_ext_ReadDataReg() reads the data register instead of the status 
 * register. For output pins this is a useful function to determine the value 
 * just written to the pin.
 *
@@ -136,19 +136,19 @@ uint8 pin_snd_Read(void)
 *  justified number for the component instance.
 *
 * \funcusage
-*  \snippet pin_snd_SUT.c usage_pin_snd_ReadDataReg 
+*  \snippet pin_snd_ext_SUT.c usage_pin_snd_ext_ReadDataReg 
 *******************************************************************************/
-uint8 pin_snd_ReadDataReg(void)
+uint8 pin_snd_ext_ReadDataReg(void)
 {
-    return (pin_snd_DR & pin_snd_MASK) >> pin_snd_SHIFT;
+    return (pin_snd_ext_DR & pin_snd_ext_MASK) >> pin_snd_ext_SHIFT;
 }
 
 
 /* If interrupt is connected for this Pins component */ 
-#if defined(pin_snd_INTSTAT) 
+#if defined(pin_snd_ext_INTSTAT) 
 
     /*******************************************************************************
-    * Function Name: pin_snd_SetInterruptMode
+    * Function Name: pin_snd_ext_SetInterruptMode
     ****************************************************************************//**
     *
     * \brief Configures the interrupt mode for each of the Pins component's
@@ -161,12 +161,12 @@ uint8 pin_snd_ReadDataReg(void)
     * \param position
     *  The pin position as listed in the Pins component. You may OR these to be 
     *  able to configure the interrupt mode of multiple pins within a Pins 
-    *  component. Or you may use pin_snd_INTR_ALL to configure the
+    *  component. Or you may use pin_snd_ext_INTR_ALL to configure the
     *  interrupt mode of all the pins in the Pins component.       
-    *  - pin_snd_0_INTR       (First pin in the list)
-    *  - pin_snd_1_INTR       (Second pin in the list)
+    *  - pin_snd_ext_0_INTR       (First pin in the list)
+    *  - pin_snd_ext_1_INTR       (Second pin in the list)
     *  - ...
-    *  - pin_snd_INTR_ALL     (All pins in Pins component)
+    *  - pin_snd_ext_INTR_ALL     (All pins in Pins component)
     *
     * \param mode
     *  Interrupt mode for the selected pins. Valid options are documented in
@@ -182,19 +182,19 @@ uint8 pin_snd_ReadDataReg(void)
     *  port.
     *
     * \funcusage
-    *  \snippet pin_snd_SUT.c usage_pin_snd_SetInterruptMode
+    *  \snippet pin_snd_ext_SUT.c usage_pin_snd_ext_SetInterruptMode
     *******************************************************************************/
-    void pin_snd_SetInterruptMode(uint16 position, uint16 mode)
+    void pin_snd_ext_SetInterruptMode(uint16 position, uint16 mode)
     {
-		if((position & pin_snd_0_INTR) != 0u) 
+		if((position & pin_snd_ext_0_INTR) != 0u) 
 		{ 
-			 pin_snd_0_INTTYPE_REG = (uint8)mode; 
+			 pin_snd_ext_0_INTTYPE_REG = (uint8)mode; 
 		}
     }
     
     
     /*******************************************************************************
-    * Function Name: pin_snd_ClearInterrupt
+    * Function Name: pin_snd_ext_ClearInterrupt
     ****************************************************************************//**
     *
     * \brief Clears any active interrupts attached with the component and returns 
@@ -211,11 +211,11 @@ uint8 pin_snd_ReadDataReg(void)
     *  those associated with the Pins component.
     *
     * \funcusage
-    *  \snippet pin_snd_SUT.c usage_pin_snd_ClearInterrupt
+    *  \snippet pin_snd_ext_SUT.c usage_pin_snd_ext_ClearInterrupt
     *******************************************************************************/
-    uint8 pin_snd_ClearInterrupt(void)
+    uint8 pin_snd_ext_ClearInterrupt(void)
     {
-        return (pin_snd_INTSTAT & pin_snd_MASK) >> pin_snd_SHIFT;
+        return (pin_snd_ext_INTSTAT & pin_snd_ext_MASK) >> pin_snd_ext_SHIFT;
     }
 
 #endif /* If Interrupts Are Enabled for this Pins component */ 
