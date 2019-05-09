@@ -25,7 +25,7 @@ if __name__ == "__main__":
     while len(data) < 0x200:
         data.append(0x00)
 
-    rom = Path(sys.argv[1]).read_bytes()
+    rom = Path(sys.argv[2]).read_bytes()
     data += rom
 
     magic_start = ord('S') & 0xff
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     magic_end = ord('E') & 0xff
 
     try:
-        with serial.Serial('/dev/ttyS6', 9600, timeout=1) as ser:
+        with serial.Serial(sys.argv[1], 9600, timeout=1) as ser:
             print("Connection Established...")
             send_byte(ser, magic_start)
             send_byte(ser, size_hb)

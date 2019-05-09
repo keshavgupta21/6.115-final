@@ -75,6 +75,8 @@ void usb_uart_echo()
                     }
                     while(1){
                         pin_led_Write(1);
+                        CyDelay(500);
+                        CySoftwareReset();
                     }
                 } else {
                     while(1){
