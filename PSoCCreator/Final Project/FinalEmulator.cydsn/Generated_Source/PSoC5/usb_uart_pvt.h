@@ -102,7 +102,7 @@ extern const T_usb_uart_LUT CYCODE usb_uart_DEVICE0_CONFIGURATION0_TABLE[5u];
 extern const T_usb_uart_LUT CYCODE usb_uart_DEVICE0_TABLE[3u];
 extern const T_usb_uart_LUT CYCODE usb_uart_TABLE[1u];
 extern const uint8 CYCODE usb_uart_SN_STRING_DESCRIPTOR[2];
-extern const uint8 CYCODE usb_uart_STRING_DESCRIPTORS[159u];
+extern const uint8 CYCODE usb_uart_STRING_DESCRIPTORS[195u];
 
 
 extern const uint8 CYCODE usb_uart_MSOS_DESCRIPTOR[usb_uart_MSOS_DESCRIPTOR_LENGTH];

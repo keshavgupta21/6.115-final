@@ -45,7 +45,7 @@ const uint8 CYCODE usb_uart_DEVICE0_DESCR[18u] = {
 /* idProduct                               */ 0x32u, 0xF2u,
 /* bcdDevice                               */ 0x01u, 0x00u,
 /* iManufacturer                           */ 0x01u,
-/* iProduct                                */ 0x02u,
+/* iProduct                                */ 0x05u,
 /* iSerialNumber                           */ 0x80u,
 /* bNumConfigurations                      */ 0x01u
 };
@@ -147,7 +147,7 @@ const uint8 CYCODE usb_uart_DEVICE0_CONFIGURATION0_DESCR[67u] = {
 /*********************************************************************
 * String Descriptor Table
 *********************************************************************/
-const uint8 CYCODE usb_uart_STRING_DESCRIPTORS[159u] = {
+const uint8 CYCODE usb_uart_STRING_DESCRIPTORS[195u] = {
 /*********************************************************************
 * Language ID Descriptor
 *********************************************************************/
@@ -191,6 +191,15 @@ const uint8 CYCODE usb_uart_STRING_DESCRIPTORS[159u] = {
  (uint8)'a', 0u,(uint8)'t', 0u,(uint8)'a', 0u,(uint8)' ', 0u,(uint8)'I', 0u,
  (uint8)'n', 0u,(uint8)'t', 0u,(uint8)'e', 0u,(uint8)'r', 0u,(uint8)'f', 0u,
  (uint8)'a', 0u,(uint8)'c', 0u,(uint8)'e', 0u,
+/*********************************************************************
+* String Descriptor: "Ch8Emul8 (Keshav)"
+*********************************************************************/
+/* Descriptor Length                       */ 0x24u,
+/* DescriptorType: STRING                  */ 0x03u,
+ (uint8)'C', 0u,(uint8)'h', 0u,(uint8)'8', 0u,(uint8)'E', 0u,(uint8)'m', 0u,
+ (uint8)'u', 0u,(uint8)'l', 0u,(uint8)'8', 0u,(uint8)' ', 0u,(uint8)'(', 0u,
+ (uint8)'K', 0u,(uint8)'e', 0u,(uint8)'s', 0u,(uint8)'h', 0u,(uint8)'a', 0u,
+ (uint8)'v', 0u,(uint8)')', 0u,
 /*********************************************************************/
 /* Marks the end of the list.              */ 0x00u};
 /*********************************************************************/

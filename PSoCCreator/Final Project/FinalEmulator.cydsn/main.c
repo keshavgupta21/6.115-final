@@ -18,7 +18,6 @@ TODO on your own:
 */
 
 #include "project.h"
-#include "font.h"
 #include "chip8.h"
 
 /* 
@@ -46,7 +45,7 @@ uint8_t dma_chan, dma_td;
 volatile uint8_t frame_update = 1;
 
 /* CHIP8 RAM */
-uint8_t ram[4096] = CH8_FONT_DATA;
+uint8_t ram[0x1000];
 
 int main(void){
     /* Initialize the DMA for VGA */
@@ -81,12 +80,11 @@ int main(void){
         usb_uart_echo();
     } else {
         /* Load ROM from EEPROM */
-        for (uint16_t i = 0; i < (0x1000 - 0x200); i++){
-            ram[0x200 + i] = eeprom_ReadByte(i);
+        for (uint16_t i = 0; i < 0x1000; i++){
+            ram[i] = eeprom_ReadByte(i);
         }
         
         /* Turn on LED to indicate execution */
-        // TODO
         pin_led_Write(1);
 
         /* Start execution */
